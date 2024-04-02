@@ -9,10 +9,10 @@ function HomePage() {
       try {
         const response = await axios.get('http://localhost:3000/users/me', {withCredentials: true});
         setUserData(response.data);
-      } catch (error) {
-        console.error('Error al obtener los datos del usuario:', error);
+      } catch (error) {        
         // Redirigir al usuario a la página de inicio de sesión en caso de error
-        // window.location.href = '/login';
+        console.error('Error al obtener los datos del usuario:', error);
+        window.location.href = '/login';
       }
     };
 
