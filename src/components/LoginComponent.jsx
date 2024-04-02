@@ -15,7 +15,7 @@ export default function LoginComponent() {
       window.location.href = '/home'; // Corregido
     } catch (error) {
       console.error("Error de autenticación", error);
-      setError('Error al iniciar sesión. Por favor, verifica tus credenciales.'); // Actualizar el estado de error
+      setError('Error al iniciar sesión. Por favor, verifica tus credenciales:', error); // Actualizar el estado de error
     }
   };
 
