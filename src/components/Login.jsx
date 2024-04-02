@@ -8,7 +8,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('https://ecoplace.3.us-1.fl0.io/login/users', { email, password }, { withCredentials: true });
+      await axios.post('https://ecoplace.3.us-1.fl0.io/users/login', { email, password }, { withCredentials: true });
       window.location.href('/home');
     } catch (error) {
       console.error("Error de autenticación", error);
