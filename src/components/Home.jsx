@@ -10,7 +10,7 @@ function HomePage() {
 
     if (!token) {
       // Si no hay token, redirigir al usuario a la página de inicio de sesión
-      window.location.href('/login');
+      window.location.href = '/src/pages/login.astro';
     } else {
       // Si hay token, enviar una solicitud al backend para obtener los datos del usuario
       axios.get('https://ecoplace.3.us-1.fl0.io/users/me', { 
@@ -28,7 +28,7 @@ function HomePage() {
           // Manejar el error
           console.error('Error al obtener los datos del usuario:', error);
           // Redirigir al usuario a la página de inicio de sesión en caso de error
-          window.location.href('/login');
+          window.location.href = '/src/pages/login.astro';
         });
     }
   }, []); // Este efecto se ejecuta solo una vez al montar el componente y cuando history cambia
