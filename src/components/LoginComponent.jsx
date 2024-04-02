@@ -11,7 +11,7 @@ export default function LoginComponent() {
     e.preventDefault();
     setError(''); // Limpiar errores anteriores antes de una nueva solicitud
     try {
-      await axios.post('http://localhost:3000/users/login', { email, password }, { withCredentials: true });
+      await axios.post('https://ecoplace.3.us-1.fl0.io/users/login', { email, password }, { withCredentials: true });
       window.location.href = '/home'; // Corregido
     } catch (error) {
       console.error("Error de autenticación", error);

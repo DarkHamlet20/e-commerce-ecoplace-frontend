@@ -7,7 +7,7 @@ function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/users/me', {withCredentials: true});
+        const response = await axios.get('https://ecoplace.3.us-1.fl0.io/users/me', {withCredentials: true});
         setUserData(response.data);
       } catch (error) {        
         // Redirigir al usuario a la página de inicio de sesión en caso de error
