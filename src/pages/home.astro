@@ -1,8 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import HomePage from "../components/Home";
+import Layout from "../layouts/Layout.astro";
+import HomeComponent from "../components/HomeComponent";
 ---
 
 <Layout title="Welcome to Astro.">
-	<HomePage />
+	<h1>Page!</h1>
+	<HomeComponent client:only />
 </Layout>
