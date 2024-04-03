@@ -16,7 +16,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://ecoplace.3.us-1.fl0.io/users/register', {
+      await axios.post('https://ecoplace.3.us-1.fl0.io/users/register', {
       email,
       password,
       name,
