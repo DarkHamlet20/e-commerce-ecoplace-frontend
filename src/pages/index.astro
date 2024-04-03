@@ -1,9 +1,12 @@
 ---
+import CarouselComponent from "../components/CarouselComponent";
+import CatalogoComponent from "../components/CatalogoComponent";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Welcome to Astro.">
-	<h1 class="">Hello World from Astro!</h1>
+	<CarouselComponent />
+	<CatalogoComponent client:load />
 </Layout>
 
 <style></style>
