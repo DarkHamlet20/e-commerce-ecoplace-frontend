@@ -23,18 +23,19 @@ const CatalogoComponent = () => {
     return <p>Cargando productos...</p>;
   }
 
+  console.log(products);
+
   return (
     <div className=" w-10/12 mx-auto">
       <h1>Lista de Productos</h1>
       <div className="grid grid-cols-3 gap-12">
         {products.map((product) => (
-          <CardComponent
+          <CardComponent 
           key={product._id}
-          id={product._id}
           productName={product.name}
           price={product.price}
-          info={product.description}
-           />
+          info={product.description} />
+          
         ))}
       </div>
     </div>
