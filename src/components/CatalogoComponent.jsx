@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import CardComponent from './CardComponent';
 
@@ -29,8 +29,8 @@ const CatalogoComponent = () => {
       <div className="grid grid-cols-3 gap-12">
         {products.map((product) => (
           <CardComponent
-          key={product.id}
-          id={product.id}
+          key={product._id}
+          id={product._id}
           productName={product.name}
           price={product.price}
           info={product.description}

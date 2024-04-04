@@ -1,93 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import CatalogoComponent from './CatalogoComponent';
+import { useNavigate } from 'react-router-dom'
 
 function HomePage() {
-  const [userData, setUserData] = useState(null);
+  const [products, setProducts] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://ecoplace.3.us-1.fl0.io/users/me', {withCredentials: true});
-        setUserData(response.data);
+        const response = await axios.get('https://ecoplace.3.us-1.fl0.io/products');
+        setProducts(response.data);
+        setLoading(false);
       } catch (error) {        
-        // Redirigir al usuario a la página de inicio de sesión en caso de error
-        console.error('Error al obtener los datos del usuario:', error);
-        window.location.href = '/login';
+        console.error("Error al cargar los productos:", error);
       }
     };
 
     fetchData();
   }, []);
 
+  if (loading) {
+    return <p>Cargando productos...</p>;
+  }
+
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem('auth_token');
+      if (!token) {
+        console.error("No se encontro el token de autenticacion.");
+      }
+      await axios.post('https://ecoplace.3.us-1.fl0.io/users/logout', {}, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      localStorage.removeItem('auth_token');
+      // Si la petición es exitosa, elimina el token de localStorage y llama a onLogout
+      navigate('/login')
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+      // Manejar cualquier error aquí, por ejemplo, mostrando un mensaje al usuario
+    }
+  };
+
   return (
     <div>
-      {userData ? (
-        <div>
-          <h1>Bienvenido, {userData.name}!</h1>
-          <p>Email: {userData.email}</p>
-          {/* Mostrar otros datos del usuario según sea necesario */}
-          <button onClick={() => history.push('/perfil')}>Ver perfil</button>
+        <h1>Lista de Productos</h1>
+        <div className="lista-productos">
+          {products.map((product) => (
+            <div key={product._id} className="producto">
+              <h2>{product.name}</h2>
+              <p>{product.description}</p>
+              <p>Precio: ${product.price}</p>
+              {/* Más detalles del producto como necesites */}
+            </div>
+          ))}
         </div>
-      ) : (
-        <p>Cargando...</p>
-      )}
-
       <CatalogoComponent />
+      <button onClick={handleLogout}>Cerrar sesión</button>
     </div>
   );
 }
 
 export default HomePage;
-
-
-
-// import React, { useEffect, useState } from 'react'; // Importar useHistory para manejar las redirecciones de ruta
-// import axios from 'axios'; // Importar Axios para hacer solicitudes HTTP
-
-// function HomePage() {
-//   const [userData, setUserData] = useState(null); // Estado para almacenar los datos del usuario// Obtener el objeto de historial de navegación
-
-//   const token = document.cookie.split('; ').find(row => row.startsWith('auth_token='));
-//   const cookies = document.cookie;
-
-//   useEffect(() => {
-//     // Obtener el token de autenticación de la cookie
-//     console.log(cookies);
-
-//     axios.get('http://localhost:3000/users/me', {
-//       headers: {
-//         'Authorization': 'Bearer ' + token.split('=')[1] // Extraer el token de la cookie y establecer el encabezado de autorización
-//       }
-//     })
-//       .then(response => {
-//         // Manejar la respuesta del servidor
-//         const userData = response.data.userData;
-//         // Establecer los datos del usuario en el estado
-//         setUserData(userData);
-//       })
-//       .catch(error => {
-//         // Manejar el error
-//         console.error('Error al obtener los datos del usuario:', error);
-//         // Redirigir al usuario a la página de inicio de sesión en caso de error
-//         window.location.href = '/src/pages/login.astro';
-//       });
-//   }, [token]); // Este efecto se ejecuta solo una vez al montar el componente y cuando history cambia
-
-//   return (
-//     <div>
-//       {userData ? ( // Si hay datos de usuario, mostrar la información del perfil
-//         <div>
-//           <h1>Bienvenido, {userData.username}!</h1>
-//           <p>Email: {userData.email}</p>
-//           {/* Mostrar otros datos del usuario según sea necesario */}
-//           <button onClick={() => history.push('/perfil')}>Ver perfil</button> {/* Botón para acceder a la página de perfil */}
-//         </div>
-//       ) : (
-//         <p>Cargando...</p> // Mostrar un mensaje de carga mientras se obtienen los datos del usuario
-//       )}
-//     </div>
-//   );
-// }
-
-// export default HomePage;

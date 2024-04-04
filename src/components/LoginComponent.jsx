@@ -1,17 +1,20 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 export default function LoginComponent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(''); // Agregando estado para manejar errores
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(''); // Limpiar errores anteriores antes de una nueva solicitud
     try {
-      await axios.post('https://ecoplace.3.us-1.fl0.io/users/login', { email, password }, { withCredentials: true });
-      window.location.href = '/home'; // Corregido
+      const response = await axios.post('https://ecoplace.3.us-1.fl0.io/users/login', { email, password });
+      localStorage.setItem('auth_token', response.data.token);
+      navigate('/')
     } catch (error) {
       console.error('Error de autenticación', error);
       setError('Error al iniciar sesión. Por favor, verifica tus credenciales:', error); // Actualizar el estado de error
@@ -74,7 +77,7 @@ export default function LoginComponent() {
                       type='submit' 
                       className='w-full text-white bg-red-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'>Sign in</button>
                       <p className='text-sm font-light text-black'>
-                          Don’t have an account yet? <a href='#' className='font-medium text-primary-600 hover:underline dark:text-primary-500'>Sign up</a>
+                          Don’t have an account yet? <a href='/register' className='font-medium text-primary-600 hover:underline dark:text-primary-500'>Sign up</a>
                       </p>
                       
                   </form>
@@ -82,54 +85,5 @@ export default function LoginComponent() {
           </div>
       </div>
     </section>
-
-
-
-
-
-    // <div className='flex justify-center h-screen items-center bg-blue-500'>
-    //   <form className='flex flex-col rounded box border-2 w-96 p-8' onSubmit={handleSubmit}>
-    //   {error && <div style={{ color: 'red' }}>{error}</div>}
-
-    //   <div className='flex flex-col justify-between'>
-
-    //   <div
-    //   className='flex flex-col justify-between'>
-    //     <label className='text-center text-2xl font-bold mb-2' htmlFor='email'>Correo Electrónico</label>
-    //     <input
-    //     className='border rounded'
-    //       name='email'
-    //       id='email'
-    //       type='email'
-    //       value={email}
-    //       onChange={(e) => setEmail(e.target.value)}
-    //       placeholder='Email'
-    //       required
-    //     />
-    //   </div>
-    //   <div className='flex flex-col justify-between'>
-    //     <label className='text-center text-2xl font-bold mb-2'  htmlFor='password'>Contraseña</label>
-    //     <input
-    //       className='border rounded'
-    //       name='password'
-    //       id='password'
-    //       type='password'
-    //       value={password}
-    //       onChange={(e) => setPassword(e.target.value)}
-    //       placeholder='Contraseña'
-    //       required
-    //     />
-    //   </div>
-
-    //   </div>
-    //   <button className='border-2 border-black p-1 font-bold' type='submit'>Iniciar sesión</button>
-      
-
-    //   <div>
-    //     <p>Cuentas: {count}</p>
-    //     <button onClick={handleClick}>Click!</button>
-    //   </div>
-    // </form>
-    // </div>
   );
 }

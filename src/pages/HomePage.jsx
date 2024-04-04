@@ -1,9 +1,9 @@
-import React from 'react'
+import HomeComponent from '../components/HomeComponent'
 
 const HomePage = () => {
   return (
     <>
-      <HomePage />
+      <HomeComponent />
     </>
   )
 }
