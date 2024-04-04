@@ -42,9 +42,9 @@ function Register() {
 
   return (
     <section className="bg-gray-50">
-    <img className='w-screen h-screen object-cover absolute z-0' src="img/richard-horvath-cPccYbPrF-A-unsplash.jpg" alt="" />
+    <img className='w-screen h-screen object-cover absolute z-0' src='img/richard-horvath-cPccYbPrF-A-unsplash (1).jpg' alt='' />
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 relative w-screen">
-        <img className=' w-36 rounded-full relative top-4 shadow-[0px_3px_10px_4px_#e53e3e]' src="img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace.webp" alt="" />
+    <img className=' w-36 rounded-full relative top-4 shadow-[0px_3px_10px_4px_#e53e3e]' src='img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp' alt='' />
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-white-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8 ">
                 <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl text-black">
@@ -269,4 +269,3 @@ function Register() {
 }
 
 export default Register
-

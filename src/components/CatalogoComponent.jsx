@@ -26,7 +26,7 @@ const CatalogoComponent = () => {
   return (
     <div className=" w-10/12 mx-auto">
       <h1>Lista de Productos</h1>
-      <div className="grid justify-center lg:grid-cols-3 md:grid-cols-2 gap-12">
+      <div className="grid grid-cols-3 gap-12">
         {products.map((product) => (
           <CardComponent
           key={product.id}

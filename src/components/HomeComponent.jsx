@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import CatalogoComponent from './CatalogoComponent';
 
 function HomePage() {
   const [userData, setUserData] = useState(null);
@@ -31,6 +32,8 @@ function HomePage() {
       ) : (
         <p>Cargando...</p>
       )}
+
+      <CatalogoComponent />
     </div>
   );
 }
