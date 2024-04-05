@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import axios from 'axios';
 import CatalogoComponent from '../../components/CatalogoComponent';
 import { useNavigate } from 'react-router-dom'
 
-function HomePage() {
+const HomePage = () => {
   const navigate = useNavigate();
 
   
