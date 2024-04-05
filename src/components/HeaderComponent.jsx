@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+
 
 export const Header = () => {
 
-  const [mode, setMode] = useState(false)
 
   return (
-    <div className='flex items-center justify-between'>
+    <header className='border-b py-2  px-6 w-full text-white bg-gray-700 fixed z-50'>
+    <div className='mb-3'>
+      <div className='flex items-center justify-between'>
       <div>
-        <img className='w-16 smm:w-24 rounded-full hidden sm:block' src="img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp" alt="" />
+        <img className='w-16 smm:w-20 rounded-full hidden sm:block' src="img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp" alt="" />
       </div>
       <div className='flex text-white'>
         <input placeholder='Buscar' type="text" className='outline-none p-2 rounded-l smm:w-96' />
@@ -27,5 +28,10 @@ export const Header = () => {
         </div>
       </nav>
     </div>
+    </div>
+    <nav className='border-t md:hidden'>
+      <span>Categories</span>
+    </nav>
+  </header>
   )
 }

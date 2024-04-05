@@ -37,19 +37,25 @@ export const Sidebar = () => {
 
   return (
     <>
-      <div className='flex flex-col justify-between h-[85%] w-52'>
-         <div>
-         {
+      <aside className={`h-full mr-4  px-6 transition-all -translate-x-full smm:translate-x-0 z-40 hidden smm:flex`}>
+        <div className='flex flex-col justify-between h-[85%] w-52'>
+        <div>
+        {
             categories.map(category => (
-               <div className=' border-b cursor-pointer 
-               hover:text-3xl py-1 transition-all' key={category._id}>
+              <div className=' border-b cursor-pointer 
+              hover:text-3xl py-1 transition-all' key={category._id}>
                   {category.categoryName}
-               </div>
+              </div>
             ))
-         }
-         </div>
-         <button className=' bg-gray-700 text-white rounded-md p-2' onClick={handleLogout}>Cerrar sesión</button>
-         </div>
+        }
+        </div>
+        <button className=' bg-gray-700 text-white rounded-md p-2' onClick={handleLogout}>Cerrar sesión</button>
+        </div>
+      </aside>
+      
+
+
+         
     </>
   )
 }
