@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export const Header = () => {
+const HeaderComponent = () => {
 
   const [mode, setMode] = useState(false)
 
@@ -29,3 +29,5 @@ export const Header = () => {
     </div>
   )
 }
+
+export default HeaderComponent
