@@ -1,6 +1,6 @@
 
 
-export const Header = () => {
+const HeaderComponent = () => {
 
 
   return (
@@ -35,3 +35,5 @@ export const Header = () => {
   </header>
   )
 }
+
+export default HeaderComponent
