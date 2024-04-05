@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CatalogoComponent from '../../components/CatalogoComponent';
-import { Header } from '../../components/HeaderComponent';
-import { Sidebar } from '../../components/Sidebar';
+import { Header } from '../../components/layout/HeaderComponent';
+import { Sidebar } from '../../components/layout/Sidebar';
 
 function HomePage() {
   const [mode, setMode] = useState(false)
