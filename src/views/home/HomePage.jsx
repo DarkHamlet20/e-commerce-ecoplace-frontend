@@ -6,12 +6,12 @@ const HomePage = () => {
   return (
     <>
       <LayoutComponent>
-      <div className=''>
-        <div className={`flex h-screen `}>
+        <div className=''>
+          <div className={`flex flex-row`}>
             <Sidebar />
             <CatalogoComponent />
+          </div>
         </div>
-      </div>
       </LayoutComponent>
     </>
   )
