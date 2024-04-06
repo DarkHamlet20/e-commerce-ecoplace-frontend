@@ -1,0 +1,47 @@
+lo que esta en parentesis es el ver HTTP
+
+Carts
+https://ecoplace.3.us-1.fl0.io/carts (get)
+https://ecoplace.3.us-1.fl0.io/carts/add (post)
+https://ecoplace.3.us-1.fl0.io/update-cart (put)
+https://ecoplace.3.us-1.fl0.io/remove-item (delete)
+
+Categories
+https://ecoplace.3.us-1.fl0.io/categories (get)
+https://ecoplace.3.us-1.fl0.io/categories/:id (get)
+https://ecoplace.3.us-1.fl0.io/categories/search/:name (get)
+https://ecoplace.3.us-1.fl0.io/categories (post)
+https://ecoplace.3.us-1.fl0.io/categories/:id (put)
+https://ecoplace.3.us-1.fl0.io/categories/:id (delete)
+
+Orders
+https://ecoplace.3.us-1.fl0.io/orders/all (get)
+https://ecoplace.3.us-1.fl0.io/orders/me (get)
+https://ecoplace.3.us-1.fl0.io/orders (post)
+https://ecoplace.3.us-1.fl0.io/orders/:orderId (get)
+https://ecoplace.3.us-1.fl0.io/orders/:orderId (put)
+
+Products
+https://ecoplace.3.us-1.fl0.io/products (get)
+https://ecoplace.3.us-1.fl0.io/products/search (get)
+https://ecoplace.3.us-1.fl0.io/products/:id (get)
+https://ecoplace.3.us-1.fl0.io/products (post)
+https://ecoplace.3.us-1.fl0.io/products/:id (put)
+https://ecoplace.3.us-1.fl0.io/products/:id (delete)
+
+Roles
+https://ecoplace.3.us-1.fl0.io/roles (get)
+https://ecoplace.3.us-1.fl0.io/roles/search/:name (get)
+https://ecoplace.3.us-1.fl0.io/roles/:id (get)
+https://ecoplace.3.us-1.fl0.io/roles/:id (post)
+https://ecoplace.3.us-1.fl0.io/roles/:id (put)
+https://ecoplace.3.us-1.fl0.io/roles/:id (delete)
+
+Users
+https://ecoplace.3.us-1.fl0.io/users/register (post)
+https://ecoplace.3.us-1.fl0.io/users/login (post)
+https://ecoplace.3.us-1.fl0.io/users/logout (post)
+https://ecoplace.3.us-1.fl0.io/users/logout-all (post)
+https://ecoplace.3.us-1.fl0.io/users/me (get)
+https://ecoplace.3.us-1.fl0.io/users/me (patch)
+https://ecoplace.3.us-1.fl0.io/users/me (delete) --- esta hay analizar los usuarios deben de inhabiltarse no borrarse.

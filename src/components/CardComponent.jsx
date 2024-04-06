@@ -1,12 +1,15 @@
-const CardComponent = ({productName, id, price, info}) => {
+const CardComponent = ({productName, id, price, info, img, brand}) => {
   return (
     <div id={id} className="w-full min-w-60 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <a href="#">
-        <img className="p-8 rounded-t-lg" src="https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg" alt="product image" />
+        <img className="p-8 rounded-t-lg" src={img} alt={productName + " image"} />
     </a>
     <div className="px-5 pb-5">
+        <a href="/" className="text-white font-semibold hover:underline hover:opacity-80">
+            Brand: {brand}
+        </a>
         <a href="#">
-            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{productName}: {info}</h5>
+            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white hover:underline">{productName}: {info}</h5>
         </a>
         <div className="flex items-center mt-2.5 mb-5">
             <div className="flex items-center space-x-1 rtl:space-x-reverse">

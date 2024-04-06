@@ -27,7 +27,7 @@ const CatalogoComponent = () => {
 
   return (
     
-      <main className='w-[95%] absolute z-10 right-0 smm:static'>
+      <main className='w-[95%] absolute z-10 right-0 smm:relative'>
         <div className="w-11/12">
           <h1>Lista de Productos</h1>
             <div className="grid gap-12 min-w-20 smm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 xl:grid-cols-4 transition-all">
@@ -35,6 +35,8 @@ const CatalogoComponent = () => {
                 <CardComponent 
                 key={product._id}
                 productName={product.name}
+                img={product.image}
+                brand={product.brand}
                 price={product.price}
                 info={product.description} />
                 

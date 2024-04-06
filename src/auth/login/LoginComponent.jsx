@@ -23,7 +23,6 @@ export default function LoginComponent() {
 
   const [Show, setShow] = useState(true)
 
-
   return (
     <section className='bg-gray-50 '>
       <img className='w-screen h-screen object-cover absolute z-0' src='img/richard-horvath-cPccYbPrF-A-unsplash (1).jpg' alt='' />
