@@ -1,12 +1,12 @@
 import React from 'react';
 import FooterComponent from '../components/FooterComponent';
-import { Header } from '../components/HeaderComponent';
+import HeaderComponent from '../components/HeaderComponent';
 
 // 'children' debe ser desestructurado del objeto props.
 const LayoutComponent = ({ children }) => {
   return (
     <div>
-      <Header />
+      <HeaderComponent />
       <div className='pt-28'>
           {children}
       </div>

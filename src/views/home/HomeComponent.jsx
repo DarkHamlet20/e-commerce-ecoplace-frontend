@@ -1,8 +1,6 @@
-import { useState } from 'react';
 import CatalogoComponent from '../../components/CatalogoComponent';
-import { Header } from '../../components/layout/HeaderComponent';
-import { Sidebar } from '../../components/layout/Sidebar';
-import LayoutComponent from '../../components/layout/LayoutComponent';
+import { Sidebar } from '../../components/Sidebar';
+
 
 function HomePage() {
 
