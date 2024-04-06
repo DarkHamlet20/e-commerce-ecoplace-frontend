@@ -7,7 +7,7 @@ const HomePage = () => {
     <>
       <LayoutComponent>
         <div className=''>
-          <div className={`flex flex-row`}>
+          <div className='flex justify-center w-screen'>
             <Sidebar />
             <CatalogoComponent />
           </div>

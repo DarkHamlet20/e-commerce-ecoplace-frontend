@@ -6,27 +6,15 @@ import HeaderComponent from '../components/HeaderComponent';
 // eslint-disable-next-line react/prop-types
 const LayoutComponent = ({ children }) => {
   return (
-<<<<<<< HEAD
-      <div className=''>
-        <HeaderComponent />
-        <div className='md:pt-28 sm:pt-36'>
-            {children}
-        </div>
-        <footer className=''>
-          <FooterComponent />
-        </footer>
-      </div>
-=======
     <div className='h-full'>
       <HeaderComponent />
       <main>
-        <div className='pt-28'>
+        <div>
           {children}
         </div>
       </main>
       <FooterComponent />
     </div>
->>>>>>> 3971202d3f2d84bd23fbe84b99438d2ab4af0b30
   );
 };
 

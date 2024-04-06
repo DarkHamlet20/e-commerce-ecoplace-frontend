@@ -37,7 +37,7 @@ export const Sidebar = () => {
 
   return (
     <>
-      <aside className={`h-full mr-4  px-6 transition-all -translate-x-full smm:translate-x-0 z-40 hidden smm:flex`}>
+      <aside className={`mr-4 pt-6 px-6 transition-all -translate-x-full smm:translate-x-0 z-40 hidden smm:flex h-screen`}>
         <div className='flex flex-col justify-between h-[85%] w-52'>
           <div>
             {
