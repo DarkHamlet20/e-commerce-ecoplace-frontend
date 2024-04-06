@@ -1,15 +1,18 @@
-import React from 'react';
+// import React from 'react';
 import FooterComponent from '../components/FooterComponent';
 import HeaderComponent from '../components/HeaderComponent';
 
 // 'children' debe ser desestructurado del objeto props.
+// eslint-disable-next-line react/prop-types
 const LayoutComponent = ({ children }) => {
   return (
-    <div>
+    <div className='h-full'>
       <HeaderComponent />
-      <div className='pt-28'>
+      <main>
+        <div className='pt-28'>
           {children}
-      </div>
+        </div>
+      </main>
       <FooterComponent />
     </div>
   );
