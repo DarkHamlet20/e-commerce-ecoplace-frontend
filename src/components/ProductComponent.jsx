@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './Product.css'
+import { NavLink } from 'react-router-dom'
 
 const ProductComponent = ({ id, name, img, description, brand, price }) => {
   const [count, setCount] = useState(0)
@@ -23,7 +24,7 @@ const ProductComponent = ({ id, name, img, description, brand, price }) => {
                   <span onClick={() => setCount(count - 1)} className='text-blue-950 px-3 text-xl cursor-pointer'>-</span><span className='text-blue-950 px-3 text-xl'>{count}</span><span onClick={() => setCount(count + 1)} className='text-blue-950 px-3 text-xl cursor-pointer'>+</span>
                 </div>
 
-                <a href='#' className='bg-blue-950 text-white rounded-md p-2 text'>Add to Cart</a>
+                <NavLink to='/cart' className='bg-blue-950 text-white rounded-md p-2 text'>Add to Cart</NavLink>
                 
               </div>
             </div>
