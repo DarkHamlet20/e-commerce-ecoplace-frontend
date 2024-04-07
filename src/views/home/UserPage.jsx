@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 // import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import LayoutComponent from '../../layout/LayoutMain';
+import UserComponent from '../../components/UserComponent';
 
 const UserPage = () => {
   const [authenticated, setAuthenticated] = useState(false);
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
   const token = localStorage.getItem('auth_token');
 
   useEffect(() => {
@@ -18,7 +20,7 @@ const UserPage = () => {
 
     setAuthenticated(true);
 
-    axios.get('https://api.example.com/data', {
+    axios.get('https://ecoplace.3.us-1.fl0.io/users/me', {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -33,18 +35,28 @@ const UserPage = () => {
       });
   }, [token]);
 
+  console.log(userData);
   // Redirigir al usuario a la página de inicio de sesión si no está autenticado
   // if (!authenticated) {
   //   return <Redirect to="/login" />;
   // }
-
   // Si el usuario está autenticado, renderizar el componente privado
   return (
     <>
-      <div>
-        <p>Nombre: <span>{userData?.name}</span></p>
-        <p>Apellido: <span>{userData?.lastname}</span></p>
-      </div>
+      <LayoutComponent>
+        <main>
+          <UserComponent
+           name={userData.name}
+           lastname={userData.lastname}
+           email={userData.email}
+           zip={userData.zip}
+           city={userData.city}
+           street={userData.street}
+          />
+        </main>
+      </LayoutComponent>
+        
+      
     </>
   )
 }

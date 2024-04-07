@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 // import { SearchComponent } from './SearchComponent'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 
 const HeaderComponent = () => {
+
+  
 
   const navigate = useNavigate()
 
@@ -14,7 +16,27 @@ const HeaderComponent = () => {
 
   // const handleCart = () => {
   //   navigate('/cart')
-  // }
+
+  const [userData, setUserData] = useState({});
+  const token = localStorage.getItem('auth_token');
+
+  useEffect(() => {
+    if (token) {
+      axios.get('https://ecoplace.3.us-1.fl0.io/users/me', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => setUserData(response.data))
+      .catch(error => {
+        console.error('There was an error with the request:', error);
+        // Optionally, you can handle errors here or show a message to the user
+      });
+    }
+  }, [token]);
+
+  console.log(userData);
 
   const handleLogout = async () => {
     try {
@@ -57,18 +79,18 @@ const HeaderComponent = () => {
             </button>
             <div className={`"z-50 right-10  top-16 absolute my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 2xl:right-80 " id="user-dropdown" ${show ? 'block' : 'hidden'}`}>
               <div className="px-4 py-3">
-                <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-                <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                <span className="block text-sm text-gray-900 dark:text-white">{userData.name} {userData.lastname}</span>
+                <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">{userData.email}</span>
               </div>
               <ul className="py-2" aria-labelledby="user-menu-button">
                 <li>
-                  <a href="/user" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                  <a href="/user" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Acount</a>
                 </li>
                 <li>
                   <NavLink to="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</NavLink>
                 </li>
                 <li>
-                  <NavLink to="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</NavLink>
+                  <NavLink to="/user" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Orders</NavLink>
                 </li>
                 <li>
                   <NavLink to="/login" onClick={() => handleLogout()} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</NavLink>
