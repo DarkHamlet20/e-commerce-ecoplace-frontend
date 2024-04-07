@@ -13,7 +13,7 @@ const CartComponent = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get("https://ecoplace.3.us-1.fl0.io/carts", {
+        const response = await axios.get("http://localhost:3000/carts", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
@@ -51,7 +51,7 @@ const CartComponent = () => {
 
       // Llamada a la API para actualizar el carrito en el backend
       const response = await axios.put(
-        "https://ecoplace.3.us-1.fl0.io/carts/update-cart",
+        "http://localhost:3000/carts/update-cart",
         {
           items: [{ product: itemId, quantity: newQuantity }],
         },
@@ -85,7 +85,7 @@ const CartComponent = () => {
     try {
       // Llamada a la API para eliminar el producto del carrito en el backend
       const response = await axios.delete(
-        "https://ecoplace.3.us-1.fl0.io/carts/remove-item",
+        "http://localhost:3000/carts/remove-item",
         {
           data: { product: productId }, // Enviando productId en el cuerpo de la solicitud DELETE
           headers: {
@@ -113,7 +113,7 @@ const CartComponent = () => {
       // 1. Crea una sesión de checkout en tu backend
       const stripe = await stripePromise;
       const checkoutSession = await axios.post(
-        'https://ecoplace.3.us-1.fl0.io/orders/create-checkout-session', 
+        'http://localhost:3000/orders/create-checkout-session', 
         { items: cartItems }, // Asegúrate de enviar los datos necesarios para tu backend
         {
           headers: {

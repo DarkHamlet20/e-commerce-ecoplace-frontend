@@ -7,7 +7,7 @@ export const Sidebar = () => {
   const navigate = useNavigate()
 
   const getCategories = async () => {
-    const response = await axios.get('https://ecoplace.3.us-1.fl0.io/categories')
+    const response = await axios.get('http://localhost:3000/categories')
     setCategories(response.data)
   }
 
