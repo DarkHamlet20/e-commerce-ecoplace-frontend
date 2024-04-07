@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+/* eslint-disable react/prop-types */
+import { useState } from 'react'
 import './Product.css'
 import { NavLink } from 'react-router-dom'
 
@@ -11,7 +12,7 @@ const ProductComponent = ({ id, name, img, description, brand, price }) => {
           <div className='w-[90%] lg:w-[850px] mx-auto rounded-lg shadow-[0_3px_10px_rgb(0,0,0,0.2)] product-container p-6 '>
             <div className='mr-3'>
               <picture>
-                <img src={img}  className='aspect-square w-80 rounded-md' alt="" />
+                <img src={img} className='aspect-square w-80 rounded-md' alt="" />
               </picture>
             </div>
             <div>
@@ -24,11 +25,11 @@ const ProductComponent = ({ id, name, img, description, brand, price }) => {
                   <span onClick={() => setCount(count - 1)} className='text-blue-950 px-3 text-xl cursor-pointer'>-</span><span className='text-blue-950 px-3 text-xl'>{count}</span><span onClick={() => setCount(count + 1)} className='text-blue-950 px-3 text-xl cursor-pointer'>+</span>
                 </div>
 
-                <NavLink to='/cart' className='bg-blue-950 text-white rounded-md p-2 text'>Add to Cart</NavLink>
-                
+                <a href='#' className='bg-blue-950 text-white rounded-md p-2 text'>Add to Cart</a>
+
               </div>
             </div>
-            
+
           </div>
         </div>
       </main>
