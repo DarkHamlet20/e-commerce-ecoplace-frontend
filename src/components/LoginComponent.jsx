@@ -83,54 +83,5 @@ export default function LoginComponent() {
         </div>
       </div>
     </section>
-
-
-
-
-
-    // <div className='flex justify-center h-screen items-center bg-blue-500'>
-    //   <form className='flex flex-col rounded box border-2 w-96 p-8' onSubmit={handleSubmit}>
-    //   {error && <div style={{ color: 'red' }}>{error}</div>}
-
-    //   <div className='flex flex-col justify-between'>
-
-    //   <div
-    //   className='flex flex-col justify-between'>
-    //     <label className='text-center text-2xl font-bold mb-2' htmlFor="email">Correo Electrónico</label>
-    //     <input
-    //     className='border rounded'
-    //       name='email'
-    //       id='email'
-    //       type="email"
-    //       value={email}
-    //       onChange={(e) => setEmail(e.target.value)}
-    //       placeholder="Email"
-    //       required
-    //     />
-    //   </div>
-    //   <div className='flex flex-col justify-between'>
-    //     <label className='text-center text-2xl font-bold mb-2'  htmlFor="password">Contraseña</label>
-    //     <input
-    //       className='border rounded'
-    //       name='password'
-    //       id='password'
-    //       type="password"
-    //       value={password}
-    //       onChange={(e) => setPassword(e.target.value)}
-    //       placeholder="Contraseña"
-    //       required
-    //     />
-    //   </div>
-
-    //   </div>
-    //   <button className='border-2 border-black p-1 font-bold' type="submit">Iniciar sesión</button>
-
-
-    //   <div>
-    //     <p>Cuentas: {count}</p>
-    //     <button onClick={handleClick}>Click!</button>
-    //   </div>
-    // </form>
-    // </div>
   );
 }
