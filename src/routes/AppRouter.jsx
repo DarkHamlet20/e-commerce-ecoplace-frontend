@@ -7,12 +7,12 @@ import ProductPage from '../views/home/ProductPage'
 
 const AppRouter = () => {
   return (
-      <Routes>
-        <Route path='/' element={<HomePage />}/>
-        <Route path='/login' element={<LoginPage />}/>
-        <Route path='/register' element={<RegisterPage />}/>
-        <Route path='/user' element={<UserPage />}/>
-        <Route path='/product' element={<ProductPage />}/>
+    <Routes>
+      <Route path='/' element={<HomePage />} />
+      <Route path='/login' element={<LoginPage />} />
+      <Route path='/register' element={<RegisterPage />} />
+      <Route path='/user' element={<UserPage />} />
+      <Route path='/product/:id' element={<ProductPage />} />
     </Routes>
   )
 }
