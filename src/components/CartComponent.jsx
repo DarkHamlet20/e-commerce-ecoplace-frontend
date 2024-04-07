@@ -13,7 +13,7 @@ const CartComponent = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get("https://ecoplace.3.us-1.fl0.io/carts", {
+        const response = await axios.get("http://localhost:3000/carts", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
@@ -113,7 +113,7 @@ const CartComponent = () => {
       // 1. Crea una sesión de checkout en tu backend
       const stripe = await stripePromise;
       const checkoutSession = await axios.post(
-        'https://ecoplace.3.us-1.fl0.io/orders/create-checkout-session', 
+        'http://localhost:3000/orders/create-checkout-session', 
         { items: cartItems }, // Asegúrate de enviar los datos necesarios para tu backend
         {
           headers: {

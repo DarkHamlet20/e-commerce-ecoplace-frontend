@@ -20,7 +20,7 @@ const UserPage = () => {
 
     setAuthenticated(true);
 
-    axios.get('https://ecoplace.3.us-1.fl0.io/users/me', {
+    axios.get('http://localhost:3000/users/me', {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
