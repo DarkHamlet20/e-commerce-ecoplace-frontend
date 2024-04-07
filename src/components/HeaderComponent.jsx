@@ -1,12 +1,10 @@
 import { useNavigate } from 'react-router-dom'
-// import { SearchComponent } from './SearchComponent'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 
-const HeaderComponent = () => {
+const HeaderComponent = ({handleSide}) => {
 
-  
 
   const navigate = useNavigate()
 
@@ -60,14 +58,14 @@ const HeaderComponent = () => {
 
   const [show, setShow] = useState(false)
   const [drop, setDrop] = useState(false)
-
+  
 
   return (
-    <header className='h-20 fixed top-0 w-full z-50'>
+      <header className='h-20 fixed top-0 w-full z-50 '>
       <nav className="bg-white border-gray-200 dark:bg-gray-900 h-full">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <NavLink to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp" className="h-12 rounded-full" alt="EcoPlace Logo" />
+            <img src="public/img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp" className="h-12 rounded-full" alt="EcoPlace Logo" />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">EcoPlace</span>
           </NavLink>
           <div className="flex text-white items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -125,6 +123,9 @@ const HeaderComponent = () => {
           </div>
         </div>
       </nav>
+      <div>
+        <h1 onClick={() => handleSide()} className='bg-gray-900 text-white py-3 select-none cursor-pointer hover:bg-gray-700 transition-all px-4 smm:hidden'>Categories</h1>
+      </div>
 
     </header>
   )
