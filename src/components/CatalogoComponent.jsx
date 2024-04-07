@@ -26,7 +26,7 @@ const CatalogoComponent = () => {
 
   return (
 
-    <main className='w-[95%] mb-8 z-10'>
+    <main className='w-[95%] mb-8 pt-24 z-10'>
       <div className="w-11/12">
         <h2 className='text-4xl font-bold my-5'>Lista de Productos</h2>
         <div className="grid gap-12 min-w-20 smm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 sm:items-center xl:grid-cols-4 transition-all">

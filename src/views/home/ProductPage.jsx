@@ -8,13 +8,14 @@ const ProductPage = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get('https://ecoplace.3.us-1.fl0.io/products/660f64405d7a6d948cf597c0')
+      const response = await axios.get('https://ecoplace.3.us-1.fl0.io/products/6610152a852120b8531fbdbe')
       setData(response.data)
     }
     catch(err) {
       console.log('Advertesiment '+ err);
     }
   }
+  console.log(data.images);
 
   useEffect(() => {
     getData()

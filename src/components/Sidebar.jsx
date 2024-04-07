@@ -15,30 +15,12 @@ export const Sidebar = () => {
     getCategories()
   }, [])
 
-  const handleLogout = async () => {
-    try {
-      const token = localStorage.getItem('auth_token');
-      if (!token) {
-        console.error("No se encontro el token de autenticacion.");
-      }
-      await axios.post('https://ecoplace.3.us-1.fl0.io/users/logout', {}, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      localStorage.removeItem('auth_token');
-      // Si la petición es exitosa, elimina el token de localStorage y llama a onLogout
-      navigate('/login')
-    } catch (error) {
-      console.error("Error al cerrar sesión:", error);
-      // Manejar cualquier error aquí, por ejemplo, mostrando un mensaje al usuario
-    }
-  };
 
   return (
     <>
-      <aside className={`mr-4 pt-6 px-6 transition-all -translate-x-full smm:translate-x-0 z-40 hidden smm:flex h-screen`}>
+      <aside className={`mr-4 pt-24 px-6 transition-all -translate-x-full smm:translate-x-0 z-40 hidden smm:flex h-screen`}>
         <div className='flex flex-col justify-between h-[85%] w-52'>
+          <h1 className='text-4xl my-5 border-b'>Catalogo</h1>
           <div>
             {
               categories.map(category => (
@@ -49,7 +31,7 @@ export const Sidebar = () => {
               ))
             }
           </div>
-          <button className=' bg-gray-700 text-white rounded-md p-2' onClick={handleLogout}>Cerrar sesión</button>
+          
         </div>
       </aside>
 
