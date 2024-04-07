@@ -4,11 +4,11 @@ import HeaderComponent from '../components/HeaderComponent';
 
 // 'children' debe ser desestructurado del objeto props.
 // eslint-disable-next-line react/prop-types
-const LayoutComponent = ({ children }) => {
+const LayoutComponent = ({ children, fuction }) => {
   return (
     <div className='h-full'>
-      <HeaderComponent />
-      <main>
+      <HeaderComponent handleSide={fuction} />
+      <main className='py-12'>
         <div>
           {children}
         </div>
