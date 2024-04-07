@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { loadStripe } from '@stripe/stripe-js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faSadTear  } from '@fortawesome/free-solid-svg-icons';
 
 const stripePromise = loadStripe('pk_test_51P2M6HIsT8wuHxVRe2GCd60YLng0HonCFfnmMdz7gqRHYU5aoKBBJVcp1fDwMKoLrVPAByLSzzdlo14hs539PkV3003lnCO3WT');
 
@@ -150,7 +152,7 @@ const CartComponent = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        Cargando...
+        <div className="text-xl font-semibold">Cargando tu carrito...</div>
       </div>
     );
   }
@@ -160,7 +162,14 @@ const CartComponent = () => {
   }
 
   if (cartItems.length === 0) {
-    return <div className="text-center">Tu carrito está vacío.</div>;
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <FontAwesomeIcon icon={faSadTear} size="6x" className="text-gray-600 my-2" />
+        <h2 className="text-2xl font-semibold mb-2">Tu carrito está vacío</h2>
+        <p className="mb-6 text-gray-800">Parece que aún no has añadido nada a tu carrito.</p>
+        <a href="/" className="text-indigo-600 hover:underline">Empieza a comprar</a>
+      </div>
+    );
   }
 
   return (
