@@ -22,7 +22,7 @@ const HeaderComponent = () => {
 
   useEffect(() => {
     if (token) {
-      axios.get('https://ecoplace.3.us-1.fl0.io/users/me', {
+      axios.get('http://localhost:3000/users/me', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ const HeaderComponent = () => {
       if (!token) {
         console.error("No se encontro el token de autenticacion.");
       }
-      await axios.post('https://ecoplace.3.us-1.fl0.io/users/logout', {}, {
+      await axios.post('http://localhost:3000/users/logout', {}, {
         headers: {
           Authorization: `Bearer ${token}`
         }

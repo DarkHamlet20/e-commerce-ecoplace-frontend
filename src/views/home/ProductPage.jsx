@@ -12,7 +12,7 @@ const ProductPage = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`https://ecoplace.3.us-1.fl0.io/products/${id}`);
+        const response = await axios.get(`http://localhost:3000/products/${id}`);
         setData(response.data)
       }
       catch (err) {

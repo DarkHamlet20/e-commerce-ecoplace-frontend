@@ -9,7 +9,7 @@ const CatalogoComponent = () => {
   useEffect(() => {
     const cargarProductos = async () => {
       try {
-        const response = await axios.get('https://ecoplace.3.us-1.fl0.io/products');
+        const response = await axios.get('http://localhost:3000/products');
         setProducts(response.data);
         setLoading(false);
       } catch (error) {
