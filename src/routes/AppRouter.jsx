@@ -5,6 +5,8 @@ import LoginPage from '../auth/login/LoginPage'
 import UserPage from '../views/home/UserPage'
 import ProductPage from '../views/home/ProductPage'
 import CartPage from '../views/home/CartPage'
+import SuccessPage from '../views/home/SuccessPages'
+import CancelPage from '../views/home/CancelPage'
 
 const AppRouter = () => {
   return (
@@ -15,6 +17,8 @@ const AppRouter = () => {
       <Route path='/user' element={<UserPage />} />
       <Route path='/product/:id' element={<ProductPage />} />
       <Route path='/cart' element={<CartPage />} />
+      <Route path='/success' element={<SuccessPage />} />
+      <Route path='/cancel' element={<CancelPage />} />
     </Routes>
   )
 }

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe('pk_test_51P2M6HIsT8wuHxVRe2GCd60YLng0HonCFfnmMdz7gqRHYU5aoKBBJVcp1fDwMKoLrVPAByLSzzdlo14hs539PkV3003lnCO3WT');
 
 const CartComponent = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -10,7 +13,7 @@ const CartComponent = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/carts", {
+        const response = await axios.get("https://ecoplace.3.us-1.fl0.io/carts", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
@@ -48,7 +51,7 @@ const CartComponent = () => {
 
       // Llamada a la API para actualizar el carrito en el backend
       const response = await axios.put(
-        "http://localhost:3000/carts/update-cart",
+        "https://ecoplace.3.us-1.fl0.io/carts/update-cart",
         {
           items: [{ product: itemId, quantity: newQuantity }],
         },
@@ -82,7 +85,7 @@ const CartComponent = () => {
     try {
       // Llamada a la API para eliminar el producto del carrito en el backend
       const response = await axios.delete(
-        "http://localhost:3000/carts/remove-item",
+        "https://ecoplace.3.us-1.fl0.io/carts/remove-item",
         {
           data: { product: productId }, // Enviando productId en el cuerpo de la solicitud DELETE
           headers: {
@@ -103,6 +106,40 @@ const CartComponent = () => {
       // Mostrar algún mensaje de error al usuario aquí
     }
   };
+
+  //Metodo para simular el pago por stripe.
+  const handleCheckout = async () => {
+    try {
+      // 1. Crea una sesión de checkout en tu backend
+      const stripe = await stripePromise;
+      const checkoutSession = await axios.post(
+        'https://ecoplace.3.us-1.fl0.io/orders/create-checkout-session', 
+        { items: cartItems }, // Asegúrate de enviar los datos necesarios para tu backend
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            // Agrega cualquier encabezado adicional como el token de autenticación aquí
+            'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+          }
+        }
+      );
+
+      // 2. Redirige al usuario a la URL del checkout de Stripe
+      const result = await stripe.redirectToCheckout({
+        sessionId: checkoutSession.data.sessionId,
+      });
+
+      if (result.error) {
+        // Informa al usuario si hay un error
+        console.error(result.error.message);
+        // Puedes mostrar un mensaje de error en la UI aquí
+      }
+    } catch (error) {
+      console.error('Error during checkout', error);
+      // Manejar errores aquí, como mostrar un mensaje al usuario
+    }
+  };
+
 
   if (loading) {
     return (
@@ -127,50 +164,106 @@ const CartComponent = () => {
           </div>
           {/* Títulos de las columnas */}
           <div className="flex mt-10 mb-5">
-            <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">Detalles del Producto</h3>
-            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Cantidad</h3>
-            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Precio</h3>
-            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Total</h3>
+            <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">
+              Detalles del Producto
+            </h3>
+            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
+              Cantidad
+            </h3>
+            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
+              Precio
+            </h3>
+            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
+              Total
+            </h3>
           </div>
           {/* Lista de productos */}
           {cartItems.map((item) => (
-            <div key={item.product._id} className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+            <div
+              key={item.product._id}
+              className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5"
+            >
               {/* Imagen y detalles del producto */}
               <div className="flex w-2/5">
                 {/* Imagen */}
-                <img className="h-24" src={item.product.images[0]} alt={item.product.name} />
+                <img
+                  className="h-24"
+                  src={item.product.images[0]}
+                  alt={item.product.name}
+                />
                 {/* Detalles */}
                 <div className="flex flex-col justify-between ml-4 flex-grow">
                   <span className="font-bold text-sm">{item.product.name}</span>
-                  <span className="text-red-500 text-xs">{item.product.brand}</span>
-                  <a onClick={() => handleRemoveItemFromCart(item.product._id)} className="font-semibold hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
+                  <span className="text-red-500 text-xs">
+                    {item.product.brand}
+                  </span>
+                  <a
+                    onClick={() => handleRemoveItemFromCart(item.product._id)}
+                    className="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                  >
+                    Eliminar
+                  </a>
                 </div>
               </div>
               {/* Cantidad y botones para incrementar y disminuir la cantidad */}
               <div className="flex justify-center w-1/5">
-                <button onClick={() => handleQuantityChange(item.product._id, item.quantity - 1)} className="fill-current text-gray-500 focus:outline-none">
+                <button
+                  onClick={() =>
+                    handleQuantityChange(item.product._id, item.quantity - 1)
+                  }
+                  className="fill-current text-gray-500 focus:outline-none"
+                >
                   <svg viewBox="0 0 20 20" fill="currentColor" className="w-3">
-                    <path fillRule="evenodd" d="M5 10a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M5 10a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </button>
-                <input className="mx-2 border text-center w-8" type="text" value={item.quantity} />
-                <button onClick={() => handleQuantityChange(item.product._id, item.quantity + 1)} className="fill-current text-gray-500 focus:outline-none">
+                <input
+                  className="mx-2 border text-center w-8"
+                  type="text"
+                  value={item.quantity}
+                />
+                <button
+                  onClick={() =>
+                    handleQuantityChange(item.product._id, item.quantity + 1)
+                  }
+                  className="fill-current text-gray-500 focus:outline-none"
+                >
                   <svg viewBox="0 0 20 20" fill="currentColor" className="w-3">
-                    <path fillRule="evenodd" d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </button>
               </div>
               {/* Precio unitario */}
-              <span className="text-center w-1/5 font-semibold text-sm">${item.product.price}</span>
+              <span className="text-center w-1/5 font-semibold text-sm">
+                ${item.product.price}
+              </span>
               {/* Precio total por producto */}
-              <span className="text-center w-1/5 font-semibold text-sm">${(item.quantity * item.product.price).toFixed(2)}</span>
+              <span className="text-center w-1/5 font-semibold text-sm">
+                ${(item.quantity * item.product.price).toFixed(2)}
+              </span>
             </div>
           ))}
 
           {/* Botón de continuar comprando */}
-          <a href="/" className="flex font-semibold text-indigo-600 text-sm mt-10">
+          <a
+            href="/"
+            className="flex font-semibold text-indigo-600 text-sm mt-10"
+          >
             {/* Ícono */}
-            <svg className="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512">{/* SVG icon code */}</svg>
+            <svg
+              className="fill-current mr-2 text-indigo-600 w-4"
+              viewBox="0 0 448 512"
+            >
+              {/* SVG icon code */}
+            </svg>
             Continuar Comprando
           </a>
         </div>
@@ -200,7 +293,7 @@ const CartComponent = () => {
               <span>Total cost</span>
               <span>${totalPrice.toFixed(2)}</span>
             </div>
-            <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+            <button onClick={handleCheckout} className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
               Proceder al Pago
             </button>
           </div>
