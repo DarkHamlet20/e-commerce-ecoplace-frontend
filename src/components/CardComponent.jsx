@@ -2,7 +2,9 @@
 import { useNavigate } from 'react-router-dom'
 
 // eslint-disable-next-line react/prop-types
-const CardComponent = ({ productName, id, price, info }) => {
+const CardComponent = ({ productName, id, price, info, image }) => {
+
+    const defaultImage = "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg";
 
     const navigate = useNavigate()
 
@@ -13,7 +15,7 @@ const CardComponent = ({ productName, id, price, info }) => {
     return (
         <div id={id} onClick={() => handleClick()} className="w-full min-w-60 max-w-80 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a href={`/product/${id}`}>
-                <img className="p-8 rounded-t-lg" src="https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg" alt="product image" />
+                <img className="p-8 rounded-t-lg" src={image || defaultImage} alt="product image" />
             </a>
             <div className="px-5 pb-5">
                 <a href={`/product/${id}`}>

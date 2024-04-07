@@ -37,7 +37,8 @@ const CatalogoComponent = () => {
               id={product._id}
               productName={product.name}
               price={product.price}
-              info={product.description} />
+              info={product.description} 
+              image={product.images[0]} />
               
           ))}
         </div>
