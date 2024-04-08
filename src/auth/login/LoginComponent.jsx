@@ -14,6 +14,7 @@ export default function LoginComponent() {
     try {
       const response = await axios.post('http://localhost:3000/users/login', { email, password });
       localStorage.setItem('auth_token', response.data.token);
+      localStorage.setItem('userRole', response.data.role);
       navigate('/')
     } catch (error) {
       console.error('Error de autenticación', error);

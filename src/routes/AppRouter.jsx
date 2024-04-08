@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router'
+import { Route, Routes} from 'react-router'
 import RegisterPage from '../auth/register/RegisterPage'
 import HomePage from '../views/home/HomePage'
 import LoginPage from '../auth/login/LoginPage'
@@ -7,6 +7,8 @@ import ProductPage from '../views/home/ProductPage'
 import CartPage from '../views/home/CartPage'
 import SuccessPage from '../views/home/SuccessPages'
 import CancelPage from '../views/home/CancelPage'
+import ProtectedRoute from '../context/ProtectedRoute';
+import UnauthorizedPage from '../views/home/UnauthorizedPage';
 
 const AppRouter = () => {
   return (
@@ -14,11 +16,20 @@ const AppRouter = () => {
       <Route path='/' element={<HomePage />} />
       <Route path='/login' element={<LoginPage />} />
       <Route path='/register' element={<RegisterPage />} />
-      <Route path='/user' element={<UserPage />} />
+      <Route path='/user' element={
+        <ProtectedRoute roles={['Admin', 'Customer', 'Seller']}>
+          <UserPage />
+        </ProtectedRoute>
+      } />
       <Route path='/product/:id' element={<ProductPage />} />
-      <Route path='/cart' element={<CartPage />} />
+      <Route path='/cart' element={
+        <ProtectedRoute roles={['Customer']}>
+          <CartPage />
+        </ProtectedRoute>
+      } />
       <Route path='/success' element={<SuccessPage />} />
       <Route path='/cancel' element={<CancelPage />} />
+      <Route path='/unauthorized' element={<UnauthorizedPage />} />
     </Routes>
   )
 }
