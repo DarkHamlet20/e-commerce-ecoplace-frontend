@@ -8,7 +8,7 @@ const LayoutComponent = ({ children, fuction }) => {
   return (
     <div className='h-full'>
       <NavComponent handleSide={fuction} />
-      <main className='py-12'>
+      <main className=''>
         <div>
           {children}
         </div>

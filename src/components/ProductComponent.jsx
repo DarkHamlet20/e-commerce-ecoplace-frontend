@@ -5,6 +5,9 @@ import { NavLink } from 'react-router-dom'
 
 const ProductComponent = ({ id, name, img, description, brand, price }) => {
   const [count, setCount] = useState(0)
+
+
+  
   return (
     <>
       <main id={id} className='h-screen'>

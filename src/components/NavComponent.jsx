@@ -38,7 +38,6 @@ const NavComponent = ({ handleSide }) => {
     }
   }, [token]);
 
-  console.log(userData);
 
   const handleLogout = async () => {
     try {
@@ -69,16 +68,27 @@ const NavComponent = ({ handleSide }) => {
 
   return (
     <>
-      <nav className="bg-white dark:bg-gray-900">
-        <div className="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-4">
+      <nav className="bg-gray-900">
+        <div className="max-w-full mx-auto flex flex-wrap items-center justify-between p-4">
+          
           <NavLink
             to="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
-            <img src={logo} className="mr-3 h-16" alt="EcoPlace Logo" />
+            <img src={logo} className="mr-3 rounded-full h-16" alt="EcoPlace Logo" />
                         <span className="text-xl font-semibold whitespace-nowrap dark:text-white">EcoPlace</span>
-          </NavLink>          
-          <div className="flex text-white items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          </NavLink>
+          <div className="flex mt-4 md:mt-0">
+                <SearchComponent />
+          </div>          
+          
+          <div className="flex relative z-50 text-white items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse mt-4 md:mt-0">
+          <div className="mr-4">
+            <button onClick={redirectToCart} className="text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">
+                  <FontAwesomeIcon icon={faShoppingCart} size="lg" />
+                </button>
+            </div>
+            <div>
             <button
               onClick={() => setShow(!show)}
               type="button"
@@ -103,12 +113,16 @@ const NavComponent = ({ handleSide }) => {
                   d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
                 />
               </svg>
+              
             </button>
+            </div>
+            
             <div
-              className={`"z-50 right-10  top-16 absolute my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 2xl:right-80 " id="user-dropdown" ${
+              className={`"z-50  top-16 absolute my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 md:right-20 2xl:right-80 " id="user-dropdown" ${
                 show ? "block" : "hidden"
               }`}
             >
+              
               <div className="px-4 py-3">
                 <span className="block text-sm text-gray-900 dark:text-white">
                   {userData.name} {userData.lastname}
@@ -157,7 +171,7 @@ const NavComponent = ({ handleSide }) => {
               onClick={() => setDrop(!drop)}
               data-collapse-toggle="navbar-user"
               type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="navbar-user"
               aria-expanded="false"
             >
@@ -180,11 +194,11 @@ const NavComponent = ({ handleSide }) => {
             </button>
           </div>
           <div
-            className={`"items-center justify-between w-full md:flex md:w-auto md:order-1" id="navbar-user" ${
-              drop ? "block" : "hidden"
+            className={`"items-center justify-between lg:flex lg:order-1" id="navbar-user" ${
+              drop ? "lg:flex" : "hidden"
             }`}
           >
-            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul className="flex flex-col font-medium p-4 w-72 lg:static absolute top-28 sm:right-56 md:right-48 smm:right-2 lg:p-0 border  rounded-lg  lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0  bg-gray-800 lg:bg-gray-900 border-gray-700 z-50">
               <li>
                 <NavLink
                   to="#"
@@ -202,22 +216,7 @@ const NavComponent = ({ handleSide }) => {
                   About
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="#"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Services
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="#"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Pricing
-                </NavLink>
-              </li>
+              
               <li>
                 <NavLink
                   to="#"
@@ -226,15 +225,13 @@ const NavComponent = ({ handleSide }) => {
                   Contact
                 </NavLink>                
               </li>
-              <button onClick={redirectToCart} className="text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">
+              {/* <button onClick={redirectToCart} className="text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">
                   <FontAwesomeIcon icon={faShoppingCart} size="lg" />
-                </button>
+                </button> */}
             </ul>
           </div>
         </div>
-        <div className="flex justify-center mt-4">
-                <SearchComponent />
-        </div>
+        
       </nav>
       <div>
         <h1
