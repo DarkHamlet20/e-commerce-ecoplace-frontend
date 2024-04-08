@@ -149,13 +149,13 @@ const CartComponent = () => {
   };
 
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="text-xl font-semibold">Cargando tu carrito...</div>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="flex justify-center items-center h-screen">
+  //       <div className="text-xl font-semibold">Cargando tu carrito...</div>
+  //     </div>
+  //   );
+  // }
 
   if (error) {
     return <div className="text-center text-red-500">{error}</div>;
