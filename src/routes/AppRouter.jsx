@@ -11,6 +11,7 @@ import ProtectedRoute from '../context/ProtectedRoute';
 import UnauthorizedPage from '../views/home/UnauthorizedPage';
 import SellerPage from '../views/seller/SellerPage'
 import OrdersCustomerPage from '../views/home/OrdersCustomerPage'
+import AddProductPage from '../views/seller/AddProductPage'
 
 const AppRouter = () => {
   return (
@@ -32,6 +33,11 @@ const AppRouter = () => {
       <Route path='/seller' element={
         <ProtectedRoute roles={['Seller']}>
           <SellerPage />
+        </ProtectedRoute>
+      } />
+      <Route path='/sellerproduct' element={
+        <ProtectedRoute roles={['Seller']}>
+          <AddProductPage />
         </ProtectedRoute>
       } />
       <Route path='/orders' element={
