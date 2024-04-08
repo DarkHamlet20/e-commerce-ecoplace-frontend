@@ -65,11 +65,12 @@ const NavComponent = ({ handleSide }) => {
 
   const [show, setShow] = useState(false);
   const [drop, setDrop] = useState(false);
+  
 
   return (
     <>
       <nav className="bg-gray-900">
-        <div className="max-w-full mx-auto flex flex-wrap items-center justify-between p-4">
+        <div className="max-w-full min-w-[380px] mx-auto flex flex-wrap items-center justify-between p-4">
           
           <NavLink
             to="/"
@@ -118,7 +119,7 @@ const NavComponent = ({ handleSide }) => {
             </div>
             
             <div
-              className={`"z-50  top-16 absolute my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 md:right-20 2xl:right-80 " id="user-dropdown" ${
+              className={`"z-50 top-16 right-1 absolute my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 " id="user-dropdown" ${
                 show ? "block" : "hidden"
               }`}
             >
@@ -150,7 +151,7 @@ const NavComponent = ({ handleSide }) => {
                 </li>
                 <li>
                   <NavLink
-                    to="/user"
+                    to="/orders"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Orders
@@ -198,7 +199,7 @@ const NavComponent = ({ handleSide }) => {
               drop ? "lg:flex" : "hidden"
             }`}
           >
-            <ul className="flex flex-col font-medium p-4 w-72 lg:static absolute top-28 sm:right-56 md:right-48 smm:right-2 lg:p-0 border  rounded-lg  lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0  bg-gray-800 lg:bg-gray-900 border-gray-700 z-50">
+            <ul className="flex flex-col font-medium p-4 lg:static absolute smm:top-28 top-48 md:right-48 right-56 lg:p-0 border  rounded-lg  lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0  bg-gray-800 lg:bg-gray-900 border-gray-700 z-50">
               <li>
                 <NavLink
                   to="#"

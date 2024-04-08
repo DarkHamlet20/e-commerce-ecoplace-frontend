@@ -9,6 +9,8 @@ import SuccessPage from '../views/home/SuccessPages'
 import CancelPage from '../views/home/CancelPage'
 import ProtectedRoute from '../context/ProtectedRoute';
 import UnauthorizedPage from '../views/home/UnauthorizedPage';
+import SellerPage from '../views/seller/SellerPage'
+import OrdersCustomerPage from '../views/home/OrdersCustomerPage'
 
 const AppRouter = () => {
   return (
@@ -25,6 +27,16 @@ const AppRouter = () => {
       <Route path='/cart' element={
         <ProtectedRoute roles={['Customer']}>
           <CartPage />
+        </ProtectedRoute>
+      } />
+      <Route path='/seller' element={
+        <ProtectedRoute roles={['Seller']}>
+          <SellerPage />
+        </ProtectedRoute>
+      } />
+      <Route path='/orders' element={
+        <ProtectedRoute roles={['Customer','Admin','Seller']}>
+          <OrdersCustomerPage />
         </ProtectedRoute>
       } />
       <Route path='/success' element={<SuccessPage />} />

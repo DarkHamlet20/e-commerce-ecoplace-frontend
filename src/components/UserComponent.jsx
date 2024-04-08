@@ -31,10 +31,7 @@ export default function UserComponent(props) {
                         </div>
                      </div>
                   </div>
-                  <div className=" my-4 pt-2 px-3 pb-6 border">
-                     <h1 className="text-xl">Order ID: {props.order}</h1>
-                     <p>Date: {props.date}</p>
-                  </div>
+                  
                </main>
             </div>
       </>

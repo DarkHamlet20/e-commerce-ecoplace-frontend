@@ -15,7 +15,7 @@ const HomePage = () => {
     <>
       <LayoutComponent fuction={handleSide}>
       <div className=''>
-          <div className='flex justify-center w-screen'>
+          <div className='flex justify-center smm:justify-bettwen w-screen'>
             <Sidebar showSide={showSide} />
             <CatalogoComponent />
           </div>
