@@ -35,6 +35,7 @@ function Register() {
       password,
     });
     localStorage.setItem('auth_token', response.data.token);
+    localStorage.setItem('userRole', response.data.role);
     navigate('/')
     } catch (error) {
       console.error('Error durante el registro o el login:', error);
