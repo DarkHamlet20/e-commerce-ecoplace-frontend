@@ -1,11 +1,30 @@
-/* eslint-disable react/prop-types */
 import { useState } from 'react'
 import './Product.css'
-import { NavLink } from 'react-router-dom'
+import axios from "axios";
+import { useAuth } from '../context/AuthContext';
 
 const ProductComponent = ({ id, name, img, description, brand, price }) => {
-  const [count, setCount] = useState(0)
 
+  const { role } = useAuth();
+
+  const addToCart = async () => {
+    try {
+      // Suponiendo que tienes almacenado el token de autenticación en localStorage
+      const token = localStorage.getItem('auth_token');
+      await axios.post('http://localhost:3000/carts/add', 
+        {
+          items: [{ product: id, quantity: 1 }] // Ajusta según necesites
+        }, 
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      alert("Producto agregado al carrito");
+    } catch (error) {
+      console.error("Error al agregar al carrito", error);
+      alert("Error al agregar producto al carrito.");
+    }
+  };
 
   
   return (
@@ -23,16 +42,12 @@ const ProductComponent = ({ id, name, img, description, brand, price }) => {
               <h2 className='text-3xl font-bold my-4'>{name}</h2>
               <p className='my-5'>{description}</p>
               <span className='text-2xl'>${price}</span>
+              {role === 'Customer' && (
               <div className='flex justify-around my-8 mx-auto flex-col w-52 smm:flex smm:flex-row smm:w-full text-center '>
-                <div className='mb-3 smm:mb-0 select-none text-white rounded-md p-2 shadow-md'>
-                  <span onClick={() => setCount(count - 1)} className='text-blue-950 px-3 text-xl cursor-pointer'>-</span><span className='text-blue-950 px-3 text-xl'>{count}</span><span onClick={() => setCount(count + 1)} className='text-blue-950 px-3 text-xl cursor-pointer'>+</span>
-                </div>
-
-                <a href='#' className='bg-blue-950 text-white rounded-md p-2 text'>Add to Cart</a>
-
+                <button onClick={addToCart} className='bg-blue-950 text-white rounded-md p-2 text'>Add to Cart</button>
               </div>
+               )}
             </div>
-
           </div>
         </div>
       </main>
