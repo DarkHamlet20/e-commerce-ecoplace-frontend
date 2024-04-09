@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { loadStripe } from '@stripe/stripe-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faSadTear  } from '@fortawesome/free-solid-svg-icons';
+import { faSadTear  } from '@fortawesome/free-solid-svg-icons';
 
 const stripePromise = loadStripe('pk_test_51P2M6HIsT8wuHxVRe2GCd60YLng0HonCFfnmMdz7gqRHYU5aoKBBJVcp1fDwMKoLrVPAByLSzzdlo14hs539PkV3003lnCO3WT');
 
@@ -10,7 +10,6 @@ const CartComponent = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -20,13 +19,8 @@ const CartComponent = () => {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
         });
-        setCartItems(response.data.items);
+        setCartItems(response.data);
         // Calcular el precio total
-        const total = response.data.items.reduce(
-          (sum, item) => sum + item.quantity * item.price,
-          0
-        );
-        setTotalPrice(total);
       } catch (error) {
           setCartItems([]); // Asumiendo que tienes un estado para los ítems del carrito
           setLoading(false);
@@ -290,9 +284,6 @@ const CartComponent = () => {
             <span className="font-semibold text-sm uppercase">
               Items {cartItems.length}
             </span>
-            <span className="font-semibold text-sm">
-              ${totalPrice.toFixed(2)}
-            </span>
           </div>
           <div>
             <label className="font-medium inline-block mb-3 text-sm uppercase">
@@ -303,10 +294,6 @@ const CartComponent = () => {
             </select>
           </div>
           <div className="border-t mt-8">
-            <div className="flex font-semibold justify-between py-6 text-sm uppercase">
-              <span>Total cost</span>
-              <span>${totalPrice.toFixed(2)}</span>
-            </div>
             <button onClick={handleCheckout} className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
               Proceder al Pago
             </button>
