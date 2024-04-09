@@ -28,16 +28,11 @@ const CartComponent = () => {
         );
         setTotalPrice(total);
       } catch (error) {
-        if (error.response && error.response.status === 404) {
-          // Manejo específico para cuando el carrito no se encuentra / está vacío
-          console.log("El carrito está vacío."); // O manejarlo como prefieras
           setCartItems([]); // Asumiendo que tienes un estado para los ítems del carrito
           setLoading(false);
-        } else {
           console.error("Error fetching cart data:", error);
           setError("Error fetching cart data");
-        }
-        setLoading(false);
+
       }
     };
 
