@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 
@@ -13,35 +13,48 @@ function Register() {
   const [country, setCountry] = useState('')
   const [zip, setZip] = useState('')
   const [error, setError] = useState('')
-  const navigate = useNavigate()
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false); // New state for showing the success message
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (showSuccessMessage) {
+      setTimeout(() => {
+        navigate('/login');
+      }, 5000); // Redirect after 5 seconds
+    }
+  }, [showSuccessMessage, navigate]);
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
       await axios.post('http://localhost:3000/users/register', {
-      email,
-      password,
-      name,
-      lastname,
-      phone,
-      street,
-      city,
-      country,
-      zip
-    });
-
-    const response = await axios.post('http://localhost:3000/users/login', {
-      email,
-      password,
-    });
-    localStorage.setItem('auth_token', response.data.token);
-    localStorage.setItem('userRole', response.data.role);
-    navigate('/')
+        email,
+        password,
+        name,
+        lastname,
+        phone,
+        street,
+        city,
+        country,
+        zip,
+      });
+      // Show success message and then redirect
+      setShowSuccessMessage(true);
     } catch (error) {
-      console.error('Error durante el registro o el login:', error);
-      setError('Error durante el registro o el login. Por favor, intenta de nuevo.');
+      console.error('Error during the registration or login:', error);
+      setError('Error during the registration or login. Please try again.');
     }
-}
+  };
+
+    if (showSuccessMessage) {
+      return (
+        <div className="text-center p-5">
+          <div className="alert alert-success" role="alert">
+            Your account was created successfully. You will be redirected to the login page shortly.
+          </div>
+        </div>
+      );
+    }
 
   return (
     <section className="bg-gray-50">

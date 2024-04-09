@@ -42,6 +42,7 @@ const NavComponent = ({ handleSide }) => {
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("auth_token");
+  
       if (!token) {
         console.error("No se encontro el token de autenticacion.");
       }
@@ -54,7 +55,7 @@ const NavComponent = ({ handleSide }) => {
           },
         }
       );
-      localStorage.removeItem("auth_token");
+      localStorage.removeItem("auth_token", "userRole");
       // Si la petición es exitosa, elimina el token de localStorage y llama a onLogout
       navigate("/login");
     } catch (error) {
