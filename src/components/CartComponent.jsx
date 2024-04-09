@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { loadStripe } from '@stripe/stripe-js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSadTear  } from '@fortawesome/free-solid-svg-icons';
+import { loadStripe } from "@stripe/stripe-js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart, faSadTear } from "@fortawesome/free-solid-svg-icons";
 
-const stripePromise = loadStripe('pk_test_51P2M6HIsT8wuHxVRe2GCd60YLng0HonCFfnmMdz7gqRHYU5aoKBBJVcp1fDwMKoLrVPAByLSzzdlo14hs539PkV3003lnCO3WT');
+const stripePromise = loadStripe(
+  "pk_test_51P2M6HIsT8wuHxVRe2GCd60YLng0HonCFfnmMdz7gqRHYU5aoKBBJVcp1fDwMKoLrVPAByLSzzdlo14hs539PkV3003lnCO3WT"
+);
 
 const CartComponent = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -19,14 +21,16 @@ const CartComponent = () => {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
         });
-        setCartItems(response.data);
+        setCartItems(response.data.items);
         // Calcular el precio total
+        const total = response.data.items.reduce(
+          (sum, item) => sum + item.quantity * item.price,
+          0
+        );
+        setTotalPrice(total);
       } catch (error) {
-          setCartItems([]); // Asumiendo que tienes un estado para los ítems del carrito
-          setLoading(false);
-          console.error("Error fetching cart data:", error);
-          setError("Error fetching cart data");
-
+        setLoading(false);
+        console.error("Error fetching cart data:", error);
       }
     };
 
@@ -35,19 +39,10 @@ const CartComponent = () => {
 
   // Agregar mas productos al carrito
   const handleQuantityChange = async (itemId, newQuantity) => {
-    newQuantity = Math.max(newQuantity, 1);
+    // Ensure newQuantity is positive and is a number; fallback to 1 if not
+    newQuantity = isNaN(newQuantity) || newQuantity < 1 ? 1 : newQuantity;
     try {
-      // Actualizar la cantidad en la interfaz de usuario primero para una respuesta rápida
-      const updatedCartItems = cartItems.map((item) => {
-        if (item.product._id === itemId) {
-          return { ...item, quantity: newQuantity };
-        }
-        return item;
-      });
-      setCartItems(updatedCartItems);
-
-      // Llamada a la API para actualizar el carrito en el backend
-      const response = await axios.put(
+      await axios.put(
         "http://localhost:3000/carts/update-cart",
         {
           items: [{ product: itemId, quantity: newQuantity }],
@@ -58,22 +53,17 @@ const CartComponent = () => {
           },
         }
       );
-
-      // Actualizar el estado con la respuesta del backend si es necesario
-      // setCartItems(response.data.items);
-      console.log("Cart updated", response.data);
+      console.log("Quantity updated", itemId, newQuantity);
+      // Update the state with the new quantity
+      const updatedCartItems = cartItems.map((item) => {
+        if (item.product._id === itemId) {
+          return { ...item, quantity: newQuantity };
+        }
+        return item;
+      });
+      setCartItems(updatedCartItems);
     } catch (error) {
       console.error("Error updating cart", error);
-      // Revertir el cambio en la interfaz de usuario si la llamada a la API falla
-      setCartItems(
-        cartItems.map((item) => {
-          if (item.product._id === itemId) {
-            return { ...item, quantity: item.quantity }; // Restablecer a la cantidad original
-          }
-          return item;
-        })
-      );
-      // Mostrar algún mensaje de error al usuario aquí
     }
   };
 
@@ -110,14 +100,14 @@ const CartComponent = () => {
       // 1. Crea una sesión de checkout en tu backend
       const stripe = await stripePromise;
       const checkoutSession = await axios.post(
-        'http://localhost:3000/orders/create-checkout-session', 
+        "http://localhost:3000/orders/create-checkout-session",
         { items: cartItems }, // Asegúrate de enviar los datos necesarios para tu backend
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             // Agrega cualquier encabezado adicional como el token de autenticación aquí
-            'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
-          }
+            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+          },
         }
       );
 
@@ -132,11 +122,10 @@ const CartComponent = () => {
         // Puedes mostrar un mensaje de error en la UI aquí
       }
     } catch (error) {
-      console.error('Error during checkout', error);
+      console.error("Error during checkout", error);
       // Manejar errores aquí, como mostrar un mensaje al usuario
     }
   };
-
 
   // if (loading) {
   //   return (
@@ -146,17 +135,21 @@ const CartComponent = () => {
   //   );
   // }
 
-  if (error) {
-    return <div className="text-center text-red-500">{error}</div>;
-  }
-
   if (cartItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <FontAwesomeIcon icon={faSadTear} size="6x" className="text-gray-600 my-2" />
+        <FontAwesomeIcon
+          icon={faSadTear}
+          size="6x"
+          className="text-gray-600 my-2"
+        />
         <h2 className="text-2xl font-semibold mb-2">Tu carrito está vacío</h2>
-        <p className="mb-6 text-gray-800">Parece que aún no has añadido nada a tu carrito.</p>
-        <a href="/" className="text-indigo-600 hover:underline">Empieza a comprar</a>
+        <p className="mb-6 text-gray-800">
+          Parece que aún no has añadido nada a tu carrito.
+        </p>
+        <a href="/" className="text-indigo-600 hover:underline">
+          Empieza a comprar
+        </a>
       </div>
     );
   }
@@ -233,6 +226,12 @@ const CartComponent = () => {
                   className="mx-2 border text-center w-8"
                   type="text"
                   value={item.quantity}
+                  onChange={(e) =>
+                    handleQuantityChange(
+                      item.product._id,
+                      parseInt(e.target.value)
+                    )
+                  }
                 />
                 <button
                   onClick={() =>
@@ -284,6 +283,9 @@ const CartComponent = () => {
             <span className="font-semibold text-sm uppercase">
               Items {cartItems.length}
             </span>
+            <span className="font-semibold text-sm">
+              ${totalPrice.toFixed(2)}
+            </span>
           </div>
           <div>
             <label className="font-medium inline-block mb-3 text-sm uppercase">
@@ -294,7 +296,14 @@ const CartComponent = () => {
             </select>
           </div>
           <div className="border-t mt-8">
-            <button onClick={handleCheckout} className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+            <div className="flex font-semibold justify-between py-6 text-sm uppercase">
+              <span>Total cost</span>
+              <span>${totalPrice.toFixed(2)}</span>
+            </div>
+            <button
+              onClick={handleCheckout}
+              className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full"
+            >
               Proceder al Pago
             </button>
           </div>

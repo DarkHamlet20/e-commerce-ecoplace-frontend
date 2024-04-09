@@ -55,7 +55,8 @@ const NavComponent = ({ handleSide }) => {
           },
         }
       );
-      localStorage.removeItem("auth_token", "userRole");
+      localStorage.removeItem("auth_token");
+      localStorage.removeItem("userRole");
       // Si la petición es exitosa, elimina el token de localStorage y llama a onLogout
       navigate("/login");
     } catch (error) {
