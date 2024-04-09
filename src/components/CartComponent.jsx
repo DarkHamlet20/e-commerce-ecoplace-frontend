@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -23,7 +23,7 @@ const CartComponent = () => {
         });
         setCartItems(response.data.items);
         // Calcular el precio total
-        const total = response.data.items.reduce(
+        const total = response.data?.items.reduce(
           (sum, item) => sum + item.quantity * item.price,
           0
         );
@@ -127,14 +127,6 @@ const CartComponent = () => {
     }
   };
 
-  // if (loading) {
-  //   return (
-  //     <div className="flex justify-center items-center h-screen">
-  //       <div className="text-xl font-semibold">Cargando tu carrito...</div>
-  //     </div>
-  //   );
-  // }
-
   if (cartItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
@@ -181,7 +173,7 @@ const CartComponent = () => {
           {/* Lista de productos */}
           {cartItems.map((item) => (
             <div
-              key={item.product._id}
+              key={item?.product?._id}
               className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5"
             >
               {/* Imagen y detalles del producto */}
@@ -189,17 +181,17 @@ const CartComponent = () => {
                 {/* Imagen */}
                 <img
                   className="h-24"
-                  src={item.product.images[0]}
-                  alt={item.product.name}
+                  src={item?.product.images[0]}
+                  alt={item?.product.name}
                 />
                 {/* Detalles */}
                 <div className="flex flex-col justify-between ml-4 flex-grow">
-                  <span className="font-bold text-sm">{item.product.name}</span>
+                  <span className="font-bold text-sm">{item?.product?.name}</span>
                   <span className="text-red-500 text-xs">
-                    {item.product.brand}
+                    {item?.product?.brand}
                   </span>
                   <a
-                    onClick={() => handleRemoveItemFromCart(item.product._id)}
+                    onClick={() => handleRemoveItemFromCart(item?.product?._id)}
                     className="font-semibold hover:text-red-500 text-gray-500 text-xs"
                   >
                     Eliminar
@@ -210,7 +202,7 @@ const CartComponent = () => {
               <div className="flex justify-center w-1/5">
                 <button
                   onClick={() =>
-                    handleQuantityChange(item.product._id, item.quantity - 1)
+                    handleQuantityChange(item?.product?._id, item?.quantity - 1)
                   }
                   className="fill-current text-gray-500 focus:outline-none"
                 >
@@ -225,17 +217,17 @@ const CartComponent = () => {
                 <input
                   className="mx-2 border text-center w-8"
                   type="text"
-                  value={item.quantity}
+                  value={item?.quantity}
                   onChange={(e) =>
                     handleQuantityChange(
-                      item.product._id,
+                      item?.product?._id,
                       parseInt(e.target.value)
                     )
                   }
                 />
                 <button
                   onClick={() =>
-                    handleQuantityChange(item.product._id, item.quantity + 1)
+                    handleQuantityChange(item?.product?._id, item.quantity + 1)
                   }
                   className="fill-current text-gray-500 focus:outline-none"
                 >
@@ -250,11 +242,11 @@ const CartComponent = () => {
               </div>
               {/* Precio unitario */}
               <span className="text-center w-1/5 font-semibold text-sm">
-                ${item.product.price}
+                ${item?.product?.price}
               </span>
               {/* Precio total por producto */}
               <span className="text-center w-1/5 font-semibold text-sm">
-                ${(item.quantity * item.product.price).toFixed(2)}
+                ${(item?.quantity * item?.product?.price).toFixed(2)}
               </span>
             </div>
           ))}
@@ -281,7 +273,7 @@ const CartComponent = () => {
           </h1>
           <div className="flex justify-between mt-10 mb-5">
             <span className="font-semibold text-sm uppercase">
-              Items {cartItems.length}
+              Items {cartItems?.length}
             </span>
             <span className="font-semibold text-sm">
               ${totalPrice.toFixed(2)}

@@ -5,8 +5,6 @@ import UnauthorizedPage from '../views/home/UnauthorizedPage';
 
 const ProtectedRoute = ({ children, roles = [] }) => {
   const { token, role } = useAuth();
-  console.log("Token:", token)
-  console.log("Rol:", role)
 
   if (!token) {
     // Usuario no autenticado

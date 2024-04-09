@@ -16,6 +16,7 @@ const UserPage = () => {
     if (!token) {
       // Puedes hacer cualquier verificación adicional aquí, como validar el token con el servidor
       setAuthenticated(false);
+      // <Redirect to='/login' />
     }
 
     setAuthenticated(true);
@@ -34,8 +35,6 @@ const UserPage = () => {
         console.error('There was an error with the request:', error);
       });
   }, [token]);
-
-  console.log(userData);
   // Redirigir al usuario a la página de inicio de sesión si no está autenticado
   // if (!authenticated) {
   //   return <Redirect to="/login" />;
@@ -46,17 +45,18 @@ const UserPage = () => {
       <LayoutComponent>
         <main>
           <UserComponent
-           name={userData.name}
-           lastname={userData.lastname}
-           email={userData.email}
-           zip={userData.zip}
-           city={userData.city}
-           street={userData.street}
+            name={userData?.name}
+            lastname={userData?.lastname}
+            phone={userData?.phone}
+            email={userData?.email}
+            zip={userData?.zip}
+            city={userData?.city}
+            street={userData?.street}
           />
         </main>
       </LayoutComponent>
-        
-      
+
+
     </>
   )
 }
