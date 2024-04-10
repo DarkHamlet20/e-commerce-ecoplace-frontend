@@ -166,7 +166,7 @@ const CartComponent = () => {
             <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
               Precio
             </h3>
-            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
+            <h3 className="font-semibold text-right text-gray-600 text-xs uppercase ml-4 w-1/5">
               Total
             </h3>
           </div>
@@ -174,13 +174,13 @@ const CartComponent = () => {
           {cartItems.map((item) => (
             <div
               key={item?.product?._id}
-              className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5"
+              className="flex items-center border gap-2 mb-3 hover:bg-gray-100 -mx-8 px-6 py-5"
             >
               {/* Imagen y detalles del producto */}
               <div className="flex w-2/5">
                 {/* Imagen */}
                 <img
-                  className="h-24"
+                  className="h-24 aspect-square object-contain"
                   src={item?.product.images[0]}
                   alt={item?.product.name}
                 />
@@ -192,14 +192,14 @@ const CartComponent = () => {
                   </span>
                   <a
                     onClick={() => handleRemoveItemFromCart(item?.product?._id)}
-                    className="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                    className="font-semibold hover:text-red-500 text-gray-500 text-xs cursor-pointer"
                   >
                     Eliminar
                   </a>
                 </div>
               </div>
               {/* Cantidad y botones para incrementar y disminuir la cantidad */}
-              <div className="flex justify-center w-1/5">
+              <div className="flex border items-center mx-2 flex-row justify-center w-1/5">
                 <button
                   onClick={() =>
                     handleQuantityChange(item?.product?._id, item?.quantity - 1)
@@ -245,7 +245,7 @@ const CartComponent = () => {
                 ${item?.product?.price}
               </span>
               {/* Precio total por producto */}
-              <span className="text-center w-1/5 font-semibold text-sm">
+              <span className=" text-center ml-4 w-1/5 font-semibold text-sm">
                 ${(item?.quantity * item?.product?.price).toFixed(2)}
               </span>
             </div>
@@ -267,7 +267,7 @@ const CartComponent = () => {
           </a>
         </div>
 
-        <div id="summary" className="w-1/4 px-8 py-10">
+        <div id="summary" className="lg:w-1/4 px-8 py-10">
           <h1 className="font-semibold text-2xl border-b pb-8">
             Resumen del Pedido
           </h1>
