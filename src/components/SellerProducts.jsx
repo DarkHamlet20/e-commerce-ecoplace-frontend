@@ -18,7 +18,7 @@ const SellerProducts = (props) => {
                      <th className="px-5 py-3">ID</th>
                      <th className="px-5 py-3">Product</th>
                      <th className="px-5 py-3">Stock</th>
-                     <th className="px-5 py-3">Orders</th>
+                     <th className="px-5 py-3">Price</th>
                      <th className="px-5 py-3">Status</th>
                      <th className="px-5 py-3">Action</th>
                   </tr>
@@ -42,7 +42,7 @@ const SellerProducts = (props) => {
                      <p className="whitespace-no-wrap">{props.stock}</p>
                      </td>
                      <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                     <p className="whitespace-no-wrap">{props.orders}</p>
+                     <p className="whitespace-no-wrap">{props.price}</p>
                      </td>
 
                      <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
