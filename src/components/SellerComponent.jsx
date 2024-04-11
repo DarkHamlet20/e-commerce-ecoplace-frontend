@@ -47,7 +47,7 @@ const SellerComponent = () => {
   return (
     <main className='w-full p-10' >
       <div className='container-seller'>
-        <div className='customers rounded-lg shadow-[0_3px_15px_rgb(0,0,0,0.2)]  p-7 flex flex-col'>
+        <div className='customers rounded-lg shadow-[0_3px_15px_rgb(0,0,0,0.2)] p-7 flex flex-col'>
           <h1 className='text-2xl font-bold'>Welcome, {seller?.name}!</h1>
           {
             orders && orders.map(order => {
@@ -67,7 +67,6 @@ const SellerComponent = () => {
         <div className='products rounded-lg shadow-[0_3px_15px_rgb(0,0,0,0.2)] p-7 flex'>
           <SellerProducts />
         </div>
-
       </div>
     </main>
   )

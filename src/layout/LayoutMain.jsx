@@ -10,7 +10,7 @@ const LayoutComponent = ({ children, fuction }) => {
       <NavComponent
         handleSide={fuction}
       />
-      <main className=''>
+      <main>
         <div>
           {children}
         </div>
