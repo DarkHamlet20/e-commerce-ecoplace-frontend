@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import OrdersCustomerComponent from '../../components/OrdersCustomerComponent'
 import LayoutComponent from '../../layout/LayoutMain'
 
@@ -6,7 +6,7 @@ const OrdersCustomerPage = () => {
   return (
     <div>
       <LayoutComponent>
-         <OrdersCustomerComponent />
+        <OrdersCustomerComponent />
       </LayoutComponent>
     </div>
   )
