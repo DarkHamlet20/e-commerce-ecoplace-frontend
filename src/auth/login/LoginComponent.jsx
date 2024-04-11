@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../AuthSlice';
 
 export default function LoginComponent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(''); // Agregando estado para manejar errores
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -15,7 +18,25 @@ export default function LoginComponent() {
       const response = await axios.post('http://localhost:3000/users/login', { email, password });
       localStorage.setItem('auth_token', response.data.token);
       localStorage.setItem('userRole', response.data.role);
-      navigate('/')
+      dispatch(setCredentials({
+        token: response.data.token,
+        role: response.data.role,
+      }));
+      
+      // Redirección basada en el rol después del inicio de sesión exitoso
+      switch(response.data.role) {
+        case 'Admin':
+          navigate('/admin');
+          break;
+        case 'Seller':
+          navigate('/seller');
+          break;
+        case 'Customer':
+          navigate('/user');
+          break;
+        default:
+          navigate('/'); // Redirigir a la página de inicio por defecto o manejar errores
+      }
     } catch (error) {
       console.error('Error de autenticación', error);
       setError('Error al iniciar sesión. Por favor, verifica tus credenciales:', error); // Actualizar el estado de error
