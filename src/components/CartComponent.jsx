@@ -12,6 +12,7 @@ const CartComponent = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -22,12 +23,9 @@ const CartComponent = () => {
           },
         });
         setCartItems(response.data.items);
-        // Calcular el precio total
-        const total = response.data?.items.reduce(
-          (sum, item) => sum + item.quantity * item.price,
-          0
-        );
-        setTotalPrice(total);
+        // Usar el total directamente del backend
+        setTotalPrice(response.data.total);
+        setLoading(false); // Asegurarse de actualizar el estado de carga
       } catch (error) {
         setLoading(false);
         console.error("Error fetching cart data:", error);
@@ -126,6 +124,19 @@ const CartComponent = () => {
       // Manejar errores aquí, como mostrar un mensaje al usuario
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="text-xl font-semibold">Cargando tu carrito...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="text-center text-red-500">{error}</div>;
+  }
+
 
   if (cartItems.length === 0) {
     return (
