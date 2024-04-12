@@ -4,6 +4,7 @@ import ADADDProductPages from '../pages/ADADDProductPages'
 const AdminProducts = () => {
   return (
     <>
+    <ADADDProductPages />
     </>
   )
 }
