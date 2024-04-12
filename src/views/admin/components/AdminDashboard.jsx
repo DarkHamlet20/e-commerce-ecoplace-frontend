@@ -15,6 +15,7 @@ import {
   faListCheck,
   faMoneyCheck,
   faThList,
+  faUsersGear
 } from '@fortawesome/free-solid-svg-icons';
 
 const AdminDashboard = () => {
@@ -35,10 +36,9 @@ const AdminDashboard = () => {
       icon: faUsers,
       href: '/admin/users',
       subMenu: [
-        { name: 'Ver Usuarios', icon: faEye, href: '/admin/users/see' },
+        { name: 'Ver Usuarios', icon: faEye, href: '/admin/users/view' },
       ],
     },
-    // ... más menús ...
     {
       name: 'Productos',
       icon: faBoxOpen,

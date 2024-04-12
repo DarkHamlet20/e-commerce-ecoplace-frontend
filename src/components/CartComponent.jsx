@@ -138,7 +138,7 @@ const CartComponent = () => {
   }
 
 
-  if (cartItems.length === 0) {
+  if (!cartItems) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
         <FontAwesomeIcon
