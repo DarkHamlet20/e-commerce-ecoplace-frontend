@@ -12,6 +12,12 @@ import UnauthorizedPage from '../views/home/UnauthorizedPage';
 import SellerPage from '../views/seller/SellerPage'
 import OrdersCustomerPage from '../views/home/OrdersCustomerPage'
 import AddProductPage from '../views/seller/AddProductPage'
+import AdminDashboardPage from '../views/admin/pages/AdminDashboardPage'
+import AdminProductsPages from '../views/admin/pages/AdminProductsPages'
+import ADADDProductPages from '../views/admin/pages/ADADDProductPages'
+import ADLTProductsPages from '../views/admin/pages/ADLTProductsPages'
+import ADUPDPages from '../views/admin/pages/ADUPDPages'
+import ADSEEProductsPages from '../views/admin/pages/ADSEEProductsPages'
 
 const AppRouter = () => {
   return (
@@ -33,6 +39,36 @@ const AppRouter = () => {
       <Route path='/seller' element={
         <ProtectedRoute roles={['Seller']}>
           <SellerPage />
+        </ProtectedRoute>
+      } />
+      <Route path='/admin' element={
+        <ProtectedRoute roles={['Admin']}>
+          <AdminDashboardPage />
+        </ProtectedRoute>
+      } />
+      <Route path='/admin/products' element={
+        <ProtectedRoute roles={['Admin']}>
+          <AdminProductsPages />
+        </ProtectedRoute>
+      } />
+      <Route path='/admin/products/add' element={
+        <ProtectedRoute roles={['Admin']}>
+          <ADADDProductPages />
+        </ProtectedRoute>
+      } />
+      <Route path='/admin/products/delete' element={
+        <ProtectedRoute roles={['Admin']}>
+          <ADLTProductsPages />
+        </ProtectedRoute>
+      } />
+      <Route path='/admin/products/edit' element={
+        <ProtectedRoute roles={['Admin']}>
+          <ADUPDPages />
+        </ProtectedRoute>
+      } />
+      <Route path='/admin/products/view' element={
+        <ProtectedRoute roles={['Admin']}>
+          <ADSEEProductsPages />
         </ProtectedRoute>
       } />
       <Route path='/sellerproduct' element={

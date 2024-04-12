@@ -1,22 +1,17 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import UnauthorizedPage from '../views/home/UnauthorizedPage';
+import { useSelector } from 'react-redux';
+import { selectCurrentToken, selectCurrentRole } from '../auth/AuthSlice'
 
-const ProtectedRoute = ({ children, roles = [] }) => {
-  const { token, role } = useAuth();
+const ProtectedRoute = ({ children, roles }) => {
+  const token = useSelector(selectCurrentToken);
+  const role = useSelector(selectCurrentRole);
 
   if (!token) {
-    // Usuario no autenticado
     return <Navigate to="/login" />;
+  } else if (!roles.includes(role)) {
+    return <Navigate to="/unauthorized" />;
   }
-
-  if (roles.length && !roles.includes(role)) {
-    // Usuario no tiene permiso
-    return <UnauthorizedPage />;
-  }
-
-  // Usuario autenticado y con permiso
   return children;
 };
 
