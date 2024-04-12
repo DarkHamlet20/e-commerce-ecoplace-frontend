@@ -13,7 +13,6 @@ import SellerPage from '../views/seller/SellerPage'
 import OrdersCustomerPage from '../views/home/OrdersCustomerPage'
 import AddProductPage from '../views/seller/AddProductPage'
 import AdminDashboardPage from '../views/admin/pages/AdminDashboardPage'
-import AdminProductsPages from '../views/admin/pages/AdminProductsPages'
 import ADADDProductPages from '../views/admin/pages/ADADDProductPages'
 import ADLTProductsPages from '../views/admin/pages/ADLTProductsPages'
 import ADUPDPages from '../views/admin/pages/ADUPDPages'
@@ -23,7 +22,6 @@ import ADLTCategoriesPages from '../views/admin/pages/ADLTCategoriesPages'
 import ADUPDCategoriesPages from '../views/admin/pages/ADUPDCategoriesPages'
 import ADSEECategoriesPages from '../views/admin/pages/ADSEECategoriesPages'
 import ADSEEUsersPages from '../views/admin/pages/ADSEEUsersPages'
-import ADUPDUsersPages from '../views/admin/pages/ADUPDUsersPages'
 
 const AppRouter = () => {
   return (
