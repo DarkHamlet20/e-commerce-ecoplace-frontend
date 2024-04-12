@@ -18,6 +18,10 @@ import ADADDProductPages from '../views/admin/pages/ADADDProductPages'
 import ADLTProductsPages from '../views/admin/pages/ADLTProductsPages'
 import ADUPDPages from '../views/admin/pages/ADUPDPages'
 import ADSEEProductsPages from '../views/admin/pages/ADSEEProductsPages'
+import ADADCategoriesPages from '../views/admin/pages/ADADCategoriesPages'
+import ADLTCategoriesPages from '../views/admin/pages/ADLTCategoriesPages'
+import ADUPDCategoriesPages from '../views/admin/pages/ADUPDCategoriesPages'
+import ADSEECategoriesPages from '../views/admin/pages/ADSEECategoriesPages'
 
 const AppRouter = () => {
   return (
@@ -38,16 +42,14 @@ const AppRouter = () => {
       } />
       
       {/* Rutas para los Admins */}
+      {/* Dashboard del Admin */}
       <Route path='/admin' element={
         <ProtectedRoute roles={['Admin']}>
           <AdminDashboardPage />
         </ProtectedRoute>
       } />
-      <Route path='/admin/products' element={
-        <ProtectedRoute roles={['Admin']}>
-          <AdminProductsPages />
-        </ProtectedRoute>
-      } />
+
+      {/* Rutas para los Admins Products */}
       <Route path='/admin/products/add' element={
         <ProtectedRoute roles={['Admin']}>
           <ADADDProductPages />
@@ -66,6 +68,28 @@ const AppRouter = () => {
       <Route path='/admin/products/view' element={
         <ProtectedRoute roles={['Admin']}>
           <ADSEEProductsPages />
+        </ProtectedRoute>
+      } />
+
+      {/* Rutas para los Admins Categories*/}
+      <Route path='/admin/categories/add' element={
+        <ProtectedRoute roles={['Admin']}>
+          <ADADCategoriesPages />
+        </ProtectedRoute>
+      } />
+      <Route path='/admin/categories/delete/:id' element={
+        <ProtectedRoute roles={['Admin']}>
+          <ADLTCategoriesPages />
+        </ProtectedRoute>
+      } />
+      <Route path='/admin/categories/edit/:id' element={
+        <ProtectedRoute roles={['Admin']}>
+          <ADUPDCategoriesPages />
+        </ProtectedRoute>
+      } />
+      <Route path='/admin/categories/view' element={
+        <ProtectedRoute roles={['Admin']}>
+          <ADSEECategoriesPages />
         </ProtectedRoute>
       } />
 

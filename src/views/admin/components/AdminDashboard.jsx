@@ -27,7 +27,7 @@ const AdminDashboard = () => {
       icon: faThList,
       href: '/admin/categories',
       subMenu: [
-        { name: 'Ver Categorias', icon: faEye, href: '/admin/categories/see' },
+        { name: 'Ver Categorias', icon: faEye, href: '/admin/categories/view' },
       ],
     },
     {
