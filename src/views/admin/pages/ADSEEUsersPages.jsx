@@ -86,7 +86,7 @@ const ADSEEUsersPages = () => {
                     </span>
                   </td>
                   <td>
-                    {user.createdAt}
+                    {new Date(user.createdAt).toLocaleDateString()}
                   </td>
                 </tr>
               ))}

@@ -22,6 +22,7 @@ import ADLTCategoriesPages from '../views/admin/pages/ADLTCategoriesPages'
 import ADUPDCategoriesPages from '../views/admin/pages/ADUPDCategoriesPages'
 import ADSEECategoriesPages from '../views/admin/pages/ADSEECategoriesPages'
 import ADSEEUsersPages from '../views/admin/pages/ADSEEUsersPages'
+import ADSEEOrdersPages from '../views/admin/pages/ADSEEOrdersPages'
 
 const AppRouter = () => {
   return (
@@ -97,6 +98,13 @@ const AppRouter = () => {
       <Route path='/admin/users/view' element={
         <ProtectedRoute roles={['Admin']}>
           <ADSEEUsersPages />
+        </ProtectedRoute>
+      } />
+
+      {/* Rutas para los Admins Orders*/}
+      <Route path='/admin/orders/view' element={
+        <ProtectedRoute roles={['Admin']}>
+          <ADSEEOrdersPages />
         </ProtectedRoute>
       } />
 
