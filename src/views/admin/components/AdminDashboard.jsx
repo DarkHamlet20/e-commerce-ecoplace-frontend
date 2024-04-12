@@ -12,6 +12,9 @@ import {
   faEdit,
   faTrashAlt,
   faEye,
+  faListCheck,
+  faMoneyCheck,
+  faThList
 } from '@fortawesome/free-solid-svg-icons';
 
 const AdminDashboard = () => {
@@ -21,19 +24,24 @@ const AdminDashboard = () => {
   const menuItems = [
     {
       name: 'Dashboard',
-      icon: faChartPie,
-      href: '/admin/dashboard',
-      subMenu: [],
+      icon: faThList,
+      href: '/admin/categories',
+      subMenu: [
+        { name: 'Agregar Categorias', icon: faPlus, href: '/admin/categories/add' },
+        { name: 'Editar Categorias', icon: faEdit, href: '/admin/categories/edit' },
+        { name: 'Eliminar Categorias', icon: faTrashAlt, href: '/admin/categories/delete' },
+        { name: 'Ver Categorias', icon: faEye, href: '/admin/categories/see' },
+      ],
     },
     {
       name: 'Usuarios',
       icon: faUsers,
       href: '/admin/users',
       subMenu: [
-        { name: 'Agregar Usuario', icon: faPlus, href: '/admin/users/add' },
-        { name: 'Editar Usuario', icon: faEdit, href: '/admin/users/edit' },
-        { name: 'Eliminar Usuario', icon: faTrashAlt, href: '/admin/users/delete' },
-        { name: 'Ver Usuario', icon: faEye, href: '/admin/users/see' },
+        { name: 'Agregar Usuarios', icon: faPlus, href: '/admin/users/add' },
+        { name: 'Editar Usuarios', icon: faEdit, href: '/admin/users/edit' },
+        { name: 'Eliminar Usuarios', icon: faTrashAlt, href: '/admin/users/delete' },
+        { name: 'Ver Usuarios', icon: faEye, href: '/admin/users/see' },
       ],
     },
     // ... más menús ...
@@ -42,10 +50,26 @@ const AdminDashboard = () => {
       icon: faBoxOpen,
       href: '/admin/products',
       subMenu: [
-        { name: 'Agregar Producto', icon: faPlus, href: '/admin/products/add' },
-        { name: 'Editar Producto', icon: faEdit, href: '/admin/products/edit' },
-        { name: 'Eliminar Producto', icon: faTrashAlt, href: '/admin/products/delete' },
-        { name: 'Ver Producto', icon: faEye, href: '/admin/products/view' },
+        { name: 'Agregar Productos', icon: faPlus, href: '/admin/products/add' },
+        { name: 'Editar Productos', icon: faEdit, href: '/admin/products/edit' },
+        { name: 'Eliminar Productos', icon: faTrashAlt, href: '/admin/products/delete' },
+        { name: 'Ver Productos', icon: faEye, href: '/admin/products/view' },
+      ],
+    },
+    {
+      name: 'Orders',
+      icon: faListCheck,
+      href: '/admin/orders',
+      subMenu: [
+        { name: 'Ver Ordenes', icon: faEye, href: '/admin/orders/view' },
+      ],
+    },
+    {
+      name: 'Ventas',
+      icon: faMoneyCheck,
+      href: '/admin/sales',
+      subMenu: [
+        { name: 'Ver Ventas', icon: faEye, href: '/admin/sales/view' },
       ],
     },
     // ... más menús ...
@@ -70,7 +94,7 @@ const AdminDashboard = () => {
             <button
               onClick={() => handleMenuClick(item)}
               className={`flex items-center p-2 w-full text-left hover:bg-blue-800 focus:outline-none transition-colors duration-150 ${
-                activeMenu === item.name ? 'bg-blue-800' : ''
+                activeMenu === item.name ? 'bg-gray-800' : ''
               }`}
             >
               <FontAwesomeIcon icon={item.icon} className="mr-3 text-lg" />
