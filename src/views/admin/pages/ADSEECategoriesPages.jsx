@@ -43,12 +43,12 @@ const ADSEECategoriesPages = () => {
   const currentCategories = filteredCategories.slice(indexOfFirstCategory, indexOfLastCategory);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center px-6 py-8">
+    <div className="min-h-screen bg-gray-900 flex justify-center items-center px-6 py-8">
   <div className="w-full max-w-6xl bg-white rounded-lg shadow-xl p-8">
     <div className="flex justify-between items-center mb-6">
       <h2 className="text-2xl font-semibold text-gray-800">Gestión de Categorías</h2>
-      <Link to="/admin" className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2">Regresar</Link>
-      <Link to="/admin/categories/add" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <Link to="/admin" className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Regresar</Link>
+      <Link to="/admin/categories/add" className="bg-indigo-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Agregar Categoría
       </Link>
     </div>
@@ -59,11 +59,11 @@ const ADSEECategoriesPages = () => {
           />
       <table className="min-w-full divide-y divide-gray-200">
         <thead>
-          <tr className="bg-blue-100">
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          <tr className="bg-gray-600">
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
               Categoría
             </th>
-            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-white uppercase tracking-wider">
               Acciones
             </th>
           </tr>
@@ -75,7 +75,7 @@ const ADSEECategoriesPages = () => {
                 {category.categoryName}
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <Link to={`/admin/categories/edit/${category._id}`} className="inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-4 rounded mr-2">Actualizar</Link>
+                <Link to={`/admin/categories/edit/${category._id}`} className="inline-block bg-slate-500 hover:bg-indigo-700 text-white font-bold py-1 px-4 rounded mr-2">Actualizar</Link>
                 <Link to={`/admin/categories/delete/${category._id}`} className="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded">Eliminar</Link>
               </td>
             </tr>

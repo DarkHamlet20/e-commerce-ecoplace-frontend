@@ -18,9 +18,12 @@ const CardComponent = ({ productName, id, price, info, image }) => {
                 <img className="p-8 rounded-t-lg aspect-square object-cover" src={image || defaultImage} alt="product image" />
             </a>
             <div className="px-5 pb-5">
+                <div className="h-16">
                 <a href={`/product/${id}`}>
-                    <h5 className="text-xl font-semibold tracking-tight  text-white min-h-14 h-16 mb-2">{productName}: {info}</h5>
+                    <h5 className="text-xl font-semibold tracking-tight  text-white mb-2">{productName}: </h5>
+                    <span className="text-white text-[14px]">{info}</span>
                 </a>
+                </div>
                 <div className="flex items-center mt-2.5 mb-5">
                     <div className="flex items-center space-x-1 rtl:space-x-reverse my-6">
                         <svg className="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">

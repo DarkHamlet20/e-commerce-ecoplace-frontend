@@ -46,7 +46,7 @@ const ADSEESalesPages = () => {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
-    <div className="min-h-screen bg-blue-900 flex justify-center items-center px-6 py-8">
+    <div className="min-h-screen bg-gray-900 flex justify-center items-center px-6 py-8">
       <div className="w-full max-w-6xl bg-white rounded-lg shadow-xl p-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold text-gray-800">
@@ -54,7 +54,7 @@ const ADSEESalesPages = () => {
           </h2>
           <Link
             to="/admin"
-            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
           >
             Regresar
           </Link>
@@ -64,19 +64,19 @@ const ADSEESalesPages = () => {
           <table className="min-w-full leading-normal">
             <thead>
               <tr>
-                <th className="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-600 text-left text-xs font-semibold text-white uppercase tracking-wider">
                   Cliente
                 </th>
-                <th className="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-600 text-left text-xs font-semibold text-white uppercase tracking-wider">
                   Vendedor
                 </th>
-                <th className="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-600 text-left text-xs font-semibold text-white uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-600 text-left text-xs font-semibold text-white uppercase tracking-wider">
                   Detalles del Producto
                 </th>
-                <th className="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-600 text-left text-xs font-semibold text-white uppercase tracking-wider">
                   Fecha de Venta
                 </th>
               </tr>

@@ -9,9 +9,4 @@
     flex-direction: column;
     margin-top: 8rem;
   }
-
-  .product-container img {
-    width: 100%;
-    aspect-ratio: 16/9;
-  }
 }

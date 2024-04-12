@@ -71,21 +71,59 @@ const NavComponent = ({ handleSide }) => {
 
   return (
     <>
-      <nav className="bg-gray-900">
-        <div className="max-w-full min-w-[380px] mx-auto flex flex-wrap items-center justify-between p-4">
+      <nav className="bg-gray-900 smm:h-auto h-36">
+        <div className="flex items-center justify-around p-4">
+          {/* Logo */}
 
+          <div>
           <NavLink
-            to="/"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
-          >
-            <img src={logo} className="mr-3 rounded-full h-16" alt="EcoPlace Logo" />
-            <span className="text-xl font-semibold whitespace-nowrap text-white">EcoPlace</span>
-          </NavLink>
-          <div className="flex mt-4 md:mt-0">
-            <SearchComponent />
+              to="/"
+              className="flex items-center space-x-3 rtl:space-x-reverse"
+            >
+              <img src={logo} className="mr-3 rounded-full h-16" alt="EcoPlace Logo" />
+              <span className="text-xl font-semibold whitespace-nowrap text-white">EcoPlace</span>
+            </NavLink>
           </div>
 
-          <div className="flex relative z-50 text-white items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse mt-4 md:mt-0">
+          {/* NavButton */}
+
+          <div>
+            <ul className={`smm:flex md:w-96 right-16 top-24 flex-row smm:bg-transparent rounded bg-gray-800 items-center smm:static absolute md:mt-0 justify-around ${drop ? 'flex' : 'hidden'} `}>
+              <li>
+                <NavLink
+                  to="/"
+                  className="block py-2 px-3 text-white  rounded md:bg-transparent md:p-0"
+                  aria-current="page"
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="#"
+                  className="block py-2 px-3 rounded md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700"
+                >
+                  About
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="#"
+                  className="block py-2 px-3 rounded md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700"
+                >
+                  Contact
+                </NavLink>
+              </li>
+              {/* <button onClick={redirectToCart} className="text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">
+                  <FontAwesomeIcon icon={faShoppingCart} size="lg" />
+                </button> */}
+            </ul>
+          </div>
+
+          {/* Action buttons cart */}
+
+          <div className="flex relative z-50 text-white items-center space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div className="mr-4">
               <button onClick={redirectToCart} className="text-white  hover:text-gray-300">
                 <FontAwesomeIcon icon={faShoppingCart} size="lg" />
@@ -119,6 +157,8 @@ const NavComponent = ({ handleSide }) => {
 
               </button>
             </div>
+
+            
 
             <div
               className={`"z-50 top-16 right-1 absolute my-4 text-base list-none divide-y  rounded-lg shadow bg-gray-700 divide-gray-600 " id="user-dropdown" ${show ? "block" : "hidden"
@@ -164,7 +204,7 @@ const NavComponent = ({ handleSide }) => {
                 </li>
                 <li>
                   <NavLink
-                    to="/orders"
+                    to="/order-confirmation"
                     className="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
                   >
                     Orders
@@ -185,7 +225,7 @@ const NavComponent = ({ handleSide }) => {
               onClick={() => setDrop(!drop)}
               data-collapse-toggle="navbar-user"
               type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg lg:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg smm:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600 "
               aria-controls="navbar-user"
               aria-expanded="false"
             >
@@ -206,42 +246,6 @@ const NavComponent = ({ handleSide }) => {
                 />
               </svg>
             </button>
-          </div>
-          <div
-            className={`"items-center justify-between lg:flex lg:order-1" id="navbar-user" ${drop ? "lg:flex" : "hidden"
-              }`}
-          >
-            <ul className="flex flex-col font-medium p-4 lg:static absolute smm:top-28 top-48 md:right-48 right-56 lg:p-0 border  rounded-lg  lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0  bg-gray-800 lg:bg-gray-900 border-gray-700 z-50">
-              <li>
-                <NavLink
-                  to="#"
-                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:p-0 md:text-blue-500"
-                  aria-current="page"
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="#"
-                  className="block py-2 px-3 rounded md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700"
-                >
-                  About
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink
-                  to="#"
-                  className="block py-2 px-3 rounded md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700"
-                >
-                  Contact
-                </NavLink>
-              </li>
-              {/* <button onClick={redirectToCart} className="text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">
-                  <FontAwesomeIcon icon={faShoppingCart} size="lg" />
-                </button> */}
-            </ul>
           </div>
         </div>
 

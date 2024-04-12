@@ -19,7 +19,7 @@ export const Sidebar = ({ showSide }) => {
         <aside
           className={`mr-4 px-6 transition-all z-40 absolute ${
             showSide ? "hidden" : "flex"
-          } smm:flex smm:static left-0 bg-white h-screen rounded-r shadow-lg`}
+          } smm:flex smm:static left-0 bg-white h-full rounded-r shadow-lg`}
         >
           <div className="flex flex-col w-52">
             <h1 className="text-4xl py-5 border-b">Catalogo</h1>

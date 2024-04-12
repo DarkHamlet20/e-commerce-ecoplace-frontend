@@ -3,6 +3,7 @@ import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSadTear } from "@fortawesome/free-solid-svg-icons";
+import { showAddCart } from "../helpers/alerts";
 
 const stripePromise = loadStripe(
   "pk_test_51P2M6HIsT8wuHxVRe2GCd60YLng0HonCFfnmMdz7gqRHYU5aoKBBJVcp1fDwMKoLrVPAByLSzzdlo14hs539PkV3003lnCO3WT"
@@ -13,6 +14,7 @@ const CartComponent = () => {
   const [loading, setLoading] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
   const [error, setError] = useState("");
+  const [Test, setTest] = useState([])
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -23,6 +25,7 @@ const CartComponent = () => {
           },
         });
         setCartItems(response.data.items);
+        setTest(response.data)
         // Usar el total directamente del backend
         setTotalPrice(response.data.total);
         setLoading(false); // Asegurarse de actualizar el estado de carga
@@ -33,8 +36,7 @@ const CartComponent = () => {
     };
 
     fetchCartItems();
-  }, []);
-
+  }, [totalPrice]);
   // Agregar mas productos al carrito
   const handleQuantityChange = async (itemId, newQuantity) => {
     // Ensure newQuantity is positive and is a number; fallback to 1 if not
@@ -305,7 +307,7 @@ const CartComponent = () => {
             </div>
             <button
               onClick={handleCheckout}
-              className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full"
+              className="bg-gray-900 font-semibold hover:bg-gray-700 py-3 text-sm text-white uppercase w-full"
             >
               Proceder al Pago
             </button>

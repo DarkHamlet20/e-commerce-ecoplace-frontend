@@ -38,7 +38,7 @@ const OrderConfirmationPage = () => {
   return (
     <>
       <LayoutComponent>
-        <div className="min-h-screen bg-blue-900 flex justify-center items-center px-6 py-8">
+        <div className="min-h-screen bg-gray-900 flex justify-center items-center px-6 py-8">
           <div className="w-full max-w-3xl bg-white rounded-lg shadow-xl p-8">
             <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
               Order Confirmation

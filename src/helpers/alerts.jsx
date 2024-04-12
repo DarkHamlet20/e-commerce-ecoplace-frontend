@@ -20,4 +20,14 @@ const showErrorAlert = (title, text) => {
   });
 };
 
-export { showConfirmationAlert, showErrorAlert };
+const showAddCart = () => {
+  return Swal.fire({
+    position: "center",
+    icon: "success",
+    title: "Producto añadido al carrito",
+    showConfirmButton: false,
+    timer: 1500
+  });
+}
+
+export { showConfirmationAlert, showErrorAlert, showAddCart };

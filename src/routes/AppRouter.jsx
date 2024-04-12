@@ -31,7 +31,6 @@ import OrderConfirmationPage from '../views/home/OrderConfirmationPage'
 const AppRouter = () => {
   return (
     <Routes>
-      <Route path='/' element={<HomePage />} />
       <Route path='/login' element={<LoginPage />} />
       <Route path='/register' element={<RegisterPage />} />
       <Route path='/user' element={
@@ -39,10 +38,18 @@ const AppRouter = () => {
           <UserPage />
         </ProtectedRoute>
       } />
+
+      {/* Rutas de Customer */}
+
       <Route path='/product/:id' element={<ProductPage />} />
       <Route path='/cart' element={
         <ProtectedRoute roles={['Customer']}>
           <CartPage />
+        </ProtectedRoute>
+      } />
+      <Route path='/' element={
+        <ProtectedRoute roles={['Customer']}>
+          <HomePage />
         </ProtectedRoute>
       } />
       <Route path='/order-confirmation' element={
@@ -149,6 +156,8 @@ const AppRouter = () => {
       <Route path='/success' element={<SuccessPage />} />
       <Route path='/cancel' element={<CancelPage />} />
       <Route path='/unauthorized' element={<UnauthorizedPage />} />
+
+      
     </Routes>
   );
 };

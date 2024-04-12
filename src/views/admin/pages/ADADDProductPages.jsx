@@ -87,7 +87,7 @@ const ADADDProductPages = () => {
   };
 
   return (
-    <div className="min-h-screen bg-blue-900 flex justify-center items-center px-6 py-8">
+    <div className="min-h-screen bg-gray-900 flex justify-center items-center px-6 py-8">
       <div className="w-full max-w-3xl bg-white rounded-lg shadow-xl p-8">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
           Agregar Producto
@@ -244,7 +244,7 @@ const ADADDProductPages = () => {
           <div className="text-center">
             <Link
               to="/admin/products/view"
-              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
             >
               Regresar
             </Link>

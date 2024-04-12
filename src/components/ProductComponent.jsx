@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './Product.css'
 import axios from "axios";
+import { showAddCart } from '../helpers/alerts';
 
 const ProductComponent = ({ id, name, img, description, brand, price }) => {
 
@@ -18,7 +19,7 @@ const ProductComponent = ({ id, name, img, description, brand, price }) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      alert("Producto agregado al carrito");
+      showAddCart()
     } catch (error) {
       console.error("Error al agregar al carrito", error);
       alert("Error al agregar producto al carrito.");
@@ -28,14 +29,14 @@ const ProductComponent = ({ id, name, img, description, brand, price }) => {
   
   return (
     <>
-      <main id={id} className="h-screen">
+      <main id={id} className="my-10 smm:my-20">
         <div className="flex items-center h-full">
           <div className="w-[90%] lg:w-[850px] mx-auto rounded-lg shadow-[0_3px_10px_rgb(0,0,0,0.2)] product-container p-6 ">
             <div className="mr-3">
               <picture>
                 <img
                   src={img}
-                  className="aspect-square w-80 rounded-md"
+                  className=" aspect-square object-contain w-80 rounded-md"
                   alt=""
                 />
               </picture>
@@ -45,7 +46,7 @@ const ProductComponent = ({ id, name, img, description, brand, price }) => {
               <h2 className='text-3xl font-bold my-4'>{name}</h2>
               <p className='my-5'>{description}</p>
               <span className='text-2xl'>${price}</span>
-              <div className='flex justify-around my-8 mx-auto flex-col w-52 smm:flex smm:flex-row smm:w-full text-center '>
+              <div className='flex my-8 mx-auto flex-col w-52 smm:flex smm:flex-row smm:w-full text-center '>
                 <button onClick={addToCart} className='bg-blue-950 text-white rounded-md p-2 text'>Add to Cart</button>
               </div>
             </div>

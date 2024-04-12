@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 const ProductPage = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const getData = async () => {
@@ -15,6 +16,7 @@ const ProductPage = () => {
           `http://localhost:3000/products/${id}`
         );
         setData(response.data);
+        setLoading(false)
       } catch (err) {
         console.log("Advertesiment " + err);
       }
@@ -22,6 +24,14 @@ const ProductPage = () => {
 
     getData();
   }, [id]);
+
+  if(loading) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <p>Loading...</p>
+      </div>
+    )
+  }
 
   return (
     <>

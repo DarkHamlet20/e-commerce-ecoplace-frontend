@@ -44,7 +44,7 @@ const ADSEEProductsPages = () => {
 
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center px-6 py-8">
+    <div className="min-h-screen bg-gray-900 flex justify-center items-center px-6 py-8">
       <div className="w-full max-w-6xl bg-white rounded-lg shadow-xl p-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold text-gray-800">
@@ -52,7 +52,7 @@ const ADSEEProductsPages = () => {
           </h2>
           <Link
             to="/admin"
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+            className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
           >
             Regresar
           </Link>
@@ -69,34 +69,34 @@ const ADSEEProductsPages = () => {
           />
           <table className="min-w-full divide-y divide-gray-200">
             <thead>
-              <tr className="bg-blue-100">
+              <tr className="bg-gray-600">
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                 >
                   Producto
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                 >
                   Precio
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                 >
                   Categoría
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                 >
                   Stock
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                 >
                   Acciones
                 </th>
@@ -135,7 +135,7 @@ const ADSEEProductsPages = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Link
                       to={`/admin/products/edit/${product._id}`}
-                      className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-4 rounded mr-2"
+                      className="bg-slate-500 hover:bg-indigo-700 text-white font-bold py-1 px-4 rounded mr-2"
                     >
                       Actualizar
                     </Link>

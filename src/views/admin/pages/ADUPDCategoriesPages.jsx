@@ -55,7 +55,7 @@ const ADUPDCategoriesPages = () => {
   };
 
   return (
-    <div className="min-h-screen bg-blue-900 flex justify-center items-center">
+    <div className="min-h-screen bg-gray-900 flex justify-center items-center">
       <div className="w-full max-w-lg bg-white rounded-lg shadow-md p-8">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Actualizar Categoría</h2>
         <form onSubmit={handleSubmit} className="space-y-5">

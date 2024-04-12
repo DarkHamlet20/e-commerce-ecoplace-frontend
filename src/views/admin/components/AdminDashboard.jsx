@@ -75,16 +75,16 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="w-64 h-full bg-blue-700 text-white flex flex-col">
+    <div className="w-64 h-full bg-gray-900 text-white flex flex-col">
       <div className="flex items-center justify-center mt-10 mb-5">
         {/* Logo o Imagen */}
       </div>
-      <nav className="flex-grow">
+      <aside className="flex-grow">
         {menuItems.map((item) => (
           <React.Fragment key={item.name}>
             <button
               onClick={() => handleMenuClick(item)}
-              className={`flex items-center p-2 w-full text-left hover:bg-blue-800 focus:outline-none transition-colors duration-150 ${
+              className={`flex items-center p-2 w-full text-left hover:bg-gray-700 focus:outline-none transition-colors duration-150 ${
                 activeMenu === item.name ? 'bg-gray-800' : ''
               }`}
             >
@@ -107,7 +107,7 @@ const AdminDashboard = () => {
             )}
           </React.Fragment>
         ))}
-      </nav>
+      </aside>
     </div>
   );
 };

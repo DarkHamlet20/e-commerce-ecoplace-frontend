@@ -64,7 +64,7 @@ const ADSEEUsersPages = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="min-h-screen bg-blue-900 flex justify-center items-center px-6 py-8">
+    <div className="min-h-screen bg-gray-900 flex justify-center items-center px-6 py-8">
       <div className="w-full max-w-6xl bg-white rounded-lg shadow-xl p-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold text-gray-800">
@@ -72,7 +72,7 @@ const ADSEEUsersPages = () => {
           </h2>
           <Link
             to="/admin"
-            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
           >
             Regresar
           </Link>
@@ -86,9 +86,9 @@ const ADSEEUsersPages = () => {
           <table className="w-full whitespace-no-wrap">
             <thead>
               <tr className="text-left font-bold">
-                <th className="pb-4 pt-6 px-6 bg-blue-100">Usuario</th>
-                <th className="pb-4 pt-6 px-6 bg-blue-100">Detalles</th>
-                <th className="pb-4 pt-6 px-6 bg-blue-100">
+                <th className="pb-4 py-6 px-6 text-white bg-gray-600">Usuario</th>
+                <th className="pb-4 py-6 px-6 text-white bg-gray-600">Detalles</th>
+                <th className="pb-4 py-6 px-6 text-white bg-gray-600">
                   Fecha de Creacion
                 </th>
               </tr>
