@@ -36,11 +36,8 @@ const AppRouter = () => {
           <CartPage />
         </ProtectedRoute>
       } />
-      <Route path='/seller' element={
-        <ProtectedRoute roles={['Seller']}>
-          <SellerPage />
-        </ProtectedRoute>
-      } />
+      
+      {/* Rutas para los Admins */}
       <Route path='/admin' element={
         <ProtectedRoute roles={['Admin']}>
           <AdminDashboardPage />
@@ -56,12 +53,12 @@ const AppRouter = () => {
           <ADADDProductPages />
         </ProtectedRoute>
       } />
-      <Route path='/admin/products/delete' element={
+      <Route path='/admin/products/delete/:id' element={
         <ProtectedRoute roles={['Admin']}>
           <ADLTProductsPages />
         </ProtectedRoute>
       } />
-      <Route path='/admin/products/edit' element={
+      <Route path='/admin/products/edit/:id' element={
         <ProtectedRoute roles={['Admin']}>
           <ADUPDPages />
         </ProtectedRoute>
@@ -69,6 +66,13 @@ const AppRouter = () => {
       <Route path='/admin/products/view' element={
         <ProtectedRoute roles={['Admin']}>
           <ADSEEProductsPages />
+        </ProtectedRoute>
+      } />
+
+      {/* Rutas para los sellers */}
+      <Route path='/seller' element={
+        <ProtectedRoute roles={['Seller']}>
+          <SellerPage />
         </ProtectedRoute>
       } />
       <Route path='/sellerproduct' element={

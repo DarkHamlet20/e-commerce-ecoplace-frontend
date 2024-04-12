@@ -14,7 +14,7 @@ import {
   faEye,
   faListCheck,
   faMoneyCheck,
-  faThList
+  faThList,
 } from '@fortawesome/free-solid-svg-icons';
 
 const AdminDashboard = () => {
@@ -23,13 +23,10 @@ const AdminDashboard = () => {
 
   const menuItems = [
     {
-      name: 'Dashboard',
+      name: 'Categorias',
       icon: faThList,
       href: '/admin/categories',
       subMenu: [
-        { name: 'Agregar Categorias', icon: faPlus, href: '/admin/categories/add' },
-        { name: 'Editar Categorias', icon: faEdit, href: '/admin/categories/edit' },
-        { name: 'Eliminar Categorias', icon: faTrashAlt, href: '/admin/categories/delete' },
         { name: 'Ver Categorias', icon: faEye, href: '/admin/categories/see' },
       ],
     },
@@ -38,9 +35,6 @@ const AdminDashboard = () => {
       icon: faUsers,
       href: '/admin/users',
       subMenu: [
-        { name: 'Agregar Usuarios', icon: faPlus, href: '/admin/users/add' },
-        { name: 'Editar Usuarios', icon: faEdit, href: '/admin/users/edit' },
-        { name: 'Eliminar Usuarios', icon: faTrashAlt, href: '/admin/users/delete' },
         { name: 'Ver Usuarios', icon: faEye, href: '/admin/users/see' },
       ],
     },
@@ -50,9 +44,6 @@ const AdminDashboard = () => {
       icon: faBoxOpen,
       href: '/admin/products',
       subMenu: [
-        { name: 'Agregar Productos', icon: faPlus, href: '/admin/products/add' },
-        { name: 'Editar Productos', icon: faEdit, href: '/admin/products/edit' },
-        { name: 'Eliminar Productos', icon: faTrashAlt, href: '/admin/products/delete' },
         { name: 'Ver Productos', icon: faEye, href: '/admin/products/view' },
       ],
     },
