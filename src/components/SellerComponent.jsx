@@ -49,6 +49,12 @@ const SellerComponent = () => {
       <div className='container-seller'>
         <div className='customers rounded-lg shadow-[0_3px_15px_rgb(0,0,0,0.2)] p-7 flex flex-col'>
           <h1 className='text-2xl font-bold'>Welcome, {seller?.name}!</h1>
+          <div className="flex items-center justify-between max-h-52 pb-6">
+            <div>
+              <h2 className="text-xl font-semibold text-gray-700">Customers</h2>
+              <span className="text-xs text-gray-500">View accounts of registered users</span>
+            </div>
+          </div>
           {
             orders && orders.map(order => {
               return (
@@ -64,7 +70,13 @@ const SellerComponent = () => {
             })
           }
         </div>
-        <div className='products rounded-lg shadow-[0_3px_15px_rgb(0,0,0,0.2)] p-7 flex'>
+        <div className='rounded-lg shadow-[0_3px_15px_rgb(0,0,0,0.2)] p-7'>
+          <div className="items-center justify-between max-h-52 pb-6">
+            <div>
+              <h2 className="font-semibold text-gray-700">Products</h2>
+              <span className="text-xs text-gray-500">View your products</span>
+            </div>
+          </div>
           <SellerProducts />
         </div>
       </div>
