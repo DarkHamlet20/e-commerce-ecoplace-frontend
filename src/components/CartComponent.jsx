@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart, faSadTear } from "@fortawesome/free-solid-svg-icons";
+import { faSadTear } from "@fortawesome/free-solid-svg-icons";
 
 const stripePromise = loadStripe(
   "pk_test_51P2M6HIsT8wuHxVRe2GCd60YLng0HonCFfnmMdz7gqRHYU5aoKBBJVcp1fDwMKoLrVPAByLSzzdlo14hs539PkV3003lnCO3WT"
@@ -11,8 +11,8 @@ const stripePromise = loadStripe(
 const CartComponent = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -23,23 +23,12 @@ const CartComponent = () => {
           },
         });
         setCartItems(response.data.items);
-        // Calcular el precio total
-        const total = response.data.items.reduce(
-          (sum, item) => sum + item.quantity * item.price,
-          0
-        );
-        setTotalPrice(total);
+        // Usar el total directamente del backend
+        setTotalPrice(response.data.total);
+        setLoading(false); // Asegurarse de actualizar el estado de carga
       } catch (error) {
-        if (error.response && error.response.status === 404) {
-          // Manejo específico para cuando el carrito no se encuentra / está vacío
-          console.log("El carrito está vacío."); // O manejarlo como prefieras
-          setCartItems([]); // Asumiendo que tienes un estado para los ítems del carrito
-          setLoading(false);
-        } else {
-          console.error("Error fetching cart data:", error);
-          setError("Error fetching cart data");
-        }
         setLoading(false);
+        console.error("Error fetching cart data:", error);
       }
     };
 
@@ -48,19 +37,10 @@ const CartComponent = () => {
 
   // Agregar mas productos al carrito
   const handleQuantityChange = async (itemId, newQuantity) => {
-    newQuantity = Math.max(newQuantity, 1);
+    // Ensure newQuantity is positive and is a number; fallback to 1 if not
+    newQuantity = isNaN(newQuantity) || newQuantity < 1 ? 1 : newQuantity;
     try {
-      // Actualizar la cantidad en la interfaz de usuario primero para una respuesta rápida
-      const updatedCartItems = cartItems.map((item) => {
-        if (item.product._id === itemId) {
-          return { ...item, quantity: newQuantity };
-        }
-        return item;
-      });
-      setCartItems(updatedCartItems);
-
-      // Llamada a la API para actualizar el carrito en el backend
-      const response = await axios.put(
+      await axios.put(
         "http://localhost:3000/carts/update-cart",
         {
           items: [{ product: itemId, quantity: newQuantity }],
@@ -71,22 +51,17 @@ const CartComponent = () => {
           },
         }
       );
-
-      // Actualizar el estado con la respuesta del backend si es necesario
-      // setCartItems(response.data.items);
-      console.log("Cart updated", response.data);
+      console.log("Quantity updated", itemId, newQuantity);
+      // Update the state with the new quantity
+      const updatedCartItems = cartItems.map((item) => {
+        if (item.product._id === itemId) {
+          return { ...item, quantity: newQuantity };
+        }
+        return item;
+      });
+      setCartItems(updatedCartItems);
     } catch (error) {
       console.error("Error updating cart", error);
-      // Revertir el cambio en la interfaz de usuario si la llamada a la API falla
-      setCartItems(
-        cartItems.map((item) => {
-          if (item.product._id === itemId) {
-            return { ...item, quantity: item.quantity }; // Restablecer a la cantidad original
-          }
-          return item;
-        })
-      );
-      // Mostrar algún mensaje de error al usuario aquí
     }
   };
 
@@ -150,20 +125,20 @@ const CartComponent = () => {
     }
   };
 
-  
-  // if (loading) {
-  //   return (
-  //     <div className="flex justify-center items-center h-screen">
-  //       <div className="text-xl font-semibold">Cargando tu carrito...</div>
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="text-xl font-semibold">Cargando tu carrito...</div>
+      </div>
+    );
+  }
 
   if (error) {
     return <div className="text-center text-red-500">{error}</div>;
   }
 
-  if (cartItems.length === 0) {
+
+  if (!cartItems || cartItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
         <FontAwesomeIcon
@@ -202,43 +177,43 @@ const CartComponent = () => {
             <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
               Precio
             </h3>
-            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
+            <h3 className="font-semibold text-right text-gray-600 text-xs uppercase ml-4 w-1/5">
               Total
             </h3>
           </div>
           {/* Lista de productos */}
           {cartItems.map((item) => (
             <div
-              key={item.product._id}
-              className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5"
+              key={item?.product?._id}
+              className="flex items-center border gap-2 mb-3 hover:bg-gray-100 -mx-8 px-6 py-5"
             >
               {/* Imagen y detalles del producto */}
               <div className="flex w-2/5">
                 {/* Imagen */}
                 <img
-                  className="h-24"
-                  src={item.product.images[0]}
-                  alt={item.product.name}
+                  className="h-24 aspect-square object-contain"
+                  src={item?.product.images[0]}
+                  alt={item?.product.name}
                 />
                 {/* Detalles */}
                 <div className="flex flex-col justify-between ml-4 flex-grow">
-                  <span className="font-bold text-sm">{item.product.name}</span>
+                  <span className="font-bold text-sm">{item?.product?.name}</span>
                   <span className="text-red-500 text-xs">
-                    {item.product.brand}
+                    {item?.product?.brand}
                   </span>
                   <a
-                    onClick={() => handleRemoveItemFromCart(item.product._id)}
-                    className="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                    onClick={() => handleRemoveItemFromCart(item?.product?._id)}
+                    className="font-semibold hover:text-red-500 text-gray-500 text-xs cursor-pointer"
                   >
                     Eliminar
                   </a>
                 </div>
               </div>
               {/* Cantidad y botones para incrementar y disminuir la cantidad */}
-              <div className="flex justify-center w-1/5">
+              <div className="flex border items-center mx-2 flex-row justify-center w-1/5">
                 <button
                   onClick={() =>
-                    handleQuantityChange(item.product._id, item.quantity - 1)
+                    handleQuantityChange(item?.product?._id, item?.quantity - 1)
                   }
                   className="fill-current text-gray-500 focus:outline-none"
                 >
@@ -253,11 +228,17 @@ const CartComponent = () => {
                 <input
                   className="mx-2 border text-center w-8"
                   type="text"
-                  value={item.quantity}
+                  value={item?.quantity}
+                  onChange={(e) =>
+                    handleQuantityChange(
+                      item?.product?._id,
+                      parseInt(e.target.value)
+                    )
+                  }
                 />
                 <button
                   onClick={() =>
-                    handleQuantityChange(item.product._id, item.quantity + 1)
+                    handleQuantityChange(item?.product?._id, item.quantity + 1)
                   }
                   className="fill-current text-gray-500 focus:outline-none"
                 >
@@ -272,11 +253,11 @@ const CartComponent = () => {
               </div>
               {/* Precio unitario */}
               <span className="text-center w-1/5 font-semibold text-sm">
-                ${item.product.price}
+                ${item?.product?.price}
               </span>
               {/* Precio total por producto */}
-              <span className="text-center w-1/5 font-semibold text-sm">
-                ${(item.quantity * item.product.price).toFixed(2)}
+              <span className=" text-center ml-4 w-1/5 font-semibold text-sm">
+                ${(item?.quantity * item?.product?.price).toFixed(2)}
               </span>
             </div>
           ))}
@@ -297,13 +278,13 @@ const CartComponent = () => {
           </a>
         </div>
 
-        <div id="summary" className="w-1/4 px-8 py-10">
+        <div id="summary" className="lg:w-1/4 px-8 py-10">
           <h1 className="font-semibold text-2xl border-b pb-8">
             Resumen del Pedido
           </h1>
           <div className="flex justify-between mt-10 mb-5">
             <span className="font-semibold text-sm uppercase">
-              Items {cartItems.length}
+              Items {cartItems?.length}
             </span>
             <span className="font-semibold text-sm">
               ${totalPrice.toFixed(2)}

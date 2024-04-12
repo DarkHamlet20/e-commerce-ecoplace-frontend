@@ -1,11 +1,13 @@
+/* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { SearchComponent } from "./SearchComponent";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import logo from "../../public/img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import logo from '../../public/img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp';
+import { roles } from "../types/roles";
 
 const NavComponent = ({ handleSide }) => {
   const navigate = useNavigate();
@@ -41,6 +43,7 @@ const NavComponent = ({ handleSide }) => {
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("auth_token");
+
       if (!token) {
         console.error("No se encontro el token de autenticacion.");
       }
@@ -54,6 +57,7 @@ const NavComponent = ({ handleSide }) => {
         }
       );
       localStorage.removeItem("auth_token");
+      localStorage.removeItem("userRole");
       // Si la petición es exitosa, elimina el token de localStorage y llama a onLogout
       navigate("/login");
     } catch (error) {
@@ -69,18 +73,13 @@ const NavComponent = ({ handleSide }) => {
     <>
       <nav className="bg-gray-900">
         <div className="max-w-full min-w-[380px] mx-auto flex flex-wrap items-center justify-between p-4">
+
           <NavLink
             to="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
-            <img
-              src={logo}
-              className="mr-3 rounded-full h-16"
-              alt="EcoPlace Logo"
-            />
-            <span className="text-xl font-semibold whitespace-nowrap dark:text-white">
-              EcoPlace
-            </span>
+            <img src={logo} className="mr-3 rounded-full h-16" alt="EcoPlace Logo" />
+            <span className="text-xl font-semibold whitespace-nowrap text-white">EcoPlace</span>
           </NavLink>
           <div className="flex mt-4 md:mt-0">
             <SearchComponent />
@@ -88,10 +87,7 @@ const NavComponent = ({ handleSide }) => {
 
           <div className="flex relative z-50 text-white items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse mt-4 md:mt-0">
             <div className="mr-4">
-              <button
-                onClick={redirectToCart}
-                className="text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300"
-              >
+              <button onClick={redirectToCart} className="text-white  hover:text-gray-300">
                 <FontAwesomeIcon icon={faShoppingCart} size="lg" />
               </button>
             </div>
@@ -99,7 +95,7 @@ const NavComponent = ({ handleSide }) => {
               <button
                 onClick={() => setShow(!show)}
                 type="button"
-                className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-600"
                 id="user-menu-button"
                 aria-expanded="false"
                 data-dropdown-toggle="user-dropdown"
@@ -120,19 +116,20 @@ const NavComponent = ({ handleSide }) => {
                     d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
                   />
                 </svg>
+
               </button>
             </div>
 
             <div
-              className={`"z-50 top-16 right-1 absolute my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 " id="user-dropdown" ${
-                show ? "block" : "hidden"
-              }`}
+              className={`"z-50 top-16 right-1 absolute my-4 text-base list-none divide-y  rounded-lg shadow bg-gray-700 divide-gray-600 " id="user-dropdown" ${show ? "block" : "hidden"
+                }`}
             >
+
               <div className="px-4 py-3">
-                <span className="block text-sm text-gray-900 dark:text-white">
+                <span className="block text-sm text-white">
                   {userData.name} {userData.lastname}
                 </span>
-                <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                <span className="block text-sm truncate text-gray-400">
                   {userData.email}
                 </span>
               </div>
@@ -140,15 +137,27 @@ const NavComponent = ({ handleSide }) => {
                 <li>
                   <a
                     href="/user"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    className="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
                   >
                     Acount
                   </a>
                 </li>
+                {
+                  (userData?.role !== roles.seller)
+                    ? ''
+                    : <li>
+                      <a
+                        href={`/seller`}
+                        className="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
+                      >
+                        Dashboard
+                      </a>
+                    </li>
+                }
                 <li>
                   <NavLink
                     to="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    className="block px-4 py-2 text-sm   hover:bg-gray-600 text-gray-200 hover:text-white"
                   >
                     Settings
                   </NavLink>
@@ -156,7 +165,7 @@ const NavComponent = ({ handleSide }) => {
                 <li>
                   <NavLink
                     to="/orders"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    className="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
                   >
                     Orders
                   </NavLink>
@@ -165,7 +174,7 @@ const NavComponent = ({ handleSide }) => {
                   <NavLink
                     to="/login"
                     onClick={() => handleLogout()}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    className="block px-4 py-2 text-sm   hover:bg-gray-600 text-gray-200 hover:text-white"
                   >
                     Sign out
                   </NavLink>
@@ -176,7 +185,7 @@ const NavComponent = ({ handleSide }) => {
               onClick={() => setDrop(!drop)}
               data-collapse-toggle="navbar-user"
               type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg lg:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
               aria-controls="navbar-user"
               aria-expanded="false"
             >
@@ -199,15 +208,14 @@ const NavComponent = ({ handleSide }) => {
             </button>
           </div>
           <div
-            className={`"items-center justify-between lg:flex lg:order-1" id="navbar-user" ${
-              drop ? "lg:flex" : "hidden"
-            }`}
+            className={`"items-center justify-between lg:flex lg:order-1" id="navbar-user" ${drop ? "lg:flex" : "hidden"
+              }`}
           >
             <ul className="flex flex-col font-medium p-4 lg:static absolute smm:top-28 top-48 md:right-48 right-56 lg:p-0 border  rounded-lg  lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0  bg-gray-800 lg:bg-gray-900 border-gray-700 z-50">
               <li>
                 <NavLink
                   to="#"
-                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:p-0 md:text-blue-500"
                   aria-current="page"
                 >
                   Home
@@ -216,7 +224,7 @@ const NavComponent = ({ handleSide }) => {
               <li>
                 <NavLink
                   to="#"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 px-3 rounded md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700"
                 >
                   About
                 </NavLink>
@@ -225,7 +233,7 @@ const NavComponent = ({ handleSide }) => {
               <li>
                 <NavLink
                   to="#"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 px-3 rounded md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700"
                 >
                   Contact
                 </NavLink>
@@ -236,6 +244,7 @@ const NavComponent = ({ handleSide }) => {
             </ul>
           </div>
         </div>
+
       </nav>
       <div>
         <h1

@@ -1,30 +1,52 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../AuthSlice';
+import { showErrorAlert, showConfirmationAlert } from '../../helpers/alerts';
 
 export default function LoginComponent() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // Agregando estado para manejar errores
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(''); // Agregando estado para manejar errores
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(""); // Limpiar errores anteriores antes de una nueva solicitud
     try {
-      const response = await axios.post("http://localhost:3000/users/login", {
-        email,
-        password,
+      const response = await axios.post('http://localhost:3000/users/login', { email, password });
+      localStorage.setItem('auth_token', response.data.token);
+      localStorage.setItem('userRole', response.data.role);
+      dispatch(setCredentials({
+        token: response.data.token,
+        role: response.data.role,
+      }));
+      
+      // Redirección basada en el rol después del inicio de sesión exitoso
+      showConfirmationAlert("Login Successful", "You have been logged in successfully!").then(result => {
+        if (result.isConfirmed) {
+          switch (response.data.role) {
+            case 'Admin':
+              navigate('/admin');
+              break;
+            case 'Seller':
+              navigate('/seller');
+              break;
+            case 'Customer':
+              navigate('/user');
+              break;
+            default:
+              navigate('/');
+          }
+        }
       });
-      localStorage.setItem("auth_token", response.data.token);
-      localStorage.setItem("userRole", response.data.role);
-      navigate("/");
+
     } catch (error) {
-      console.error("Error de autenticación", error);
-      setError(
-        "Error al iniciar sesión. Por favor, verifica tus credenciales:",
-        error
-      ); // Actualizar el estado de error
+      console.error('Login Error:', error);
+      // Mostrar alerta de error usando la función personalizada
+      showErrorAlert("Authentication Failed", "Please check your credentials and try again.");
     }
   };
 

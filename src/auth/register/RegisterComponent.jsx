@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { showErrorAlert, showConfirmationAlert } from "../../helpers/alerts";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -13,6 +14,7 @@ function Register() {
   const [country, setCountry] = useState("");
   const [zip, setZip] = useState("");
   const [error, setError] = useState("");
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false); // New state for showing the success message
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -30,16 +32,20 @@ function Register() {
         zip,
       });
 
-      const response = await axios.post("http://localhost:3000/users/login", {
-        email,
-        password,
+      // Mostrar alerta de confirmación de registro exitoso
+      showConfirmationAlert(
+        "Registration Successful",
+        "You have been successfully registered!"
+      ).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
       });
-      localStorage.setItem("auth_token", response.data.token);
-      navigate("/");
     } catch (error) {
-      console.error("Error durante el registro o el login:", error);
-      setError(
-        "Error durante el registro o el login. Por favor, intenta de nuevo."
+      console.error("Error during the registration:", error);
+      showErrorAlert(
+        "Registration Failed",
+        "Please check the details and try again."
       );
     }
   };

@@ -6,13 +6,17 @@ import NavComponent from "../components/NavComponent";
 // eslint-disable-next-line react/prop-types
 const LayoutComponent = ({ children, fuction }) => {
   return (
-    <div className="h-full">
-      <NavComponent handleSide={fuction} />
-      <main className="">
-        <div>{children}</div>
+    <>
+      <NavComponent
+        handleSide={fuction}
+      />
+      <main>
+        <div>
+          {children}
+        </div>
       </main>
       <FooterComponent />
-    </div>
+    </>
   );
 };
 
