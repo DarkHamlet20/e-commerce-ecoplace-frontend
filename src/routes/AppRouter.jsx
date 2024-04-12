@@ -9,9 +9,9 @@ import SuccessPage from '../views/home/SuccessPages'
 import CancelPage from '../views/home/CancelPage'
 import ProtectedRoute from '../context/ProtectedRoute';
 import UnauthorizedPage from '../views/home/UnauthorizedPage';
-import SellerPage from '../views/seller/SellerPage'
-import OrdersCustomerPage from '../views/home/OrdersCustomerPage'
-import AddProductPage from '../views/seller/AddProductPage'
+// import SellerPage from '../views/seller/pages/SellerPage'
+// import OrdersCustomerPage from '../views/home/OrdersCustomerPage'
+// import AddProductPage from '../views/seller/AddProductPage'
 import AdminDashboardPage from '../views/admin/pages/AdminDashboardPage'
 import ADADDProductPages from '../views/admin/pages/ADADDProductPages'
 import ADLTProductsPages from '../views/admin/pages/ADLTProductsPages'
@@ -23,6 +23,9 @@ import ADUPDCategoriesPages from '../views/admin/pages/ADUPDCategoriesPages'
 import ADSEECategoriesPages from '../views/admin/pages/ADSEECategoriesPages'
 import ADSEEUsersPages from '../views/admin/pages/ADSEEUsersPages'
 import ADSEEOrdersPages from '../views/admin/pages/ADSEEOrdersPages'
+import ADSEESalesPages from '../views/admin/pages/ADSEESalesPages'
+// import SLSEEProductsPages from '../views/seller/pages/SLSEEProductsPages'
+import SellerSalesPage from '../views/seller/pages/SellerSalesPages'
 
 const AppRouter = () => {
   return (
@@ -108,22 +111,34 @@ const AppRouter = () => {
         </ProtectedRoute>
       } />
 
+      {/* Rutas para los Admins Sales*/}
+      <Route path='/admin/sales/view' element={
+        <ProtectedRoute roles={['Admin']}>
+          <ADSEESalesPages />
+        </ProtectedRoute>
+      } />
+
       {/* Rutas para los sellers */}
-      <Route path='/seller' element={
+      {/* <Route path='/seller' element={
         <ProtectedRoute roles={['Seller']}>
           <SellerPage />
         </ProtectedRoute>
+      } /> */}
+      <Route path='/seller' element={
+        <ProtectedRoute roles={['Seller']}>
+          <SellerSalesPage />
+        </ProtectedRoute>
       } />
-      <Route path='/sellerproduct' element={
+      {/* <Route path='/sellerproduct' element={
         <ProtectedRoute roles={['Seller']}>
           <AddProductPage />
         </ProtectedRoute>
-      } />
-      <Route path='/orders' element={
+      } /> */}
+      {/* <Route path='/orders' element={
         <ProtectedRoute roles={['Customer','Admin','Seller']}>
           <OrdersCustomerPage />
         </ProtectedRoute>
-      } />
+      } /> */}
       <Route path='/success' element={<SuccessPage />} />
       <Route path='/cancel' element={<CancelPage />} />
       <Route path='/unauthorized' element={<UnauthorizedPage />} />
