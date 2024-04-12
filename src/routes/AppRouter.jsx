@@ -17,6 +17,7 @@ import AdminProductsPages from '../views/admin/pages/AdminProductsPages'
 import ADADDProductPages from '../views/admin/pages/ADADDProductPages'
 import ADLTProductsPages from '../views/admin/pages/ADLTProductsPages'
 import ADUPDPages from '../views/admin/pages/ADUPDPages'
+import ADSEEProductsPages from '../views/admin/pages/ADSEEProductsPages'
 
 const AppRouter = () => {
   return (
@@ -63,6 +64,11 @@ const AppRouter = () => {
       <Route path='/admin/products/edit' element={
         <ProtectedRoute roles={['Admin']}>
           <ADUPDPages />
+        </ProtectedRoute>
+      } />
+      <Route path='/admin/products/view' element={
+        <ProtectedRoute roles={['Admin']}>
+          <ADSEEProductsPages />
         </ProtectedRoute>
       } />
       <Route path='/sellerproduct' element={
