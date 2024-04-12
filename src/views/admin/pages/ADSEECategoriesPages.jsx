@@ -1,9 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import SearchBarComponent from "../components/SearchbarComponent";
+import PaginationComponent from "../components/PaginationComponent";
 
 const ADSEECategoriesPages = () => {
   const [categories, setCategories] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [categoriesPerPage] = useState(10);
   const token = localStorage.getItem("auth_token");
 
   useEffect(() => {
@@ -23,6 +28,20 @@ const ADSEECategoriesPages = () => {
     }
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredCategories = categories.filter((category) =>
+    category.categoryName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
+  const totalPages = Math.ceil(filteredCategories.length / categoriesPerPage);
+
+  const indexOfLastCategory = currentPage * categoriesPerPage;
+  const indexOfFirstCategory = indexOfLastCategory- categoriesPerPage;
+  const currentCategories = filteredCategories.slice(indexOfFirstCategory, indexOfLastCategory);
+
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center px-6 py-8">
   <div className="w-full max-w-6xl bg-white rounded-lg shadow-xl p-8">
@@ -34,6 +53,10 @@ const ADSEECategoriesPages = () => {
       </Link>
     </div>
     <div className="overflow-x-auto">
+    <SearchBarComponent
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
       <table className="min-w-full divide-y divide-gray-200">
         <thead>
           <tr className="bg-blue-100">
@@ -46,7 +69,7 @@ const ADSEECategoriesPages = () => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {categories.map((category) => (
+          {currentCategories.map((category) => (
             <tr key={category._id}>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                 {category.categoryName}
@@ -59,8 +82,13 @@ const ADSEECategoriesPages = () => {
           ))}
         </tbody>
       </table>
+      <PaginationComponent
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
     </div>
-    {categories.length === 0 && <div className="text-center py-4">No se encontraron categorías.</div>}
+    {filteredCategories.length === 0 && <div className="text-center py-4">No se encontraron categorías.</div>}
   </div>
 </div>
   );

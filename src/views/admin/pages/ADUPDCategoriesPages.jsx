@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
 
 const ADUPDCategoriesPages = () => {
   const [categoryName, setCategoryName] = useState("");
@@ -20,6 +21,7 @@ const ADUPDCategoriesPages = () => {
         setCategoryName(response.data.categoryName);
       } catch (error) {
         console.error("Error fetching category details", error);
+        showErrorAlert('Error', 'No se pudo cargar los detalles de la categoría.');
         // Manejar el error aquí
       }
     };
@@ -43,9 +45,11 @@ const ADUPDCategoriesPages = () => {
           },
         }
       );
+      await showConfirmationAlert('¡Éxito!', 'Categoría actualizada correctamente.', 'success', 'Aceptar');
       navigate("/admin/categories/view"); // Redirige al usuario a la lista de categorías
     } catch (error) {
       console.error("Error updating category", error);
+      showErrorAlert('Error', 'No se pudo actualizar la categoría. Intente nuevamente.');
       // Manejar el error aquí
     }
   };

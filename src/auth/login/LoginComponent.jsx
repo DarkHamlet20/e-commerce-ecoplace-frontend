@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../AuthSlice';
+import { showErrorAlert, showConfirmationAlert } from '../../helpers/alerts';
 
 export default function LoginComponent() {
   const [email, setEmail] = useState('');
@@ -24,22 +25,28 @@ export default function LoginComponent() {
       }));
       
       // Redirección basada en el rol después del inicio de sesión exitoso
-      switch(response.data.role) {
-        case 'Admin':
-          navigate('/admin');
-          break;
-        case 'Seller':
-          navigate('/seller');
-          break;
-        case 'Customer':
-          navigate('/user');
-          break;
-        default:
-          navigate('/'); // Redirigir a la página de inicio por defecto o manejar errores
-      }
+      showConfirmationAlert("Login Successful", "You have been logged in successfully!").then(result => {
+        if (result.isConfirmed) {
+          switch (response.data.role) {
+            case 'Admin':
+              navigate('/admin');
+              break;
+            case 'Seller':
+              navigate('/seller');
+              break;
+            case 'Customer':
+              navigate('/user');
+              break;
+            default:
+              navigate('/');
+          }
+        }
+      });
+
     } catch (error) {
-      console.error('Error de autenticación', error);
-      setError('Error al iniciar sesión. Por favor, verifica tus credenciales:', error); // Actualizar el estado de error
+      console.error('Login Error:', error);
+      // Mostrar alerta de error usando la función personalizada
+      showErrorAlert("Authentication Failed", "Please check your credentials and try again.");
     }
   };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
 
 const ADLTCategoriesPages = () => {
   const [category, setCategory] = useState(null);
@@ -19,7 +20,7 @@ const ADLTCategoriesPages = () => {
         setCategory(response.data);
       } catch (error) {
         console.error("Error fetching category details", error);
-        // Manejar el error aquí
+        showErrorAlert('Error al cargar los detalles de la categoría');
       }
     };
 
@@ -27,20 +28,25 @@ const ADLTCategoriesPages = () => {
   }, [id, token]);
 
   const deleteCategory = async () => {
-    try {
-      await axios.delete(`http://localhost:3000/categories/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    showConfirmationAlert('Confirmación', '¿Estás seguro de que quieres eliminar esta categoría?', 'warning')
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios.delete(`http://localhost:3000/categories/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }).then(response => {
+            showConfirmationAlert('Eliminado!', 'La categoría ha sido eliminada correctamente.', 'success');
+            navigate("/admin/categories/view"); // Redirige al usuario a la lista de categorías
+          }).catch(error => {
+            console.error("Error deleting category", error);
+            showErrorAlert('Error al eliminar la categoría');
+          });
+        }
       });
-      navigate("/admin/categories/view"); // Redirige al usuario a la vista de categorías
-    } catch (error) {
-      console.error("Error deleting category", error);
-      // Manejar el error aquí
-    }
   };
 
-  if (!category) return <div>Loading...</div>;
+  if (!category) return <div>Cargando...</div>;
 
   return (
     <div className="min-h-screen bg-blue-900 flex justify-center items-center">

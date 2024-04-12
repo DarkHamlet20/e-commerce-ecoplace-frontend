@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import SearchBarComponent from '../components/SearchbarComponent';
+import PaginationComponent from "../components/PaginationComponent";
 
 const ADSEESalesPages = () => {
   const [sales, setSales] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [salesPerPage] = useState(5);  
 
   useEffect(() => {
     const fetchSales = async () => {
@@ -25,21 +30,20 @@ const ADSEESalesPages = () => {
     fetchSales();
   }, []);
 
-  function formatDate(dateString) {
-    if (!dateString) return "Fecha no disponible";
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
-    const options = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: true,
-    };
+  const filteredSales = sales.filter((sale) =>
+    sale.customer && `${sale.customer.name} ${sale.customer.lastname}`.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-    return new Date(dateString).toLocaleDateString("es", options);
-  }
+  const indexOfLastSale = currentPage * salesPerPage;
+  const indexOfFirstSale = indexOfLastSale - salesPerPage;
+  const currentSales = filteredSales.slice(indexOfFirstSale, indexOfLastSale);
+
+  // Cambiar la página
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
     <div className="min-h-screen bg-blue-900 flex justify-center items-center px-6 py-8">
@@ -56,6 +60,7 @@ const ADSEESalesPages = () => {
           </Link>
         </div>
         <div className="overflow-x-auto">
+        <SearchBarComponent value={searchTerm} onChange={handleSearchChange} placeholder="Buscar ventas..." />
           <table className="min-w-full leading-normal">
             <thead>
               <tr>
@@ -77,23 +82,23 @@ const ADSEESalesPages = () => {
               </tr>
             </thead>
             <tbody>
-              {sales.map((sale) => (
+              {currentSales.map((sale) => (
                 <tr key={sale._id} className="hover:bg-gray-100">
                   <td className="p-4">
-                    {sale.customer && (
                       <div>
                         <p>
-                          {sale.customer?.name} {sale.customer?.lastname}
+                          {sale.customer ? `${sale.customer?.name} ${sale.customer?.lastname}` : 'Cliente no disponible'}
                         </p>
                       </div>
-                    )}
                   </td>
                   <td className="p-4">
                     {sale.items.map((item, index) => (
                       <div key={index}>
                         <p>
-                          {item.product?.seller?.name}{" "}
-                          {item.product?.seller?.lastname}
+                          {item.product?.seller ? `
+                          ${item.product?.seller?.name}
+                          ${item.product?.seller?.lastname}
+                          ` : 'Vendedor no disponible'}
                         </p>
                       </div>
                     ))}
@@ -119,7 +124,12 @@ const ADSEESalesPages = () => {
             </tbody>
           </table>
         </div>
-        {sales.length === 0 && (
+        <PaginationComponent
+          currentPage={currentPage}
+          totalPages={Math.ceil(filteredSales.length / salesPerPage)}
+          onPageChange={paginate}
+        />
+        {currentSales.length === 0 && (
           <div className="text-center py-4">No se encontraron ventas.</div>
         )}
       </div>

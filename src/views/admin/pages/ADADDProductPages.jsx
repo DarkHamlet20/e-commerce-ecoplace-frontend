@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ADADDProductPages = () => {
@@ -16,6 +17,7 @@ const ADADDProductPages = () => {
   });
   const [categories, setCategories] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
+  const navigate = useNavigate();
   const token = localStorage.getItem("auth_token");
 
   useEffect(() => {
@@ -39,11 +41,13 @@ const ADADDProductPages = () => {
   };
 
   const handleCategoryChange = (e) => {
-    const selectedCategories = Array.from(e.target.selectedOptions, option => option.value);
+    const selectedCategories = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
+    );
     console.log(selectedCategories); // Depuración para ver los IDs seleccionados
     setFormData({ ...formData, categories: selectedCategories });
   };
-  
 
   const formDataToSend = new FormData();
   formDataToSend.append("name", formData.name);
@@ -75,6 +79,7 @@ const ADADDProductPages = () => {
       );
       console.log(response.data);
       // Maneja la respuesta exitosa, como redirigir o limpiar el formulario
+      navigate('/admin/products/view')
     } catch (error) {
       console.error("Error al agregar el producto", error);
       // Maneja errores aquí
@@ -236,8 +241,13 @@ const ADADDProductPages = () => {
               Es destacado
             </label>
           </div>
-
           <div className="text-center">
+            <Link
+              to="/admin/products/view"
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+            >
+              Regresar
+            </Link>
             <button
               type="submit"
               className="px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"

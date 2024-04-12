@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
 
 const ADADCategoriesPage = () => {
   const [categoryName, setCategoryName] = useState("");
@@ -25,10 +26,12 @@ const ADADCategoriesPage = () => {
       );
       console.log(response.data);
       // Redirigir al usuario a la lista de categorías
+      await showConfirmationAlert('¡Éxito!', 'Categoría agregada correctamente.', 'success', 'Aceptar');
       navigate("/admin/categories/view");
     } catch (error) {
       console.error("Error al agregar la categoría", error);
       // Maneja el error aquí
+      showErrorAlert('Error', 'No se pudo agregar la categoría. Intente nuevamente.');
     }
   };
 

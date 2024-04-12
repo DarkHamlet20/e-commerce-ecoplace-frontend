@@ -26,6 +26,7 @@ import ADSEEOrdersPages from '../views/admin/pages/ADSEEOrdersPages'
 import ADSEESalesPages from '../views/admin/pages/ADSEESalesPages'
 // import SLSEEProductsPages from '../views/seller/pages/SLSEEProductsPages'
 import SellerSalesPage from '../views/seller/pages/SellerSalesPages'
+import OrderConfirmationPage from '../views/home/OrderConfirmationPage'
 
 const AppRouter = () => {
   return (
@@ -44,6 +45,12 @@ const AppRouter = () => {
           <CartPage />
         </ProtectedRoute>
       } />
+      <Route path='/order-confirmation' element={
+        <ProtectedRoute roles={['Customer']}>
+          <OrderConfirmationPage />
+        </ProtectedRoute>
+      } />
+
       
       {/* Rutas para los Admins */}
       {/* Dashboard del Admin */}
