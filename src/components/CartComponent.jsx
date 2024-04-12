@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { loadStripe } from '@stripe/stripe-js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faSadTear  } from '@fortawesome/free-solid-svg-icons';
+import { loadStripe } from "@stripe/stripe-js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart, faSadTear } from "@fortawesome/free-solid-svg-icons";
 
-const stripePromise = loadStripe('pk_test_51P2M6HIsT8wuHxVRe2GCd60YLng0HonCFfnmMdz7gqRHYU5aoKBBJVcp1fDwMKoLrVPAByLSzzdlo14hs539PkV3003lnCO3WT');
+const stripePromise = loadStripe(
+  "pk_test_51P2M6HIsT8wuHxVRe2GCd60YLng0HonCFfnmMdz7gqRHYU5aoKBBJVcp1fDwMKoLrVPAByLSzzdlo14hs539PkV3003lnCO3WT"
+);
 
 const CartComponent = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -121,14 +123,14 @@ const CartComponent = () => {
       // 1. Crea una sesión de checkout en tu backend
       const stripe = await stripePromise;
       const checkoutSession = await axios.post(
-        'http://localhost:3000/orders/create-checkout-session', 
+        "http://localhost:3000/orders/create-checkout-session",
         { items: cartItems }, // Asegúrate de enviar los datos necesarios para tu backend
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             // Agrega cualquier encabezado adicional como el token de autenticación aquí
-            'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
-          }
+            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+          },
         }
       );
 
@@ -143,12 +145,12 @@ const CartComponent = () => {
         // Puedes mostrar un mensaje de error en la UI aquí
       }
     } catch (error) {
-      console.error('Error during checkout', error);
+      console.error("Error during checkout", error);
       // Manejar errores aquí, como mostrar un mensaje al usuario
     }
   };
 
-
+  
   // if (loading) {
   //   return (
   //     <div className="flex justify-center items-center h-screen">
@@ -164,10 +166,18 @@ const CartComponent = () => {
   if (cartItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <FontAwesomeIcon icon={faSadTear} size="6x" className="text-gray-600 my-2" />
+        <FontAwesomeIcon
+          icon={faSadTear}
+          size="6x"
+          className="text-gray-600 my-2"
+        />
         <h2 className="text-2xl font-semibold mb-2">Tu carrito está vacío</h2>
-        <p className="mb-6 text-gray-800">Parece que aún no has añadido nada a tu carrito.</p>
-        <a href="/" className="text-indigo-600 hover:underline">Empieza a comprar</a>
+        <p className="mb-6 text-gray-800">
+          Parece que aún no has añadido nada a tu carrito.
+        </p>
+        <a href="/" className="text-indigo-600 hover:underline">
+          Empieza a comprar
+        </a>
       </div>
     );
   }
@@ -312,7 +322,10 @@ const CartComponent = () => {
               <span>Total cost</span>
               <span>${totalPrice.toFixed(2)}</span>
             </div>
-            <button onClick={handleCheckout} className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+            <button
+              onClick={handleCheckout}
+              className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full"
+            >
               Proceder al Pago
             </button>
           </div>

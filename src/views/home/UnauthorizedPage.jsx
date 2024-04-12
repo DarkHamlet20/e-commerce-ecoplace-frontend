@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const UnauthorizedPage = () => {
   const navigate = useNavigate();
@@ -16,8 +16,8 @@ const UnauthorizedPage = () => {
         <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
           Parece que no tienes permiso para acceder a esta página.
         </p>
-        <button 
-          onClick={() => navigate('/')}
+        <button
+          onClick={() => navigate("/")}
           className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-md"
         >
           Volver al inicio

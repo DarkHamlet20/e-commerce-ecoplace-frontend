@@ -1,27 +1,27 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({
-    token: localStorage.getItem('auth_token'),
-    role: localStorage.getItem('userRole'),
+    token: localStorage.getItem("auth_token"),
+    role: localStorage.getItem("userRole"),
   });
 
   useEffect(() => {
     const handleStorageChange = () => {
       setAuth({
-        token: localStorage.getItem('auth_token'),
-        role: localStorage.getItem('userRole'),
+        token: localStorage.getItem("auth_token"),
+        role: localStorage.getItem("userRole"),
       });
     };
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   const login = (token, role) => {
-    localStorage.setItem('auth_token', token);
-    localStorage.setItem('userRole', role);
+    localStorage.setItem("auth_token", token);
+    localStorage.setItem("userRole", role);
     setAuth({ token, role });
   };
 

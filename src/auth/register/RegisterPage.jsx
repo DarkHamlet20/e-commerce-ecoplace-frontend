@@ -1,11 +1,10 @@
-import Register from './RegisterComponent'
+import Register from "./RegisterComponent";
 
 const RegisterPage = () => {
   return (
     <>
       <Register />
     </>
-  )
-}
-
-export default RegisterPage
+  );
+};
+export default RegisterPage;
