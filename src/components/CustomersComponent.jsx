@@ -5,12 +5,6 @@ const CustomersComponent = ({ orderId, customer, product, date, status }) => {
    return (
       <div className='w-full'>
          <div className="mx-auto  px-4 py-8 sm:px-8">
-            <div className="flex  items-center justify-between max-h-52 pb-6">
-               <div>
-                  <h2 className="font-semibold text-gray-700">Customers</h2>
-                  <span className="text-xs text-gray-500">View accounts of registered users</span>
-               </div>
-            </div>
             <div className=" rounded-lg border">
                <div className="overflow-x-auto">
                   <table className="w-full">
