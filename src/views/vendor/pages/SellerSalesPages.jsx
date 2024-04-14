@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import SellerSalesList from "../components/SellerSalesList"; // Asumiendo que así llamas al componente que lista las ventas
-import { roles } from "../../../types/roles";
+import SellerSalesList from "../components/SellerSalesList";
 import { NavLink } from "react-router-dom";
-import FooterComponent from "../../../components/FooterComponent";
 
 const SellerSalesPage = () => {
   const [sales, setSales] = useState([]);

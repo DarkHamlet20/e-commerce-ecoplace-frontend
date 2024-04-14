@@ -24,7 +24,7 @@ import ADSEEUsersPages from '../views/admin/pages/ADSEEUsersPages'
 import ADUPDUsersPages from '../views/admin/pages/ADUPDUsersPages';
 import ADSEEOrdersPages from '../views/admin/pages/ADSEEOrdersPages'
 import ADSEESalesPages from '../views/admin/pages/ADSEESalesPages'
-import SellerSalesPage from '../views/seller/pages/SellerSalesPages'
+import SellerSalesPage from '../views/vendor/pages/SellerSalesPages'
 import OrderConfirmationPage from '../views/home/OrderConfirmationPage'
 
 const AppRouter = () => {
