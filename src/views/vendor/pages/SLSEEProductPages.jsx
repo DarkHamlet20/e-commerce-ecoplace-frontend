@@ -50,13 +50,13 @@ const SLSEEProductsPages = () => {
             Gestión de Productos
           </h2>
           <Link
-            to="/admin"
+            to="/seller"
             className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
           >
             Regresar
           </Link>
           <Link
-            to="/admin/products/add"
+            to="/seller/products/add"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
             Agregar Producto
@@ -133,13 +133,13 @@ const SLSEEProductsPages = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Link
-                      to={`/admin/products/edit/${product._id}`}
+                      to={`/seller/products/edit/${product._id}`}
                       className="bg-slate-500 hover:bg-indigo-700 text-white font-bold py-1 px-4 rounded mr-2"
                     >
                       Actualizar
                     </Link>
                     <Link
-                      to={`/admin/products/delete/${product._id}`}
+                      to={`/seller/products/delete/${product._id}`}
                       className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded"
                     >
                       Eliminar
