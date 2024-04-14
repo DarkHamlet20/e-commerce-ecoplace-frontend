@@ -1,11 +1,25 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import SellerSalesList from "../components/SellerSalesList"; // Asumiendo que así llamas al componente que lista las ventas
-// import { roles } from "../../../types/roles";
-import { NavLink, Navigate } from "react-router-dom";
+import SellerSalesList from "../components/SellerSalesList";
+import { NavLink } from "react-router-dom";
 
 const SellerSalesPage = () => {
   const [sales, setSales] = useState([]);
+
+
+  useEffect(() => {
+    const fetchSales = async () => {
+      const response = await axios.get("http://localhost:3000/products/seller", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("auth_token")}`
+        }
+      });
+      setSales(response.data);
+    };
+
+    fetchSales();
+  }, []);
+
   const [userData, setUserData] = useState({});
   const token = localStorage.getItem("auth_token");
 
@@ -18,31 +32,13 @@ const SellerSalesPage = () => {
             "Content-Type": "application/json",
           },
         })
-        .then((response) => {
-          setUserData(response.data);
-          return response.data._id;
-        })
-        .then(sellerId => {
-          axios.get("http://localhost:3000/products/seller", {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-              "Content-Type": "application/json"
-            },
-            params: {
-              "user": {
-                "_id": sellerId
-              }
-            }
-          }).then(response => setSales(response.data));
-        })
+        .then((response) => setUserData(response.data))
         .catch((error) => {
           console.error("There was an error with the request:", error);
           // Optionally, you can handle errors here or show a message to the user
         });
     }
   }, [token]);
-
-  console.log(sales);
 
   const handleLogout = async () => {
     try {
@@ -63,7 +59,7 @@ const SellerSalesPage = () => {
       localStorage.removeItem("auth_token");
       localStorage.removeItem("userRole");
       // Si la petición es exitosa, elimina el token de localStorage y llama a onLogout
-      Navigate("/login");
+      navigate("/login");
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
       // Manejar cualquier error aquí, por ejemplo, mostrando un mensaje al usuario

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import SearchBarComponent from "../components/SearchbarComponent";
-import PaginationComponent from "../components/PaginationComponent";
+import SearchBarComponent from "../../../common/SearchbarComponent";
+import PaginationComponent from "../../../common/PaginationComponent";
 
 const ADSEEUsersPages = () => {
   const [users, setUsers] = useState([]);

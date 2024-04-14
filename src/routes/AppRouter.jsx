@@ -1,10 +1,13 @@
 import { Route, Routes} from 'react-router'
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import RegisterPage from '../auth/register/RegisterPage'
 import HomePage from '../views/home/HomePage'
 import LoginPage from '../auth/login/LoginPage'
 import UserPage from '../views/home/UserPage'
 import ProductPage from '../views/home/ProductPage'
 import CartPage from '../views/home/CartPage'
+import OrderConfirmationPage from '../views/home/OrderConfirmationPage'
 import SuccessPage from '../views/home/SuccessPages'
 import CancelPage from '../views/home/CancelPage'
 import ProtectedRoute from '../context/ProtectedRoute';
@@ -12,7 +15,7 @@ import UnauthorizedPage from '../views/home/UnauthorizedPage';
 import AdminDashboardPage from '../views/admin/pages/AdminDashboardPage'
 import ADADDProductPages from '../views/admin/pages/ADADDProductPages'
 import ADLTProductsPages from '../views/admin/pages/ADLTProductsPages'
-import ADUPDPages from '../views/admin/pages/ADUPDPages'
+import ADUPDProductsPages from '../views/admin/pages/ADUPDProductsPages'
 import ADSEEProductsPages from '../views/admin/pages/ADSEEProductsPages'
 import ADADCategoriesPages from '../views/admin/pages/ADADCategoriesPages'
 import ADLTCategoriesPages from '../views/admin/pages/ADLTCategoriesPages'
@@ -22,12 +25,32 @@ import ADSEEUsersPages from '../views/admin/pages/ADSEEUsersPages'
 import ADUPDUsersPages from '../views/admin/pages/ADUPDUsersPages';
 import ADSEEOrdersPages from '../views/admin/pages/ADSEEOrdersPages'
 import ADSEESalesPages from '../views/admin/pages/ADSEESalesPages'
-import SellerSalesPage from '../views/seller/pages/SellerSalesPages'
-import OrderConfirmationPage from '../views/home/OrderConfirmationPage'
+import SellerDashboardPage from '../views/vendor/pages/SellerDashboardPage';
+import SLSEEProductPages from '../views/vendor/pages/SLSEEProductPages';
 
 const AppRouter = () => {
+
+  const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
+
+  const getHomeComponent = () => {
+    if(token) {
+      switch (role) {
+        case 'Admin':
+          return <Navigate to='/admin' />;
+        case 'Seller':
+          return <Navigate to='/seller' />;
+        default:
+          return <HomePage />;
+      }      
+    } else {
+      return <HomePage />; // Asegúrate de devolver el HomePage como fallback
+    }
+  }
+
   return (
     <Routes>
+      {/* Rutas de autenticacion */}
       <Route path='/login' element={<LoginPage />} />
       <Route path='/register' element={<RegisterPage />} />
       <Route path='/user' element={
@@ -36,17 +59,15 @@ const AppRouter = () => {
         </ProtectedRoute>
       } />
 
+      {/* Ruta Defecto de la pagina */}
+      <Route path='/' element={getHomeComponent()} />
+
       {/* Rutas de Customer */}
 
       <Route path='/product/:id' element={<ProductPage />} />
       <Route path='/cart' element={
         <ProtectedRoute roles={['Customer']}>
           <CartPage />
-        </ProtectedRoute>
-      } />
-      <Route path='/' element={
-        <ProtectedRoute roles={['Customer']}>
-          <HomePage />
         </ProtectedRoute>
       } />
       <Route path='/order-confirmation' element={
@@ -77,7 +98,7 @@ const AppRouter = () => {
       } />
       <Route path='/admin/products/edit/:id' element={
         <ProtectedRoute roles={['Admin']}>
-          <ADUPDPages />
+          <ADUPDProductsPages />
         </ProtectedRoute>
       } />
       <Route path='/admin/products/view' element={
@@ -137,7 +158,12 @@ const AppRouter = () => {
       {/* Rutas para los sellers */}
       <Route path='/seller' element={
         <ProtectedRoute roles={['Seller']}>
-          <SellerSalesPage />
+          <SellerDashboardPage />
+        </ProtectedRoute>
+      } />
+      <Route path='/seller/products/view' element={
+        <ProtectedRoute roles={['Seller']}>
+          <SLSEEProductPages />
         </ProtectedRoute>
       } />
 

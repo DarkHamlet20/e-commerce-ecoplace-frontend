@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import SearchBarComponent from "../components/SearchbarComponent";
-import PaginationComponent from "../components/PaginationComponent";
+import SearchBarComponent from "../../../common/SearchbarComponent";
+import PaginationComponent from "../../../common/PaginationComponent";
 import axios from "axios";
 
 const ADSEEOrdersPages = () => {

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CardComponent from "./CardComponent";
-import PaginationComponent from "../views/admin/components/PaginationComponent";
-import SearchBarComponent from "../views/admin/components/SearchbarComponent";
+import PaginationComponent from "../common/PaginationComponent";
+import SearchBarComponent from "../common/SearchbarComponent";
 
 const CatalogoComponent = ({ categoryId }) => {
   const [products, setProducts] = useState([]);

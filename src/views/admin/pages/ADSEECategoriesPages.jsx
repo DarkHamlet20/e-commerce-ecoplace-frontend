@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SearchBarComponent from "../components/SearchbarComponent";
-import PaginationComponent from "../components/PaginationComponent";
+import SearchBarComponent from "../../../common/SearchbarComponent";
+import PaginationComponent from "../../../common/PaginationComponent";
 
 const ADSEECategoriesPages = () => {
   const [categories, setCategories] = useState([]);

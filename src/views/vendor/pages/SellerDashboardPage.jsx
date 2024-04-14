@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import AdminDashboard from "../components/AdminDashboard";
+import SellerDashboard from "../components/SellerDashboard";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 
-const AdminDashboardPages = () => {
+const SellerDashboardPage = () => {
   const [userData, setUserData] = useState({});
   const token = localStorage.getItem("auth_token");
 
@@ -53,7 +53,7 @@ const AdminDashboardPages = () => {
   const [show, setShow] = useState(false);
   return (
     <div className="flex h-screen bg-gray-100">
-      <AdminDashboard />
+      <SellerDashboard />
       <div>
         <nav className="flex justify-end p-6 absolute right-0">
           <div>
@@ -121,7 +121,7 @@ const AdminDashboardPages = () => {
         {/* Aquí irá el contenido del dashboard */}
         <div className="p-5 h-3/4 items-center flex">
           <h1 className="text-3xl font-semibold">
-            Bienvenido al Dashboard de Administración
+            Bienvenido al Dashboard de Vendedor
           </h1>
           {/* Resto del contenido del dashboard */}
         </div>
@@ -130,4 +130,4 @@ const AdminDashboardPages = () => {
   );
 };
 
-export default AdminDashboardPages;
+export default SellerDashboardPage;

@@ -3,7 +3,7 @@ import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSadTear } from "@fortawesome/free-solid-svg-icons";
-import { showAddCart } from "../helpers/alerts";
+import { showErrorAlert, showAddCart } from "../helpers/alerts";
 
 const stripePromise = loadStripe(
   "pk_test_51P2M6HIsT8wuHxVRe2GCd60YLng0HonCFfnmMdz7gqRHYU5aoKBBJVcp1fDwMKoLrVPAByLSzzdlo14hs539PkV3003lnCO3WT"
@@ -32,6 +32,7 @@ const CartComponent = () => {
       } catch (error) {
         setLoading(false);
         console.error("Error fetching cart data:", error);
+        showErrorAlert("Error fetching cart data:")
       }
     };
 
@@ -64,6 +65,8 @@ const CartComponent = () => {
       setCartItems(updatedCartItems);
     } catch (error) {
       console.error("Error updating cart", error);
+      showErrorAlert("Error al actualizar el carrito")
+      
     }
   };
 
@@ -90,6 +93,7 @@ const CartComponent = () => {
       console.log("Product removed from cart", response.data);
     } catch (error) {
       console.error("Error removing product from cart", error);
+      showErrorAlert("Error eliminando producto del carrito")
       // Mostrar algún mensaje de error al usuario aquí
     }
   };
