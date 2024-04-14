@@ -14,7 +14,7 @@ import UnauthorizedPage from '../views/home/UnauthorizedPage';
 import AdminDashboardPage from '../views/admin/pages/AdminDashboardPage'
 import ADADDProductPages from '../views/admin/pages/ADADDProductPages'
 import ADLTProductsPages from '../views/admin/pages/ADLTProductsPages'
-import ADUPDPages from '../views/admin/pages/ADUPDPages'
+import ADUPDProductsPages from '../views/admin/pages/ADUPDProductsPages'
 import ADSEEProductsPages from '../views/admin/pages/ADSEEProductsPages'
 import ADADCategoriesPages from '../views/admin/pages/ADADCategoriesPages'
 import ADLTCategoriesPages from '../views/admin/pages/ADLTCategoriesPages'
@@ -97,7 +97,7 @@ const AppRouter = () => {
       } />
       <Route path='/admin/products/edit/:id' element={
         <ProtectedRoute roles={['Admin']}>
-          <ADUPDPages />
+          <ADUPDProductsPages />
         </ProtectedRoute>
       } />
       <Route path='/admin/products/view' element={

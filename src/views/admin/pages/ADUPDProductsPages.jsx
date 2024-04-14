@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
-const ADUPDPages = () => {
+const ADUPDProductsPages = () => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -197,4 +197,4 @@ const ADUPDPages = () => {
   );
 };
 
-export default ADUPDPages;
+export default ADUPDProductsPages;
