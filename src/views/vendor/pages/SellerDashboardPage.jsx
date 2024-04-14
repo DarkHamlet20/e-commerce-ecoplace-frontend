@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import SellerDashboard from "../components/SellerDashboard";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SellerDashboardPage = () => {
   const [userData, setUserData] = useState({});
   const token = localStorage.getItem("auth_token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
 
-const ADUPDProductsPages = () => {
+const SLUPDProductPages = () => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -43,9 +43,9 @@ const ADUPDProductsPages = () => {
       const response = await axios.get("http://localhost:3000/categories", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setCategories(response.data);
+      setCategories(response.data);      
     } catch (error) {
-      console.error("Error fetching categories", error);
+      console.error("Error fetching categories", error);      
     }
   };
 
@@ -94,7 +94,7 @@ const ADUPDProductsPages = () => {
         }
       );
       await showConfirmationAlert('¡Éxito!', 'Productos actualizado correctamente.', 'success', 'Aceptar');
-      navigate("/admin/products/view"); // Asegura que esta ruta es correcta para ver productos
+      navigate("/seller/products/view"); // Asegura que esta ruta es correcta para ver productos
     } catch (error) {
       console.error("Error updating product", error);
       showErrorAlert('Error', 'No se pudo actualizar el producto. Intente nuevamente.');
@@ -187,7 +187,7 @@ const ADUPDProductsPages = () => {
             />
           </div>
           <div className="flex justify-between">
-            <Link to="/admin/products/view" className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            <Link to="/seller/products/view" className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
               Regresar
             </Link>
             <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -198,6 +198,7 @@ const ADUPDProductsPages = () => {
       </div>
     </div>
   );
-};
+}
 
-export default ADUPDProductsPages;
+export default SLUPDProductPages
+

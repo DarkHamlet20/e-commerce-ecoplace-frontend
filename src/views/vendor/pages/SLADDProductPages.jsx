@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
+import { showConfirmationAlert, showErrorAlert } from "../../../helpers/alerts"; 
 
-const ADADDProductPages = () => {
+const SLADDProductPages = () => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -44,7 +44,7 @@ const ADADDProductPages = () => {
       e.target.selectedOptions,
       (option) => option.value
     );
-    console.log(selectedCategories);
+    console.log(selectedCategories); 
     setFormData({ ...formData, categories: selectedCategories });
   };
 
@@ -78,7 +78,7 @@ const ADADDProductPages = () => {
       );
       console.log(response.data);
       await showConfirmationAlert('¡Éxito!', 'Producto Agregado Correctamente.', 'success', 'Hecho');
-      navigate('/admin/products/view')
+      navigate('/seller/products/view')
     } catch (error) {
       console.error("Error al agregar el producto", error);
       showErrorAlert("Error", "Error al agregar el producto.")
@@ -242,7 +242,7 @@ const ADADDProductPages = () => {
           </div>
           <div className="text-center">
             <Link
-              to="/admin/products/view"
+              to="/seller/products/view"
               className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
             >
               Regresar
@@ -258,6 +258,6 @@ const ADADDProductPages = () => {
       </div>
     </div>
   );
-};
+}
 
-export default ADADDProductPages;
+export default SLADDProductPages

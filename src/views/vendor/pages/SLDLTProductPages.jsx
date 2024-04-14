@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
 
-const ADLTProductsPages = () => {
+const SLDLTProductPages = () => {
   const [product, setProduct] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const ADLTProductsPages = () => {
               "El producto ha sido eliminado correctamente.",
               "success"
             );
-            navigate("/admin/products/view"); // Redirige al usuario a la lista de categorías
+            navigate("/seller/products/view"); // Redirige al usuario a la lista de categorías
           })
           .catch((error) => {
             console.error("Error deleting product", error);
@@ -81,7 +82,7 @@ const ADLTProductsPages = () => {
         </p>
         <div className="flex justify-between items-center mt-6">
           <Link
-            to="/admin/products/view"
+            to="/seller/products/view"
             className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors"
           >
             Regresar
@@ -96,6 +97,6 @@ const ADLTProductsPages = () => {
       </div>
     </div>
   );
-};
+}
 
-export default ADLTProductsPages;
+export default SLDLTProductPages

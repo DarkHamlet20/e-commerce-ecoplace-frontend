@@ -27,6 +27,9 @@ import ADSEEOrdersPages from '../views/admin/pages/ADSEEOrdersPages'
 import ADSEESalesPages from '../views/admin/pages/ADSEESalesPages'
 import SellerDashboardPage from '../views/vendor/pages/SellerDashboardPage';
 import SLSEEProductPages from '../views/vendor/pages/SLSEEProductPages';
+import SLADDProductPages from '../views/vendor/pages/SLADDProductPages';
+import SLUPDProductPages from '../views/vendor/pages/SLUPDProductPages';
+import SLDLTProductPages from '../views/vendor/pages/SLDLTProductPages';
 
 const AppRouter = () => {
 
@@ -164,6 +167,21 @@ const AppRouter = () => {
       <Route path='/seller/products/view' element={
         <ProtectedRoute roles={['Seller']}>
           <SLSEEProductPages />
+        </ProtectedRoute>
+      } />
+      <Route path='/seller/products/add' element={
+        <ProtectedRoute roles={['Seller']}>
+          <SLADDProductPages />
+        </ProtectedRoute>
+      } />
+      <Route path='/seller/products/edit/:id' element={
+        <ProtectedRoute roles={['Seller']}>
+          <SLUPDProductPages />
+        </ProtectedRoute>
+      } />
+      <Route path='/seller/products/delete/:id' element={
+        <ProtectedRoute roles={['Seller']}>
+          <SLDLTProductPages />
         </ProtectedRoute>
       } />
 
