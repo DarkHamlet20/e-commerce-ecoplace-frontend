@@ -5,19 +5,18 @@ import LayoutComponent from "../../layout/LayoutMain";
 
 const HomePage = () => {
   const [showSide, setShowSide] = useState(false);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
-  const handleSide = () => {
-    setShowSide(!showSide);
+  const handleCategorySelect = (categoryId) => {
+    setSelectedCategoryId(categoryId);
   };
 
   return (
     <>
-      <LayoutComponent fuction={handleSide}>
-        <div className="">
-          <div className="flex justify-center smm:justify-bettwen w-screen">
-            <Sidebar showSide={showSide} />
-            <CatalogoComponent />
-          </div>
+      <LayoutComponent function={setShowSide}>
+        <div className="flex justify-center smm:justify-between w-screen">
+          <Sidebar showSide={showSide} onCategorySelect={handleCategorySelect} />
+          <CatalogoComponent categoryId={selectedCategoryId} />
         </div>
       </LayoutComponent>
     </>
