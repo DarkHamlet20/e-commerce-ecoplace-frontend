@@ -7,6 +7,7 @@ import LoginPage from '../auth/login/LoginPage'
 import UserPage from '../views/home/UserPage'
 import ProductPage from '../views/home/ProductPage'
 import CartPage from '../views/home/CartPage'
+import OrderConfirmationPage from '../views/home/OrderConfirmationPage'
 import SuccessPage from '../views/home/SuccessPages'
 import CancelPage from '../views/home/CancelPage'
 import ProtectedRoute from '../context/ProtectedRoute';
@@ -24,8 +25,8 @@ import ADSEEUsersPages from '../views/admin/pages/ADSEEUsersPages'
 import ADUPDUsersPages from '../views/admin/pages/ADUPDUsersPages';
 import ADSEEOrdersPages from '../views/admin/pages/ADSEEOrdersPages'
 import ADSEESalesPages from '../views/admin/pages/ADSEESalesPages'
-import SellerSalesPage from '../views/vendor/pages/SellerSalesPages'
-import OrderConfirmationPage from '../views/home/OrderConfirmationPage'
+import SellerDashboardPage from '../views/vendor/pages/SellerDashboardPage';
+import SLSEEProductPages from '../views/vendor/pages/SLSEEProductPages';
 
 const AppRouter = () => {
 
@@ -157,7 +158,12 @@ const AppRouter = () => {
       {/* Rutas para los sellers */}
       <Route path='/seller' element={
         <ProtectedRoute roles={['Seller']}>
-          <SellerSalesPage />
+          <SellerDashboardPage />
+        </ProtectedRoute>
+      } />
+      <Route path='/seller/products/view' element={
+        <ProtectedRoute roles={['Seller']}>
+          <SLSEEProductPages />
         </ProtectedRoute>
       } />
 

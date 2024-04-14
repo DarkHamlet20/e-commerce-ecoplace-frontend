@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SearchBarComponent from "../../../common/SearchbarComponent";
-import PaginationComponent from "../../../common/PaginationComponent";
+import SearchBarComponent from '../../../common/SearchbarComponent';
+import PaginationComponent from '../../../common/PaginationComponent'
 
-const ADSEEProductsPages = () => {
+const SLSEEProductsPages = () => {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,7 +42,6 @@ const ADSEEProductsPages = () => {
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
-
   return (
     <div className="min-h-screen bg-gray-900 flex justify-center items-center px-6 py-8">
       <div className="w-full max-w-6xl bg-white rounded-lg shadow-xl p-8">
@@ -51,13 +50,13 @@ const ADSEEProductsPages = () => {
             Gestión de Productos
           </h2>
           <Link
-            to="/seller"
+            to="/admin"
             className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
           >
             Regresar
           </Link>
           <Link
-            to="/seller/products/add"
+            to="/admin/products/add"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
             Agregar Producto
@@ -134,13 +133,13 @@ const ADSEEProductsPages = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Link
-                      to={`/seller/products/edit/${product._id}`}
+                      to={`/admin/products/edit/${product._id}`}
                       className="bg-slate-500 hover:bg-indigo-700 text-white font-bold py-1 px-4 rounded mr-2"
                     >
                       Actualizar
                     </Link>
                     <Link
-                      to={`/seller/products/delete/${product._id}`}
+                      to={`/admin/products/delete/${product._id}`}
                       className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded"
                     >
                       Eliminar
@@ -161,6 +160,6 @@ const ADSEEProductsPages = () => {
       </div>
     </div>
   );
-};
+}
 
-export default ADSEEProductsPages;
+export default SLSEEProductsPages;
