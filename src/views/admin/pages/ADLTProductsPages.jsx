@@ -32,7 +32,7 @@ const ADLTProductsPages = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      navigate("/admin/products"); // Asegúrate de redirigir al usuario al listado de productos correcto
+      navigate("/admin/products/view"); // Asegúrate de redirigir al usuario al listado de productos correcto
     } catch (error) {
       console.error("Error deleting product", error);
     }

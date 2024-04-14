@@ -86,10 +86,17 @@ const ADSEEUsersPages = () => {
           <table className="w-full whitespace-no-wrap">
             <thead>
               <tr className="text-left font-bold">
-                <th className="pb-4 py-6 px-6 text-white bg-gray-600">Usuario</th>
-                <th className="pb-4 py-6 px-6 text-white bg-gray-600">Detalles</th>
+                <th className="pb-4 py-6 px-6 text-white bg-gray-600">
+                  Usuario
+                </th>
+                <th className="pb-4 py-6 px-6 text-white bg-gray-600">
+                  Detalles
+                </th>
                 <th className="pb-4 py-6 px-6 text-white bg-gray-600">
                   Fecha de Creacion
+                </th>
+                <th className="pb-4 py-6 px-6 text-white bg-gray-600">
+                  Acciones
                 </th>
               </tr>
             </thead>
@@ -116,6 +123,14 @@ const ADSEEUsersPages = () => {
                     </span>
                   </td>
                   <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                  <td>
+                    <Link
+                      to={`/admin/users/edit/${user._id}`}
+                      className="inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-4 rounded mr-2"
+                    >
+                      Editar
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>
