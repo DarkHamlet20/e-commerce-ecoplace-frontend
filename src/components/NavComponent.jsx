@@ -20,6 +20,7 @@ const NavComponent = ({ handleSide }) => {
   };
 
   const [userData, setUserData] = useState({});
+  const [userCart, setUserCart] = useState([]);
   const token = localStorage.getItem("auth_token");
 
   useEffect(() => {
@@ -32,6 +33,17 @@ const NavComponent = ({ handleSide }) => {
           },
         })
         .then((response) => setUserData(response.data))
+        .catch((error) => {
+          console.error("There was an error with the request:", error);
+          // Optionally, you can handle errors here or show a message to the user
+        });
+
+      axios.get("http://localhost:3000/carts", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(response => setUserCart(response.data))
         .catch((error) => {
           console.error("There was an error with the request:", error);
           // Optionally, you can handle errors here or show a message to the user
@@ -75,7 +87,7 @@ const NavComponent = ({ handleSide }) => {
           {/* Logo */}
 
           <div>
-          <NavLink
+            <NavLink
               to="/"
               className="flex items-center space-x-3 rtl:space-x-reverse"
             >
@@ -126,6 +138,11 @@ const NavComponent = ({ handleSide }) => {
             <div className="mr-4">
               <button onClick={redirectToCart} className="text-white  hover:text-gray-300">
                 <FontAwesomeIcon icon={faShoppingCart} size="lg" />
+                {
+                  userCart?.items?.length !== 0
+                    ? <span className="bg-red-700 text-xs rounded-full px-1 absolute top-2.5 left-3">{userCart?.items?.length}</span>
+                    : ""
+                }
               </button>
             </div>
             <div>
@@ -157,7 +174,7 @@ const NavComponent = ({ handleSide }) => {
               </button>
             </div>
 
-            
+
 
             <div
               className={`"z-50 top-16 right-1 absolute my-4 text-base list-none divide-y  rounded-lg shadow bg-gray-700 divide-gray-600 " id="user-dropdown" ${show ? "block" : "hidden"

@@ -17,7 +17,7 @@ const UnauthorizedPage = () => {
           Parece que no tienes permiso para acceder a esta página.
         </p>
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/login")}
           className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-md"
         >
           Volver al inicio
