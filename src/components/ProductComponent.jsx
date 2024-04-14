@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Product.css'
 import axios from "axios";
-import { showAddCart } from '../helpers/alerts';
+import { showAddCart, showErrorAlert } from '../helpers/alerts';
 
 const ProductComponent = ({ id, name, img, description, brand, price }) => {
 
@@ -22,7 +22,7 @@ const ProductComponent = ({ id, name, img, description, brand, price }) => {
       showAddCart()
     } catch (error) {
       console.error("Error al agregar al carrito", error);
-      alert("Error al agregar producto al carrito.");
+      showErrorAlert("Agregar al carrito","Debes de iniciar sesion para agregar productos al carrito")
     }
   };
 

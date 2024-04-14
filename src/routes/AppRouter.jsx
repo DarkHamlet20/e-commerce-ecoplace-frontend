@@ -1,4 +1,6 @@
 import { Route, Routes} from 'react-router'
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import RegisterPage from '../auth/register/RegisterPage'
 import HomePage from '../views/home/HomePage'
 import LoginPage from '../auth/login/LoginPage'
@@ -26,8 +28,28 @@ import SellerSalesPage from '../views/seller/pages/SellerSalesPages'
 import OrderConfirmationPage from '../views/home/OrderConfirmationPage'
 
 const AppRouter = () => {
+
+  const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
+
+  const getHomeComponent = () => {
+    if(token) {
+      switch (role) {
+        case 'Admin':
+          return <Navigate to='/admin' />;
+        case 'Seller':
+          return <Navigate to='/seller' />;
+        default:
+          return <HomePage />;
+      }      
+    } else {
+      return <HomePage />; // Asegúrate de devolver el HomePage como fallback
+    }
+  }
+
   return (
     <Routes>
+      {/* Rutas de autenticacion */}
       <Route path='/login' element={<LoginPage />} />
       <Route path='/register' element={<RegisterPage />} />
       <Route path='/user' element={
@@ -36,17 +58,15 @@ const AppRouter = () => {
         </ProtectedRoute>
       } />
 
+      {/* Ruta Defecto de la pagina */}
+      <Route path='/' element={getHomeComponent()} />
+
       {/* Rutas de Customer */}
 
       <Route path='/product/:id' element={<ProductPage />} />
       <Route path='/cart' element={
         <ProtectedRoute roles={['Customer']}>
           <CartPage />
-        </ProtectedRoute>
-      } />
-      <Route path='/' element={
-        <ProtectedRoute roles={['Customer']}>
-          <HomePage />
         </ProtectedRoute>
       } />
       <Route path='/order-confirmation' element={
