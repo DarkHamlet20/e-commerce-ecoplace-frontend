@@ -7,14 +7,18 @@ const HomePage = () => {
   const [showSide, setShowSide] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
+  const handleSide = () => {
+    setShowSide(!showSide)
+  }
+
   const handleCategorySelect = (categoryId) => {
     setSelectedCategoryId(categoryId);
   };
 
   return (
     <>
-      <LayoutComponent function={setShowSide}>
-        <div className="flex justify-center smm:justify-between w-screen">
+      <LayoutComponent function={handleSide}>
+        <div className="flex justify-center smm:justify-between">
           <Sidebar showSide={showSide} onCategorySelect={handleCategorySelect} />
           <CatalogoComponent categoryId={selectedCategoryId} />
         </div>

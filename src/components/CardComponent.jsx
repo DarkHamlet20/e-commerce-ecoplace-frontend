@@ -1,5 +1,6 @@
 // eslint-disable-next-line react/prop-types
-import { useNavigate } from "react-router-dom";
+import { Rating, RatingStar } from "flowbite-react";
+import { Link, useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const CardComponent = ({ productName, id, price, info, image }) => {
@@ -13,8 +14,29 @@ const CardComponent = ({ productName, id, price, info, image }) => {
   };
 
     return (
-        <div id={id} onClick={() => handleClick()} className="w-full min-w-60 max-w-80 h-[32rm] min-h-[28rem] border  rounded-lg shadow bg-gray-800 border-gray-700">
-            <a href={`/product/${id}`}>
+        <div id={id} onClick={() => handleClick()} className="flex mx-auto items-center flex-col smm:flex-row h-88 min-h-88 max-h-88 smm:h-60 border w-72 smm:w-full text-black">
+            <picture className="smm:border-r h-48 smm:h-full min-w-48 max-w-48 smm:min-w-72 smm:max-w-72 p-2">
+                <img src={image} className="w-full h-full object-contain" alt={`${productName} image`} />
+            </picture>
+            <div className="p-4">
+                <div className="mb-6">
+                    <h1 className="text-2xl capitalize">{productName}</h1>
+                    <p>
+                        {info}
+                    </p>
+                </div>
+                <p className="text-2xl">
+                    ${price}
+                </p>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            {/* <a href={`/product/${id}`}>
                 <img className="p-8 rounded-t-lg aspect-square object-cover" src={image || defaultImage} alt="product image" />
             </a>
             <div className="px-5 pb-5">
@@ -48,7 +70,7 @@ const CardComponent = ({ productName, id, price, info, image }) => {
                     <span className="text-2xl font-bold text-white">
                         ${price}</span>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

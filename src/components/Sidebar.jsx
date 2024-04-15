@@ -15,7 +15,7 @@ export const Sidebar = ({ showSide, onCategorySelect }) => {
   return (
     <>
     <div className="flex flex-col">
-    <aside className={`sidebar-sticky mr-4 px-6 transition-all z-40 absolute ${
+    <aside className={`sidebar-sticky mr-10 px-6 transition-all z-40 absolute ${
             showSide ? "hidden" : "flex"
           } smm:flex smm:static left-0 bg-white h-full rounded-r shadow-lg`}>
       <div className="flex flex-col w-52">
