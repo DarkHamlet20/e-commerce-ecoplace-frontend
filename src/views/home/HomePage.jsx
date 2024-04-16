@@ -7,11 +7,11 @@ const HomePage = () => {
   const [showSide, setShowSide] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
-  const handleSide = () => {
-    setShowSide(!showSide)
+  const handleSide = () => {  //Cambie esto por que al elegir una categoria no esta siendo traida y este era problema
+    setShowSide(showSide)
   }
 
-  const handleCategorySelect = (categoryId) => {
+  const handleCategorySelect = (categoryId) => {  
     setSelectedCategoryId(categoryId);
   };
 
