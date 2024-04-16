@@ -195,7 +195,7 @@ const NavComponent = ({ handleSide }) => {
                     href="/user"
                     className="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white"
                   >
-                    Acount
+                    Account
                   </a>
                 </li>
                 {
@@ -210,14 +210,14 @@ const NavComponent = ({ handleSide }) => {
                       </a>
                     </li>
                 }
-                <li>
+                {/* <li>
                   <NavLink
                     to="#"
                     className="block px-4 py-2 text-sm   hover:bg-gray-600 text-gray-200 hover:text-white"
                   >
                     Settings
                   </NavLink>
-                </li>
+                </li> */}
                 <li>
                   <NavLink
                     to="/order-confirmation"
