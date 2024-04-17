@@ -30,6 +30,7 @@ import SLSEEProductPages from '../views/vendor/pages/SLSEEProductPages';
 import SLADDProductPages from '../views/vendor/pages/SLADDProductPages';
 import SLUPDProductPages from '../views/vendor/pages/SLUPDProductPages';
 import SLDLTProductPages from '../views/vendor/pages/SLDLTProductPages';
+import SellerSalesPage from '../views/vendor/pages/SellerSalesPages';
 
 const AppRouter = () => {
 
@@ -182,6 +183,13 @@ const AppRouter = () => {
       <Route path='/seller/products/delete/:id' element={
         <ProtectedRoute roles={['Seller']}>
           <SLDLTProductPages />
+        </ProtectedRoute>
+      } />
+
+      {/* Sales of Seller */}
+      <Route path='/seller/sales/view' element={
+        <ProtectedRoute roles={['Seller']}>
+          <SellerSalesPage />
         </ProtectedRoute>
       } />
 

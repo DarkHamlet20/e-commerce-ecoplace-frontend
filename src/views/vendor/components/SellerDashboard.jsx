@@ -22,14 +22,6 @@ const SellerDashboard = () => {
       ],
     },
     {
-      name: 'Orders',
-      icon: faListCheck,
-      href: '/seller/orders',
-      subMenu: [
-        { name: 'Ver Ordenes', icon: faEye, href: '/seller/orders/view' },
-      ],
-    },
-    {
       name: 'Ventas',
       icon: faMoneyCheck,
       href: '/seller/sales',
