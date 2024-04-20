@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import AdminNavComponent from "../components/AdminNavComponent";
+import AdminSidebar from "../components/AdminSidebar";
 import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
 
 const ADADCategoriesPage = () => {
@@ -26,47 +28,62 @@ const ADADCategoriesPage = () => {
       );
       console.log(response.data);
       // Redirigir al usuario a la lista de categorías
-      await showConfirmationAlert('¡Éxito!', 'Categoría agregada correctamente.', 'success', 'Aceptar');
+      await showConfirmationAlert(
+        "¡Éxito!",
+        "Categoría agregada correctamente.",
+        "success",
+        "Aceptar"
+      );
       navigate("/admin/categories/view");
     } catch (error) {
       console.error("Error al agregar la categoría", error);
       // Maneja el error aquí
-      showErrorAlert('Error', 'No se pudo agregar la categoría. Intente nuevamente.');
+      showErrorAlert(
+        "Error",
+        "No se pudo agregar la categoría. Intente nuevamente."
+      );
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex justify-center items-center">
-      <div className="w-full max-w-lg bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Agregar Categoría</h2>
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="categoryName"
-            >
-              Nombre de la Categoría
-            </label>
-            <input
-              className="w-full p-2 border rounded-md"
-              id="categoryName"
-              type="text"
-              name="categoryName"
-              value={categoryName}
-              onChange={handleInputChange}
-              required
-            />
+    <div className="d-flex flex-column" style={{ marginTop: "60px" }}>
+      <div className="d-flex min-vh-100">
+        <AdminSidebar />
+        <div className="flex-grow-1">
+          <AdminNavComponent />
+          <div className="container mt-4">
+            <div className="text-center mb-4">
+              <h2 className="text-dark">Agregar Categoría</h2>
+            </div>
+            <div className="d-flex justify-content-between mb-3">
+              <Link to="/admin/categories/view" className="btn btn-secondary">
+                Regresar
+              </Link>
+            </div>
+            <div className="card p-4">
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label htmlFor="categoryName" className="form-label">
+                    Nombre de la Categoría
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="categoryName"
+                    required
+                    value={categoryName}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="text-center">
+                  <button type="submit" className="btn btn-primary">
+                    Agregar Categoría
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-
-          <div className="text-center">
-            <button
-              type="submit"
-              className="px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-            >
-              Agregar Categoría
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );

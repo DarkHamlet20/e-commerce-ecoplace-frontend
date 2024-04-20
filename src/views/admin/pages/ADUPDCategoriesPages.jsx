@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import AdminNavComponent from "../components/AdminNavComponent";
+import AdminSidebar from "../components/AdminSidebar";
 import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
 
 const ADUPDCategoriesPages = () => {
@@ -13,15 +15,21 @@ const ADUPDCategoriesPages = () => {
     // Cargar los detalles de la categoría
     const fetchCategoryDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/categories/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `http://localhost:3000/categories/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setCategoryName(response.data.categoryName);
       } catch (error) {
         console.error("Error fetching category details", error);
-        showErrorAlert('Error', 'No se pudo cargar los detalles de la categoría.');
+        showErrorAlert(
+          "Error",
+          "No se pudo cargar los detalles de la categoría."
+        );
         // Manejar el error aquí
       }
     };
@@ -45,47 +53,63 @@ const ADUPDCategoriesPages = () => {
           },
         }
       );
-      await showConfirmationAlert('¡Éxito!', 'Categoría actualizada correctamente.', 'success', 'Aceptar');
+      await showConfirmationAlert(
+        "¡Éxito!",
+        "Categoría actualizada correctamente.",
+        "success",
+        "Aceptar"
+      );
       navigate("/admin/categories/view"); // Redirige al usuario a la lista de categorías
     } catch (error) {
       console.error("Error updating category", error);
-      showErrorAlert('Error', 'No se pudo actualizar la categoría. Intente nuevamente.');
+      showErrorAlert(
+        "Error",
+        "No se pudo actualizar la categoría. Intente nuevamente."
+      );
       // Manejar el error aquí
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex justify-center items-center">
-      <div className="w-full max-w-lg bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Actualizar Categoría</h2>
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="categoryName"
-            >
-              Nombre de la Categoría
-            </label>
-            <input
-              className="w-full p-2 border rounded-md"
-              id="categoryName"
-              type="text"
-              name="categoryName"
-              value={categoryName}
-              onChange={handleInputChange}
-              required
-            />
+    <div className="d-flex flex-column" style={{ marginTop: "60px" }}>
+      <div className="d-flex min-vh-100">
+        <AdminSidebar />
+        <div className="flex-grow-1">
+          <AdminNavComponent />
+          <div className="container mt-4">
+            <div className="text-center mb-4">
+              <h2 className="text-dark">Actualizar Categoría</h2>
+            </div>
+            <div className="d-flex justify-content-between mb-3">
+              <Link to="/admin/categories/view" className="btn btn-secondary">
+                Regresar
+              </Link>
+            </div>
+            <div className="card p-4">
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label htmlFor="categoryName" className="form-label">
+                    Nombre de la Categoría
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="categoryName"
+                    name="categoryName"
+                    value={categoryName}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="text-center">
+                  <button type="submit" className="btn btn-primary">
+                    Actualizar Categoría
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-
-          <div className="text-center">
-            <button
-              type="submit"
-              className="px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-            >
-              Actualizar Categoría
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );
