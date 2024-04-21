@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
+import SellerNavComponent from "../components/SellerNavComponent";
+import SellerSidebarComponent from "../components/SellerSidebarComponent";
+import SellerFooterComponent from "../components/SellerFooterComponent";
 
 const SLUPDProductPages = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -16,24 +21,33 @@ const SLUPDProductPages = () => {
   const [categories, setCategories] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { id } = useParams(); 
-  const navigate = useNavigate();
+  const [currentImage, setCurrentImage] = useState(null);
   const token = localStorage.getItem("auth_token");
 
   useEffect(() => {
     fetchProductDetails();
     fetchCategories();
-  }, [id]);
+  }, [id, token]);
 
   const fetchProductDetails = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setFormData({ ...response.data, categories: response.data.categories.map(cat => cat._id) });
+      const product = response.data;
+      setFormData({
+        name: product.name,
+        description: product.description,
+        brand: product.brand,
+        price: product.price,
+        categories: product.categories.map((cat) => cat._id),
+        countInStock: product.countInStock,
+        isFeatured: product.isFeatured,
+      });
+      setCurrentImage(product.images[0]);
       setIsLoading(false);
     } catch (error) {
-      console.error("Error fetching product details", error);
+      console.error("Error fetching product details:", error);
       setIsLoading(false);
     }
   };
@@ -43,9 +57,9 @@ const SLUPDProductPages = () => {
       const response = await axios.get("http://localhost:3000/categories", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setCategories(response.data);      
+      setCategories(response.data);
     } catch (error) {
-      console.error("Error fetching categories", error);      
+      console.error("Error fetching categories:", error);
     }
   };
 
@@ -57,13 +71,13 @@ const SLUPDProductPages = () => {
     }));
   };
 
-  const handleFileChange = (e) => {
-    setSelectedFiles(e.target.files);
+  const handleCategoryChange = (e) => {
+    const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
+    setFormData((prev) => ({ ...prev, categories: selectedOptions }));
   };
 
-  const handleCategoryChange = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
-    setFormData(prev => ({ ...prev, categories: selectedOptions }));
+  const handleFileChange = (e) => {
+    setSelectedFiles(Array.from(e.target.files));
   };
 
   const handleSubmit = async (e) => {
@@ -76,8 +90,9 @@ const SLUPDProductPages = () => {
         updateData.append(key, value);
       }
     });
+
     if (selectedFiles.length) {
-      for (let file of selectedFiles) {
+      for (const file of selectedFiles) {
         updateData.append("images", file);
       }
     }
@@ -93,112 +108,111 @@ const SLUPDProductPages = () => {
           },
         }
       );
-      await showConfirmationAlert('¡Éxito!', 'Productos actualizado correctamente.', 'success', 'Aceptar');
-      navigate("/seller/products/view"); // Asegura que esta ruta es correcta para ver productos
+      await showConfirmationAlert("¡Éxito!", "Producto actualizado correctamente.", "success");
+      navigate("/seller/products/view");
     } catch (error) {
-      console.error("Error updating product", error);
-      showErrorAlert('Error', 'No se pudo actualizar el producto. Intente nuevamente.');
+      console.error("Error al actualizar el producto:", error);
+      showErrorAlert("Error", "No se pudo actualizar el producto.");
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div className="text-center">Cargando...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center px-6 py-8">
-      <div className="w-full max-w-4xl bg-white rounded-lg shadow-xl p-8 space-y-4">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6">Actualizar Producto</h2>
-        <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                Nombre del Producto
-              </label>
-              <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white"
-                id="name"
-                type="text"
-                placeholder="Nombre"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-              />
+    <div className="d-flex flex-column" style={{ marginTop: "60px" }}>
+      <div className="d-flex min-vh-100">
+        <SellerSidebarComponent />
+        <div className="flex-grow-1">
+          <SellerNavComponent />
+          <div className="container mt-4">
+            <div className="d-flex justify-content-between align-items-center">
+              <h2 className="text-2xl text-gray-800">Actualizar Producto</h2>
+              <Link to="/seller/products/view" className="btn btn-info">Regresar</Link>
             </div>
-            <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="price">
-                Precio
-              </label>
-              <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white"
-                id="price"
-                type="number"
-                placeholder="Precio"
-                name="price"
-                value={formData.price}
-                onChange={handleInputChange}
-                required
-              />
+            <div className="card p-5" style={{ maxWidth: "800px", margin: "auto" }}>
+              <form onSubmit={handleSubmit} className="space-y-5" encType="multipart/form-data">
+                <div className="mb-4"> {/* Imágenes */}
+                  <label htmlFor="images" className="form-label">Imágenes</label>
+                  {currentImage && (
+                    <div className="mb-3">
+                      <img
+                        src={currentImage}
+                        alt="Imagen actual del producto"
+                        style={{ width: '100px', borderRadius: '10px' }}
+                      />
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    multiple
+                    className="form-control"
+                    onChange={handleFileChange}
+                  />
+                </div>
+                <div className="mb-4"> {/* Campo para el nombre */}
+                  <label htmlFor="name" className="form-label">Nombre del Producto</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="mb-4"> {/* Campo para el precio */}
+                  <label htmlFor="price" className="form-label">Precio</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="price"
+                    name="price"
+                    value={formData.price}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="mb-4"> {/* Campo para la descripción */}
+                  <label htmlFor="description" className="form-label">Descripción</label>
+                  <textarea
+                    className="form-control"
+                    id="description"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="mb-4"> {/* Selección de categorías */}
+                  <label htmlFor="categories" className="form-label">Categorías</label>
+                  <select
+                    multiple
+                    className="form-control"
+                    id="categories"
+                    name="categories"
+                    value={formData.categories}
+                    onChange={handleCategoryChange}
+                  >
+                    {categories.map((category) => (
+                      <option key={category._id} value={category._id}>
+                        {category.categoryName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="d-flex justify-content-between"> {/* Botón para cancelar y para actualizar */}
+                  <Link to="/seller/products/view" className="btn btn-secondary">Cancelar</Link>
+                  <button type="submit" className="btn btn-primary">Actualizar Producto</button>
+                </div>
+              </form>
             </div>
           </div>
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-              Descripción
-            </label>
-            <textarea
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white"
-                id="description"
-                placeholder="Descripción detallada del producto"
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                required
-              />
-          </div>
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="categories">
-              Categorías
-            </label>
-            <select
-              multiple
-              className="block w-full bg-gray-200 border rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white"
-              id="categories"
-              name="categories"
-              value={formData.categories}
-              onChange={handleCategoryChange}
-            >
-              {categories.map((category) => (
-                <option key={category._id} value={category._id}>
-                  {category.categoryName}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="images">
-              Imágenes
-            </label>
-            <input
-              type="file"
-              multiple
-              className="block w-full text-gray-700"
-              id="images"
-              name="images"
-              onChange={handleFileChange}
-            />
-          </div>
-          <div className="flex justify-between">
-            <Link to="/seller/products/view" className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-              Regresar
-            </Link>
-            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Actualizar Producto
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
+      <SellerFooterComponent />
     </div>
   );
-}
+};
 
-export default SLUPDProductPages
-
+export default SLUPDProductPages;

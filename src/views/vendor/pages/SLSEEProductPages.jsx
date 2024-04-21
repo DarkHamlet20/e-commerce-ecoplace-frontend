@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SearchBarComponent from '../../../common/SearchbarComponent';
-import PaginationComponent from '../../../common/PaginationComponent'
+import PaginationComponent from "../../../common/PaginationComponent";
+import SellerNavComponent from "../components/SellerNavComponent";
+import SellerSidebarComponent from "../components/SellerSidebarComponent";
+import SellerFooterComponent from "../components/SellerFooterComponent";
+import SearchBarComponent from "../../../common/SearchbarComponent";
 
 const SLSEEProductsPages = () => {
   const [products, setProducts] = useState([]);
@@ -17,14 +20,17 @@ const SLSEEProductsPages = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/products", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "http://localhost:3000/products/seller",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setProducts(response.data);
     } catch (error) {
-      console.error("Error fetching products", error);
+      console.error("Error al obtener productos", error);
     }
   };
 
@@ -35,131 +41,115 @@ const SLSEEProductsPages = () => {
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  
+
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   return (
-    <div className="min-h-screen bg-gray-900 flex justify-center items-center px-6 py-8">
-      <div className="w-full max-w-6xl bg-white rounded-lg shadow-xl p-8">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold text-gray-800">
-            Gestión de Productos
-          </h2>
-          <Link
-            to="/seller"
-            className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-          >
-            Regresar
-          </Link>
-          <Link
-            to="/seller/products/add"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Agregar Producto
-          </Link>
+    <div className="d-flex flex-column" style={{ marginTop: "60px" }}>
+      <div className="d-flex min-vh-100">
+        <SellerSidebarComponent />
+        <div className="flex-grow-1">
+          <SellerNavComponent />
+          <div className="container mt-4">
+            <div className="d-flex justify-content-between align-items-center mb-4">
+              <h2>Gestión de Productos</h2>
+              <div>
+                <Link to="/seller" className="btn btn-info me-2">
+                  Regresar
+                </Link>
+                <Link to="/seller/products/add" className="btn btn-primary">
+                  Agregar Producto
+                </Link>
+              </div>
+            </div>
+            <SearchBarComponent
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder="Buscar productos..."
+            />
+            <div className="table-responsive">
+              <table className="table table-striped">
+                <thead>
+                  <tr className="bg-info text-white">
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Categoría</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentProducts.length > 0 ? (
+                    currentProducts.map((product) => (
+                      <tr key={product._id}>
+                        <td>
+                          <div className="d-flex align-items-center">
+                            <img
+                              src={product.images[0]}
+                              alt={product.name}
+                              className="rounded-circle"
+                              style={{
+                                height: "40px",
+                                width: "40px",
+                                marginRight: "10px",
+                              }}
+                            />
+                            {product.name}
+                          </div>
+                        </td>
+                        <td>${product.price}</td>
+                        <td>
+                          {product.categories
+                            .map((cat) => cat.categoryName)
+                            .join(", ")}
+                        </td>
+                        <td>{product.countInStock}</td>
+                        <td>
+                          <Link
+                            to={`/seller/products/edit/${product._id}`}
+                            className="btn btn-warning me-2"
+                          >
+                            Actualizar
+                          </Link>
+                          <Link
+                            to={`/seller/products/delete/${product._id}`}
+                            className="btn btn-danger"
+                          >
+                            Eliminar
+                          </Link>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="5" className="text-center">
+                        No se encontraron productos.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+            {totalPages > 1 && (
+              <PaginationComponent
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
+            )}
+          </div>
         </div>
-          <SearchBarComponent
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead>
-              <tr className="bg-gray-600">
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-                >
-                  Producto
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-                >
-                  Precio
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-                >
-                  Categoría
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-                >
-                  Stock
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
-                >
-                  Acciones
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {currentProducts.map((product) => (
-                <tr key={product._id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10">
-                        <img
-                          className="h-10 w-10 rounded-full"
-                          src={product.images[0]}
-                          alt=""
-                        />
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">
-                          {product.name}
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    ${product.price}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {product.categories
-                      .map((cat) => cat.categoryName)
-                      .join(", ")}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {product.countInStock}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <Link
-                      to={`/seller/products/edit/${product._id}`}
-                      className="bg-slate-500 hover:bg-indigo-700 text-white font-bold py-1 px-4 rounded mr-2"
-                    >
-                      Actualizar
-                    </Link>
-                    <Link
-                      to={`/seller/products/delete/${product._id}`}
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded"
-                    >
-                      Eliminar
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        <PaginationComponent
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
-        {currentProducts.length === 0 && (
-          <div className="text-center py-4">No se encontraron productos.</div>
-        )}
       </div>
+      <SellerFooterComponent />
     </div>
   );
-}
+};
 
 export default SLSEEProductsPages;

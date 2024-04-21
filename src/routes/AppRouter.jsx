@@ -32,6 +32,7 @@ import SLUPDProductPages from '../views/vendor/pages/SLUPDProductPages';
 import SLDLTProductPages from '../views/vendor/pages/SLDLTProductPages';
 import SellerSalesPage from '../views/vendor/pages/SellerSalesPages';
 import AdminPagesAccount from '../views/admin/pages/AdminPagesAccount';
+import SellerPagesAccount from '../views/vendor/pages/SellerPagesAccount';
 
 const AppRouter = () => {
 
@@ -173,6 +174,14 @@ const AppRouter = () => {
           <SellerDashboardPage />
         </ProtectedRoute>
       } />
+
+      {/* Account del Seller */}
+      <Route path='/seller/account' element={
+        <ProtectedRoute roles={['Seller']}>
+          <SellerPagesAccount />
+        </ProtectedRoute>
+      } />
+
       <Route path='/seller/products/view' element={
         <ProtectedRoute roles={['Seller']}>
           <SLSEEProductPages />
