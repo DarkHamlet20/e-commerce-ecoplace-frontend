@@ -5,6 +5,7 @@ import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import SearchBarComponent from '../../../common/SearchbarComponent';
 import PaginationComponent from '../../../common/PaginationComponent';
+import AdminFooterComponent from "../components/AdminFooterComponent";
 
 const ADSEECategoriesPages = () => {
   const [categories, setCategories] = useState([]);
@@ -118,6 +119,7 @@ const ADSEECategoriesPages = () => {
           </div>
         </div>
       </div>
+      <AdminFooterComponent />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import AdminNavComponent from "../components/AdminNavComponent";
 import AdminSidebar from "../components/AdminSidebar";
 import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
+import AdminFooterComponent from "../components/AdminFooterComponent";
 
 const ADUPDCategoriesPages = () => {
   const [categoryName, setCategoryName] = useState("");
@@ -111,6 +112,7 @@ const ADUPDCategoriesPages = () => {
           </div>
         </div>
       </div>
+      <AdminFooterComponent />
     </div>
   );
 };

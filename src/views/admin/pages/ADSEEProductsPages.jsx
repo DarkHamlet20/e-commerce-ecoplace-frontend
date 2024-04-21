@@ -5,6 +5,7 @@ import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import SearchBarComponent from '../../../common/SearchbarComponent';
 import PaginationComponent from '../../../common/PaginationComponent';
+import AdminFooterComponent from "../components/AdminFooterComponent";
 
 const ADSEEProductsPages = () => {
   const [products, setProducts] = useState([]);
@@ -138,6 +139,7 @@ const ADSEEProductsPages = () => {
           </div>
         </div>
       </div>
+      <AdminFooterComponent />
     </div>
   );
 };

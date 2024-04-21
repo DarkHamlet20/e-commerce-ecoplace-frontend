@@ -31,6 +31,7 @@ import SLADDProductPages from '../views/vendor/pages/SLADDProductPages';
 import SLUPDProductPages from '../views/vendor/pages/SLUPDProductPages';
 import SLDLTProductPages from '../views/vendor/pages/SLDLTProductPages';
 import SellerSalesPage from '../views/vendor/pages/SellerSalesPages';
+import AdminPagesAccount from '../views/admin/pages/AdminPagesAccount';
 
 const AppRouter = () => {
 
@@ -86,6 +87,13 @@ const AppRouter = () => {
       <Route path='/admin' element={
         <ProtectedRoute roles={['Admin']}>
           <AdminDashboardPage />
+        </ProtectedRoute>
+      } />
+
+      {/* Account del Admin */}
+      <Route path='/admin/account' element={
+        <ProtectedRoute roles={['Admin']}>
+          <AdminPagesAccount />
         </ProtectedRoute>
       } />
 

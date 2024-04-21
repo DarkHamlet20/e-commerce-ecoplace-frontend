@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import SearchBarComponent from '../../../common/SearchbarComponent';
+import AdminNavComponent from "../components/AdminNavComponent";
+import AdminSidebar from "../components/AdminSidebar";
 import PaginationComponent from "../../../common/PaginationComponent";
+import SearchBarComponent from "../../../common/SearchbarComponent";
+import AdminFooterComponent from "../components/AdminFooterComponent";
 
 const ADSEESalesPages = () => {
   const [sales, setSales] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [salesPerPage] = useState(5);  
+  const [salesPerPage] = useState(5);
 
   useEffect(() => {
     const fetchSales = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/sales/admin", // Asegúrate de ajustar la URL según tu configuración
+          "http://localhost:3000/sales/admin",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
@@ -23,7 +26,7 @@ const ADSEESalesPages = () => {
         );
         setSales(response.data);
       } catch (error) {
-        console.error("Error fetching sales", error);
+        console.error("Error fetching sales:", error);
       }
     };
 
@@ -34,105 +37,96 @@ const ADSEESalesPages = () => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredSales = sales.filter((sale) =>
-    sale.customer && `${sale.customer.name} ${sale.customer.lastname}`.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredSales = sales.filter(
+    (sale) =>
+      sale.customer &&
+      `${sale.customer?.name} ${sale.customer?.lastname}`
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
   );
 
   const indexOfLastSale = currentPage * salesPerPage;
   const indexOfFirstSale = indexOfLastSale - salesPerPage;
   const currentSales = filteredSales.slice(indexOfFirstSale, indexOfLastSale);
 
-  // Cambiar la página
-  const paginate = pageNumber => setCurrentPage(pageNumber);
-
   return (
-    <div className="min-h-screen bg-gray-900 flex justify-center items-center px-6 py-8">
-      <div className="w-full max-w-6xl bg-white rounded-lg shadow-xl p-8">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold text-gray-800">
-            Lista de Ventas
-          </h2>
-          <Link
-            to="/admin"
-            className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Regresar
-          </Link>
+    <div className="d-flex flex-column" style={{ marginTop: '60px' }}> {/* Ajuste para el navbar */}
+      <div className="d-flex min-vh-100"> {/* Estructura principal */}
+        <AdminSidebar /> {/* Sidebar */}
+        <div className="flex-grow-1"> {/* Contenedor principal */}
+          <AdminNavComponent /> {/* Navbar */}
+          <div className="container mt-4"> {/* Contenedor para el contenido */}
+            <div className="d-flex justify-content-between align-items-center mb-4"> {/* Título y búsqueda */}
+              <h2 className="text-dark">Lista de Ventas</h2>
+              <SearchBarComponent
+                value={searchTerm} // Valor del término de búsqueda
+                onChange={handleSearchChange} // Controlador de cambio
+                placeholder="Buscar ventas..." // Placeholder de búsqueda
+              />
+              <Link
+                to="/admin"
+                className="btn btn-secondary"
+              >
+                Regresar
+              </Link>
+            </div>
+            <div className="table-responsive"> {/* Tabla con contenido responsive */}
+              <table className="table table-striped"> {/* Tabla con estilo */}
+                <thead>
+                  <tr>
+                    <th>Cliente</th> {/* Cliente de la venta */}
+                    <th>Vendedor</th> {/* Vendedor asociado */}
+                    <th>Status</th> {/* Estado de la venta */}
+                    <th>Productos</th> {/* Productos de la venta */}
+                    <th>Fecha de Venta</th> {/* Fecha de creación */}
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentSales.map((sale) => (
+                    <tr key={sale._id}>
+                      <td>{sale.customer ? `${sale.customer.name} ${sale.customer.lastname}` : "Cliente no disponible"}</td>
+                      <td>
+                        {sale.items.map((item, index) => (
+                          <div key={index}> {/* Productos por vendedor */}
+                            {item.product?.seller
+                              ? `${item.product.seller.name} ${item.product.seller.lastname}`
+                              : "Vendedor no disponible"}
+                          </div>
+                        ))}
+                      </td>
+                      <td>{sale.status}</td>
+                      <td> {/* Dividir productos en cuadros */}
+                        <div className="d-flex flex-wrap"> {/* Productos en cuadro */}
+                          {sale.items.map((item, index) => (
+                            <div key={index} className="border p-2 m-2 rounded"> {/* Cuadro para cada producto */}
+                              <p>Producto: {item.product?.name || "No disponible"}</p>
+                              <p>Precio: ${item.product?.price || "0"}</p>
+                              <p>Cantidad: {item.quantity}</p>
+                              <p>Total: ${item.quantity * item.product?.price || "0"}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </td>
+                      <td>{new Date(sale.createdAt).toLocaleDateString()}</td>
+                    </tr>
+                  ))}
+                  {currentSales.length === 0 && (
+                    <tr>
+                      <td colSpan="5" className="text-center">No se encontraron ventas.</td>
+                      </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+            <PaginationComponent
+              currentPage={currentPage}
+              totalPages={Math.ceil(filteredSales.length / salesPerPage)}
+              onPageChange={(pageNumber) => setCurrentPage(pageNumber)} // Cambiar página
+            />
+          </div>
         </div>
-        <div className="overflow-x-auto">
-        <SearchBarComponent value={searchTerm} onChange={handleSearchChange} placeholder="Buscar ventas..." />
-          <table className="min-w-full leading-normal">
-            <thead>
-              <tr>
-                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-600 text-left text-xs font-semibold text-white uppercase tracking-wider">
-                  Cliente
-                </th>
-                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-600 text-left text-xs font-semibold text-white uppercase tracking-wider">
-                  Vendedor
-                </th>
-                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-600 text-left text-xs font-semibold text-white uppercase tracking-wider">
-                  Status
-                </th>
-                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-600 text-left text-xs font-semibold text-white uppercase tracking-wider">
-                  Detalles del Producto
-                </th>
-                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-600 text-left text-xs font-semibold text-white uppercase tracking-wider">
-                  Fecha de Venta
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentSales.map((sale) => (
-                <tr key={sale._id} className="hover:bg-gray-100">
-                  <td className="p-4">
-                      <div>
-                        <p>
-                          {sale.customer ? `${sale.customer?.name} ${sale.customer?.lastname}` : 'Cliente no disponible'}
-                        </p>
-                      </div>
-                  </td>
-                  <td className="p-4">
-                    {sale.items.map((item, index) => (
-                      <div key={index}>
-                        <p>
-                          {item.product?.seller ? `
-                          ${item.product?.seller?.name}
-                          ${item.product?.seller?.lastname}
-                          ` : 'Vendedor no disponible'}
-                        </p>
-                      </div>
-                    ))}
-                  </td>
-                  <td className="p-4">{sale.status}</td>
-                  <td className="p-4">
-                    <ul>
-                      {sale.items.map((item, index) => (
-                        <li key={index}>
-                          <p>{item.product?.name}</p>
-                          <p>Precio: {item.product?.price}</p>
-                          <p>Cantidad: {item.quantity}</p>
-                          <p>Total: {item.quantity * item.product?.price}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  </td>
-                  <td className="p-4">
-                    {new Date(sale.createdAt).toLocaleDateString()}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <PaginationComponent
-          currentPage={currentPage}
-          totalPages={Math.ceil(filteredSales.length / salesPerPage)}
-          onPageChange={paginate}
-        />
-        {currentSales.length === 0 && (
-          <div className="text-center py-4">No se encontraron ventas.</div>
-        )}
       </div>
+      <AdminFooterComponent />
     </div>
   );
 };

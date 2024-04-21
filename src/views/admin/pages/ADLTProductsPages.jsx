@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import { showConfirmationAlert, showErrorAlert } from '../../../helpers/alerts';
+import AdminFooterComponent from "../components/AdminFooterComponent";
 
 const ADLTProductsPages = () => {
   const [product, setProduct] = useState(null);
@@ -59,44 +60,43 @@ const ADLTProductsPages = () => {
     <div className="d-flex flex-column" style={{ marginTop: '60px' }}> {/* Ajuste para el navbar */}
       <div className="d-flex min-vh-100"> {/* Estructura principal */}
         <AdminSidebar /> {/* Sidebar */}
-        <div className="flex-grow-1"> {/* Contenedor principal */}
+        <div className="flex-grow-1 d-flex justify-content-center align-items-center"> {/* Centra el contenido */}
           <AdminNavComponent /> {/* Navbar */}
-          <div className="container mt-4"> {/* Contenedor para el contenido */}
-            <div className="card p-5" style={{ maxWidth: '800px' }}> {/* Tarjeta para el formulario */}
-              <h2 className="text-center text-dark">Eliminar Producto</h2>
-              <h3 className="text-center">{product.name}</h3> {/* Nombre del producto */}
-              <div className="d-flex justify-content-center my-4"> {/* Imágenes del producto */}
-                {product.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`Imagen ${index + 1}`}
-                    className="rounded-circle me-3"
-                    style={{ width: '60px', height: '60px', objectFit: 'cover' }}
-                  />
-                ))}
-              </div>
-              <p>
-                <strong>Categorías:</strong> {product.categories.map((cat) => cat.categoryName).join(', ')}
-              </p>
-              <div className="d-flex justify-content-between"> {/* Botón para regresar y eliminar */}
-                <Link
-                  to="/admin/products/view"
-                  className="btn btn-secondary"
-                >
-                  Regresar
-                </Link>
-                <button
-                  className="btn btn-danger"
-                  onClick={deleteProduct}
-                >
-                  Confirmar Eliminación
-                </button>
-              </div>
+          <div className="card p-5" style={{ width: '70%' }}> {/* Tarjeta centrada */}
+            <h2 className="text-center">Eliminar Producto</h2>
+            <h3 className="text-center">{product.name}</h3> {/* Nombre del producto */}
+            <div className="d-flex justify-content-center my-4"> {/* Imágenes del producto */}
+              {product.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Imagen ${index + 1}`}
+                  className="rounded"
+                  style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '10px' }}
+                />
+              ))}
+            </div>
+            <p className="text-center">
+              <strong>Categorías:</strong> {product.categories.map((cat) => cat.categoryName).join(', ')}
+            </p>
+            <div className="d-flex justify-content-between mt-4"> {/* Botones de acción */}
+              <Link
+                to="/admin/products/view"
+                className="btn btn-secondary"
+              >
+                Regresar
+              </Link>
+              <button
+                className="btn btn-danger"
+                onClick={deleteProduct}
+              >
+                Confirmar Eliminación
+              </button>
             </div>
           </div>
         </div>
       </div>
+      <AdminFooterComponent />
     </div>
   );
 };

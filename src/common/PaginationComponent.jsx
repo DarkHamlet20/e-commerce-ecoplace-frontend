@@ -4,7 +4,7 @@ const PaginationComponent = ({ currentPage, totalPages, onPageChange }) => {
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
-    <div className="flex justify-center mt-4">
+    <div className="flex justify-center mt-4 mb-5">
       {pageNumbers.map(number => (
         <button
           key={number}

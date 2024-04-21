@@ -4,6 +4,7 @@ import axios from 'axios';
 import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import { showErrorAlert, showConfirmationAlert } from '../../../helpers/alerts';
+import AdminFooterComponent from "../components/AdminFooterComponent";
 
 const ADADDProductPages = () => {
   const [formData, setFormData] = useState({
@@ -107,7 +108,7 @@ const ADADDProductPages = () => {
               </Link>
             </div>
             <div className="d-flex justify-content-center"> {/* Formulario para agregar producto */}
-              <div className="card p-5" style={{ maxWidth: '800px' }}> {/* Tarjeta para el formulario */}
+              <div className="card p-5 mb-3" style={{ maxWidth: '800px' }}> {/* Tarjeta para el formulario */}
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="mb-4"> {/* Campo para el nombre */}
                     <label htmlFor="name" className="form-label">Nombre del Producto</label>
@@ -230,6 +231,7 @@ const ADADDProductPages = () => {
           </div>
         </div>
       </div>
+      <AdminFooterComponent />
     </div>
   );
 };

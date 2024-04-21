@@ -5,6 +5,7 @@ import AdminNavComponent from "../components/AdminNavComponent";
 import AdminSidebar from "../components/AdminSidebar";
 import SearchBarComponent from "../../../common/SearchbarComponent";
 import PaginationComponent from "../../../common/PaginationComponent";
+import AdminFooterComponent from "../components/AdminFooterComponent";
 
 const ADSEEUsersPages = () => {
   const [users, setUsers] = useState([]);
@@ -158,6 +159,7 @@ const ADSEEUsersPages = () => {
           </div>
         </div>
       </div>
+      <AdminFooterComponent />
     </div>
   );
 };

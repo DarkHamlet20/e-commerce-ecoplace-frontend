@@ -4,6 +4,7 @@ import axios from 'axios';
 import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import { showErrorAlert, showConfirmationAlert } from '../../../helpers/alerts';
+import AdminFooterComponent from "../components/AdminFooterComponent";
 
 const ADUPDUsersPages = () => {
   const { id } = useParams();
@@ -102,7 +103,7 @@ const ADUPDUsersPages = () => {
         <div className="flex-grow-1"> {/* Contenedor principal */}
           <AdminNavComponent /> {/* Navbar */}
           <div className="container mt-4 d-flex justify-content-center"> {/* Contenedor para el contenido */}
-            <div className="card p-5" style={{ maxWidth: '800px', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)', background: 'linear-gradient(to right, #e0eafc, #cfdef3)' }}> {/* Tarjeta para el formulario con gradiente */}
+            <div className="card p-5 mb-4" style={{ maxWidth: '800px', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)', background: 'linear-gradient(to right, #e0eafc, #cfdef3)' }}> {/* Tarjeta para el formulario con gradiente */}
               <div className="d-flex justify-content-between align-items-center"> {/* Título y botón de regresar */}
                 <h1 className="text-center text-dark">Editar Usuario</h1>
                 <button
@@ -171,6 +172,7 @@ const ADUPDUsersPages = () => {
           </div>
         </div>
       </div>
+      <AdminFooterComponent />
     </div>
   );
 };

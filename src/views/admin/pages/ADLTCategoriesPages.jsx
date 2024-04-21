@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
+import AdminFooterComponent from "../components/AdminFooterComponent";
 
 const ADLTCategoriesPages = () => {
   const [category, setCategory] = useState(null);
@@ -80,6 +81,7 @@ const ADLTCategoriesPages = () => {
           </div>
         </div>
       </div>
+      <AdminFooterComponent />
     </div>
   );
 };

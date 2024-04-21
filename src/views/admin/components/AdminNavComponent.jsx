@@ -3,13 +3,49 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { Navbar, Nav, Dropdown, Image } from 'react-bootstrap';
+import axios from 'axios';
 import logo from '../../../../public/img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp';
 
-const AdminNavComponent = ({ handleLogout, handleLogoutAllSessions }) => {
+const AdminNavComponent = () => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  const token = localStorage.getItem('auth_token');
 
   const toggleDropdown = () => setShowDropdown(!showDropdown);
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        'http://localhost:3000/users/logout',
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('userRole');
+      navigate('/login');
+    } catch (error) {
+      console.error('Error durante el cierre de sesión:', error);
+    }
+  };
+
+  const handleLogoutAllSessions = async () => {
+    try {
+      await axios.post(
+        'http://localhost:3000/users/logout-all',
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('userRole');
+      navigate('/login');
+    } catch (error) {
+      console.error('Error cerrando todas las sesiones:', error);
+    }
+  };
 
   const handleAccountClick = () => {
     navigate('/admin/account');
