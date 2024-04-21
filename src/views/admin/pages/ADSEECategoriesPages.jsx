@@ -89,7 +89,7 @@ const ADSEECategoriesPages = () => {
                         <td className="text-end">
                           <Link
                             to={`/admin/categories/edit/${category._id}`}
-                            className="btn btn-info me-2"
+                            className="btn btn-warning me-2"
                           >
                             Actualizar
                           </Link>

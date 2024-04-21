@@ -1,39 +1,44 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import AdminNavComponent from '../components/AdminNavComponent';
+import AdminSidebar from '../components/AdminSidebar';
+import { showErrorAlert, showConfirmationAlert } from '../../../helpers/alerts';
 
 const ADUPDProductsPages = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    brand: "",
-    price: "",
+    name: '',
+    description: '',
+    brand: '',
+    price: '',
     categories: [],
-    countInStock: "",
+    countInStock: '',
     isFeatured: false,
   });
   const [categories, setCategories] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { id } = useParams(); 
-  const navigate = useNavigate();
-  const token = localStorage.getItem("auth_token");
+  const [currentImage, setCurrentImage] = useState(null); // Para mostrar la imagen actual
+  const token = localStorage.getItem('auth_token');
 
   useEffect(() => {
     fetchProductDetails();
     fetchCategories();
-  }, [id]);
+  }, [id, token]);
 
   const fetchProductDetails = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setFormData({ ...response.data, categories: response.data.categories.map(cat => cat._id) });
+      const product = response.data;
+      setFormData({ ...product, categories: product.categories.map(cat => cat._id) });
+      setCurrentImage(product.images[0]); // Establece la imagen actual
       setIsLoading(false);
     } catch (error) {
-      console.error("Error fetching product details", error);
+      console.error("Error fetching product details:", error);
       setIsLoading(false);
     }
   };
@@ -45,7 +50,7 @@ const ADUPDProductsPages = () => {
       });
       setCategories(response.data);
     } catch (error) {
-      console.error("Error fetching categories", error);
+      console.error("Error fetching categories:", error);
     }
   };
 
@@ -53,7 +58,7 @@ const ADUPDProductsPages = () => {
     const { name, value, type, checked } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
@@ -70,15 +75,15 @@ const ADUPDProductsPages = () => {
     e.preventDefault();
     const updateData = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
-      if (key === "categories") {
-        value.forEach((category) => updateData.append("categories", category));
+      if (key === 'categories') {
+        value.forEach((category) => updateData.append('categories', category));
       } else {
         updateData.append(key, value);
       }
     });
     if (selectedFiles.length) {
       for (let file of selectedFiles) {
-        updateData.append("images", file);
+        updateData.append('images', file);
       }
     }
 
@@ -89,14 +94,14 @@ const ADUPDProductsPages = () => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         }
       );
-      await showConfirmationAlert('¡Éxito!', 'Productos actualizado correctamente.', 'success', 'Aceptar');
-      navigate("/admin/products/view"); // Asegura que esta ruta es correcta para ver productos
+      await showConfirmationAlert('¡Éxito!', 'Producto actualizado correctamente.', 'success', 'Aceptar');
+      navigate('/admin/products/view'); // Asegura que esta ruta es correcta para ver productos
     } catch (error) {
-      console.error("Error updating product", error);
+      console.error("Error updating product:", error);
       showErrorAlert('Error', 'No se pudo actualizar el producto. Intente nuevamente.');
     }
   };
@@ -104,97 +109,98 @@ const ADUPDProductsPages = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center px-6 py-8">
-      <div className="w-full max-w-4xl bg-white rounded-lg shadow-xl p-8 space-y-4">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6">Actualizar Producto</h2>
-        <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                Nombre del Producto
-              </label>
-              <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white"
-                id="name"
-                type="text"
-                placeholder="Nombre"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-              />
+    <div className="d-flex flex-column" style={{ marginTop: '60px' }}> {/* Ajuste para el navbar */}
+      <div className="d-flex min-vh-100"> {/* Estructura principal */}
+        <AdminSidebar /> {/* Sidebar */}
+        <div className="flex-grow-1"> {/* Contenedor principal */}
+          <AdminNavComponent /> {/* Navbar */}
+          <div className="container mt-4"> {/* Contenedor para el contenido */}
+            <div className="d-flex justify-content-between align-items-center"> {/* Título y botón para regresar */}
+              <h1 className="text-center text-dark">Actualizar Producto</h1>
+              <Link to="/admin/products/view" className="btn btn-secondary">Regresar</Link>
             </div>
-            <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="price">
-                Precio
-              </label>
-              <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white"
-                id="price"
-                type="number"
-                placeholder="Precio"
-                name="price"
-                value={formData.price}
-                onChange={handleInputChange}
-                required
-              />
+            <div className="d-flex justify-content-center"> {/* Formulario para editar el producto */}
+              <div className="card p-5" style={{ maxWidth: '800px' }}> {/* Tarjeta para el formulario */}
+                <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-6">
+                  <div className="mb-4"> {/* Imágenes */}
+                    <label className="form-label">{formData.name}</label>
+                    {currentImage && ( /* Previsualización de la imagen actual */
+                      <div className="mb-3">
+                        <img
+                          src={currentImage}
+                          alt="Imagen actual del producto"
+                          style={{ width: '100px', borderRadius: '10px' }}
+                        />
+                      </div>
+                    )}
+                    <input
+                      type="file"
+                      multiple
+                      className="form-control"
+                      onChange={handleFileChange}
+                    />
+                  </div>
+                  <div className="mb-4"> {/* Campo para el nombre */}
+                    <label htmlFor="name" className="form-label">Nombre del Producto</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-4"> {/* Campo para el precio */}
+                    <label htmlFor="price" className="form-label">Precio</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="price"
+                      name="price"
+                      value={formData.price}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-4"> {/* Descripción */}
+                    <label htmlFor="description" className="form-label">Descripción</label>
+                    <textarea
+                      className="form-control"
+                      id="description"
+                      name="description"
+                      value={formData.description}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-4"> {/* Selección de categorías */}
+                    <label htmlFor="categories" className="form-label">Categorías</label>
+                    <select
+                      multiple
+                      className="form-control"
+                      id="categories"
+                      name="categories"
+                      value={formData.categories}
+                      onChange={handleCategoryChange}
+                    >
+                      {categories.map((category) => (
+                        <option key={category._id} value={category._id}>
+                          {category.categoryName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="d-flex justify-content-between"> {/* Botón para regresar y botón para enviar */}
+                    <Link to="/admin/products/view" className="btn btn-secondary">Cancelar</Link>
+                    <button type="submit" className="btn btn-primary">Actualizar Producto</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-              Descripción
-            </label>
-            <textarea
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white"
-                id="description"
-                placeholder="Descripción detallada del producto"
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                required
-              />
-          </div>
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="categories">
-              Categorías
-            </label>
-            <select
-              multiple
-              className="block w-full bg-gray-200 border rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white"
-              id="categories"
-              name="categories"
-              value={formData.categories}
-              onChange={handleCategoryChange}
-            >
-              {categories.map((category) => (
-                <option key={category._id} value={category._id}>
-                  {category.categoryName}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="images">
-              Imágenes
-            </label>
-            <input
-              type="file"
-              multiple
-              className="block w-full text-gray-700"
-              id="images"
-              name="images"
-              onChange={handleFileChange}
-            />
-          </div>
-          <div className="flex justify-between">
-            <Link to="/admin/products/view" className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-              Regresar
-            </Link>
-            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Actualizar Producto
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );
