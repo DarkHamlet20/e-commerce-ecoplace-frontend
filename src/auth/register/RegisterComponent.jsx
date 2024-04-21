@@ -14,7 +14,6 @@ function Register() {
   const [country, setCountry] = useState("");
   const [zip, setZip] = useState("");
   const [error, setError] = useState("");
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false); // New state for showing the success message
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
