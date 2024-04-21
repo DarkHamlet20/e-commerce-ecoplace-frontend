@@ -1,22 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import AdminFooterComponent from "../components/AdminFooterComponent";
 
 const AdminDashboardPage = () => {
-  const [userData, setUserData] = useState({});
-  const token = localStorage.getItem('auth_token');
-  useEffect(() => {
-    if (token) {
-      axios
-        .get('http://localhost:3000/users/me', {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((response) => setUserData(response.data))
-        .catch((error) => console.error('Error obteniendo datos del usuario:', error));
-    }
-  }, [token]);
 
   return (
     <div className="d-flex flex-column" style={{ marginTop: '60px' }}> {/* Ajuste para el navbar fijo */}
