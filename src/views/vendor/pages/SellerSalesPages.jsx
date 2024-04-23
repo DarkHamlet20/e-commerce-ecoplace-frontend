@@ -1,140 +1,142 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import PaginationComponent from "../../../common/PaginationComponent";
-import SearchBarComponent from "../../../common/SearchbarComponent";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { Table, Spinner, Image } from 'react-bootstrap';
+import SellerNavComponent from '../components/SellerNavComponent';
+import SellerSidebarComponent from '../components/SellerSidebarComponent';
+import PaginationComponent from '../../../common/PaginationComponent';
+import SearchBarComponent from '../../../common/SearchbarComponent';
+import SellerFooterComponent from '../components/SellerFooterComponent';
 
 const SellerSalesPage = () => {
   const [sales, setSales] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
   const [salesPerPage] = useState(10);
-  const [searchTerm, setSearchTerm] = useState("");
+  const token = localStorage.getItem('auth_token');
   const navigate = useNavigate();
-  const token = localStorage.getItem("auth_token");
 
   useEffect(() => {
     const fetchSales = async () => {
-      setLoading(true);
+      setLoading(true); // Indicar que está cargando
       try {
-        const response = await axios.get("http://localhost:3000/sales/seller", {
+        const response = await axios.get('http://localhost:3000/sales/seller', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         setSales(response.data);
-        setLoading(false);
+        setLoading(false); // Indicar que terminó de cargar
       } catch (error) {
-        console.error("Error fetching sales:", error);
+        console.error('Error al obtener las ventas:', error);
         setLoading(false);
       }
     };
 
-    fetchSales();
-  }, [token]);
+    fetchSales(); // Obtener ventas al montar el componente
+  }, [token]); // Volver a cargar cuando el token cambia
 
-  const filteredSales = sales.filter((sale) =>
-    sale.items.some((item) =>
+  const filteredSales = sales.filter((sale) => {
+    // Buscar productos por nombre
+    return sale.items.some((item) => 
       item.product?.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
+    );
+  });
 
-  // Lógica de paginación
+  const totalPages = Math.ceil(filteredSales.length / salesPerPage);
+
   const indexOfLastSale = currentPage * salesPerPage;
   const indexOfFirstSale = indexOfLastSale - salesPerPage;
   const currentSales = filteredSales.slice(indexOfFirstSale, indexOfLastSale);
 
   const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-    setCurrentPage(1);
+    setSearchTerm(e.target.value); // Actualizar el término de búsqueda
   };
 
-  if (loading) {
-    return <p>Cargando ventas...</p>;
-  }
-
-  // Cambiar la página
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber); // Cambiar la página actual
+  };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <button className="mt-4" onClick={() => navigate("/seller")}>
-        Regresar
-      </button>
-      <div className="overflow-x-auto">
-        <SearchBarComponent
-          value={searchTerm}
-          onChange={handleSearchChange}
-          placeholder="Buscar ventas..."
-        />
-        {loading ? (
-          <div>Cargando...</div>
-        ) : (
-          <table className="min-w-full leading-normal">
-            <thead>
-              <tr>
-                <th>Cliente</th>
-                <th>Fecha</th>
-                <th>Total</th>
-                <th>Detalles</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentSales.map((sale) => (
-                <tr key={sale._id} className="hover:bg-gray-100">
-                  <td className="p-4">
-                    <div>
-                      <p>
-                        {sale.customer
-                          ? `${sale.customer?.name} ${sale.customer?.lastname}`
-                          : "Cliente no disponible"}
-                      </p>
-                    </div>
-                  </td>
-                  <td className="p-4">
-                    {sale.items.map((item, index) => (
-                      <div key={index}>
-                        <p>
-                          {item.product?.seller
-                            ? `
-                          ${item.product?.seller?.name}
-                          ${item.product?.seller?.lastname}
-                          `
-                            : "Vendedor no disponible"}
-                        </p>
-                      </div>
-                    ))}
-                  </td>
-                  <td className="p-4">{sale.status}</td>
-                  <td className="p-4">
-                    <ul>
-                      {sale.items.map((item, index) => (
-                        <li key={index}>
-                          <p>{item.product?.name}</p>
-                          <p>Precio: {item.product?.price}</p>
-                          <p>Cantidad: {item.quantity}</p>
-                          <p>Total: {item.quantity * item.product?.price}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  </td>
-                  <td className="p-4">
-                    {new Date(sale.createdAt).toLocaleDateString()}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+    <div className="d-flex flex-column" style={{ marginTop: '60px' }}>
+      <div className="d-flex min-vh-100">
+        <SellerSidebarComponent />
+        <div className="flex-grow-1">
+          <SellerNavComponent />
+          <div className="container mt-4">
+            <div className="d-flex justify-content-between align-items-center mb-4">
+              <h2>Ventas del Vendedor</h2>
+              <button className="btn btn-info" onClick={() => navigate('/seller')}>
+                Regresar
+              </button>
+            </div>
+
+            <SearchBarComponent
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder="Buscar productos..."
+            />
+
+            {loading ? (
+              <Spinner animation="border" /> 
+            ) : (
+              <Table striped bordered hover>
+                <thead>
+                  <tr className="bg-info text-white">
+                    <th>Producto</th>
+                    <th>Categoria</th>
+                    <th>Cliente</th>
+                    <th>Fecha de Venta</th>
+                    <th>Precio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentSales.length > 0 ? (
+                    currentSales.map((sale) => (
+                      <tr key={sale._id}>
+                        <td>
+                          <div className="d-flex align-items-center">
+                            <Image
+                              src={sale.items[0].product?.images[0]} // Imagen del producto
+                              roundedCircle
+                              style={{ height: '40px', width: '40px' }}
+                              alt={sale.items.product?.name}
+                            />
+                            <span className="ms-2">{sale.items[0].product?.name}</span>
+                            <span className="ms-2">{sale.items[0].product?.brand}</span>
+                          </div>
+                        </td>
+                        <td>
+                          <span className="ms-2">{sale.items[0].product?.categories[0].categoryName}</span>
+                        </td>
+                        <td>
+                          {sale.customer.name} {sale.customer.lastname}
+                        </td>
+                        <td>{new Date(sale.createdAt).toLocaleDateString()}</td>
+                        <td>${sale.items[0].product?.price}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="5" className="text-center">No se encontraron ventas.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </Table>
+            )}
+
+            {totalPages > 1 && (
+              <PaginationComponent
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={paginate}
+              />
+            )}
+          </div>
+        </div>
       </div>
-      <PaginationComponent
-        currentPage={currentPage}
-        totalPages={Math.ceil(filteredSales.length / salesPerPage)}
-        onPageChange={paginate}
-      />
-      {currentSales.length === 0 && (
-        <div className="text-center py-4">No se encontraron ventas.</div>
-      )}
+      <SellerFooterComponent />
     </div>
   );
 };
