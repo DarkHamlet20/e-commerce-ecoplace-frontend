@@ -11,7 +11,7 @@ const ADSEESalesPages = () => {
   const [sales, setSales] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [salesPerPage] = useState(5);
+  const [salesPerPage] = useState(2);
 
   useEffect(() => {
     const fetchSales = async () => {

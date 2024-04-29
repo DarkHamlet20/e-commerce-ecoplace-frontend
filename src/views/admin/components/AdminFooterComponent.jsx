@@ -5,36 +5,32 @@ import { faFacebook, faTwitter, faInstagram, faLinkedin } from '@fortawesome/fre
 
 const AdminFooterComponent = () => {
   return (
-    <footer className="bg-dark text-white py-4"> {/* Fondo oscuro, texto blanco */}
-      <Container>
-        <Row>
-          <Col md={6} className="text-center text-md-left mb-3 mb-md-0"> {/* Contenido izquierdo */}
-            <p>© 2024 EcoPlace. Todos los derechos reservados.</p>
-          </Col>
-          <Col md={6} className="d-flex justify-content-center justify-content-md-end"> {/* Enlaces a redes sociales */}
-            <a href="#facebook" className="text-white mx-2"> {/* Ícono de Facebook */}
-              <FontAwesomeIcon icon={faFacebook} size="lg" />
-            </a>
-            <a href="#twitter" className="text-white mx-2"> {/* Ícono de Twitter */}
-              <FontAwesomeIcon icon={faTwitter} size="lg" />
-            </a>
-            <a href="#instagram" className="text-white mx-2"> {/* Ícono de Instagram */}
-              <FontAwesomeIcon icon={faInstagram} size="lg" />
-            </a>
-            <a href="#linkedin" className="text-white mx-2"> {/* Ícono de LinkedIn */}
-              <FontAwesomeIcon icon={faLinkedin} size="lg" />
-            </a>
-          </Col>
-        </Row>
-        <Row className="mt-2">
-          <Col md={6} className="text-center text-md-left"> {/* Enlaces informativos */}
-            <a href="#about" className="text-white me-3">Acerca de nosotros</a>
-            <a href="#contact" className="text-white">Contacto</a>
-          </Col>
-        </Row>
-      </Container>
-    </footer>
-  );
+    <footer className="bg-dark text-white py-3" style={{ position: 'fixed', bottom: '0', width: '100%' }}>
+    <Container>
+      <Row>
+        <Col className="text-center">
+          © 2024 EcoPlace. Todos los derechos reservados.
+        </Col>
+      </Row>
+      <Row>
+        <Col className="text-center">
+          <a href="#facebook" className="text-white mx-2">
+            <FontAwesomeIcon icon={faFacebook} size="lg" />
+          </a>
+          <a href="#twitter" className="text-white mx-2">
+            <FontAwesomeIcon icon={faTwitter} size="lg" />
+          </a>
+          <a href="#instagram" className="text-white mx-2">
+            <FontAwesomeIcon icon={faInstagram} size="lg" />
+          </a>
+          <a href="#linkedin" className="text-white mx-2">
+            <FontAwesomeIcon icon={faLinkedin} size="lg" />
+          </a>
+        </Col>
+      </Row>
+    </Container>
+  </footer>
+);
 }
 
 export default AdminFooterComponent

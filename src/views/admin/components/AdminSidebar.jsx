@@ -62,12 +62,17 @@ const AdminSidebar = () => {
   };
 
   return (
-    <div className="bg-dark text-white flex-shrink-0" style={{ width: '250px', paddingTop: '20px' }}>
+    <div
+      className="bg-dark text-white"
+      style={{ width: '250px', paddingTop: '20px', minHeight: '100vh' }}
+    >
       <ListGroup variant="flush">
         {menuItems.map((item) => (
           <React.Fragment key={item.name}>
             <ListGroup.Item
-              className={`bg-dark text-white d-flex align-items-center ${activeMenu === item.name ? 'bg-secondary' : ''}`}
+              className={`d-flex align-items-center ${
+                activeMenu === item.name ? 'bg-secondary' : ''
+              }`}
               onClick={() => handleMenuClick(item)}
             >
               <FontAwesomeIcon icon={item.icon} className="me-2" />
@@ -78,7 +83,7 @@ const AdminSidebar = () => {
                 {item.subMenu.map((subItem) => (
                   <ListGroup.Item
                     key={subItem.name}
-                    className="bg-dark text-white d-flex align-items-center"
+                    className="bg-dark text-white"
                     onClick={() => navigate(subItem.href)}
                   >
                     <FontAwesomeIcon icon={subItem.icon} className="me-2" />

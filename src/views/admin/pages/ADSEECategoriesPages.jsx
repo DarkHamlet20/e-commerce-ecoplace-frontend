@@ -11,7 +11,7 @@ const ADSEECategoriesPages = () => {
   const [categories, setCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [categoriesPerPage] = useState(10);
+  const [categoriesPerPage] = useState(6);
   const token = localStorage.getItem('auth_token');
 
   useEffect(() => {

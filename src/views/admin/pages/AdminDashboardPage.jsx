@@ -7,6 +7,7 @@ import {
   faTag,
   faChartLine,
 } from '@fortawesome/free-solid-svg-icons';
+import { Row, Col, Card } from 'react-bootstrap';
 import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import AdminFooterComponent from '../components/AdminFooterComponent';
@@ -61,53 +62,53 @@ const AdminDashboardPage = () => {
         <div className="flex-grow-1"> {/* Contenedor principal */}
           <AdminNavComponent /> {/* Navbar */}
           <div className="container mt-4"> {/* Espacio para el contenido */}
-            <h1 className="text-dark text-center">Dashboard de Administración</h1> {/* Título del dashboard */}
+            <h1 className="text-center text-dark">Dashboard de Administración</h1>
 
-            <div className="row"> {/* Sección para mostrar las estadísticas */}
-              <div className="col-md-4"> {/* Tarjeta para ventas */}
-                <div className="card p-4 mb-4 bg-light text-center">
-                  <FontAwesomeIcon icon={faChartLine} size="3x" className="mb-3" />
+            <Row> {/* Usa filas y columnas para la cuadrícula */}
+              <Col md={4}> {/* Tarjeta para Ventas */}
+                <Card className="bg-light text-center p-4">
+                  <FontAwesomeIcon icon={faChartLine} size="3x" />
                   <h3>Ventas</h3>
-                  <p>{salesCount}</p> {/* Mostrar el total de ventas */}
-                </div>
-              </div>
-
-              <div className="col-md-4"> {/* Tarjeta para órdenes */}
-                <div className="card p-4 mb-4 bg-light text-center">
-                  <FontAwesomeIcon icon={faShoppingCart} size="3x" className="mb-3" />
+                  <p>{salesCount}</p>
+                </Card>
+              </Col>
+              {/* Tarjetas para Órdenes, Productos y otros elementos */}
+              <Col md={4}>
+                <Card className="bg-light text-center p-4">
+                  <FontAwesomeIcon icon={faShoppingCart} size="3x" />
                   <h3>Órdenes</h3>
-                  <p>{ordersCount}</p> {/* Mostrar el total de órdenes */}
-                </div>
-              </div>
-
-              <div className="col-md-4"> {/* Tarjeta para productos */}
-                <div className="card p-4 mb-4 bg-light text-center">
-                  <FontAwesomeIcon icon={faBox} size="3x" className="mb-3" />
+                  <p>{ordersCount}</p>
+                </Card>
+              </Col>
+              <Col md={4}>
+                <Card className="bg-light text-center p-4">
+                  <FontAwesomeIcon icon={faBox} size="3x" />
                   <h3>Productos</h3>
-                  <p>{productsCount}</p> {/* Mostrar el total de productos */}
-                </div>
-              </div>
+                  <p>{productsCount}</p>
+                </Card>
+              </Col>
+            </Row>
 
-              <div className="col-md-4"> {/* Tarjeta para usuarios */}
-                <div className="card p-4 mb-4 bg-light text-center">
-                  <FontAwesomeIcon icon={faUsers} size="3x" className="mb-3" />
+            <Row className='mt-4'> {/* Segunda fila de tarjetas */}
+              <Col md={6}>
+                <Card className="bg-light text-center p-4">
+                  <FontAwesomeIcon icon={faUsers} size="3x" />
                   <h3>Usuarios</h3>
-                  <p>{usersCount}</p> {/* Mostrar el total de usuarios */}
-                </div>
-              </div>
-
-              <div className="col-md-4"> {/* Tarjeta para categorías */}
-                <div className="card p-4 mb-4 bg-light text-center">
-                  <FontAwesomeIcon icon={faTag} size="3x" className="mb-3" />
+                  <p>{usersCount}</p>
+                </Card>
+              </Col>
+              <Col md={6}>
+                <Card className="bg-light text-center p-4">
+                  <FontAwesomeIcon icon={faTag} size="3x" />
                   <h3>Categorías</h3>
-                  <p>{categoriesCount}</p> {/* Mostrar el total de categorías */}
-                </div>
-              </div>
-            </div>
+                  <p>{categoriesCount}</p>
+                </Card>
+              </Col>
+            </Row>
           </div>
         </div>
       </div>
-      <AdminFooterComponent />
+      <AdminFooterComponent /> {/* Footer */}
     </div>
   );
 };

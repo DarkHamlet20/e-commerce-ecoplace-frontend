@@ -11,7 +11,7 @@ const ADSEEOrdersPages = () => {
   const [orders, setOrders] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [ordersPerPage] = useState(4);
+  const [ordersPerPage] = useState(2);
 
   useEffect(() => {
     const fetchOrders = async () => {

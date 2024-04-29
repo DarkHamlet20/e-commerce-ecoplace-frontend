@@ -69,8 +69,8 @@ const AdminNavComponent = () => {
         <Image src={logo} roundedCircle width="40" height="40" alt="Admin Logo" />
         <span className="ms-2">Admin Dashboard</span>
       </Navbar.Brand>
-      <Nav className="ms-auto">
-        <div className="d-flex flex-column justify-content-center align-items-end mr-9"> {/* Mostrar el nombre y el correo del admin */}
+      <Nav className="ms-auto d-flex align-items-center">
+        <div className="d-flex flex-column align-items-end me-3"> {/* Mostrar el nombre y el correo del admin */}
           <span className="text-white">{userData.name} {userData.lastname}</span>
           <span className="text-white">{userData.email}</span>
         </div>
