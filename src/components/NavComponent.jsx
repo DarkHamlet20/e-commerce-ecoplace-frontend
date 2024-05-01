@@ -26,7 +26,7 @@ const NavComponent = ({ handleSide }) => {
   useEffect(() => {
     if (token) {
       axios
-        .get("http://localhost:3000/users/me", {
+        .get("https://ecoplace-api.zeabur.app/users/me", {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -38,7 +38,7 @@ const NavComponent = ({ handleSide }) => {
           // Optionally, you can handle errors here or show a message to the user
         });
 
-      axios.get("http://localhost:3000/carts", {
+      axios.get("https://ecoplace-api.zeabur.app/carts", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -59,7 +59,7 @@ const NavComponent = ({ handleSide }) => {
         console.error("No se encontro el token de autenticacion.");
       }
       await axios.post(
-        "http://localhost:3000/users/logout",
+        "https://ecoplace-api.zeabur.app/users/logout",
         {},
         {
           headers: {

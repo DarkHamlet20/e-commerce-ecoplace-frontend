@@ -17,7 +17,7 @@ const ADSEESalesPages = () => {
     const fetchSales = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/sales/admin",
+          "https://ecoplace-api.zeabur.app/sales/admin",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
@@ -50,13 +50,13 @@ const ADSEESalesPages = () => {
   const currentSales = filteredSales.slice(indexOfFirstSale, indexOfLastSale);
 
   return (
-    <div className="d-flex flex-column" style={{ marginTop: '60px' }}> {/* Ajuste para el navbar */}
-      <div className="d-flex min-vh-100"> {/* Estructura principal */}
-        <AdminSidebar /> {/* Sidebar */}
-        <div className="flex-grow-1"> {/* Contenedor principal */}
-          <AdminNavComponent /> {/* Navbar */}
-          <div className="container mt-4"> {/* Contenedor para el contenido */}
-            <div className="d-flex justify-content-between align-items-center mb-4"> {/* Título y búsqueda */}
+    <div className="d-flex flex-column" style={{ marginTop: '60px' }}>
+      <div className="d-flex min-vh-100">
+        <AdminSidebar />
+        <div className="flex-grow-1">
+          <AdminNavComponent />
+          <div className="container mt-4">
+            <div className="d-flex justify-content-between align-items-center mb-4">
               <h2 className="text-dark">Lista de Ventas</h2>
               <SearchBarComponent
                 value={searchTerm} // Valor del término de búsqueda
@@ -70,15 +70,15 @@ const ADSEESalesPages = () => {
                 Regresar
               </Link>
             </div>
-            <div className="table-responsive"> {/* Tabla con contenido responsive */}
-              <table className="table table-striped"> {/* Tabla con estilo */}
+            <div className="table-responsive">
+              <table className="table table-striped">
                 <thead>
                   <tr>
-                    <th>Cliente</th> {/* Cliente de la venta */}
-                    <th>Vendedor</th> {/* Vendedor asociado */}
-                    <th>Status</th> {/* Estado de la venta */}
-                    <th>Productos</th> {/* Productos de la venta */}
-                    <th>Fecha de Venta</th> {/* Fecha de creación */}
+                    <th>Cliente</th>
+                    <th>Vendedor</th>
+                    <th>Status</th>
+                    <th>Productos</th>
+                    <th>Fecha de Venta</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -87,7 +87,7 @@ const ADSEESalesPages = () => {
                       <td>{sale.customer ? `${sale.customer.name} ${sale.customer.lastname}` : "Cliente no disponible"}</td>
                       <td>
                         {sale.items.map((item, index) => (
-                          <div key={index}> {/* Productos por vendedor */}
+                          <div key={index}>
                             {item.product?.seller
                               ? `${item.product.seller.name} ${item.product.seller.lastname}`
                               : "Vendedor no disponible"}
@@ -95,10 +95,10 @@ const ADSEESalesPages = () => {
                         ))}
                       </td>
                       <td>{sale.status}</td>
-                      <td> {/* Dividir productos en cuadros */}
-                        <div className="d-flex flex-wrap"> {/* Productos en cuadro */}
+                      <td>
+                        <div className="d-flex flex-wrap">
                           {sale.items.map((item, index) => (
-                            <div key={index} className="border p-2 m-2 rounded"> {/* Cuadro para cada producto */}
+                            <div key={index} className="border p-2 m-2 rounded">
                               <p>Producto: {item.product?.name || "No disponible"}</p>
                               <p>Precio: ${item.product?.price || "0"}</p>
                               <p>Cantidad: {item.quantity}</p>

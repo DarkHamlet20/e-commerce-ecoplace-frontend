@@ -20,7 +20,7 @@ const SuccessPage = () => {
     try {
       // Verificar la sesión de pago con tu backend
       const { data: session } = await axios.get(
-        `http://localhost:3000/orders/checkout-session/${sessionId}`,
+        `https://ecoplace-api.zeabur.app/orders/checkout-session/${sessionId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
@@ -31,7 +31,7 @@ const SuccessPage = () => {
       if (session.payment_status === "paid") {
         // Llamada al backend para crear la orden
         await axios.post(
-          "http://localhost:3000/orders",
+          "https://ecoplace-api.zeabur.app/orders",
           {
             sessionId: sessionId,
           },

@@ -11,12 +11,12 @@ const OrderConfirmationPage = () => {
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/orders/me", {
+        const response = await axios.get("https://ecoplace-api.zeabur.app/orders/me", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
         });
-        setOrder(response.data[0]); // Assume we want to show the latest order
+        setOrder(response.data[1]); // Assume we want to show the latest order
         setLoading(false);
       } catch (error) {
         setError("Failed to fetch order details");

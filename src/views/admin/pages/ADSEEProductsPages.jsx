@@ -20,7 +20,7 @@ const ADSEEProductsPages = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/products', {
+      const response = await axios.get('https://ecoplace-api.zeabur.app/products', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

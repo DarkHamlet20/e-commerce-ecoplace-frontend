@@ -17,7 +17,7 @@ const ADSEEUsersPages = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/users/admin/users",
+          "https://ecoplace-api.zeabur.app/users/admin/users",
           {
             headers: {
               Authorization: `Bearer ${token}`,

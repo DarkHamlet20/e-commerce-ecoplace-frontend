@@ -14,7 +14,7 @@ const AdminPagesAccount = () => {
   useEffect(() => {
     if (token) {
       axios
-        .get("http://localhost:3000/users/me", {
+        .get("https://ecoplace-api.zeabur.app/users/me", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => setUserData(response.data))

@@ -17,7 +17,7 @@ const ADSEEOrdersPages = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/orders/all",
+          "https://ecoplace-api.zeabur.app/orders/all",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("auth_token")}`,

@@ -11,7 +11,7 @@ export default function LoginComponent() {
     setError(""); // Limpiar errores anteriores antes de una nueva solicitud
     try {
       await axios.post(
-        "http://localhost:3000/users/login",
+        "https://ecoplace-api.zeabur.app/users/login",
         { email, password },
         { withCredentials: true }
       );

@@ -24,19 +24,19 @@ const AdminDashboardPage = () => {
     const token = localStorage.getItem('auth_token');
     try {
       const [sales, orders, products, users, categories] = await Promise.all([
-        axios.get('http://localhost:3000/stats/sales/count', {
+        axios.get('https://ecoplace-api.zeabur.app/stats/sales/count', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:3000/stats/orders/count', {
+        axios.get('https://ecoplace-api.zeabur.app/stats/orders/count', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:3000/stats/products/count', {
+        axios.get('https://ecoplace-api.zeabur.app/stats/products/count', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:3000/stats/users/count', {
+        axios.get('https://ecoplace-api.zeabur.app/stats/users/count', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:3000/stats/categories/count', {
+        axios.get('https://ecoplace-api.zeabur.app/stats/categories/count', {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);

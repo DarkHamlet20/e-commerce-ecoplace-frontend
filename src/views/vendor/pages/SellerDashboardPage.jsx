@@ -6,7 +6,7 @@ import SellerFooterComponent from '../components/SellerFooterComponent';
 const SellerDashboardPage = () => {
   return (
     <div className="d-flex flex-column" style={{ marginTop: '60px' }}> {/* Ajuste para el navbar */}
-      <div class="d-flex min-vh-100"> {/* Estructura principal */}
+      <div className="d-flex min-vh-100"> {/* Estructura principal */}
         <SellerSidebarComponent /> {/* Sidebar */}
         <div className="flex-grow-1"> {/* Contenedor principal */}
           <SellerNavComponent /> {/* Navbar */}

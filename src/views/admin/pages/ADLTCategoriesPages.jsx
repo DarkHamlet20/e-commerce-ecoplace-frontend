@@ -15,7 +15,7 @@ const ADLTCategoriesPages = () => {
   useEffect(() => {
     const fetchCategoryDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/categories/${id}`, {
+        const response = await axios.get(`https://ecoplace-api.zeabur.app/categories/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -34,7 +34,7 @@ const ADLTCategoriesPages = () => {
     showConfirmationAlert('Confirmación', '¿Estás seguro de que quieres eliminar esta categoría?', 'warning')
       .then((result) => {
         if (result.isConfirmed) {
-          axios.delete(`http://localhost:3000/categories/${id}`, {
+          axios.delete(`https://ecoplace-api.zeabur.app/categories/${id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

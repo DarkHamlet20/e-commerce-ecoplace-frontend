@@ -13,7 +13,7 @@ const ProductPage = () => {
     const getData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/products/${id}`
+          `https://ecoplace-api.zeabur.app/products/${id}`
         );
         setData(response.data);
         setLoading(false)

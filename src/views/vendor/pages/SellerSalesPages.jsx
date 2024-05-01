@@ -21,7 +21,7 @@ const SellerSalesPage = () => {
     const fetchSales = async () => {
       setLoading(true); // Indicar que está cargando
       try {
-        const response = await axios.get('http://localhost:3000/sales/seller', {
+        const response = await axios.get('https://ecoplace-api.zeabur.app/sales/seller', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

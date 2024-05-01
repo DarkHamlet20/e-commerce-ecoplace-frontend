@@ -31,7 +31,7 @@ const SLUPDProductPages = () => {
 
   const fetchProductDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/products/${id}`, {
+      const response = await axios.get(`https://ecoplace-api.zeabur.app/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const product = response.data;
@@ -54,7 +54,7 @@ const SLUPDProductPages = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/categories", {
+      const response = await axios.get("https://ecoplace-api.zeabur.app/categories", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCategories(response.data);
@@ -99,7 +99,7 @@ const SLUPDProductPages = () => {
 
     try {
       await axios.patch(
-        `http://localhost:3000/products/${id}`,
+        `https://ecoplace-api.zeabur.app/products/${id}`,
         updateData,
         {
           headers: {
