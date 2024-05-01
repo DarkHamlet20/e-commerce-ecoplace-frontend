@@ -16,7 +16,7 @@ const OrderConfirmationPage = () => {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
         });
-        setOrder(response.data[1]); // Assume we want to show the latest order
+        setOrder(response.data[0]); // Assume we want to show the latest order
         setLoading(false);
       } catch (error) {
         setError("Failed to fetch order details");
