@@ -27,7 +27,7 @@ const SLADDProductPages = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("https://ecoplace-api.zeabur.app/categories", {
+        const response = await axios.get("http://54.204.138.33:3000/categories", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCategories(response.data);
@@ -74,7 +74,7 @@ const SLADDProductPages = () => {
 
     try {
       const response = await axios.post(
-        "https://ecoplace-api.zeabur.app/products",
+        "http://54.204.138.33:3000/products",
         formDataToSend,
         {
           headers: {

@@ -21,7 +21,7 @@ const SLSEEProductsPages = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "https://ecoplace-api.zeabur.app/products/seller",
+        "http://54.204.138.33:3000/products/seller",
         {
           headers: {
             Authorization: `Bearer ${token}`,

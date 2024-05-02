@@ -19,7 +19,7 @@ const ADADCategoriesPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://ecoplace-api.zeabur.app/categories",
+        "http://54.204.138.33:3000/categories",
         { categoryName },
         {
           headers: {

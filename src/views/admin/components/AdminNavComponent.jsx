@@ -15,7 +15,7 @@ const AdminNavComponent = () => {
   useEffect(() => {
     if (token) {
       axios
-        .get('https://ecoplace-api.zeabur.app/users/me', {
+        .get('http://54.204.138.33:3000/users/me', {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => setUserData(response.data))
@@ -32,7 +32,7 @@ const AdminNavComponent = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        'https://ecoplace-api.zeabur.app/users/logout',
+        'http://54.204.138.33:3000/users/logout',
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -49,7 +49,7 @@ const AdminNavComponent = () => {
   const handleLogoutAllSessions = async () => {
     try {
       await axios.post(
-        'https://ecoplace-api.zeabur.app/users/logout-all',
+        'http://54.204.138.33:3000/users/logout-all',
         {},
         {
           headers: { Authorization: `Bearer ${token}` },

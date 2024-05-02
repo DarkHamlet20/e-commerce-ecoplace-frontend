@@ -17,7 +17,7 @@ const ADSEEUsersPages = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          "https://ecoplace-api.zeabur.app/users/admin/users",
+          "http://54.204.138.33:3000/users/admin/users",
           {
             headers: {
               Authorization: `Bearer ${token}`,

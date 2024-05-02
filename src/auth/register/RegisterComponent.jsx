@@ -19,7 +19,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://ecoplace-api.zeabur.app/users/register", {
+      await axios.post("http://54.204.138.33:3000/users/register", {
         email,
         password,
         name,

@@ -11,7 +11,7 @@ const ProductComponent = ({ id, name, img, description, brand, price }) => {
     try {
       // Suponiendo que tienes almacenado el token de autenticación en localStorage
       const token = localStorage.getItem('auth_token');
-      await axios.post('https://ecoplace-api.zeabur.app/carts/add', 
+      await axios.post('http://54.204.138.33:3000/carts/add', 
         {
           items: [{ product: id, quantity: 1 }] // Ajusta según necesites
         }, 

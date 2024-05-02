@@ -20,7 +20,7 @@ const ADSEECategoriesPages = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('https://ecoplace-api.zeabur.app/categories', {
+      const response = await axios.get('http://54.204.138.33:3000/categories', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCategories(response.data);
