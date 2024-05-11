@@ -20,7 +20,7 @@ const SuccessPage = () => {
     try {
       // Verificar la sesión de pago con tu backend
       const { data: session } = await axios.get(
-        `http://54.204.138.33:3000/orders/checkout-session/${sessionId}`,
+        `http://34.201.92.59:3000/orders/checkout-session/${sessionId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
@@ -31,7 +31,7 @@ const SuccessPage = () => {
       if (session.payment_status === "paid") {
         // Llamada al backend para crear la orden
         await axios.post(
-          "http://54.204.138.33:3000/orders",
+          "http://34.201.92.59:3000/orders",
           {
             sessionId: sessionId,
           },

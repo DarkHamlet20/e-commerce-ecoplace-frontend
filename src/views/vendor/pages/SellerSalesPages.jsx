@@ -21,7 +21,7 @@ const SellerSalesPage = () => {
     const fetchSales = async () => {
       setLoading(true); // Indicar que está cargando
       try {
-        const response = await axios.get('http://54.204.138.33:3000/sales/seller', {
+        const response = await axios.get('http://34.201.92.59:3000/sales/seller', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

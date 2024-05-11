@@ -15,7 +15,7 @@ const CatalogoComponent = ({ categoryId }) => {
     const cargarProductos = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(categoryId ? `http://54.204.138.33:3000/products/search?categories=${categoryId}` : "http://54.204.138.33:3000/products");
+        const response = await axios.get(categoryId ? `http://34.201.92.59:3000/products/search?categories=${categoryId}` : "http://34.201.92.59:3000/products");
         setProducts(response.data);
         setLoading(false);
       } catch (error) {

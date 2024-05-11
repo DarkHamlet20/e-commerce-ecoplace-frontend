@@ -13,7 +13,7 @@ const ProductPage = () => {
     const getData = async () => {
       try {
         const response = await axios.get(
-          `http://54.204.138.33:3000/products/${id}`
+          `http://34.201.92.59:3000/products/${id}`
         );
         setData(response.data);
         setLoading(false)

@@ -16,7 +16,7 @@ export default function LoginComponent() {
     e.preventDefault();
     setError(""); // Limpiar errores anteriores antes de una nueva solicitud
     try {
-      const response = await axios.post('http://54.204.138.33:3000/users/login', { email, password });
+      const response = await axios.post('http://34.201.92.59:3000/users/login', { email, password });
       localStorage.setItem('auth_token', response.data.token);
       localStorage.setItem('userRole', response.data.role);
       dispatch(setCredentials({
