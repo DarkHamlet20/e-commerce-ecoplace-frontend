@@ -31,7 +31,7 @@ const ADUPDProductsPages = () => {
 
   const fetchProductDetails = async () => {
     try {
-      const response = await axios.get(`http://34.201.92.59:3000/products/${id}`, {
+      const response = await axios.get(`https://34.201.92.59/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const product = response.data;
@@ -46,7 +46,7 @@ const ADUPDProductsPages = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://34.201.92.59:3000/categories", {
+      const response = await axios.get("https://34.201.92.59/categories", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCategories(response.data);
@@ -90,7 +90,7 @@ const ADUPDProductsPages = () => {
 
     try {
       await axios.patch(
-        `http://34.201.92.59:3000/products/${id}`,
+        `https://34.201.92.59/products/${id}`,
         updateData,
         {
           headers: {

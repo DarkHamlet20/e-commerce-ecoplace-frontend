@@ -20,7 +20,7 @@ const ADADCategoriesPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://34.201.92.59:3000/categories",
+        "https://34.201.92.59/categories",
         { categoryName },
         {
           headers: {

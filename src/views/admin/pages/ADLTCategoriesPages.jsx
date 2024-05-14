@@ -15,7 +15,7 @@ const ADLTCategoriesPages = () => {
   useEffect(() => {
     const fetchCategoryDetails = async () => {
       try {
-        const response = await axios.get(`http://34.201.92.59:3000/categories/${id}`, {
+        const response = await axios.get(`https://34.201.92.59/categories/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -34,7 +34,7 @@ const ADLTCategoriesPages = () => {
     showConfirmationAlert('Confirmación', '¿Estás seguro de que quieres eliminar esta categoría?', 'warning')
       .then((result) => {
         if (result.isConfirmed) {
-          axios.delete(`http://34.201.92.59:3000/categories/${id}`, {
+          axios.delete(`https://34.201.92.59/categories/${id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

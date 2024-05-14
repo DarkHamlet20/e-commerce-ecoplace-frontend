@@ -4,7 +4,7 @@ export const Sidebar = ({ showSide, onCategorySelect }) => {
   const [categories, setCategories] = useState([]);
 
   const getCategories = async () => {
-    const response = await axios.get("http://34.201.92.59:3000/categories");
+    const response = await axios.get("https://34.201.92.59/categories");
     setCategories(response.data);
   };
 

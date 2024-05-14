@@ -14,7 +14,7 @@ const AdminPagesAccount = () => {
   useEffect(() => {
     if (token) {
       axios
-        .get("http://34.201.92.59:3000/users/me", {
+        .get("https://34.201.92.59/users/me", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => setUserData(response.data))

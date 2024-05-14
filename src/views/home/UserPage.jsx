@@ -22,7 +22,7 @@ const UserPage = () => {
     setAuthenticated(true);
 
     axios
-      .get("http://34.201.92.59:3000/users/me", {
+      .get("https://34.201.92.59/users/me", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
