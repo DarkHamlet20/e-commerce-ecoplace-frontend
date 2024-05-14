@@ -9,29 +9,29 @@ import {
 
 const FooterComponent = () => {
   return (
-    <Footer bgDark>
-      <div className="w-full bottom-0">
-        <div className="grid w-full grid-cols-2 gap-8 px-6 py-8 md:grid-cols-4">
+    <Footer className="relative z-50 bg-primary">
+      <div className="w-full">
+        <div className="grid w-full grid-cols-2 gap-8 px-6 py-8 md:grid-cols-4 ">
 
           <div>
-            <Footer.Title title="help center" />
-            <Footer.LinkGroup col>
-              <Footer.Link href="#">Discord Server</Footer.Link>
-              <Footer.Link href="#">Twitter</Footer.Link>
-              <Footer.Link href="#">Facebook</Footer.Link>
-              <Footer.Link href="#">Contact Us</Footer.Link>
-            </Footer.LinkGroup>
+            <h4 className="text-white">Help Center</h4>
+            <div className="grid">
+              <a className="text-white" href="">Discord Server</a>
+              <a className="text-white" href="">Twitter</a>
+              <a className="text-white" href="">Facebook</a>
+              <a className="text-white" href="">Contact Us</a>
+            </div>
           </div>
           <div>
-            <Footer.Title title="legal" />
-            <Footer.LinkGroup col>
-              <Footer.Link href="#">Privacy Policy</Footer.Link>
-              <Footer.Link href="#">Licensing</Footer.Link>
-              <Footer.Link href="#">Terms &amp; Conditions</Footer.Link>
-            </Footer.LinkGroup>
+          <h4 className="text-white">Legal</h4>
+            <div className="grid">
+              <a className="text-white" href="">Privacy Policy</a>
+              <a className="text-white" href="">Licensing</a>
+              <a className="text-white" href="">Terms &amp; Conditions</a>
+            </div>
           </div>
         </div>
-        <div className="w-full bg-gray-700 px-4 py-6 sm:flex sm:items-center sm:justify-between">
+        <div className="w-full bg-gray-700 px-4 py-6 sm:flex sm:items-center sm:justify-between ">
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
             <Footer.Icon href="#" icon={BsFacebook} />
             <Footer.Icon href="#" icon={BsInstagram} />
