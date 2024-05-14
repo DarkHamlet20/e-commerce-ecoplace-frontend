@@ -18,7 +18,7 @@ const ADLTProductsPages = () => {
 
   const fetchProductDetails = async () => {
     try {
-      const response = await axios.get(`https://34.201.92.59/products/${id}`, {
+      const response = await axios.get(`https://ecoplace-api.zeabur.app/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProduct(response.data);
@@ -35,7 +35,7 @@ const ADLTProductsPages = () => {
     ).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`https://34.201.92.59/products/${id}`, {
+          .delete(`https://ecoplace-api.zeabur.app/products/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then(() => {

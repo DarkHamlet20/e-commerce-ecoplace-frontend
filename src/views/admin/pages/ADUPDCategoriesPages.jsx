@@ -18,7 +18,7 @@ const ADUPDCategoriesPages = () => {
     const fetchCategoryDetails = async () => {
       try {
         const response = await axios.get(
-          `https://34.201.92.59/categories/${id}`,
+          `https://ecoplace-api.zeabur.app/categories/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ const ADUPDCategoriesPages = () => {
     e.preventDefault();
     try {
       await axios.put(
-        `https://34.201.92.59/categories/${id}`,
+        `https://ecoplace-api.zeabur.app/categories/${id}`,
         { categoryName },
         {
           headers: {

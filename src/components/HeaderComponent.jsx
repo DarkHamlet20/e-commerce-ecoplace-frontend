@@ -21,7 +21,7 @@
 
 //   useEffect(() => {
 //     if (token) {
-//       axios.get('https://34.201.92.59/users/me', {
+//       axios.get('https://ecoplace-api.zeabur.app/users/me', {
 //         headers: {
 //           'Authorization': `Bearer ${token}`,
 //           'Content-Type': 'application/json'
@@ -43,7 +43,7 @@
 //       if (!token) {
 //         console.error("No se encontro el token de autenticacion.");
 //       }
-//       await axios.post('https://34.201.92.59/users/logout', {}, {
+//       await axios.post('https://ecoplace-api.zeabur.app/users/logout', {}, {
 //         headers: {
 //           Authorization: `Bearer ${token}`
 //         }

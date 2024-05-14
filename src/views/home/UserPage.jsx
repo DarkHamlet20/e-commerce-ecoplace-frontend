@@ -22,7 +22,7 @@ const UserPage = () => {
     setAuthenticated(true);
 
     axios
-      .get("https://34.201.92.59/users/me", {
+      .get("https://ecoplace-api.zeabur.app/users/me", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

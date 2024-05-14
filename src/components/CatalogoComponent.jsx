@@ -15,7 +15,7 @@ const CatalogoComponent = ({ categoryId }) => {
     const cargarProductos = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(categoryId ? `https://34.201.92.59/products/search?categories=${categoryId}` : "https://34.201.92.59/products");
+        const response = await axios.get(categoryId ? `https://ecoplace-api.zeabur.app/products/search?categories=${categoryId}` : "https://ecoplace-api.zeabur.app/products");
         setProducts(response.data);
         setLoading(false);
       } catch (error) {
