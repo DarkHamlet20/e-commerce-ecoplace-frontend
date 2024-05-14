@@ -46,14 +46,14 @@ const CatalogoComponent = ({ categoryId }) => {
   }
 
   return (
-    <main className="mb-8 z-10 w-full relative">
+    <main className="my-8 z-10 w-full min-h-full relative">
       <div className=" w-[80%] mx-auto m-4 shadow-lg">
         <SearchBarComponent
           value={searchTerm}
           onChange={handleSearchChange}
         />
       </div>
-      <div className="smm:w-11/12">
+      <div className="smm:w-11/12 flex flex-col items-center">
         <h2 className="text-4xl font-bold my-5">Lista de Productos</h2>
         <div className="transition-all flex flex-col gap-4">
           {currentProducts.map((product) => (

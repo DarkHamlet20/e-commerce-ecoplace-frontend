@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useAsyncError } from "react-router-dom";
 export const Sidebar = ({ showSide, onCategorySelect }) => {
   const [categories, setCategories] = useState([]);
 
@@ -12,14 +13,15 @@ export const Sidebar = ({ showSide, onCategorySelect }) => {
     getCategories();
   }, []);
 
+  const [drop, setDrop] = useState(false)
+
   return (
     <>
-    <div className="flex flex-col">
-    <aside className={`sidebar-sticky mr-10 px-6 transition-all z-40 absolute ${
-            showSide ? "hidden" : "flex"
-          } smm:flex smm:static left-0 bg-white h-full rounded-r shadow-lg`}>
-      <div className="flex flex-col w-52">
-        <h1 className="text-4xl py-5 border-b">Catálogo</h1>
+    <h1 onClick={() => setDrop(!drop)}
+     className="p-2 cursor-pointer z-50 absolute left-2">Categories</h1>
+    <div className={` ${drop ? 'relative smm:static' : 'flex flex-col'}`}>
+    <aside className={`${drop ? 'scale-0' : 'scale-100'} sidebar-sticky mr-10 absolute px-6 transition-all z-40  flex smm:static left-0 bg-white h-full rounded-r shadow-lg`}>
+      <div className="flex flex-col w-48">
         <div>
           {categories.map((category) => (
             <div

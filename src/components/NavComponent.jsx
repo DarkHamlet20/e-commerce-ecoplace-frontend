@@ -82,7 +82,7 @@ const NavComponent = ({ handleSide }) => {
 
   return (
     <>
-      <nav className="bg-gray-900 smm:h-auto h-36">
+      <nav className="bg-primary smm:h-auto h-36">
         <div className="flex items-center justify-around p-4">
           {/* Logo */}
 
@@ -266,14 +266,14 @@ const NavComponent = ({ handleSide }) => {
         </div>
 
       </nav>
-      <div>
+      {/* <div>
         <h1
           onClick={() => handleSide()}
           className="bg-gray-900 text-white py-3 select-none cursor-pointer hover:bg-gray-700 transition-all px-4 smm:hidden"
         >
           Categories
         </h1>
-      </div>
+      </div> */}
     </>
   );
 };
