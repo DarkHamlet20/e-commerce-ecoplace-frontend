@@ -39,7 +39,7 @@ const SellerSidebarComponent = () => {
         {menuItems.map((item) => (
           <React.Fragment key={item.name}>
             <ListGroup.Item
-              className={`bg-primary text-white d-flex align-items-center ${activeMenu === item.name ? 'bg-secondary' : ''}`}
+              className={`bg-primary cursor-pointer text-white d-flex align-items-center ${activeMenu === item.name ? 'bg-secondary' : ''}`}
               onClick={() => handleMenuClick(item)}
             >
               <FontAwesomeIcon icon={item.icon} className="me-2" />
@@ -50,7 +50,7 @@ const SellerSidebarComponent = () => {
                 {item.subMenu.map((subItem) => (
                   <ListGroup.Item
                     key={subItem.name}
-                    className="bg-primary text-white d-flex align-items-center"
+                    className="bg-primary cursor-pointer text-white d-flex align-items-center"
                     onClick={() => navigate(subItem.href)}
                   >
                     <FontAwesomeIcon icon={subItem.icon} className="me-2" />

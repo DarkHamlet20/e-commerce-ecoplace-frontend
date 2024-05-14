@@ -65,27 +65,27 @@ const AdminDashboardPage = () => {
           <h1 className="dashboard-title">Dashboard de Administración</h1>
           <div className="stats-container">
             <div className="stat-card">
-              <FontAwesomeIcon icon={faChartLine} size="3x" />
+              <FontAwesomeIcon icon={faChartLine} className='text-white' size="3x" />
               <h3>Ventas</h3>
               <p>{salesCount}</p>
             </div>
             <div className="stat-card">
-              <FontAwesomeIcon icon={faShoppingCart} size="3x" />
+              <FontAwesomeIcon icon={faShoppingCart} className='text-white'  size="3x" />
               <h3>Órdenes</h3>
               <p>{ordersCount}</p>
             </div>
             <div className="stat-card">
-              <FontAwesomeIcon icon={faBox} size="3x" />
+              <FontAwesomeIcon icon={faBox} className='text-white'  size="3x" />
               <h3>Productos</h3>
               <p>{productsCount}</p>
             </div>
             <div className="stat-card">
-              <FontAwesomeIcon icon={faUsers} size="3x" />
+              <FontAwesomeIcon icon={faUsers} className='text-white'  size="3x" />
               <h3>Usuarios</h3>
               <p>{usersCount}</p>
             </div>
             <div className="stat-card">
-              <FontAwesomeIcon icon={faTag} size="3x" />
+              <FontAwesomeIcon icon={faTag} className='text-white'  size="3x" />
               <h3>Categorías</h3>
               <p>{categoriesCount}</p>
             </div>

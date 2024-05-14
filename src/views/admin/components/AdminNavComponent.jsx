@@ -87,9 +87,9 @@ const AdminNavComponent = () => {
             <FontAwesomeIcon icon={faUserCircle} size="lg" />
           </button>
           <div className={`dropdown-menu ${showDropdown ? 'show' : ''}`}>
-            <button onClick={handleAccountClick}>Account</button>
-            <button onClick={handleLogout}>Sign Out</button>
-            <button onClick={handleLogoutAllSessions}>Sign Out All Sessions</button>
+            <button className='hover:text-white' onClick={handleAccountClick}>Account</button>
+            <button className='hover:text-white' onClick={handleLogout}>Sign Out</button>
+            <button className='hover:text-white' onClick={handleLogoutAllSessions}>Sign Out All Sessions</button>
           </div>
         </div>
       </div>

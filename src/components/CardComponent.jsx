@@ -14,15 +14,15 @@ const CardComponent = ({ productName, id, price, info, image }) => {
   };
 
     return (
-        <div id={id} onClick={() => handleClick()} className="flex mx-auto items-center flex-col smm:flex-row h-88 min-h-88 max-h-88 smm:h-60 border w-72 smm:w-full text-black">
-            <picture className="smm:border-r h-48 smm:h-full min-w-48 max-w-48 smm:min-w-72 smm:max-w-72 p-2">
+        <div id={id} onClick={() => handleClick()} className="cursor-pointer flex mx-auto items-center flex-col md:flex-row h-88 min-h-88 max-h-88 md:h-60 border w-72 md:w-full text-black">
+            <picture className="md:border-r h-48 md:h-full min-w-48 max-w-48 md:min-w-72 md:max-w-72 p-2">
                 <img src={image} className="w-full h-full object-contain" alt={`${productName} image`} />
             </picture>
             <div className="p-4">
                 <div className="mb-6">
                     <h1 className="text-2xl capitalize">{productName}</h1>
                     <p>
-                        {info}
+                        {info.length > 50 ? info.slice(0,100) + '...' : info}
                     </p>
                 </div>
                 <p className="text-2xl">

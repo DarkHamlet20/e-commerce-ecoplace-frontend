@@ -63,7 +63,7 @@ const SellerNavComponent = () => {
     <Navbar bg="primary" variant="dark" expand="lg" fixed="top" style={{ padding: '0.5rem 1rem', zIndex: 1000 }}>
       <Navbar.Brand onClick={() => navigate('/seller')} className="d-flex align-items-center">
         <Image src={logo} roundedCircle width="40" height="40" alt="Seller Logo" />
-        <span className="ms-2">Seller Dashboard</span>
+        <span className="ms-2 cursor-pointer">Seller Dashboard</span>
       </Navbar.Brand>
       <Nav className="ms-auto">
         <div className="d-flex flex-column justify-content-center align-items-end mr-9"> {/* Mostrar el nombre y el correo del vendedor */}
