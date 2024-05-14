@@ -21,7 +21,7 @@
 
 //   useEffect(() => {
 //     if (token) {
-//       axios.get('http://localhost:3000/users/me', {
+//       axios.get('http://34.201.92.59:3000/users/me', {
 //         headers: {
 //           'Authorization': `Bearer ${token}`,
 //           'Content-Type': 'application/json'
@@ -43,7 +43,7 @@
 //       if (!token) {
 //         console.error("No se encontro el token de autenticacion.");
 //       }
-//       await axios.post('http://localhost:3000/users/logout', {}, {
+//       await axios.post('http://34.201.92.59:3000/users/logout', {}, {
 //         headers: {
 //           Authorization: `Bearer ${token}`
 //         }

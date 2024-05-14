@@ -5,6 +5,7 @@ import AdminNavComponent from "../components/AdminNavComponent";
 import AdminSidebar from "../components/AdminSidebar";
 import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
 import AdminFooterComponent from "../components/AdminFooterComponent";
+import '../styles/AdminADCategories.css';
 
 const ADADCategoriesPage = () => {
   const [categoryName, setCategoryName] = useState("");
@@ -47,29 +48,26 @@ const ADADCategoriesPage = () => {
   };
 
   return (
-    <div className="d-flex flex-column" style={{ marginTop: "60px" }}>
-      <div className="d-flex min-vh-100">
+    <div className="page-container">
+      <div className="content-container">
         <AdminSidebar />
-        <div className="flex-grow-1">
+        <div className="main-content">
           <AdminNavComponent />
-          <div className="container mt-4">
+          <div className="form-container">
             <div className="text-center mb-4">
               <h2 className="text-dark">Agregar Categoría</h2>
             </div>
-            <div className="d-flex justify-content-between mb-3">
-              <Link to="/admin/categories/view" className="btn btn-secondary">
+            <div className="back-button-container">
+              <Link to="/admin/categories/view" className="btn-secondary">
                 Regresar
               </Link>
             </div>
-            <div className="card p-4">
+            <div className="card">
               <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="categoryName" className="form-label">
-                    Nombre de la Categoría
-                  </label>
+                <div className="form-group">
+                  <label htmlFor="categoryName">Nombre de la Categoría</label>
                   <input
                     type="text"
-                    className="form-control"
                     id="categoryName"
                     required
                     value={categoryName}
@@ -77,7 +75,7 @@ const ADADCategoriesPage = () => {
                   />
                 </div>
                 <div className="text-center">
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn-primary">
                     Agregar Categoría
                   </button>
                 </div>

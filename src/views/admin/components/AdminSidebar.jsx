@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -8,12 +8,34 @@ import {
   faMoneyCheck,
   faThList,
   faEye,
+  faBars,
 } from '@fortawesome/free-solid-svg-icons';
-import { ListGroup, Collapse } from 'react-bootstrap';
+import '../styles/AdminSidebar.css';
+// import { ListGroup, Collapse } from 'react-bootstrap';
+
 
 const AdminSidebar = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
   const [activeMenu, setActiveMenu] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsSidebarOpen(false);
+      } else {
+        setIsSidebarOpen(true);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   const menuItems = [
     {
@@ -62,40 +84,40 @@ const AdminSidebar = () => {
   };
 
   return (
-    <div
-      className="bg-dark text-white"
-      style={{ width: '250px', paddingTop: '20px', minHeight: '100vh' }}
-    >
-      <ListGroup variant="flush">
-        {menuItems.map((item) => (
-          <React.Fragment key={item.name}>
-            <ListGroup.Item
-              className={`d-flex align-items-center ${
-                activeMenu === item.name ? 'bg-secondary' : ''
-              }`}
-              onClick={() => handleMenuClick(item)}
-            >
-              <FontAwesomeIcon icon={item.icon} className="me-2" />
-              {item.name}
-            </ListGroup.Item>
-            <Collapse in={activeMenu === item.name}>
-              <div className="ms-3">
-                {item.subMenu.map((subItem) => (
-                  <ListGroup.Item
-                    key={subItem.name}
-                    className="bg-dark text-white"
-                    onClick={() => navigate(subItem.href)}
-                  >
-                    <FontAwesomeIcon icon={subItem.icon} className="me-2" />
-                    {subItem.name}
-                  </ListGroup.Item>
-                ))}
+    <>
+      <button className="menu-btn" onClick={toggleSidebar}>
+        <FontAwesomeIcon icon={faBars} />
+      </button>
+      <div className={`admin-sidebar ${isSidebarOpen ? '' : 'closed'}`}>
+        <div className="sidebar-content">
+          {menuItems.map((item) => (
+            <React.Fragment key={item.name}>
+              <div
+                className={`sidebar-item ${activeMenu === item.name ? 'active' : ''}`}
+                onClick={() => handleMenuClick(item)}
+              >
+                <FontAwesomeIcon icon={item.icon} className="me-2" />
+                {item.name}
               </div>
-            </Collapse>
-          </React.Fragment>
-        ))}
-      </ListGroup>
-    </div>
+              {activeMenu === item.name && (
+                <div className="sidebar-submenu">
+                  {item.subMenu.map((subItem) => (
+                    <div
+                      key={subItem.name}
+                      className="sidebar-subitem"
+                      onClick={() => navigate(subItem.href)}
+                    >
+                      <FontAwesomeIcon icon={subItem.icon} className="me-2" />
+                      {subItem.name}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 

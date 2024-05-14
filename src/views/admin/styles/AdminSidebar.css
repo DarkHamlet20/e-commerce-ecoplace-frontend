@@ -1,0 +1,73 @@
+.admin-sidebar {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  width: 250px; /* Ancho fijo para el sidebar */
+  min-height: calc(100vh - 50px); /* Altura ajustada para empezar debajo del navbar */
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50px;  /* Empieza debajo del navbar */
+  left: 0;
+  z-index: 1000;  /* Menor que el navbar para que quede debajo */
+  transition: transform 0.3s ease;
+}
+
+.admin-sidebar.closed {
+  transform: translateX(-100%);
+}
+.sidebar-content {
+  padding: 20px;
+}
+
+.sidebar-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar-item.active,
+.sidebar-item:hover {
+  background-color: var(--secondary-color);
+}
+
+.sidebar-submenu {
+  padding-left: 20px;
+}
+
+.sidebar-subitem {
+  padding: 5px 0;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.sidebar-subitem:hover {
+  color: var(--secondary-color);
+}
+
+.menu-btn {
+  display: none; /* Oculto por defecto */
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 2rem;
+  padding: 10px;
+  position: fixed;
+  top: 10px;
+  left: 10px; /* Ajusta esta posición si es necesario */
+  z-index: 1020; /* Asegura que el botón esté sobre otros elementos */
+}
+
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block;
+  }
+  .sidebar-item,
+  .sidebar-submenu {
+    display: block; /* Asegura que se muestren cuando el sidebar está abierto */
+  }
+
+  .nav-logo {
+    padding-left: 60px; /* Ajusta el padding para evitar superposición con el botón del menú */
+  }
+}

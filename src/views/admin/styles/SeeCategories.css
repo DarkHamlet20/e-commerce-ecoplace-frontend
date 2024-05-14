@@ -1,0 +1,159 @@
+:root {
+  --primary-color: #1f3b82;
+  --secondary-color: #1a74db;
+  --text-color: #ffffff;
+  --table-bg-color: #f8f9fa;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+}
+
+.admin-categories-page {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+  min-height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  margin-left: 250px; /* Ajuste para el sidebar */
+  margin-top: 20px; /* Añadir margen superior para separar del navbar */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px; /* Añadir margen superior para separar del navbar */
+}
+
+.header h2 {
+  color: #333;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px; /* Añadir margen superior para separar del navbar */
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 5px;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+}
+
+.btn-primary {
+  background-color: var(--secondary-color);
+}
+
+.btn-warning {
+  background-color: var(--warning-color);
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.categories-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.categories-table th,
+.categories-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.categories-table th {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.categories-table tbody tr:nth-child(even) {
+  background-color: var(--table-bg-color);
+}
+
+.categories-table .text-end {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .admin-categories-page {
+    margin-top: 0;
+  }
+
+  .main-content {
+    margin-left: 0; /* Quitar margen lateral en pantallas pequeñas */
+    padding: 10px;
+    margin-top: 10px; /* Ajustar margen superior en pantallas pequeñas */
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px; /* Ajustar margen superior en pantallas pequeñas */
+  }
+
+  .buttons {
+    margin-top: 20px; /* Añadir margen superior para separar del navbar */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn {
+    width: 48%;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .categories-table th,
+  .categories-table td {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    align-items: center;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
