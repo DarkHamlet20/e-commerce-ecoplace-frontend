@@ -32,7 +32,7 @@ const ADUPDUsersPages = () => {
   const fetchUserDetails = async () => {
     try {
       const response = await axios.get(
-        `https://ecoplace-api.zeabur.app/users/admin/users/${id}`,
+        `https://34.201.92.59/users/admin/users/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -60,7 +60,7 @@ const ADUPDUsersPages = () => {
 
   const fetchRoles = async () => {
     try {
-      const rolesResponse = await axios.get('https://ecoplace-api.zeabur.app/roles', {
+      const rolesResponse = await axios.get('https://34.201.92.59/roles', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setRoles(rolesResponse.data);
@@ -79,7 +79,7 @@ const ADUPDUsersPages = () => {
     e.preventDefault();
     try {
       await axios.patch(
-        `https://ecoplace-api.zeabur.app/users/admin/users/${id}`,
+        `https://34.201.92.59/users/admin/users/${id}`,
         {
           ...formData,
           role: formData.role, // Asegúrate de enviar el ID correcto

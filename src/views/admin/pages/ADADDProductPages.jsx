@@ -25,7 +25,7 @@ const ADADDProductPages = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('https://ecoplace-api.zeabur.app/categories', {
+        const response = await axios.get('https://34.201.92.59/categories', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCategories(response.data);
@@ -74,7 +74,7 @@ const ADADDProductPages = () => {
 
     try {
       const response = await axios.post(
-        'https://ecoplace-api.zeabur.app/products',
+        'https://34.201.92.59/products',
         formDataToSend,
         {
           headers: {
