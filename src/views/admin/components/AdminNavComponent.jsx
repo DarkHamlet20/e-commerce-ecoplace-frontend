@@ -17,7 +17,7 @@ const AdminNavComponent = () => {
   useEffect(() => {
     if (token) {
       axios
-        .get('https://34.201.92.59/users/me', { headers: { Authorization: `Bearer ${token}` } })
+        .get('https://ecoplace-api.zeabur.app/users/me', { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => setUserData(response.data))
         .catch((error) => console.error('Error obteniendo datos del usuario:', error));
     }
@@ -44,7 +44,7 @@ const AdminNavComponent = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        'https://34.201.92.59/users/logout',
+        'https://ecoplace-api.zeabur.app/users/logout',
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -59,7 +59,7 @@ const AdminNavComponent = () => {
   const handleLogoutAllSessions = async () => {
     try {
       await axios.post(
-        'https://34.201.92.59/users/logout-all',
+        'https://ecoplace-api.zeabur.app/users/logout-all',
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

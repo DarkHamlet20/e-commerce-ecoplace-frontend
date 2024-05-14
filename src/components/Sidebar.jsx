@@ -5,7 +5,7 @@ export const Sidebar = ({ showSide, onCategorySelect }) => {
   const [categories, setCategories] = useState([]);
 
   const getCategories = async () => {
-    const response = await axios.get("https://34.201.92.59/categories");
+    const response = await axios.get("https://ecoplace-api.zeabur.app/categories");
     setCategories(response.data);
   };
 
