@@ -18,7 +18,7 @@ const HomePage = () => {
   return (
     <>
       <LayoutComponent function={handleSide}>
-        <div className="flex justify-center smm:justify-between">
+        <div className="flex justify-center smm:justify-between min-h-[800px]">
           <Sidebar showSide={showSide} onCategorySelect={handleCategorySelect} />
           <CatalogoComponent categoryId={selectedCategoryId} />
         </div>

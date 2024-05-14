@@ -53,7 +53,7 @@ const CatalogoComponent = ({ categoryId }) => {
           onChange={handleSearchChange}
         />
       </div>
-      <div className="smm:w-11/12 flex flex-col items-center">
+      <div className="flex flex-col items-center smm:w-11/12 smm:items-stretch">
         <h2 className="text-4xl font-bold my-5">Lista de Productos</h2>
         <div className="transition-all flex flex-col gap-4">
           {currentProducts.map((product) => (

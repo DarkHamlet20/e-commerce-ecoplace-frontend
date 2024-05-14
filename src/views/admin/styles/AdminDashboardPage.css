@@ -61,10 +61,13 @@ body {
 .stat-card h3 {
   margin: 10px 0;
   font-size: 1.5rem;
+  color: var(--text-color);
+
 }
 
 .stat-card p {
   font-size: 1.2rem;
+  color: var(--text-color);
 }
 
 /* Estilos responsivos */

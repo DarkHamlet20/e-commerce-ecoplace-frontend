@@ -106,8 +106,8 @@ const ADSEEProductsPages = () => {
                         <td>
                           <Link
                             to={`/admin/products/edit/${product._id}`}
-                            className="btn btn-warning me-2"
-                          >
+                            className="btn btn-warning bg-primary text-white me-2"
+                          >git
                             Actualizar
                           </Link>
                           <Link
