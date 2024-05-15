@@ -12,6 +12,7 @@
   flex-direction: column;
   margin-top: 60px;
   min-height: 100vh;
+  padding-bottom: 80px; 
 }
 
 .content {
@@ -22,8 +23,8 @@
 .main-content {
   flex-grow: 1;
   padding: 20px;
-  margin-left: 250px; /* Ajuste para el sidebar */
-  margin-top: 20px; /* Añadir margen superior para separar del navbar */
+  margin-left: 250px;
+  margin-top: 20px; 
 }
 
 .header {
@@ -31,7 +32,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  margin-top: 20px; /* Añadir margen superior para separar del navbar */
+  margin-top: 20px; 
 }
 
 .header h2 {
@@ -41,7 +42,7 @@
 .buttons {
   display: flex;
   gap: 10px;
-  margin-top: 20px; /* Añadir margen superior para separar del navbar */
+  margin-top: 20px; 
 }
 
 .btn {

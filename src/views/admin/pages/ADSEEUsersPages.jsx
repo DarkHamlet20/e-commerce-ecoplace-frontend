@@ -75,15 +75,19 @@ const ADSEEUsersPages = () => {
           <AdminNavComponent />
           <div className="container">
             <div className="header">
-              <h2>Gestión de Usuarios</h2>
-              <SearchBarComponent
-                value={searchTerm}
-                onChange={handleSearchChange}
-                placeholder="Buscar usuarios..."
-              />
-              <Link to="/admin" className="btn btn-secondary">
-                Regresar
-              </Link>
+              <div className="header-top">
+                <h2>Gestión de Usuarios</h2>
+                <Link to="/admin" className="btn btn-secondary">
+                  Regresar
+                </Link>
+              </div>
+              <div className="search-bar-container">
+                <SearchBarComponent
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  placeholder="Buscar usuarios..."
+                />
+              </div>
             </div>
             <div className="table-responsive">
               <table className="users-table">

@@ -48,7 +48,6 @@ const ADSEEProductsPages = () => {
 
   return (
     <div className="see-products-page">
-      <div className="content">
       <AdminSidebar />
       <div className="main-content">
         <AdminNavComponent />
@@ -125,7 +124,6 @@ const ADSEEProductsPages = () => {
             />
           )}
         </div>
-      </div>
       </div>
       <AdminFooterComponent />
     </div>
