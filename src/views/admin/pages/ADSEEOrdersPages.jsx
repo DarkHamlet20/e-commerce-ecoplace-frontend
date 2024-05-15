@@ -17,7 +17,7 @@ const ADSEEOrdersPages = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          "https://34.201.92.59/orders/all",
+          "http://34.201.92.59:3000/orders/all",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("auth_token")}`,

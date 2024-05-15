@@ -14,7 +14,7 @@ const SellerPagesAccount = () => {
   useEffect(() => {
     if (token) {
       axios
-        .get("https://34.201.92.59/users/me", {
+        .get("http://34.201.92.59:3000/users/me", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => setUserData(response.data))

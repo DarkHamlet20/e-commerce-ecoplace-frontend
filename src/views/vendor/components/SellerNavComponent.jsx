@@ -15,7 +15,7 @@ const SellerNavComponent = () => {
   useEffect(() => {
     if (token) {
       axios
-        .get('https://34.201.92.59/users/me', {
+        .get('http://34.201.92.59:3000/users/me', {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => setUserData(response.data))
@@ -28,7 +28,7 @@ const SellerNavComponent = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        'https://34.201.92.59/users/logout',
+        'http://34.201.92.59:3000/users/logout',
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -45,7 +45,7 @@ const SellerNavComponent = () => {
   const handleLogoutAllSessions = async () => {
     try {
       await axios.post(
-        'https://34.201.92.59/users/logout-all',
+        'http://34.201.92.59:3000/users/logout-all',
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
