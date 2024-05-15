@@ -1,19 +1,60 @@
 import React from 'react';
+import '../styles/PaginationComponent.css';
 
 const PaginationComponent = ({ currentPage, totalPages, onPageChange }) => {
-  const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
+  const pageNumbers = [];
+  let startPage = Math.max(1, currentPage - 2);
+  let endPage = Math.min(totalPages, currentPage + 2);
+
+  if (currentPage <= 3) {
+    endPage = Math.min(5, totalPages);
+  } else if (currentPage + 2 >= totalPages) {
+    startPage = Math.max(1, totalPages - 4);
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
-    <div className="flex justify-center mt-4 mb-5">
+    <div className="pagination-container">
+      <button 
+        onClick={() => onPageChange(1)} 
+        disabled={currentPage === 1}
+        className="pagination-button"
+      >
+        {'<<'}
+      </button>
+      <button 
+        onClick={() => onPageChange(currentPage - 1)} 
+        disabled={currentPage === 1}
+        className="pagination-button"
+      >
+        {'<'}
+      </button>
       {pageNumbers.map(number => (
         <button
           key={number}
           onClick={() => onPageChange(number)}
-          className={`mx-1 px-3 py-1 border rounded-full ${number === currentPage ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 border-blue-500 hover:bg-blue-100'}`}
+          className={`pagination-button ${number === currentPage ? 'active' : ''}`}
         >
           {number}
         </button>
       ))}
+      <button 
+        onClick={() => onPageChange(currentPage + 1)} 
+        disabled={currentPage === totalPages}
+        className="pagination-button"
+      >
+        {'>'}
+      </button>
+      <button 
+        onClick={() => onPageChange(totalPages)} 
+        disabled={currentPage === totalPages}
+        className="pagination-button"
+      >
+        {'>>'}
+      </button>
     </div>
   );
 };

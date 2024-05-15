@@ -1,15 +1,15 @@
 .admin-sidebar {
   background-color: var(--primary-color);
   color: var(--text-color);
-  width: 250px; /* Ancho fijo para el sidebar */
-  min-height: calc(100vh - 50px); /* Altura ajustada para empezar debajo del navbar */
+  width: 250px; /* Ancho fijo */
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 50px;  /* Empieza debajo del navbar */
+  top: 60px; /* Comienza debajo del navbar, ajusta según la altura de tu navbar */
   left: 0;
-  z-index: 1000;  /* Menor que el navbar para que quede debajo */
+  z-index: 1000; /* Debajo del navbar en términos de z-index */
   transition: transform 0.3s ease;
+  height: calc(100vh - 60px); /* Ajusta la altura restante de la vista */
 }
 
 .admin-sidebar.closed {

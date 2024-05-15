@@ -7,16 +7,17 @@
   bottom: 0;
   width: 100%;
   display: flex;
-  justify-content: center; /* Centra el contenido horizontalmente */
+  justify-content: center;
   align-items: center;
+  z-index: 1000; /* Asegurar que el footer esté por encima del contenido */
 }
 
 .footer-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%; /* Ocupa el 90% del ancho del footer */
-  max-width: 1200px; /* Limita el ancho máximo del footer */
+  width: 90%;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -43,10 +44,14 @@
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;
-    padding: 10px;
+    text-align: center;
+  }
+
+  .footer-content .footer-text {
+    margin-bottom: 10px;
   }
 
   .social-icons {
-    margin-top: 10px; /* Da espacio entre el texto y los iconos */
+    margin-top: 10px;
   }
 }

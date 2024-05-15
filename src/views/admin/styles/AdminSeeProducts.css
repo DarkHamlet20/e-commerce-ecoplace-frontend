@@ -7,7 +7,7 @@
   --danger-color: #dc3545;
 }
 
-.admin-categories-page {
+.see-products-page {
   display: flex;
   flex-direction: column;
   margin-top: 60px;
@@ -16,15 +16,23 @@
 }
 
 .content {
-  display: flex;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-content {
   flex-grow: 1;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
   margin-left: 250px;
-  margin-top: 20px; 
+}
+
+.content-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
 .header {
@@ -32,7 +40,6 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  margin-top: 20px; 
 }
 
 .header h2 {
@@ -42,7 +49,6 @@
 .buttons {
   display: flex;
   gap: 10px;
-  margin-top: 20px; 
 }
 
 .btn {
@@ -52,7 +58,7 @@
   color: var(--text-color);
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-right: 5px;
+  text-decoration: none;
 }
 
 .btn-secondary {
@@ -63,42 +69,42 @@
   background-color: var(--secondary-color);
 }
 
-.btn-warning {
-  background-color: var(--warning-color);
-}
-
-.btn-danger {
-  background-color: var(--danger-color);
-}
-
 .table-responsive {
   overflow-x: auto;
 }
 
-.categories-table {
+.products-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.categories-table th,
-.categories-table td {
+.products-table th,
+.products-table td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: left;
 }
 
-.categories-table th {
+.products-table th {
   background-color: var(--primary-color);
   color: var(--text-color);
 }
 
-.categories-table tbody tr:nth-child(even) {
+.products-table tbody tr:nth-child(even) {
   background-color: var(--table-bg-color);
 }
 
-.categories-table .text-end {
-  text-align: right;
+.product-info {
+  display: flex;
+  align-items: center;
+}
+
+.product-image {
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+  border-radius: 50%;
 }
 
 .text-center {
@@ -106,25 +112,19 @@
 }
 
 /* Estilos responsivos */
-@media (max-width: 768px) {
-  .admin-categories-page {
-    margin-top: 0;
-  }
-
+@media (max-width: 1024px) {
   .main-content {
-    margin-left: 0; /* Quitar margen lateral en pantallas pequeñas */
+    margin-left: 0;
     padding: 10px;
-    margin-top: 10px; /* Ajustar margen superior en pantallas pequeñas */
   }
 
   .header {
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 10px; /* Ajustar margen superior en pantallas pequeñas */
   }
 
   .buttons {
-    margin-top: 20px; /* Añadir margen superior para separar del navbar */
+    margin-top: 10px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -132,15 +132,29 @@
 
   .btn {
     width: 48%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 10px;
   }
 
-  .table-responsive {
-    overflow-x: auto;
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .categories-table th,
-  .categories-table td {
-    padding: 8px;
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
   }
 }
 

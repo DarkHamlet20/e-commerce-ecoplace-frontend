@@ -1,7 +1,7 @@
 .page-container {
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
+  margin-top: 80px;
   min-height: 100vh;
 }
 
@@ -14,36 +14,21 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 20px; /* Ajuste para añadir padding */
-  margin-top: 20px; /* Añadir margen superior para separar del navbar */
-}
-
-.form-container {
-  flex: 1;
   padding: 20px;
 }
 
-.text-center {
-  text-align: center;
-}
-
-.mb-4 {
-  margin-bottom: 1.5rem;
-}
-
-.back-button-container {
+.header-container {
   display: flex;
-  justify-content: flex-start;
-  margin-bottom: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px; /* Reducir el margen inferior */
 }
 
-.btn-secondary {
-  background-color: #6c757d;
-  color: white;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  border-radius: 5px;
-  display: inline-block;
+.form-container {
+  display: flex;
+  justify-content: center; /* Centra el formulario horizontalmente */
+  align-items: center; /* Centra el formulario verticalmente */
+  height: 100%; /* Asegura que la contenedor ocupe toda la altura disponible */
 }
 
 .card {
@@ -51,11 +36,11 @@
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 20px; /* Añadir margen superior para separar del navbar */
+  width: 300px; /* Hacer el card más pequeño */
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem; /* Reducir el margen inferior del grupo de formulario */
 }
 
 .form-group label {
@@ -85,25 +70,45 @@
   background-color: #0056b3;
 }
 
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.text-center {
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .page-container {
-    margin-top: 0;
+    margin-top: 30px;
   }
 
   .content-container {
+    margin-top: 30px;
     flex-direction: column;
   }
 
   .main-content {
-    padding: 0 10px; /* Añadir padding horizontal en pantallas pequeñas */
-    margin-top: 10px; /* Ajustar margen superior en pantallas pequeñas */
+    margin-top: 30px;
+    padding: 0 10px;
   }
 
-  .form-container {
-    padding: 10px;
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-wrapper {
+    padding: 20px;
   }
 
   .btn-secondary, .btn-primary {
+    margin-top: 30px;
     width: 100%;
     text-align: center;
   }

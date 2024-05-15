@@ -5,6 +5,7 @@ import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import { showErrorAlert, showConfirmationAlert } from '../../../helpers/alerts';
 import AdminFooterComponent from "../components/AdminFooterComponent";
+import '../styles/AdminADProducts.css';
 
 const ADADDProductPages = () => {
   const [formData, setFormData] = useState({
@@ -92,141 +93,123 @@ const ADADDProductPages = () => {
   };
 
   return (
-    <div className="d-flex flex-column" style={{ marginTop: '60px' }}> {/* Ajuste para el navbar */}
-      <div className="d-flex min-vh-100"> {/* Estructura principal */}
-        <AdminSidebar /> {/* Sidebar */}
-        <div className="flex-grow-1"> {/* Contenedor principal */}
-          <AdminNavComponent /> {/* Navbar */}
-          <div className="container mt-4"> {/* Contenedor para el formulario */}
-            <div className="d-flex justify-content-between align-items-center"> {/* Título y botón de regresar */}
-              <h2 className="text-center text-dark">Agregar Producto</h2>
-              <Link
-                to="/admin/products/view"
-                className="btn btn-secondary"
-              >
+    <div className="admin-add-product-page">
+      <div className="content">
+        <AdminSidebar />
+        <div className="main-content">
+          <AdminNavComponent />
+          <div className="container">
+            <div className="header">
+              <h2>Agregar Producto</h2>
+              <Link to="/admin/products/view" className="btn btn-secondary">
                 Regresar
               </Link>
             </div>
-            <div className="d-flex justify-content-center"> {/* Formulario para agregar producto */}
-              <div className="card p-5 mb-3" style={{ maxWidth: '800px' }}> {/* Tarjeta para el formulario */}
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="mb-4"> {/* Campo para el nombre */}
-                    <label htmlFor="name" className="form-label">Nombre del Producto</label>
+            <div className="form-container">
+              <form onSubmit={handleSubmit} className="form">
+                <div className="form-group">
+                  <label htmlFor="name">Nombre del Producto</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="description">Descripción</label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="images">Imágenes</label>
+                  <input
+                    type="file"
+                    id="images"
+                    name="images"
+                    multiple
+                    onChange={handleFileChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="brand">Marca</label>
+                  <input
+                    type="text"
+                    id="brand"
+                    name="brand"
+                    value={formData.brand}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="price">Precio</label>
+                  <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    value={formData.price}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="categories">Categorías</label>
+                  <select
+                    multiple
+                    id="categories"
+                    name="categories"
+                    value={formData.categories}
+                    onChange={handleCategoryChange}
+                  >
+                    {categories.map((category) => (
+                      <option key={category._id} value={category._id}>
+                        {category.categoryName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="countInStock">Cantidad en Stock</label>
+                  <input
+                    type="number"
+                    id="countInStock"
+                    name="countInStock"
+                    value={formData.countInStock}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="form-group checkbox-group">
+                  <label htmlFor="isFeatured">
                     <input
-                      type="text"
-                      className="form-control"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
+                      type="checkbox"
+                      id="isFeatured"
+                      name="isFeatured"
+                      checked={formData.isFeatured}
+                      onChange={(e) =>
+                        setFormData({ ...formData, isFeatured: e.target.checked })
+                      }
                     />
-                  </div>
-                  <div className="mb-4"> {/* Campo para la descripción */}
-                    <label htmlFor="description" className="form-label">Descripción</label>
-                    <textarea
-                      className="form-control"
-                      id="description"
-                      name="description"
-                      value={formData.description}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="mb-4"> {/* Campo para las imágenes */}
-                    <label htmlFor="images" className="form-label">Imágenes</label>
-                    <input
-                      type="file"
-                      className="form-control"
-                      id="images"
-                      name="images"
-                      multiple
-                      onChange={handleFileChange}
-                    />
-                  </div>
-                  <div className="mb-4"> {/* Campo para la marca */}
-                    <label htmlFor="brand" className="form-label">Marca</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="brand"
-                      name="brand"
-                      value={formData.brand}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="mb-4"> {/* Campo para el precio */}
-                    <label htmlFor="price" className="form-label">Precio</label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      id="price"
-                      name="price"
-                      value={formData.price}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="mb-4"> {/* Campo para las categorías */}
-                    <label htmlFor="categories" className="form-label">Categorías</label>
-                    <select
-                      multiple
-                      className="form-control"
-                      id="categories"
-                      name="categories"
-                      value={formData.categories}
-                      onChange={handleCategoryChange}
-                    >
-                      {categories.map((category) => (
-                        <option key={category._id} value={category._id}>
-                          {category.categoryName}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="mb-4"> {/* Campo para la cantidad en stock */}
-                    <label htmlFor="countInStock" className="form-label">Cantidad en Stock</label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      id="countInStock"
-                      name="countInStock"
-                      value={formData.countInStock}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="mb-4"> {/* Campo para indicar si es destacado */}
-                    <label htmlFor="isFeatured" className="form-label">
-                      <input
-                        type="checkbox"
-                        id="isFeatured"
-                        name="isFeatured"
-                        checked={formData.isFeatured}
-                        onChange={(e) =>
-                          setFormData({ ...formData, isFeatured: e.target.checked })
-                        }
-                      />
-                      ¿Es destacado?
-                    </label>
-                  </div>
-                  <div className="d-flex justify-content-between"> {/* Botón para regresar y botón para agregar */}
-                    <Link
-                      to="/admin/products/view"
-                      className="btn btn-secondary"
-                    >
-                      Cancelar
-                    </Link>
-                    <button
-                      type="submit"
-                      className="btn btn-primary"
-                    >
-                      Agregar Producto
-                    </button>
-                  </div>
-                </form>
-              </div>
+                    ¿Es destacado?
+                  </label>
+                </div>
+                <div className="buttons">
+                  <Link to="/admin/products/view" className="btn btn-secondary">
+                    Cancelar
+                  </Link>
+                  <button type="submit" className="btn btn-primary">
+                    Agregar Producto
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

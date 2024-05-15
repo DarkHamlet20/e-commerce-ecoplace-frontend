@@ -1,14 +1,15 @@
 import React from 'react';
+import '../styles/SearchbarComponent.css';
 
 const SearchBarComponent = ({ value, onChange, placeholder }) => {
   return (
-    <div className="search-bar-container mb-4">
+    <div className="search-bar-container">
       <input
         type="text"
         value={value}
         onChange={onChange}
         placeholder={placeholder || 'Buscar...'}
-        className="w-full p-2 border rounded-md outline-none"
+        className="search-bar-input"
       />
     </div>
   );
