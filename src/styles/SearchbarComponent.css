@@ -1,0 +1,31 @@
+.search-bar-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-bar-input:focus {
+  border-color: var(--primary-color);
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .search-bar-container {
+    justify-content: flex-start;
+  }
+
+  .search-bar-input {
+    width: calc(100% - 20px);
+    margin: 0 auto;
+  }
+}

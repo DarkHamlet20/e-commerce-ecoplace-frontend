@@ -41,9 +41,13 @@
 
 /* Estilos responsivos */
 @media (max-width: 768px) {
-  .footer-content {
+  footer .footer-content {
     flex-direction: column;
-    padding: 10px;
+    text-align: center;
+  }
+
+  footer .footer-content .footer-text {
+    margin-bottom: 10px;
   }
 
   .social-icons {
