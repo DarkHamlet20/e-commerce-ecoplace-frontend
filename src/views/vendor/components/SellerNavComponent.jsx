@@ -65,7 +65,7 @@ const SellerNavComponent = () => {
         <Image src={logo} roundedCircle width="40" height="40" alt="Seller Logo" />
         <span className="ms-2 cursor-pointer">Seller Dashboard</span>
       </Navbar.Brand>
-      <Nav className="ms-auto">
+      <Nav className="ms-auto absolute right-0 top-4">
         <div className="d-flex flex-column justify-content-center align-items-end mr-9"> {/* Mostrar el nombre y el correo del vendedor */}
           <span className="text-white">{userData.name} {userData.lastname}</span>
           <span className="text-white">{userData.email}</span>
