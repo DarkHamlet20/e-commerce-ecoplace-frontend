@@ -7,4 +7,14 @@ export default defineConfig({
   server: {
     port: 3001,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000,
+  }
 })
