@@ -53,33 +53,33 @@ const ADADCategoriesPage = () => {
         <AdminSidebar />
         <div className="main-content">
           <AdminNavComponent />
-          <div className="form-container">
-            <div className="text-center mb-4">
-              <h2 className="text-dark">Agregar Categoría</h2>
-            </div>
-            <div className="back-button-container">
-              <Link to="/admin/categories/view" className="btn-secondary">
-                Regresar
-              </Link>
-            </div>
-            <div className="card">
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="categoryName">Nombre de la Categoría</label>
-                  <input
-                    type="text"
-                    id="categoryName"
-                    required
-                    value={categoryName}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="text-center">
-                  <button type="submit" className="btn-primary">
-                    Agregar Categoría
-                  </button>
-                </div>
-              </form>
+          <div className="header-container">
+            <Link to="/admin/categories/view" className="btn-secondary">
+              Regresar
+            </Link>
+            <h2 className="text-dark">Agregar Categoría</h2>
+          </div>
+          <div className="form-wrapper">
+            <div className="form-container">
+              <div className="card">
+                <form onSubmit={handleSubmit}>
+                  <div className="form-group">
+                    <label htmlFor="categoryName">Nombre de la Categoría</label>
+                    <input
+                      type="text"
+                      id="categoryName"
+                      required
+                      value={categoryName}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="text-center">
+                    <button type="submit" className="btn-primary">
+                      Agregar Categoría
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>

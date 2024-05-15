@@ -6,10 +6,10 @@
   padding: 10px 20px;
   color: var(--text-color);
   position: fixed;
-  width: 100%;  /* Ocupa todo el ancho */
+  width: 100%;
   left: 0;
   top: 0;
-  z-index: 1001;  /* Mayor z-index para estar sobre el sidebar */
+  z-index: 1001; 
   transition: left 0.3s, width 0.3s;
 }
 

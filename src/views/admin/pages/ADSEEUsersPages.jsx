@@ -75,12 +75,10 @@ const ADSEEUsersPages = () => {
           <AdminNavComponent />
           <div className="container">
             <div className="header">
-              <div className="header-top">
-                <h2>Gestión de Usuarios</h2>
-                <Link to="/admin" className="btn btn-secondary">
-                  Regresar
-                </Link>
-              </div>
+              <h2>Gestión de Usuarios</h2>
+              <Link to="/admin" className="btn btn-secondary">
+                Regresar
+              </Link>
               <div className="search-bar-container">
                 <SearchBarComponent
                   value={searchTerm}
