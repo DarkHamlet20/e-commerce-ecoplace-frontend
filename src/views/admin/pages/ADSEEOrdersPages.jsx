@@ -4,8 +4,9 @@ import axios from "axios";
 import AdminNavComponent from "../components/AdminNavComponent";
 import AdminSidebar from "../components/AdminSidebar";
 import PaginationComponent from "../../../common/PaginationComponent";
-import SearchBarComponent from "../../../common/SearchbarComponent"; // Verificar que está importado correctamente
+import SearchBarComponent from "../../../common/SearchbarComponent";
 import AdminFooterComponent from "../components/AdminFooterComponent";
+import '../styles/AdminOrders.css';
 
 const ADSEEOrdersPages = () => {
   const [orders, setOrders] = useState([]);
@@ -48,23 +49,23 @@ const ADSEEOrdersPages = () => {
   const currentOrders = filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder);
 
   return (
-    <div className="d-flex flex-column" style={{ marginTop: '60px'}}>
-      <div className="d-flex min-vh-100">
+    <div className="orders-page-container">
+      <div className="orders-content-container">
         <AdminSidebar />
-        <div className="flex-grow-1">
+        <div className="orders-main-content">
           <AdminNavComponent />
-          <div className="container mt-4">
-            <div className="d-flex justify-content-between align-items-center mb-4"> {/* Título y búsqueda */}
-              <h2 className="text-dark">Lista de Órdenes</h2>
+          <div className="orders-content-wrapper">
+            <h2>Lista de Órdenes</h2>
+            <div className="orders-header">
               <SearchBarComponent
-                value={searchTerm} // Término de búsqueda actual
-                onChange={handleSearchChange} // Controlador para el cambio de búsqueda
-                placeholder="Buscar órdenes..." // Placeholder descriptivo
+                value={searchTerm}
+                onChange={handleSearchChange}
+                placeholder="Buscar órdenes..."
               />
-              <Link to="/admin" className="btn btn-secondary">Regresar</Link>
+              <Link to="/admin" className="orders-btn orders-btn-secondary">Regresar</Link>
             </div>
-            <div className="table-responsive">
-              <table className="table table-striped">
+            <div className="orders-table-responsive">
+              <table className="orders-table">
                 <thead>
                   <tr>
                     <th>Cliente</th>
@@ -75,23 +76,31 @@ const ADSEEOrdersPages = () => {
                 </thead>
                 <tbody>
                   {currentOrders.map((order) => (
-                    <tr key={order._id}>
-                      <td>{order.customer ? `${order.customer.name} ${order.customer.lastname}` : "Cliente no disponible"}</td>
-                      <td>{order.status}</td>
-                      <td> {/* Múltiples productos */}
-                        <div className="d-flex flex-wrap">
-                          {order.items.map((item, index) => (
-                            <div key={index} className="border p-2 m-2 rounded">
+                    order.items.map((item, index) => (
+                      <tr key={`${order._id}-${index}`}>
+                        {index === 0 && (
+                          <td rowSpan={order.items.length}>
+                            {order.customer ? `${order.customer.name} ${order.customer.lastname}` : "Cliente no disponible"}
+                          </td>
+                        )}
+                        {index === 0 && (
+                          <td rowSpan={order.items.length}>{order.status}</td>
+                        )}
+                        <td>
+                          <div className="orders-product-details">
+                            <div className="orders-product-card">
                               <p>Producto: {item.product?.name || "Producto no disponible"}</p>
                               <p>Precio: ${item.product?.price || "No disponible"}</p>
                               <p>Cantidad: {item.quantity}</p>
                               <p>Total: ${item.quantity * item.product?.price || "0"}</p>
                             </div>
-                          ))}
-                        </div>
-                      </td>
-                      <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                    </tr>
+                          </div>
+                        </td>
+                        {index === 0 && (
+                          <td rowSpan={order.items.length}>{new Date(order.createdAt).toLocaleDateString()}</td>
+                        )}
+                      </tr>
+                    ))
                   ))}
                   {currentOrders.length === 0 && (
                     <tr>
@@ -104,7 +113,7 @@ const ADSEEOrdersPages = () => {
             <PaginationComponent
               currentPage={currentPage}
               totalPages={Math.ceil(filteredOrders.length / ordersPerPage)}
-              onPageChange={(pageNumber) => setCurrentPage(pageNumber)} // Controlador para paginación
+              onPageChange={(pageNumber) => setCurrentPage(pageNumber)}
             />            
           </div>
         </div>

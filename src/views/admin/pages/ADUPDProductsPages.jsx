@@ -5,6 +5,7 @@ import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import { showErrorAlert, showConfirmationAlert } from '../../../helpers/alerts';
 import AdminFooterComponent from "../components/AdminFooterComponent";
+import '../styles/AdminUPProducts.css';
 
 const ADUPDProductsPages = () => {
   const { id } = useParams();
@@ -110,27 +111,28 @@ const ADUPDProductsPages = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="d-flex flex-column" style={{ marginTop: '60px' }}> {/* Ajuste para el navbar */}
-      <div className="d-flex min-vh-100"> {/* Estructura principal */}
-        <AdminSidebar /> {/* Sidebar */}
-        <div className="flex-grow-1"> {/* Contenedor principal */}
-          <AdminNavComponent /> {/* Navbar */}
-          <div className="container mt-4"> {/* Contenedor para el contenido */}
-            <div className="d-flex justify-content-between align-items-center"> {/* Título y botón para regresar */}
-              <h1 className="text-center text-dark">Actualizar Producto</h1>
-              <Link to="/admin/products/view" className="btn btn-secondary">Regresar</Link>
+    <div className="page-container">
+      <div className="content-container">
+        <AdminSidebar />
+        <div className="main-content">
+          <AdminNavComponent />
+          <div className="content-wrapper">
+            <div className="header">
+              <h1>Actualizar Producto</h1>
+              <div className="button-group">
+                <Link to="/admin/products/view" className="btn btn-secondary">Regresar</Link>
+              </div>
             </div>
-            <div className="d-flex justify-content-center"> {/* Formulario para editar el producto */}
-              <div className="card p-5" style={{ maxWidth: '800px' }}> {/* Tarjeta para el formulario */}
-                <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-6">
-                  <div className="mb-4"> {/* Imágenes */}
+            <div className="form-wrapper">
+              <div className="form-card">
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
+                  <div className="form-group">
                     <label className="form-label">{formData.name}</label>
-                    {currentImage && ( /* Previsualización de la imagen actual */
-                      <div className="mb-3">
+                    {currentImage && (
+                      <div className="current-image">
                         <img
                           src={currentImage}
                           alt="Imagen actual del producto"
-                          style={{ width: '100px', borderRadius: '10px' }}
                         />
                       </div>
                     )}
@@ -141,7 +143,7 @@ const ADUPDProductsPages = () => {
                       onChange={handleFileChange}
                     />
                   </div>
-                  <div className="mb-4"> {/* Campo para el nombre */}
+                  <div className="form-group">
                     <label htmlFor="name" className="form-label">Nombre del Producto</label>
                     <input
                       type="text"
@@ -153,7 +155,7 @@ const ADUPDProductsPages = () => {
                       required
                     />
                   </div>
-                  <div className="mb-4"> {/* Campo para el precio */}
+                  <div className="form-group">
                     <label htmlFor="price" className="form-label">Precio</label>
                     <input
                       type="number"
@@ -165,7 +167,7 @@ const ADUPDProductsPages = () => {
                       required
                     />
                   </div>
-                  <div className="mb-4"> {/* Descripción */}
+                  <div className="form-group">
                     <label htmlFor="description" className="form-label">Descripción</label>
                     <textarea
                       className="form-control"
@@ -176,7 +178,7 @@ const ADUPDProductsPages = () => {
                       required
                     />
                   </div>
-                  <div className="mb-4"> {/* Selección de categorías */}
+                  <div className="form-group">
                     <label htmlFor="categories" className="form-label">Categorías</label>
                     <select
                       multiple
@@ -193,7 +195,7 @@ const ADUPDProductsPages = () => {
                       ))}
                     </select>
                   </div>
-                  <div className="d-flex justify-content-between"> {/* Botón para regresar y botón para enviar */}
+                  <div className="form-actions">
                     <Link to="/admin/products/view" className="btn btn-secondary">Cancelar</Link>
                     <button type="submit" className="btn btn-primary">Actualizar Producto</button>
                   </div>

@@ -6,6 +6,7 @@ import AdminSidebar from "../components/AdminSidebar";
 import PaginationComponent from "../../../common/PaginationComponent";
 import SearchBarComponent from "../../../common/SearchbarComponent";
 import AdminFooterComponent from "../components/AdminFooterComponent";
+import '../styles/AdminSales.css';
 
 const ADSEESalesPages = () => {
   const [sales, setSales] = useState([]);
@@ -50,28 +51,23 @@ const ADSEESalesPages = () => {
   const currentSales = filteredSales.slice(indexOfFirstSale, indexOfLastSale);
 
   return (
-    <div className="d-flex flex-column" style={{ marginTop: '60px' }}>
-      <div className="d-flex min-vh-100">
+    <div className="sales-page-container">
+      <div className="sales-content-container">
         <AdminSidebar />
-        <div className="flex-grow-1">
+        <div className="sales-main-content">
           <AdminNavComponent />
-          <div className="container mt-4">
-            <div className="d-flex justify-content-between align-items-center mb-4">
-              <h2 className="text-dark">Lista de Ventas</h2>
+          <div className="sales-content-wrapper">
+            <h2>Lista de Ventas</h2>
+            <div className="sales-header">              
               <SearchBarComponent
-                value={searchTerm} // Valor del término de búsqueda
-                onChange={handleSearchChange} // Controlador de cambio
-                placeholder="Buscar ventas..." // Placeholder de búsqueda
+                value={searchTerm}
+                onChange={handleSearchChange}
+                placeholder="Buscar ventas..."
               />
-              <Link
-                to="/admin"
-                className="btn btn-secondary"
-              >
-                Regresar
-              </Link>
+              <Link to="/admin" className="sales-btn sales-btn-secondary">Regresar</Link>
             </div>
-            <div className="table-responsive">
-              <table className="table table-striped">
+            <div className="sales-table-responsive">
+              <table className="sales-table">
                 <thead>
                   <tr>
                     <th>Cliente</th>
@@ -83,37 +79,43 @@ const ADSEESalesPages = () => {
                 </thead>
                 <tbody>
                   {currentSales.map((sale) => (
-                    <tr key={sale._id}>
-                      <td>{sale.customer ? `${sale.customer.name} ${sale.customer.lastname}` : "Cliente no disponible"}</td>
-                      <td>
-                        {sale.items.map((item, index) => (
-                          <div key={index}>
-                            {item.product?.seller
-                              ? `${item.product.seller.name} ${item.product.seller.lastname}`
-                              : "Vendedor no disponible"}
-                          </div>
-                        ))}
-                      </td>
-                      <td>{sale.status}</td>
-                      <td>
-                        <div className="d-flex flex-wrap">
-                          {sale.items.map((item, index) => (
-                            <div key={index} className="border p-2 m-2 rounded">
+                    sale.items.map((item, index) => (
+                      <tr key={`${sale._id}-${index}`}>
+                        {index === 0 && (
+                          <td rowSpan={sale.items.length}>
+                            {sale.customer ? `${sale.customer.name} ${sale.customer.lastname}` : "Cliente no disponible"}
+                          </td>
+                        )}
+                        <td>
+                          {item.product?.seller
+                            ? `${item.product.seller.name} ${item.product.seller.lastname}`
+                            : "Vendedor no disponible"}
+                        </td>
+                        <td>
+                          {index === 0 && (
+                            <td rowSpan={sale.items.length}>{sale.status}</td>
+                          )}
+                        </td>
+                        <td>
+                          <div className="sales-product-details">
+                            <div className="sales-product-card">
                               <p>Producto: {item.product?.name || "No disponible"}</p>
                               <p>Precio: ${item.product?.price || "0"}</p>
                               <p>Cantidad: {item.quantity}</p>
                               <p>Total: ${item.quantity * item.product?.price || "0"}</p>
                             </div>
-                          ))}
-                        </div>
-                      </td>
-                      <td>{new Date(sale.createdAt).toLocaleDateString()}</td>
-                    </tr>
+                          </div>
+                        </td>
+                        {index === 0 && (
+                          <td rowSpan={sale.items.length}>{new Date(sale.createdAt).toLocaleDateString()}</td>
+                        )}
+                      </tr>
+                    ))
                   ))}
                   {currentSales.length === 0 && (
                     <tr>
                       <td colSpan="5" className="text-center">No se encontraron ventas.</td>
-                      </tr>
+                    </tr>
                   )}
                 </tbody>
               </table>
@@ -121,7 +123,7 @@ const ADSEESalesPages = () => {
             <PaginationComponent
               currentPage={currentPage}
               totalPages={Math.ceil(filteredSales.length / salesPerPage)}
-              onPageChange={(pageNumber) => setCurrentPage(pageNumber)} // Cambiar página
+              onPageChange={(pageNumber) => setCurrentPage(pageNumber)}
             />
           </div>
         </div>

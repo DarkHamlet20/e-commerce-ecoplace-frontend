@@ -4,8 +4,9 @@ import AdminNavComponent from "../components/AdminNavComponent";
 import AdminSidebar from "../components/AdminSidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Importar FontAwesomeIcon
 import { faUserCircle, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
-import { Container, Card, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
+// import { Container, Card, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
 import AdminFooterComponent from "../components/AdminFooterComponent";
+import '../styles/AdminPagesAccount.css';
 
 const AdminPagesAccount = () => {
   const [userData, setUserData] = useState({});
@@ -23,48 +24,36 @@ const AdminPagesAccount = () => {
   }, [token]);
 
   return (
-    <div className="d-flex flex-column" style={{ marginTop: '60px' }}> {/* Ajuste para el navbar */}
-      <div className="d-flex min-vh-100"> {/* Estructura principal */}
-        <AdminSidebar /> {/* Sidebar */}
-        <div className="flex-grow-1"> {/* Contenedor principal */}
-          <AdminNavComponent /> {/* Navbar */}
-          <Container className="mt-4"> {/* Espacio para el contenido */}
-            <Card className="p-4 shadow"> {/* Tarjeta para detalles del usuario */}
-              <Card.Header className="text-center text-dark h2">Cuenta del Administrador</Card.Header>
-              <Card.Body>
-                <Row className="mb-3"> {/* Información personal */}
-                  <Col md={3} className="text-center"> {/* Ícono para indicar usuario */}
+    <div className="admin-account-container">
+      <div className="admin-account-content">
+        <AdminSidebar />
+        <div className="admin-account-main">
+          <AdminNavComponent />
+          <div className="admin-account-details">
+            <div className="admin-account-card">
+              <h2 className="admin-account-title">Cuenta del Administrador</h2>
+              <div className="admin-account-info">
+                <div className="admin-account-section">
+                  <div className="admin-account-icon">
                     <FontAwesomeIcon icon={faUserCircle} size="4x" />
-                  </Col>
-                  <Col md={9}> {/* Información del usuario */}
-                    <ListGroup variant="flush"> {/* Lista para detalles del usuario */}
-                      <ListGroupItem>
-                        <strong>Nombre: </strong> {userData?.name} {userData?.lastname}
-                      </ListGroupItem>
-                      <ListGroupItem>
-                        <strong>Email: </strong> {userData?.email}
-                      </ListGroupItem>
-                      <ListGroupItem>
-                        <strong>Teléfono: </strong> {userData?.phone}
-                      </ListGroupItem>
-                    </ListGroup>
-                  </Col>
-                </Row>
-                <Row> {/* Detalles de dirección */}
-                  <Col md={3} className="text-center"> {/* Ícono para indicar ubicación */}
+                  </div>
+                  <div className="admin-account-data">
+                    <p><strong>Nombre:</strong> {userData?.name} {userData?.lastname}</p>
+                    <p><strong>Email:</strong> {userData?.email}</p>
+                    <p><strong>Teléfono:</strong> {userData?.phone}</p>
+                  </div>
+                </div>
+                <div className="admin-account-section">
+                  <div className="admin-account-icon">
                     <FontAwesomeIcon icon={faMapMarkerAlt} size="4x" />
-                  </Col>
-                  <Col md={9}>
-                    <ListGroup variant="flush"> {/* Lista para detalles de dirección */}
-                      <ListGroupItem>
-                        <strong>Dirección: </strong> {userData?.street}, {userData?.city}, {userData?.country}, {userData?.zip}
-                      </ListGroupItem>
-                    </ListGroup>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
-          </Container>
+                  </div>
+                  <div className="admin-account-data">
+                    <p><strong>Dirección:</strong> {userData?.street}, {userData?.city}, {userData?.country}, {userData?.zip}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <AdminFooterComponent />

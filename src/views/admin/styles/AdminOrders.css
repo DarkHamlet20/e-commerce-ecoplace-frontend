@@ -1,0 +1,143 @@
+:root {
+  --primary-color: #1f3b82;
+  --text-color: #ffffff;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --card-background: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --border-color: #ced4da;
+  --table-bg-color: #f8f9fa;
+}
+
+.orders-page-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+  min-height: 100vh;
+}
+
+.orders-content-container {
+  display: flex;
+  flex-grow: 1;
+}
+
+.orders-main-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: 250px;
+  padding: 20px;
+}
+
+.orders-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding-bottom: 80px; /* Separación del footer */
+}
+
+.orders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.orders-header h2 {
+  color: #333;
+}
+
+.orders-table-responsive {
+  overflow-x: auto;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.orders-table th,
+.orders-table td {
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  text-align: left;
+}
+
+.orders-table th {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.orders-table-striped tbody tr:nth-of-type(odd) {
+  background-color: var(--table-bg-color);
+}
+
+.orders-product-details {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.orders-product-card {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  margin: 10px;
+  padding: 10px;
+  width: calc(50% - 20px); /* Dos columnas */
+  box-sizing: border-box;
+}
+
+.orders-product-card p {
+  margin: 5px 0;
+}
+
+.orders-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: var(--text-color);
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.orders-btn-secondary {
+  background-color: #6c757d;
+}
+
+.orders-btn-secondary:hover {
+  background-color: #878b8f;
+}
+
+.text-center {
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  .orders-main-content {
+    padding: 20px 40px;
+  }
+
+  .orders-table {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .orders-main-content {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .orders-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .orders-product-card {
+    width: 100%;
+  }
+}

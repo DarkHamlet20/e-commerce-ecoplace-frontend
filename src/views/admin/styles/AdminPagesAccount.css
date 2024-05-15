@@ -1,0 +1,87 @@
+:root {
+  --primary-color: #1f3b82;
+  --secondary-color: #1a74db;
+  --text-color: #ffffff;
+  --card-background: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --border-color: #ced4da;
+}
+
+.admin-account-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+  min-height: 100vh;
+}
+
+.admin-account-content {
+  display: flex;
+  flex-grow: 1;
+}
+
+.admin-account-main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: 250px;
+  padding: 20px;
+}
+
+.admin-account-details {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.admin-account-card {
+  background-color: var(--card-background);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.admin-account-title {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.admin-account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-account-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.admin-account-icon {
+  color: var(--primary-color);
+}
+
+.admin-account-data p {
+  margin: 5px 0;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .admin-account-main {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .admin-account-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-account-icon {
+    text-align: center;
+    width: 100%;
+  }
+}
