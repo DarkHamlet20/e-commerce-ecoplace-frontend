@@ -5,6 +5,7 @@ import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
 import AdminFooterComponent from "../components/AdminFooterComponent";
+import '../styles/AdminDLTCategories.css';
 
 const ADLTCategoriesPages = () => {
   const [category, setCategory] = useState(null);
@@ -52,31 +53,27 @@ const ADLTCategoriesPages = () => {
   if (!category) return <div>Cargando...</div>;
 
   return (
-    <div className="d-flex flex-column" style={{ marginTop: '60px' }}> {/* Compensar el navbar */}
-      <div className="d-flex min-vh-100"> {/* Estructura principal */}
-        <AdminSidebar /> {/* Sidebar */}
-        <div className="flex-grow-1"> {/* Contenedor principal */}
-          <AdminNavComponent /> {/* Navbar */}
-          <div className="container mt-4"> {/* Contenedor para el contenido */}
-            <div className="d-flex justify-content-center"> {/* Centrando el formulario */}
-              <div className="card p-4" style={{ maxWidth: '600px' }}> {/* Tarjeta para el formulario */}
-                <h2 className="text-center">Eliminar Categoría</h2> {/* Título */}
-                <p>¿Estás seguro de que quieres eliminar la categoría <strong>{category.categoryName}</strong>?</p> {/* Pregunta de confirmación */}
-                <div className="d-flex justify-content-center mt-4"> {/* Botones */}
-                  <button
-                    className="btn btn-danger me-2"
-                    onClick={deleteCategory}
-                  >
-                    Confirmar Eliminación
-                  </button>
-                  <Link
-                    to="/admin/categories/view"
-                    className="btn btn-secondary"
-                  >
-                    Cancelar
-                  </Link>
-                </div>
-              </div>
+    <div className="page-container">
+      <AdminSidebar />
+      <div className="main-content">
+        <AdminNavComponent />
+        <div className="content-wrapper">
+          <div className="card">
+            <h2>Eliminar Categoría</h2>
+            <p>¿Estás seguro de que quieres eliminar la categoría <strong>{category.categoryName}</strong>?</p>
+            <div className="button-group">
+              <button
+                className="btn btn-danger"
+                onClick={deleteCategory}
+              >
+                Confirmar Eliminación
+              </button>
+              <Link
+                to="/admin/categories/view"
+                className="btn btn-secondary"
+              >
+                Cancelar
+              </Link>
             </div>
           </div>
         </div>

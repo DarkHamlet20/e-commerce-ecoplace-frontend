@@ -57,8 +57,8 @@ const ADADCategoriesPage = () => {
             <Link to="/admin/categories/view" className="btn-secondary">
               Regresar
             </Link>
-            <h2 className="text-dark">Agregar Categoría</h2>
           </div>
+          <h2 className="text-dark">Agregar Categoría</h2>
           <div className="form-wrapper">
             <div className="form-container">
               <div className="card">

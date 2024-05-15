@@ -1,0 +1,99 @@
+:root {
+  --secondary-color: #6c757d;
+  --danger-color: #dc3545;
+  --text-color: white;
+  --background-color: #f8f9fa;
+  --card-background: white;
+  --border-color: #ced4da;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+  min-height: 100vh;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: 250px; /* Ajuste para el sidebar */
+  padding: 20px;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.card {
+  background-color: var(--card-background);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  max-width: 600px;
+  width: 100%;
+}
+
+.card h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: var(--text-color);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+}
+
+.btn-secondary:hover {
+  background-color: darken(var(--secondary-color), 10%);
+}
+
+.btn-danger:hover {
+  background-color: darken(var(--danger-color), 10%);
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

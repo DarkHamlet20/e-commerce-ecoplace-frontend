@@ -19,6 +19,10 @@
 .form-container {
   flex: 1;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .text-center {
@@ -30,9 +34,9 @@
 }
 
 .back-button-container {
-  display: flex;
-  justify-content: flex-start;
+  align-self: flex-start;
   margin-bottom: 1rem;
+  margin-top: -200px; /* Reduce el espacio superior del botón */
 }
 
 .btn-secondary {
@@ -44,11 +48,19 @@
   display: inline-block;
 }
 
+.card-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .card {
   background-color: white;
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
 }
 
 .form-group {
