@@ -47,82 +47,72 @@ const ADSEEProductsPages = () => {
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
   return (
-    <div className="see-products-page">
-      <AdminSidebar />
-      <div className="main-content">
-        <AdminNavComponent />
-        <div className="content-container">
-          <div className="header">
-            <h2>Gestión de Productos</h2>
-            <div className="buttons">
-              <Link to="/admin" className="btn btn-secondary">
-                Regresar
-              </Link>
-              <Link to="/admin/products/add" className="btn btn-primary">
-                Agregar Producto
-              </Link>
+    <div className="products-page products-root">
+      <div className="products-content-container">
+        <AdminSidebar />
+        <div className="products-main-content">
+          <AdminNavComponent />
+          <div className="products-content-wrapper">
+            <div className="products-header">
+              <Link to="/admin" className="products-btn products-btn-secondary">Regresar</Link>
+              <h2 className="products-title">Gestión de Productos</h2>
+              <Link to="/admin/products/add" className="products-btn products-btn-primary">Agregar Producto</Link>
             </div>
-          </div>
-          <SearchBarComponent
-            value={searchTerm}
-            onChange={handleSearchChange}
-            placeholder="Buscar productos..."
-          />
-          <div className="table-responsive">
-            <table className="products-table">
-              <thead>
-                <tr>
-                  <th>Producto</th>
-                  <th>Precio</th>
-                  <th>Categoría</th>
-                  <th>Stock</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentProducts.length > 0 ? (
-                  currentProducts.map((product) => (
-                    <tr key={product._id}>
-                      <td>
-                        <div className="product-info">
-                          <img
-                            src={product.images[0]}
-                            alt={product.name}
-                            className="product-image"
-                          />
-                          {product.name}
-                        </div>
-                      </td>
-                      <td>${product.price}</td>
-                      <td>{product.categories.map((cat) => cat.categoryName).join(', ')}</td>
-                      <td>{product.countInStock}</td>
-                      <td>
-                        <Link to={`/admin/products/edit/${product._id}`} className="btn btn-warning">
-                          Actualizar
-                        </Link>
-                        <Link to={`/admin/products/delete/${product._id}`} className="btn btn-danger">
-                          Eliminar
-                        </Link>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
+            <div className="products-search-bar-container">
+              <SearchBarComponent
+                value={searchTerm}
+                onChange={handleSearchChange}
+                placeholder="Buscar productos..."
+              />
+            </div>
+            <div className="products-table-responsive">
+              <table className="products-table">
+                <thead>
                   <tr>
-                    <td colSpan="5" className="text-center">
-                      No se encontraron productos.
-                    </td>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Categoría</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-          {totalPages > 1 && (
+                </thead>
+                <tbody>
+                  {currentProducts.length > 0 ? (
+                    currentProducts.map((product) => (
+                      <tr key={product._id}>
+                        <td>
+                          <div className="product-info">
+                            <img
+                              src={product.images[0]}
+                              alt={product.name}
+                              className="product-image"
+                            />
+                            {product.name}
+                          </div>
+                        </td>
+                        <td>${product.price}</td>
+                        <td>{product.categories.map((cat) => cat.categoryName).join(', ')}</td>
+                        <td>{product.countInStock}</td>
+                        <td>
+                          <Link to={`/admin/products/edit/${product._id}`} className="products-btn products-btn-warning">Actualizar</Link>
+                          <Link to={`/admin/products/delete/${product._id}`} className="products-btn products-btn-danger">Eliminar</Link>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="5" className="products-text-center">No se encontraron productos.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
             <PaginationComponent
               currentPage={currentPage}
               totalPages={totalPages}
               onPageChange={setCurrentPage}
             />
-          )}
+          </div>
         </div>
       </div>
       <AdminFooterComponent />

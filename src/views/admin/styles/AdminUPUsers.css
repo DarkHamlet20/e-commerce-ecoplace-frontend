@@ -1,113 +1,123 @@
-:root {
-  --primary-color: #1f3b82;
-  --secondary-color: #1a74db;
-  --text-color: #ffffff;
-  --warning-color: #ffc107;
-  --danger-color: #dc3545;
+.update-user-root {
+  --update-user-primary-color: #1f3b82; /* Azul oscuro */
+  --update-user-secondary-color: #1a74db; /* Azul */
+  --update-user-text-color: #ffffff; /* Blanco */
+  --update-user-card-bg-color: #ffffff; /* Fondo de la tarjeta */
+  --update-user-border-color: #ced4da; /* Color del borde */
+  --update-user-shadow-color: rgba(0, 0, 0, 0.1); /* Sombra */
 }
 
-.edit-user-page {
+.update-user-page {
   display: flex;
   flex-direction: column;
   margin-top: 60px;
   min-height: 100vh;
 }
 
-.main-content {
+.update-user-content-container {
+  display: flex;
+  flex-grow: 1;
+}
+
+.update-user-main-content {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 250px;
+  margin-left: 250px; /* Ajuste para el sidebar */
+  padding: 20px;
+  justify-content: flex-start; /* Subir el contenido hacia arriba */
+  align-items: center; /* Centrar el contenido horizontalmente */
 }
 
-.form-container {
+.update-user-form-container {
   flex-grow: 1;
   display: flex;
   justify-content: center;
   padding: 20px;
 }
 
-.card {
-  background-color: var(--card-bg-color);
-  padding: 30px;
+.update-user-card {
+  background-color: var(--update-user-card-bg-color);
+  padding: 40px; /* Aumentar el padding para un mejor aspecto */
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px var(--update-user-shadow-color); /* Aumentar la sombra */
   width: 100%;
   max-width: 800px;
   margin-bottom: 60px; /* Añadido para evitar solapamiento con el footer */
 }
 
-.header {
+.update-user-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* Aumentar el espacio debajo del header */
 }
 
-.header h1 {
+.update-user-header h1 {
   color: #333;
   margin: 0;
 }
 
-.form-group {
+.update-user-form-group {
   margin-bottom: 20px;
 }
 
-.form-group label {
+.update-user-form-group label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
   color: #333;
 }
 
-.form-group input,
-.form-group select {
+.update-user-form-control {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ced4da;
+  padding: 12px; /* Aumentar el padding para un mejor aspecto */
+  border: 1px solid var(--update-user-border-color);
   border-radius: 5px;
+  font-size: 1rem; /* Aumentar el tamaño de la fuente */
 }
 
-.btn {
-  padding: 10px 20px;
+.update-user-btn {
+  padding: 12px 20px; /* Aumentar el padding para un mejor aspecto */
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.btn-secondary {
+.update-user-btn-secondary {
   background-color: #6c757d;
-  color: var(--text-color);
+  color: var(--update-user-text-color);
 }
 
-.btn-primary {
-  background-color: var(--primary-color);
-  color: var(--text-color);
+.update-user-btn-primary {
+  background-color: var(--update-user-primary-color);
+  color: var(--update-user-text-color);
 }
 
-.text-center {
+.update-user-text-center {
   text-align: center;
 }
 
 /* Estilos responsivos */
 @media (max-width: 768px) {
-  .main-content {
+  .update-user-main-content {
     margin-left: 0;
     padding: 10px;
   }
 
-  .header {
+  .update-user-header {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .header h1 {
-    margin-bottom: 10px;
+  .update-user-header h1 {
+    margin-bottom: 20px; /* Aumentar el margen inferior */
   }
 
-  .btn {
+  .update-user-btn {
     width: 100%;
     text-align: center;
+    margin-bottom: 10px; /* Añadir espacio entre los botones */
   }
 }

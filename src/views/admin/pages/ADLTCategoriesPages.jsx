@@ -53,27 +53,29 @@ const ADLTCategoriesPages = () => {
   if (!category) return <div>Cargando...</div>;
 
   return (
-    <div className="page-container">
+    <div className="delete-category-page delete-category-root">
       <AdminSidebar />
-      <div className="main-content">
+      <div className="delete-category-content-container">
         <AdminNavComponent />
-        <div className="content-wrapper">
-          <div className="card">
-            <h2>Eliminar Categoría</h2>
-            <p>¿Estás seguro de que quieres eliminar la categoría <strong>{category.categoryName}</strong>?</p>
-            <div className="button-group">
-              <button
-                className="btn btn-danger"
-                onClick={deleteCategory}
-              >
-                Confirmar Eliminación
-              </button>
-              <Link
-                to="/admin/categories/view"
-                className="btn btn-secondary"
-              >
-                Cancelar
-              </Link>
+        <div className="delete-category-main-content">
+          <div className="delete-category-content-wrapper">
+            <div className="delete-category-card">
+              <h2>Eliminar Categoría</h2>
+              <p>¿Estás seguro de que quieres eliminar la categoría <strong>{category.categoryName}</strong>?</p>
+              <div className="delete-category-button-group">
+                <button
+                  className="delete-category-btn delete-category-btn-danger"
+                  onClick={deleteCategory}
+                >
+                  Confirmar Eliminación
+                </button>
+                <Link
+                  to="/admin/categories/view"
+                  className="delete-category-btn delete-category-btn-secondary"
+                >
+                  Cancelar
+                </Link>
+              </div>
             </div>
           </div>
         </div>

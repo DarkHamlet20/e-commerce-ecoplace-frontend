@@ -73,36 +73,31 @@ const ADUPDCategoriesPages = () => {
   };
 
   return (
-    <div className="page-container">
-      <div className="content-container">
-        <AdminSidebar />
-        <div className="main-content">
-          <AdminNavComponent />
-          <div className="form-container">
-            <div className="back-button-container">
-              <Link to="/admin/categories/view" className="btn-secondary">
-                Regresar
-              </Link>
-            </div>
-            <div className="text-center mb-4">
-              <h2 className="text-dark">Actualizar Categoría</h2>
-            </div>
-            <div className="card-container">
-              <div className="card">
+    <div className="categories-page categories-root">
+      <AdminSidebar />
+      <div className="categories-content-container">
+        <AdminNavComponent />
+        <div className="categories-main-content">
+          <div className="categories-header">
+            <Link to="/admin/categories/view" className="categories-btn categories-btn-secondary">Regresar</Link>
+            <h2 className="categories-title">Actualizar Categoría</h2>
+          </div>
+          <div className="categories-form-wrapper">
+            <div className="categories-form-container">
+              <div className="categories-card">
                 <form onSubmit={handleSubmit}>
-                  <div className="form-group">
+                  <div className="categories-form-group">
                     <label htmlFor="categoryName">Nombre de la Categoría</label>
                     <input
                       type="text"
                       id="categoryName"
-                      name="categoryName"
+                      required
                       value={categoryName}
                       onChange={handleInputChange}
-                      required
                     />
                   </div>
-                  <div className="text-center">
-                    <button type="submit" className="btn-primary">
+                  <div className="categories-text-center">
+                    <button type="submit" className="categories-btn categories-btn-primary">
                       Actualizar Categoría
                     </button>
                   </div>

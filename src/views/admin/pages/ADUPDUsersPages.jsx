@@ -98,60 +98,62 @@ const ADUPDUsersPages = () => {
   };
 
   return (
-    <div className="edit-user-page">
+    <div className="update-user-page update-user-root">
       <AdminSidebar />
-      <div className="main-content">
+      <div className="update-user-content-container">
         <AdminNavComponent />
-        <div className="form-container">
-          <div className="card">
-            <div className="header">
-              <h1>Editar Usuario</h1>
-              <button onClick={() => navigate('/admin/users/view')} className="btn btn-secondary">
-                Regresar
-              </button>
-            </div>
-            <form onSubmit={handleSubmit}>
-              {Object.entries(formData).map(
-                ([key, value]) =>
-                  key !== 'role' && (
-                    <div key={key} className="form-group">
-                      <label htmlFor={key}>
-                        {key.charAt(0).toUpperCase() + key.slice(1)}
-                      </label>
-                      <input
-                        type="text"
-                        name={key}
-                        id={key}
-                        value={value}
-                        onChange={handleChange}
-                        readOnly={key === 'createdAt' || key === 'email'}
-                        className="form-control"
-                      />
-                    </div>
-                  )
-              )}
-              <div className="form-group">
-                <label htmlFor="role">Role</label>
-                <select
-                  name="role"
-                  id="role"
-                  value={formData.role}
-                  onChange={handleChange}
-                  className="form-control"
-                >
-                  {roles.map((role) => (
-                    <option key={role._id} value={role._id}>
-                      {role.roleName}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="form-group text-center">
-                <button type="submit" className="btn btn-primary">
-                  Actualizar
+        <div className="update-user-main-content">
+          <div className="update-user-form-container">
+            <div className="update-user-card">
+              <div className="update-user-header">
+                <h1>Editar Usuario</h1>
+                <button onClick={() => navigate('/admin/users/view')} className="update-user-btn update-user-btn-secondary">
+                  Regresar
                 </button>
               </div>
-            </form>
+              <form onSubmit={handleSubmit}>
+                {Object.entries(formData).map(
+                  ([key, value]) =>
+                    key !== 'role' && (
+                      <div key={key} className="update-user-form-group">
+                        <label htmlFor={key}>
+                          {key.charAt(0).toUpperCase() + key.slice(1)}
+                        </label>
+                        <input
+                          type="text"
+                          name={key}
+                          id={key}
+                          value={value}
+                          onChange={handleChange}
+                          readOnly={key === 'createdAt' || key === 'email'}
+                          className="update-user-form-control"
+                        />
+                      </div>
+                    )
+                )}
+                <div className="update-user-form-group">
+                  <label htmlFor="role">Role</label>
+                  <select
+                    name="role"
+                    id="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                    className="update-user-form-control"
+                  >
+                    {roles.map((role) => (
+                      <option key={role._id} value={role._id}>
+                        {role.roleName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="update-user-form-group update-user-text-center">
+                  <button type="submit" className="update-user-btn update-user-btn-primary">
+                    Actualizar
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>

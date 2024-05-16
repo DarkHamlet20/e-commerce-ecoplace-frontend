@@ -48,22 +48,20 @@ const ADADCategoriesPage = () => {
   };
 
   return (
-    <div className="page-container">
-      <div className="content-container">
-        <AdminSidebar />
-        <div className="main-content">
-          <AdminNavComponent />
-          <div className="header-container">
-            <Link to="/admin/categories/view" className="btn-secondary">
-              Regresar
-            </Link>
+    <div className="categories-page categories-root">
+      <AdminSidebar />
+      <div className="categories-content-container">
+        <AdminNavComponent />
+        <div className="categories-main-content">
+          <div className="categories-header">
+            <Link to="/admin/categories/view" className="categories-btn categories-btn-secondary">Regresar</Link>
+            <h2 className="categories-title">Agregar Categoría</h2>
           </div>
-          <h2 className="text-dark">Agregar Categoría</h2>
-          <div className="form-wrapper">
-            <div className="form-container">
-              <div className="card">
+          <div className="categories-form-wrapper">
+            <div className="categories-form-container">
+              <div className="categories-card">
                 <form onSubmit={handleSubmit}>
-                  <div className="form-group">
+                  <div className="categories-form-group">
                     <label htmlFor="categoryName">Nombre de la Categoría</label>
                     <input
                       type="text"
@@ -73,8 +71,8 @@ const ADADCategoriesPage = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <div className="text-center">
-                    <button type="submit" className="btn-primary">
+                  <div className="categories-text-center">
+                    <button type="submit" className="categories-btn categories-btn-primary">
                       Agregar Categoría
                     </button>
                   </div>

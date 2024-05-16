@@ -48,56 +48,59 @@ const ADSEECategoriesPages = () => {
   );
 
   return (
-    <div className="admin-categories-page">
+    <div className="categories-page categories-root">
       <AdminSidebar />
-      <div className="admin-content">
+      <div className="categories-content-container">
         <AdminNavComponent />
-        <div className="admin-main-content">
-          <div className="admin-header">
-            <Link to="/admin" className="admin-btn admin-btn-secondary">
-              Regresar
-            </Link>
-            <h2>Gestión de Categorías</h2>
-          </div>
-          <div className="admin-search-bar-container">
-            <SearchBarComponent value={searchTerm} onChange={handleSearchChange} />
-          </div>
-          <div className="admin-table-responsive">
-            <table className="admin-categories-table">
-              <thead>
-                <tr>
-                  <th>Categoría</th>
-                  <th className="text-end">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentCategories.length > 0 ? (
-                  currentCategories.map((category) => (
-                    <tr key={category._id}>
-                      <td>{category.categoryName}</td>
-                      <td className="text-end">
-                        <Link to={`/admin/categories/edit/${category._id}`} className="admin-btn admin-btn-warning">
-                          Actualizar
-                        </Link>
-                        <Link to={`/admin/categories/delete/${category._id}`} className="admin-btn admin-btn-danger">
-                          Eliminar
-                        </Link>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
+        <div className="categories-main-content">
+          <div className="categories-content-wrapper">
+            <div className="categories-header">
+              <Link to="/admin" className="categories-btn categories-btn-secondary">Regresar</Link>
+              <h2 className="categories-title">Gestión de Categorías</h2>
+              <Link to="/admin/categories/add" className="categories-btn categories-btn-primary">Agregar Categoría</Link>
+            </div>
+            <div className="categories-search-bar-container">
+              <SearchBarComponent
+                value={searchTerm}
+                onChange={handleSearchChange}
+                placeholder="Buscar categorías..."
+              />
+            </div>
+            <div className="categories-table-responsive">
+              <table className="categories-table">
+                <thead>
                   <tr>
-                    <td colSpan="2" className="admin-text-center">No se encontraron categorías.</td>
+                    <th>Categoría</th>
+                    <th className="text-end">Acciones</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {currentCategories.length > 0 ? (
+                    currentCategories.map((category) => (
+                      <tr key={category._id}>
+                        <td>{category.categoryName}</td>
+                        <td className="text-end">
+                          <Link to={`/admin/categories/edit/${category._id}`} className="categories-btn categories-btn-warning">Actualizar</Link>
+                          <Link to={`/admin/categories/delete/${category._id}`} className="categories-btn categories-btn-danger">Eliminar</Link>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="2" className="categories-text-center">No se encontraron categorías.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+            {totalPages > 1 && (
+              <PaginationComponent
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
+            )}
           </div>
-          <PaginationComponent
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
         </div>
       </div>
       <AdminFooterComponent />
