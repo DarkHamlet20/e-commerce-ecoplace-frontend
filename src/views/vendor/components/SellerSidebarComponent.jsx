@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ListGroup, Collapse } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBoxOpen, faMoneyCheck, faEye } from '@fortawesome/free-solid-svg-icons';
-import shadows from '@mui/material/styles/shadows';
+import { faBoxOpen, faMoneyCheck, faEye, faBars } from '@fortawesome/free-solid-svg-icons';
+import '../styles/SellerSidebar.css';
 
 const SellerSidebarComponent = () => {
   const [activeMenu, setActiveMenu] = useState('');
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
   const menuItems = [
@@ -34,44 +35,48 @@ const SellerSidebarComponent = () => {
     }
   };
 
-  const [show, setShow] = useState(false)
+  useEffect(() => {
+    if (!show) {
+      setActiveMenu('');
+    }
+  }, [show]);
 
   return (
     <>
-    <h3 className='cursor-pointer absolute block md:hidden mt-4 pl-3 z-40' onClick={() => setShow(!show)}>Acciones</h3>
-    <div className={`${show ? 'scale-0' : 'scale-100'} md:scale-100 bg-primary absolute md:static min-h-full text-white flex-shrink-0 w-52`}>
-    
-      <div className={` mt-20 md:mt-4 w-48 md:w-full absolute md:static z-30`}>
-      <ListGroup variant="flush">
-        {menuItems.map((item) => (
-          <React.Fragment key={item.name}>
-            
-            <ListGroup.Item
-              className={`bg-primary cursor-pointer text-white d-flex align-items-center ${activeMenu === item.name ? 'bg-secondary' : ''}`}
-              onClick={() => handleMenuClick(item)}
-            >
-              <FontAwesomeIcon icon={item.icon} className="me-2" />
-              {item.name}
-            </ListGroup.Item>
-            <Collapse in={activeMenu === item.name}>
-              <div className="ms-3">
-                {item.subMenu.map((subItem) => (
-                  <ListGroup.Item
-                    key={subItem.name}
-                    className="bg-primary cursor-pointer text-white d-flex align-items-center"
-                    onClick={() => navigate(subItem.href)}
-                  >
-                    <FontAwesomeIcon icon={subItem.icon} className="me-2" />
-                    {subItem.name}
-                  </ListGroup.Item>
-                ))}
-              </div>
-            </Collapse>
-          </React.Fragment>
-        ))}
-      </ListGroup>
+      <FontAwesomeIcon icon={faBars} className="sidebar-toggle" onClick={() => setShow(!show)} />
+      <div className={`overlay ${show ? 'show' : ''}`} onClick={() => setShow(false)}></div>
+      <div className={`seller-sidebar ${show ? 'show' : ''}`}>
+        <ListGroup variant="flush">
+          {menuItems.map((item) => (
+            <React.Fragment key={item.name}>
+              <ListGroup.Item
+                className={`menu-item ${activeMenu === item.name ? 'active' : ''}`}
+                onClick={() => handleMenuClick(item)}
+              >
+                <FontAwesomeIcon icon={item.icon} className="me-2" />
+                {item.name}
+              </ListGroup.Item>
+              <Collapse in={activeMenu === item.name}>
+                <div className="submenu">
+                  {item.subMenu.map((subItem) => (
+                    <ListGroup.Item
+                      key={subItem.name}
+                      className="submenu-item"
+                      onClick={() => {
+                        navigate(subItem.href);
+                        setShow(false); // Cierra el sidebar al hacer clic en un subitem
+                      }}
+                    >
+                      <FontAwesomeIcon icon={subItem.icon} className="me-2" />
+                      {subItem.name}
+                    </ListGroup.Item>
+                  ))}
+                </div>
+              </Collapse>
+            </React.Fragment>
+          ))}
+        </ListGroup>
       </div>
-    </div>
     </>
   );
 };

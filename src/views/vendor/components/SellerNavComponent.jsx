@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Navbar, Nav, Dropdown, Image } from 'react-bootstrap';
+// import { Navbar, Nav, Dropdown, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import logo from '../../../../public/img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp';
+import '../styles/SellerNav.css';
 
 const SellerNavComponent = () => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
   const [userData, setUserData] = useState({});
+  const dropdownRef = useRef(null);
   const token = localStorage.getItem('auth_token');
 
   useEffect(() => {
@@ -23,7 +25,23 @@ const SellerNavComponent = () => {
     }
   }, [token]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   const toggleDropdown = () => setShowDropdown(!showDropdown);
+
+  const handleAccountClick = () => {
+    navigate('/seller/account');
+  };
 
   const handleLogout = async () => {
     try {
@@ -60,28 +78,28 @@ const SellerNavComponent = () => {
   };
 
   return (
-    <Navbar bg="primary" variant="dark" expand="lg" fixed="top" style={{ padding: '0.5rem 1rem', zIndex: 1000 }}>
-      <Navbar.Brand onClick={() => navigate('/seller')} className="d-flex align-items-center">
-        <Image src={logo} roundedCircle width="40" height="40" alt="Seller Logo" />
-        <span className="ms-2 cursor-pointer">Seller Dashboard</span>
-      </Navbar.Brand>
-      <Nav className="ms-auto absolute right-0 top-4">
-        <div className="d-flex flex-column justify-content-center align-items-end mr-9"> {/* Mostrar el nombre y el correo del vendedor */}
-          <span className="text-white">{userData.name} {userData.lastname}</span>
-          <span className="text-white">{userData.email}</span>
+    <div className="seller-nav">
+      <div className="nav-logo" onClick={() => navigate('/seller')}>
+        <img src={logo} alt="Seller Logo" />
+        <span>Seller Dashboard</span>
+      </div>
+      <div className="nav-user" ref={dropdownRef}>
+        <div className="user-info">
+          <span>{userData.name} {userData.lastname}</span>
+          <span>{userData.email}</span>
         </div>
-        <Dropdown align="end" show={showDropdown} onToggle={toggleDropdown}>
-          <Dropdown.Toggle variant="secondary" id="user-menu-toggle">
+        <div className="dropdown">
+          <button className="dropdown-toggle" onClick={toggleDropdown}>
             <FontAwesomeIcon icon={faUserCircle} size="lg" />
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={() => navigate('/seller/account')}>Account</Dropdown.Item>
-            <Dropdown.Item onClick={handleLogout}>Cerrar Sesión</Dropdown.Item>
-            <Dropdown.Item onClick={handleLogoutAllSessions}>Cerrar Todas las Sesiones</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </Nav>
-    </Navbar>
+          </button>
+          <div className={`dropdown-menu ${showDropdown ? 'show' : ''}`}>
+            <button onClick={handleAccountClick}>Account</button>
+            <button onClick={handleLogout}>Sign Out</button>
+            <button onClick={handleLogoutAllSessions}>Sign Out All Sessions</button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

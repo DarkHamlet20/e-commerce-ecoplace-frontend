@@ -1,0 +1,28 @@
+:root {
+  --primary-color: #28a745; 
+  --secondary-color: #1a74db;
+  --text-color: #ffffff;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --card-background: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --border-color: #ced4da;
+}
+
+.seller-dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.dashboard-content {
+  display: flex;
+  flex-grow: 1;
+  margin-top: 60px; /* Ajuste para el navbar */
+}
+
+/* Contenido principal */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+}

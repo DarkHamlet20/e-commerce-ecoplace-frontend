@@ -1,0 +1,124 @@
+:root {
+  --seller-primary-color: #4caf50; /* Verde para diferenciar del panel admin */
+  --seller-secondary-color: #388e3c;
+  --seller-text-color: #ffffff;
+  --seller-bg-color: #f8f9fa;
+  --seller-shadow-color: rgba(0, 0, 0, 0.1);
+  --seller-border-color: #ced4da;
+}
+
+.seller-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--seller-primary-color);
+  padding: 10px 20px;
+  color: var(--seller-text-color);
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1001; 
+  transition: left 0.3s, width 0.3s;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nav-logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.nav-logo span {
+  margin-left: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-user {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.user-info {
+  text-align: right;
+  margin-right: 15px;
+}
+
+.user-info span {
+  display: block;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  color: var(--seller-text-color);
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  background-color: var(--seller-secondary-color);
+  color: var(--seller-text-color);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  display: none;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+  background-color: var(--seller-primary-color);
+}
+
+@media (max-width: 768px) {
+  .seller-nav {
+    width: 100%;
+    left: 0;
+    padding: 10px 5px;
+  }
+
+  .nav-logo img {
+    margin-right: 0;
+  }
+
+  .nav-logo span {
+    display: none;
+  }
+
+  .nav-user {
+    justify-content: flex-end;
+  }
+}
+
+@media (min-width: 769px) {
+  .seller-sidebar.closed + .seller-nav {
+    left: 0;
+    width: 100%;
+  }
+}
