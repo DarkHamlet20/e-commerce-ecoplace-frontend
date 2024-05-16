@@ -1,0 +1,83 @@
+/* Estilos base */
+.orders-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.order {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.order-header h3 {
+  margin: 0;
+}
+
+.order-body {
+  padding: 10px 0;
+}
+
+.order-body ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.order-body ul li {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.item-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-total {
+  text-align: right;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+  .order-header,
+  .item-details {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-header h3,
+  .order-header p,
+  .item-details p {
+    margin-bottom: 5px;
+  }
+
+  .order-total {
+    text-align: left;
+  }
+}

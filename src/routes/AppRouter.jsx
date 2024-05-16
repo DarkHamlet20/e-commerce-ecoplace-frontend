@@ -7,6 +7,7 @@ import LoginPage from '../auth/login/LoginPage'
 import UserPage from '../views/home/UserPage'
 import ProductPage from '../views/home/ProductPage'
 import CartPage from '../views/home/CartPage'
+import OrdersCustomerPage from '../views/home/OrdersCustomerPage';
 import OrderConfirmationPage from '../views/home/OrderConfirmationPage'
 import SuccessPage from '../views/home/SuccessPages'
 import CancelPage from '../views/home/CancelPage'
@@ -76,6 +77,13 @@ const AppRouter = () => {
           <CartPage />
         </ProtectedRoute>
       } />
+
+      <Route path='/order-customer' element={
+        <ProtectedRoute roles={['Customer']}>
+          <OrdersCustomerPage />
+        </ProtectedRoute>
+      } />
+
       <Route path='/order-confirmation' element={
         <ProtectedRoute roles={['Customer']}>
           <OrderConfirmationPage />
