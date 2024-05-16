@@ -1,0 +1,135 @@
+:root {
+  --seller-primary-color: #4caf50;
+  --seller-secondary-color: #388e3c;
+  --seller-text-color: #ffffff;
+  --seller-bg-color: #f8f9fa;
+  --seller-border-color: #ced4da;
+  --seller-btn-primary-bg: #4caf50;
+  --seller-btn-secondary-bg: #6c757d;
+  --seller-btn-danger-bg: #dc3545;
+  --seller-btn-primary-color: #ffffff;
+  --seller-btn-secondary-color: #ffffff;
+  --seller-btn-danger-color: #ffffff;
+}
+
+.seller-sales-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.seller-main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 250px; /* Ajuste para el sidebar */
+}
+
+.seller-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.seller-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.seller-header h2 {
+  margin: 0;
+  color: var(--seller-primary-color);
+}
+
+.seller-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.seller-btn-secondary {
+  background: var(--seller-btn-secondary-bg);
+  color: var(--seller-btn-secondary-color);
+}
+
+.seller-btn-secondary:hover {
+  background: #5a6268;
+}
+
+.seller-loading {
+  text-align: center;
+  margin-top: 50px;
+  color: var(--seller-primary-color);
+  font-size: 1.5em;
+}
+
+.seller-table-wrapper {
+  margin-top: 20px;
+}
+
+.seller-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.seller-table th,
+.seller-table td {
+  padding: 10px;
+  border: 1px solid var(--seller-border-color);
+  text-align: left;
+}
+
+.seller-table th {
+  background-color: var(--seller-primary-color);
+  color: var(--seller-text-color);
+}
+
+.seller-product-info {
+  display: flex;
+  align-items: center;
+}
+
+.seller-product-image {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.seller-no-sales {
+  text-align: center;
+  color: var(--seller-secondary-color);
+  font-size: 1.2em;
+}
+
+@media (max-width: 768px) {
+  .seller-main-content {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .seller-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .seller-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .seller-product-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .seller-product-image {
+    margin-bottom: 10px;
+  }
+}

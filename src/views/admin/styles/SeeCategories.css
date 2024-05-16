@@ -1,160 +1,153 @@
 :root {
-  --primary-color: #1f3b82;
-  --secondary-color: #1a74db;
-  --text-color: #ffffff;
-  --table-bg-color: #f8f9fa;
-  --warning-color: #ffc107;
-  --danger-color: #dc3545;
+  --admin-primary-color: #1f3b82; /* Azul oscuro */
+  --admin-secondary-color: #1a74db; /* Azul */
+  --admin-text-color: #ffffff; /* Blanco */
+  --admin-table-bg-color: #f8f9fa; /* Fondo de tabla */
+  --admin-warning-color: #ffc107; /* Amarillo */
+  --admin-danger-color: #dc3545; /* Rojo */
 }
 
 .admin-categories-page {
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
   min-height: 100vh;
-  padding-bottom: 80px; 
+  padding-top: 60px; /* Ajuste para el navbar */
 }
 
-.content {
+.admin-content {
   display: flex;
   flex-grow: 1;
 }
 
-.main-content {
+.admin-main-content {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 250px; /* Ajuste para el sidebar */
   padding: 20px;
-  margin-left: 250px;
-  margin-top: 20px; 
 }
 
-.header {
+.admin-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  margin-top: 20px; 
 }
 
-.header h2 {
-  color: #333;
+.admin-header h2 {
+  color: var(--admin-primary-color);
+  text-align: center;
+  flex-grow: 1;
 }
 
-.buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px; 
-}
-
-.btn {
+.admin-btn {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  color: var(--text-color);
+  color: var(--admin-text-color);
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-right: 5px;
 }
 
-.btn-secondary {
+.admin-btn-secondary {
   background-color: #6c757d;
+  order: -1; /* Para posicionar el botón a la izquierda */
 }
 
-.btn-primary {
-  background-color: var(--secondary-color);
+.admin-btn-warning {
+  background-color: var(--admin-warning-color);
 }
 
-.btn-warning {
-  background-color: var(--warning-color);
+.admin-btn-danger {
+  background-color: var(--admin-danger-color);
 }
 
-.btn-danger {
-  background-color: var(--danger-color);
+.admin-search-bar-container {
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-.table-responsive {
+.admin-table-responsive {
   overflow-x: auto;
 }
 
-.categories-table {
+.admin-categories-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.categories-table th,
-.categories-table td {
+.admin-categories-table th,
+.admin-categories-table td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: left;
 }
 
-.categories-table th {
-  background-color: var(--primary-color);
-  color: var(--text-color);
+.admin-categories-table th {
+  background-color: var(--admin-primary-color);
+  color: var(--admin-text-color);
 }
 
-.categories-table tbody tr:nth-child(even) {
-  background-color: var(--table-bg-color);
+.admin-categories-table tbody tr:nth-child(even) {
+  background-color: var(--admin-table-bg-color);
 }
 
-.categories-table .text-end {
+.admin-categories-table .text-end {
   text-align: right;
 }
 
-.text-center {
+.admin-text-center {
   text-align: center;
 }
 
-/* Estilos responsivos */
 @media (max-width: 768px) {
-  .admin-categories-page {
-    margin-top: 0;
-  }
-
-  .main-content {
-    margin-left: 0; /* Quitar margen lateral en pantallas pequeñas */
+  .admin-main-content {
+    margin-left: 0;
     padding: 10px;
-    margin-top: 10px; /* Ajustar margen superior en pantallas pequeñas */
   }
 
-  .header {
+  .admin-header {
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 10px; /* Ajustar margen superior en pantallas pequeñas */
   }
 
-  .buttons {
-    margin-top: 20px; /* Añadir margen superior para separar del navbar */
+  .admin-btn {
+    margin-top: 10px;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
   }
 
-  .btn {
-    width: 48%;
-  }
-
-  .table-responsive {
-    overflow-x: auto;
-  }
-
-  .categories-table th,
-  .categories-table td {
-    padding: 8px;
+  .admin-search-bar-container {
+    width: 100%;
+    margin-bottom: 10px;
+    padding-top: 5px;
   }
 }
 
 @media (max-width: 576px) {
-  .header {
+  .admin-header {
     align-items: center;
   }
 
-  .buttons {
-    flex-direction: column;
-    gap: 10px;
+  .admin-header h2 {
+    margin-bottom: 10px;
   }
 
-  .btn {
+  .admin-btn {
+    margin-top: 10px;
     width: 100%;
+  }
+
+  .admin-search-bar-container {
+    width: 100%;
+    margin-bottom: 10px;
   }
 }

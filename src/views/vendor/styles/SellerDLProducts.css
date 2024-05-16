@@ -1,0 +1,133 @@
+:root {
+  --sldlt-primary-color: #4caf50;
+  --sldlt-secondary-color: #388e3c;
+  --sldlt-text-color: #ffffff;
+  --sldlt-bg-color: #f8f9fa;
+  --sldlt-border-color: #ced4da;
+  --sldlt-btn-primary-bg: #4caf50;
+  --sldlt-btn-secondary-bg: #6c757d;
+  --sldlt-btn-danger-bg: #dc3545;
+  --sldlt-btn-primary-color: #ffffff;
+  --sldlt-btn-secondary-color: #ffffff;
+  --sldlt-btn-danger-color: #ffffff;
+}
+
+.sldlt-product-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.sldlt-main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 250px; /* Ajuste para el sidebar */
+}
+
+.sldlt-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sldlt-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+}
+
+.sldlt-card h2 {
+  margin-bottom: 20px;
+  color: var(--sldlt-primary-color);
+}
+
+.sldlt-card h3 {
+  margin-bottom: 20px;
+  color: var(--sldlt-secondary-color);
+}
+
+.sldlt-image-gallery {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.sldlt-product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.sldlt-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.sldlt-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.sldlt-btn-primary {
+  background: var(--sldlt-btn-primary-bg);
+  color: var(--sldlt-btn-primary-color);
+}
+
+.sldlt-btn-secondary {
+  background: var(--sldlt-btn-secondary-bg);
+  color: var(--sldlt-btn-secondary-color);
+}
+
+.sldlt-btn-danger {
+  background: var(--sldlt-btn-danger-bg);
+  color: var(--sldlt-btn-danger-color);
+}
+
+.sldlt-btn-primary:hover {
+  background: var(--sldlt-secondary-color);
+}
+
+.sldlt-btn-secondary:hover {
+  background: #5a6268;
+}
+
+.sldlt-btn-danger:hover {
+  background: #c82333;
+}
+
+@media (max-width: 768px) {
+  .sldlt-main-content {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .sldlt-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sldlt-btn {
+    width: 100%;
+  }
+}
+
+.sldlt-loading {
+  text-align: center;
+  margin-top: 50px;
+  color: var(--sldlt-primary-color);
+  font-size: 1.5em;
+}

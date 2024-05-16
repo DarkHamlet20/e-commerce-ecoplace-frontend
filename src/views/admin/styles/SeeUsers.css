@@ -1,57 +1,73 @@
 :root {
-  --primary-color: #1f3b82;
-  --secondary-color: #1a74db;
-  --text-color: #ffffff;
+  --primary-color: #1f3b82; /* Azul oscuro */
+  --secondary-color: #1a74db; /* Azul */
+  --text-color: #ffffff; /* Blanco */
+  --warning-color: #ffc107; /* Amarillo */
+  --danger-color: #dc3545; /* Rojo */
+  --border-color: #ced4da;
   --table-bg-color: #f8f9fa;
-  --warning-color: #ffc107;
-  --danger-color: #dc3545;
 }
 
 .admin-users-page {
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
   min-height: 100vh;
-  padding-bottom: 80px; 
+  padding-top: 60px; /* Ajuste para el navbar */
 }
 
-.search-bar-container {
-  width: 100%;
-  margin-bottom: 10px;
-  padding-top: 5px;
-}
-
-.content {
+.users-content {
   display: flex;
   flex-grow: 1;
 }
 
-.main-content {
+.users-main-content {
   flex-grow: 1;
-  padding: 20px;
-  margin-left: 250px; /* Ajuste para el sidebar */
-}
-
-.header {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 20px;
-  margin-top: 20px; /* Añadir margen superior para separar del navbar */
+  margin-left: 250px; /* Ajuste para el sidebar */
+  padding: 20px;
+  padding-bottom: 80px; /* Separación del footer */
 }
 
-.header-top {
+.users-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
+}
+
+.users-header h2 {
+  color: var(--primary-color);
+  text-align: center;
+  flex-grow: 1;
+}
+
+.users-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: var(--text-color);
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.users-btn-secondary {
+  background-color: #6c757d;
+}
+
+.users-btn-warning {
+  background-color: var(--warning-color);
+}
+
+.users-search-bar-container {
   width: 100%;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-.header h2 {
-  color: #333;
-}
-
-.table-responsive {
+.users-table-responsive {
   overflow-x: auto;
 }
 
@@ -63,7 +79,7 @@
 
 .users-table th,
 .users-table td {
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   padding: 10px;
   text-align: left;
 }
@@ -77,7 +93,7 @@
   background-color: var(--table-bg-color);
 }
 
-.text-center {
+.users-text-center {
   text-align: center;
 }
 
@@ -92,70 +108,39 @@
   border-radius: 0.25rem;
 }
 
-.bg-danger {
-  background-color: #dc3545;
+.badge.admin {
+  background-color: var(--danger-color);
 }
 
-.bg-success {
+.badge.customer {
   background-color: #28a745;
 }
 
-.bg-primary {
+.badge.seller {
   background-color: #007bff;
 }
 
-.bg-secondary {
+.badge.secondary {
   background-color: #6c757d;
 }
 
-.btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  color: var(--text-color);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-right: 5px;
-}
-
-.btn-secondary {
-  background-color: #6c757d;
-}
-
-.btn-warning {
-  background-color: var(--warning-color);
-}
-
-.text-center {
-  text-align: center;
-}
-
-/* Estilos responsivos */
 @media (max-width: 768px) {
-  .admin-users-page {
-    margin-top: 30px;
-  }
-
-  .main-content {
-    margin-left: 0; /* Quitar margen lateral en pantallas pequeñas */
+  .users-main-content {
+    margin-left: 0;
     padding: 10px;
   }
 
-  .header {
-    margin-top: 10px; /* Ajustar margen superior en pantallas pequeñas */
-  }
-
-  .header-top {
+  .users-header {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .btn {
+  .users-btn {
     margin-top: 10px;
     width: 100%;
   }
 
-  .search-bar-container {
+  .users-search-bar-container {
     width: 100%;
     margin-bottom: 10px;
     padding-top: 5px;
@@ -163,24 +148,20 @@
 }
 
 @media (max-width: 576px) {
-  .header {
+  .users-header {
     align-items: center;
   }
 
-  .header-top {
-    align-items: center;
-  }
-
-  .header h2 {
+  .users-header h2 {
     margin-bottom: 10px;
   }
 
-  .btn {
+  .users-btn {
     margin-top: 10px;
     width: 100%;
   }
 
-  .search-bar-container {
+  .users-search-bar-container {
     width: 100%;
     margin-bottom: 10px;
   }

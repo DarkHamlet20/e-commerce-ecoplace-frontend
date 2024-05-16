@@ -7,6 +7,7 @@ import SellerSidebarComponent from '../components/SellerSidebarComponent';
 import PaginationComponent from '../../../common/PaginationComponent';
 import SearchBarComponent from '../../../common/SearchbarComponent';
 import SellerFooterComponent from '../components/SellerFooterComponent';
+import '../styles/SellerSeeSales.css';
 
 const SellerSalesPage = () => {
   const [sales, setSales] = useState([]);
@@ -59,31 +60,31 @@ const SellerSalesPage = () => {
   };
 
   return (
-    <div className="d-flex flex-column" style={{ marginTop: '60px' }}>
-      <div className="d-flex min-vh-100">
-        <SellerSidebarComponent />
-        <div className="flex-grow-1">
-          <SellerNavComponent />
-          <div className="container mt-4">
-            <div className="d-flex justify-content-between align-items-center mb-4">
-              <h2>Ventas del Vendedor</h2>
-              <button className="btn btn-info" onClick={() => navigate('/seller')}>
-                Regresar
-              </button>
-            </div>
+    <div className="seller-sales-page">
+      <SellerSidebarComponent />
+      <div className="seller-main-content">
+        <SellerNavComponent />
+        <div className="seller-content">
+          <div className="seller-header">
+            <h2>Ventas del Vendedor</h2>
+            <button className="seller-btn seller-btn-secondary" onClick={() => navigate('/seller')}>
+              Regresar
+            </button>
+          </div>
 
-            <SearchBarComponent
-              value={searchTerm}
-              onChange={handleSearchChange}
-              placeholder="Buscar productos..."
-            />
+          <SearchBarComponent
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Buscar productos..."
+          />
 
-            {loading ? (
-              <Spinner animation="border" /> 
-            ) : (
-              <Table striped bordered hover>
+          {loading ? (
+            <div className="seller-loading">Cargando...</div> 
+          ) : (
+            <div className="seller-table-wrapper">
+              <table className="seller-table">
                 <thead>
-                  <tr className="bg-info text-white">
+                  <tr>
                     <th>Producto</th>
                     <th>Categoria</th>
                     <th>Cliente</th>
@@ -96,19 +97,20 @@ const SellerSalesPage = () => {
                     currentSales.map((sale) => (
                       <tr key={sale._id}>
                         <td>
-                          <div className="d-flex align-items-center">
-                            <Image
+                          <div className="seller-product-info">
+                            <img
                               src={sale.items[0].product?.images[0]} // Imagen del producto
-                              roundedCircle
-                              style={{ height: '40px', width: '40px' }}
+                              className="seller-product-image"
                               alt={sale.items.product?.name}
                             />
-                            <span className="ms-2">{sale.items[0].product?.name}</span>
-                            <span className="ms-2">{sale.items[0].product?.brand}</span>
+                            <div>
+                              <span>{sale.items[0].product?.name}</span>
+                              <span>{sale.items[0].product?.brand}</span>
+                            </div>
                           </div>
                         </td>
                         <td>
-                          <span className="ms-2">{sale.items[0].product?.categories[0].categoryName}</span>
+                          {sale.items[0].product?.categories[0].categoryName}
                         </td>
                         <td>
                           {sale.customer.name} {sale.customer.lastname}
@@ -119,21 +121,21 @@ const SellerSalesPage = () => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="5" className="text-center">No se encontraron ventas.</td>
+                      <td colSpan="5" className="seller-no-sales">No se encontraron ventas.</td>
                     </tr>
                   )}
                 </tbody>
-              </Table>
-            )}
+              </table>
+            </div>
+          )}
 
-            {totalPages > 1 && (
-              <PaginationComponent
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={paginate}
-              />
-            )}
-          </div>
+          {totalPages > 1 && (
+            <PaginationComponent
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={paginate}
+            />
+          )}
         </div>
       </div>
       <SellerFooterComponent />

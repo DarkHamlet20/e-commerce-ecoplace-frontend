@@ -50,23 +50,20 @@ const ADSEECategoriesPages = () => {
   return (
     <div className="admin-categories-page">
       <AdminSidebar />
-      <div className="content">
+      <div className="admin-content">
         <AdminNavComponent />
-        <div className="main-content">
-          <div className="header">
+        <div className="admin-main-content">
+          <div className="admin-header">
+            <Link to="/admin" className="admin-btn admin-btn-secondary">
+              Regresar
+            </Link>
             <h2>Gestión de Categorías</h2>
-            <div className="buttons">
-              <Link to="/admin" className="btn btn-secondary">
-                Regresar
-              </Link>
-              <Link to="/admin/categories/add" className="btn btn-primary">
-                Agregar Categoría
-              </Link>
-            </div>
           </div>
-          <SearchBarComponent value={searchTerm} onChange={handleSearchChange} />
-          <div className="table-responsive">
-            <table className="categories-table">
+          <div className="admin-search-bar-container">
+            <SearchBarComponent value={searchTerm} onChange={handleSearchChange} />
+          </div>
+          <div className="admin-table-responsive">
+            <table className="admin-categories-table">
               <thead>
                 <tr>
                   <th>Categoría</th>
@@ -79,10 +76,10 @@ const ADSEECategoriesPages = () => {
                     <tr key={category._id}>
                       <td>{category.categoryName}</td>
                       <td className="text-end">
-                        <Link to={`/admin/categories/edit/${category._id}`} className="btn bg-primary text-white btn-warning">
+                        <Link to={`/admin/categories/edit/${category._id}`} className="admin-btn admin-btn-warning">
                           Actualizar
                         </Link>
-                        <Link to={`/admin/categories/delete/${category._id}`} className="btn btn-danger">
+                        <Link to={`/admin/categories/delete/${category._id}`} className="admin-btn admin-btn-danger">
                           Eliminar
                         </Link>
                       </td>
@@ -90,7 +87,7 @@ const ADSEECategoriesPages = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="2" className="text-center">No se encontraron categorías.</td>
+                    <td colSpan="2" className="admin-text-center">No se encontraron categorías.</td>
                   </tr>
                 )}
               </tbody>

@@ -69,71 +69,63 @@ const ADSEEUsersPages = () => {
 
   return (
     <div className="admin-users-page">
-      <div className="content">
-        <AdminSidebar />
-        <div className="main-content">
-          <AdminNavComponent />
-          <div className="container">
-            <div className="header">
-              <h2>Gestión de Usuarios</h2>
-              <Link to="/admin" className="btn btn-secondary">
-                Regresar
-              </Link>
-              <div className="search-bar-container">
-                <SearchBarComponent
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                  placeholder="Buscar usuarios..."
-                />
-              </div>
-            </div>
-            <div className="table-responsive">
-              <table className="users-table">
-                <thead>
-                  <tr>
-                    <th>Usuario</th>
-                    <th>Detalles</th>
-                    <th>Fecha de Creación</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentUsers.length > 0 ? (
-                    currentUsers.map((user) => (
-                      <tr key={user._id}>
-                        <td>{user.name} {user.lastname}</td>
-                        <td>
-                          Email: {user.email}<br />
-                          Teléfono: {user.phone}<br />
-                          Dirección: {user.street}, {user.city}, {user.country}, {user.zip}<br />
-                          <span className={`badge ${getRoleBadgeClass(user.role.roleName)}`}>
-                            {user.role.roleName}
-                          </span>
-                        </td>
-                        <td>{new Date(user.createdAt).toLocaleDateString()}</td>
-                        <td>
-                          <Link to={`/admin/users/edit/${user._id}`} className="btn btn-warning">
-                            Editar
-                          </Link>
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="4" className="text-center">No se encontraron usuarios.</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-              {filteredUsers.length > 0 && (
-                <PaginationComponent
-                  currentPage={currentPage}
-                  totalPages={Math.ceil(filteredUsers.length / usersPerPage)}
-                  onPageChange={paginate}
-                />
-              )}
-            </div>
+      <AdminSidebar />
+      <div className="users-content">
+        <AdminNavComponent />
+        <div className="users-main-content">
+          <div className="users-header">
+            <Link to="/admin" className="users-btn users-btn-secondary">Regresar</Link>
+            <h2>Gestión de Usuarios</h2>
           </div>
+          <div className="users-search-bar-container">
+            <SearchBarComponent
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder="Buscar usuarios..."
+            />
+          </div>
+          <div className="users-table-responsive">
+            <table className="users-table">
+              <thead>
+                <tr>
+                  <th>Usuario</th>
+                  <th>Detalles</th>
+                  <th>Fecha de Creación</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentUsers.length > 0 ? (
+                  currentUsers.map((user) => (
+                    <tr key={user._id}>
+                      <td>{user.name} {user.lastname}</td>
+                      <td>
+                        Email: {user.email}<br />
+                        Teléfono: {user.phone}<br />
+                        Dirección: {user.street}, {user.city}, {user.country}, {user.zip}<br />
+                        <span className={`badge ${user.role.roleName.toLowerCase()}`}>
+                          {user.role.roleName}
+                        </span>
+                      </td>
+                      <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                      <td>
+                        <Link to={`/admin/users/edit/${user._id}`} className="users-btn users-btn-warning">Editar</Link>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="4" className="users-text-center">No se encontraron usuarios.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+          <PaginationComponent
+            currentPage={currentPage}
+            totalPages={Math.ceil(filteredUsers.length / usersPerPage)}
+            onPageChange={paginate}
+          />
         </div>
       </div>
       <AdminFooterComponent />

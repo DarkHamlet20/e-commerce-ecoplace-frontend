@@ -5,6 +5,7 @@ import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
 import SellerNavComponent from "../components/SellerNavComponent";
 import SellerSidebarComponent from "../components/SellerSidebarComponent";
 import SellerFooterComponent from "../components/SellerFooterComponent";
+import '../styles/SellerDLProducts.css';
 
 const SLDLTProductPages = () => {
   const [product, setProduct] = useState(null);
@@ -56,46 +57,43 @@ const SLDLTProductPages = () => {
     });
   };
 
-  if (!product) return <div className="text-center">Cargando...</div>;
+  if (!product) return <div className="sldlt-loading">Cargando...</div>;
 
   return (
-    <div className="d-flex flex-column" style={{ marginTop: "60px" }}>
-      <div className="d-flex min-vh-100">
-        <SellerSidebarComponent />
-        <div className="flex-grow-1">
-          <SellerNavComponent />
-          <div className="container mt-4">
-            <div className="card p-5" style={{ maxWidth: "800px", margin: "auto" }}>
-              <h2 className="text-center text-2xl text-gray-800">Eliminar Producto</h2>
-              <h3 className="text-center text-xl">{product.name}</h3>
-              <div className="d-flex justify-content-center my-4">
-                {product.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`Imagen ${index + 1}`}
-                    className="rounded"
-                    style={{ width: "100px", height: "100px", objectFit: "cover", marginRight: "10px" }}
-                  />
-                ))}
-              </div>
-              <p className="text-center">
-                <strong>Categorías:</strong> {product.categories.map((cat) => cat.categoryName).join(", ")}
-              </p>
-              <div className="d-flex justify-content-between mt-4">
-                <Link
-                  to="/seller/products/view"
-                  className="btn btn-info"
-                >
-                  Regresar
-                </Link>
-                <button
-                  className="btn btn-danger"
-                  onClick={deleteProduct}
-                >
-                  Confirmar Eliminación
-                </button>
-              </div>
+    <div className="sldlt-product-page">
+      <SellerSidebarComponent />
+      <div className="sldlt-main-content">
+        <SellerNavComponent />
+        <div className="sldlt-content">
+          <div className="sldlt-card">
+            <h2>Eliminar Producto</h2>
+            <h3>{product.name}</h3>
+            <div className="sldlt-image-gallery">
+              {product.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Imagen ${index + 1}`}
+                  className="sldlt-product-image"
+                />
+              ))}
+            </div>
+            <p>
+              <strong>Categorías:</strong> {product.categories.map((cat) => cat.categoryName).join(", ")}
+            </p>
+            <div className="sldlt-actions">
+              <Link
+                to="/seller/products/view"
+                className="sldlt-btn sldlt-btn-secondary"
+              >
+                Regresar
+              </Link>
+              <button
+                className="sldlt-btn sldlt-btn-danger"
+                onClick={deleteProduct}
+              >
+                Confirmar Eliminación
+              </button>
             </div>
           </div>
         </div>

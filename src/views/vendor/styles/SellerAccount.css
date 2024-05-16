@@ -1,0 +1,100 @@
+:root {
+  --seller-primary-color: #4caf50;
+  --seller-secondary-color: #388e3c;
+  --seller-text-color: #ffffff;
+  --seller-bg-color: #f8f9fa;
+  --seller-border-color: #ced4da;
+  --seller-header-bg: #4caf50;
+  --seller-header-color: #ffffff;
+}
+
+.seller-account-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.seller-main-content {
+  margin-top: 100px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 250px; /* Ajuste para el sidebar */
+}
+
+.seller-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.seller-card {
+  background-color: var(--seller-bg-color);
+  border: 1px solid var(--seller-border-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.seller-card-header {
+  background-color: var(--seller-header-bg);
+  color: var(--seller-header-color);
+  padding: 10px;
+  font-size: 1.5em;
+  text-align: center;
+  border-radius: 8px 8px 0 0;
+}
+
+.seller-card-body {
+  padding: 20px;
+}
+
+.seller-row {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.seller-col {
+  flex: 1;
+  padding: 10px;
+}
+
+.seller-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.seller-list-group {
+  list-style: none;
+  padding: 0;
+}
+
+.seller-list-group-item {
+  padding: 10px;
+  border-bottom: 1px solid var(--seller-border-color);
+}
+
+.seller-list-group-item:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .seller-main-content {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .seller-card {
+    width: 100%;
+  }
+
+  .seller-row {
+    flex-direction: column;
+  }
+
+  .seller-col {
+    padding: 5px;
+  }
+}

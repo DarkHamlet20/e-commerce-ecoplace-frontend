@@ -8,7 +8,6 @@
   --btn-secondary-hover-bg-color: #5a6268;
 }
 
-
 .seller-update-product-page {
   display: flex;
   flex-direction: column;
@@ -109,8 +108,8 @@
 }
 
 .btn-primary {
-  background-color: #4caf50; 
-  color:  #fff;
+  background-color: var(--seller-primary-color);
+  color: var(--seller-text-color);
 }
 
 .btn-primary:hover {
@@ -118,12 +117,12 @@
 }
 
 .btn-secondary {
-  background-color: #6c757d;
-  color: #fff;
+  background-color: var(--btn-secondary-bg-color);
+  color: var(--seller-text-color);
 }
 
 .btn-secondary:hover {
-  background-color: #5a6268;
+  background-color: var(--btn-secondary-hover-bg-color);
 }
 
 @media (max-width: 768px) {
