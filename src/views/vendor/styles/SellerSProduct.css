@@ -1,0 +1,117 @@
+:root {
+  --seller-primary-color: #4caf50; /* Verde */
+  --seller-secondary-color: #388e3c;
+  --seller-text-color: #ffffff;
+  --seller-bg-color: #f8f9fa;
+  --seller-border-color: #ced4da;
+}
+
+.seller-products-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.dashboard-content {
+  display: flex;
+  flex-grow: 1;
+  margin-top: 60px; /* Ajuste para el navbar */
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  margin: auto; /* Ajuste para el sidebar */
+  background-color: var(--seller-bg-color);
+  transition: margin-left 0.3s ease;
+}
+
+.seller-sidebar.show + .main-content {
+  margin-left: 0;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.content-header h2 {
+  margin: 0;
+  color: var(--seller-primary-color);
+}
+
+.action-buttons .btn {
+  margin-left: 10px;
+}
+
+.table-responsive {
+  margin-top: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  border: 1px solid var(--seller-border-color);
+  text-align: left;
+}
+
+.table th {
+  background-color: var(--seller-primary-color);
+  color: var(--seller-text-color);
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+}
+
+.product-image {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.btn-warning {
+  background-color: var(--seller-warning-color);
+  border-color: var(--seller-warning-color);
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: var(--seller-danger-color);
+  border-color: var(--seller-danger-color);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .content-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .action-buttons .btn {
+    margin: 10px 0;
+  }
+
+  .product-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-image {
+    margin-bottom: 10px;
+  }
+}

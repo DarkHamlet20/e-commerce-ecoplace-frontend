@@ -6,6 +6,7 @@ import SellerNavComponent from "../components/SellerNavComponent";
 import SellerSidebarComponent from "../components/SellerSidebarComponent";
 import SellerFooterComponent from "../components/SellerFooterComponent";
 import SearchBarComponent from "../../../common/SearchbarComponent";
+import '../styles/SellerSProduct.css';
 
 const SLSEEProductsPages = () => {
   const [products, setProducts] = useState([]);
@@ -52,103 +53,94 @@ const SLSEEProductsPages = () => {
   );
 
   return (
-    <div className="d-flex flex-column" style={{ marginTop: "60px" }}>
-      <div className="d-flex min-vh-100">
+    <>
+    <div className="seller-products-page">
+      <SellerNavComponent />
+      <div className="dashboard-content">
         <SellerSidebarComponent />
-        <div className="flex-grow-1">
-          <SellerNavComponent />
-          <div className="container mt-16">
-            <div className="d-flex justify-content-between align-items-center mb-4">
-              <h2>Gestión de Productos</h2>
-              <div>
-                <Link to="/seller" className="btn btn-info me-2">
-                  Regresar
-                </Link>
-                <Link to="/seller/products/add" className="btn btn-primary">
-                  Agregar Producto
-                </Link>
-              </div>
+        <div className="main-content">
+          <div className="content-header">
+            <h2>Gestión de Productos</h2>
+            <div className="action-buttons">
+              <Link to="/seller" className="btn btn-secondary">Regresar</Link>
+              <Link to="/seller/products/add" className="btn btn-primary">Agregar Producto</Link>
             </div>
-            <SearchBarComponent
-              value={searchTerm}
-              onChange={handleSearchChange}
-              placeholder="Buscar productos..."
-            />
-            <div className="table-responsive">
-              <table className="table table-striped">
-                <thead>
-                  <tr className="bg-info text-white">
-                    <th>Producto</th>
-                    <th>Precio</th>
-                    <th>Categoría</th>
-                    <th>Stock</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentProducts.length > 0 ? (
-                    currentProducts.map((product) => (
-                      <tr key={product._id}>
-                        <td>
-                          <div className="d-flex align-items-center">
-                            <img
-                              src={product.images[0]}
-                              alt={product.name}
-                              className="rounded-circle"
-                              style={{
-                                height: "40px",
-                                width: "40px",
-                                marginRight: "10px",
-                              }}
-                            />
-                            {product.name}
-                          </div>
-                        </td>
-                        <td>${product.price}</td>
-                        <td>
-                          {product.categories
-                            .map((cat) => cat.categoryName)
-                            .join(", ")}
-                        </td>
-                        <td>{product.countInStock}</td>
-                        <td>
-                          <Link
-                            to={`/seller/products/edit/${product._id}`}
-                            className="btn btn-warning me-2"
-                          >
-                            Actualizar
-                          </Link>
-                          <Link
-                            to={`/seller/products/delete/${product._id}`}
-                            className="btn btn-danger"
-                          >
-                            Eliminar
-                          </Link>
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="5" className="text-center">
-                        No se encontraron productos.
+          </div>
+          <SearchBarComponent
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Buscar productos..."
+          />
+          <div className="table-responsive">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Precio</th>
+                  <th>Categoría</th>
+                  <th>Stock</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentProducts.length > 0 ? (
+                  currentProducts.map((product) => (
+                    <tr key={product._id}>
+                      <td>
+                        <div className="product-info">
+                          <img
+                            src={product.images[0]}
+                            alt={product.name}
+                            className="product-image"
+                          />
+                          {product.name}
+                        </div>
+                      </td>
+                      <td>${product.price}</td>
+                      <td>
+                        {product.categories
+                          .map((cat) => cat.categoryName)
+                          .join(", ")}
+                      </td>
+                      <td>{product.countInStock}</td>
+                      <td>
+                        <Link
+                          to={`/seller/products/edit/${product._id}`}
+                          className="btn btn-warning"
+                        >
+                          Actualizar
+                        </Link>
+                        <Link
+                          to={`/seller/products/delete/${product._id}`}
+                          className="btn btn-danger"
+                        >
+                          Eliminar
+                        </Link>
                       </td>
                     </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-            {totalPages > 1 && (
-              <PaginationComponent
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-              />
-            )}
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="5" className="text-center">
+                      No se encontraron productos.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
+          {totalPages > 1 && (
+            <PaginationComponent
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
+          )}
         </div>
       </div>
       <SellerFooterComponent />
     </div>
+    </>
   );
 };
 
