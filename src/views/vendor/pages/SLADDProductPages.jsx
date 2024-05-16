@@ -5,6 +5,7 @@ import { showConfirmationAlert, showErrorAlert } from "../../../helpers/alerts";
 import SellerNavComponent from "../components/SellerNavComponent";
 import SellerSidebarComponent from "../components/SellerSidebarComponent";
 import SellerFooterComponent from "../components/SellerFooterComponent";
+import '../styles/SellerAddProducts.css';
 
 const SLADDProductPages = () => {
   const [formData, setFormData] = useState({
@@ -93,132 +94,116 @@ const SLADDProductPages = () => {
   };
 
   return (
-    <div className="d-flex flex-column" style={{ marginTop: "60px" }}>
-      <div className="d-flex min-vh-100">
+    <div className="seller-add-product-page">
+      <SellerNavComponent />
+      <div className="dashboard-content">
         <SellerSidebarComponent />
-        <div className="flex-grow-1">
-          <SellerNavComponent />
-          <div className="container mt-4">
-            <div className="d-flex justify-content-between align-items-center">
-              <h2 className="text-2xl font-semibold text-dark">Agregar Producto</h2>
-              <Link to="/seller/products/view" className="btn btn-info">
-                Regresar
-              </Link>
-            </div>
-            <div className="card p-5 mb-3" style={{ maxWidth: "800px", margin: "auto" }}>
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label htmlFor="name" className="form-label">Nombre del Producto</label>
+        <div className="main-content">
+          <div className="content-header">
+            <h2>Agregar Producto</h2>
+            <Link to="/seller/products/view" className="btn btn-secondary">Regresar</Link>
+          </div>
+          <div className="form-container">
+            <form onSubmit={handleSubmit} className="form">
+              <div className="form-group">
+                <label htmlFor="name">Nombre del Producto</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="description">Descripción</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="images">Imágenes</label>
+                <input
+                  type="file"
+                  id="images"
+                  name="images"
+                  multiple
+                  onChange={handleFileChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="brand">Marca</label>
+                <input
+                  type="text"
+                  id="brand"
+                  name="brand"
+                  value={formData.brand}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="price">Precio</label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="categories">Categorías</label>
+                <select
+                  multiple
+                  id="categories"
+                  name="categories"
+                  value={formData.categories}
+                  onChange={handleCategoryChange}
+                >
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.categoryName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="countInStock">Cantidad en Stock</label>
+                <input
+                  type="number"
+                  id="countInStock"
+                  name="countInStock"
+                  value={formData.countInStock}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group checkbox-group">
+                <label htmlFor="isFeatured">
                   <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
+                    type="checkbox"
+                    id="isFeatured"
+                    name="isFeatured"
+                    checked={formData.isFeatured}
+                    onChange={(e) =>
+                      setFormData({ ...formData, isFeatured: e.target.checked })
+                    }
                   />
-                </div>
-                <div>
-                  <label htmlFor="description" className="form-label">Descripción</label>
-                  <textarea
-                    className="form-control"
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="images" className="form-label">Imágenes</label>
-                  <input
-                    type="file"
-                    className="form-control"
-                    id="images"
-                    name="images"
-                    multiple
-                    onChange={handleFileChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="brand" className="form-label">Marca</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="brand"
-                    name="brand"
-                    value={formData.brand}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="price" className="form-label">Precio</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="price"
-                    name="price"
-                    value={formData.price}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="categories" className="form-label">Categorías</label>
-                  <select
-                    multiple
-                    className="form-control"
-                    id="categories"
-                    name="categories"
-                    value={formData.categories}
-                    onChange={handleCategoryChange}
-                  >
-                    {categories.map((category) => (
-                      <option key={category._id} value={category._id}>
-                        {category.categoryName}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="countInStock" className="form-label">Cantidad en Stock</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="countInStock"
-                    name="countInStock"
-                    value={formData.countInStock}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="isFeatured" className="form-label">
-                    <input
-                      type="checkbox"
-                      id="isFeatured"
-                      name="isFeatured"
-                      checked={formData.isFeatured}
-                      onChange={(e) =>
-                        setFormData({ ...formData, isFeatured: e.target.checked })
-                      }
-                    />
-                    ¿Es destacado?
-                  </label>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <Link to="/seller/products/view" className="btn btn-secondary">Regresar</Link>
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                  >
-                    Agregar Producto
-                  </button>
-                </div>
-              </form>
-            </div>
+                  ¿Es destacado?
+                </label>
+              </div>
+              <div className="form-actions">
+                <Link to="/seller/products/view" className="btn btn-secondary">Regresar</Link>
+                <button type="submit" className="btn btn-primary">Agregar Producto</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

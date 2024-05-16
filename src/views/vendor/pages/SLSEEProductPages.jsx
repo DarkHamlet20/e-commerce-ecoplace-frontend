@@ -53,7 +53,6 @@ const SLSEEProductsPages = () => {
   );
 
   return (
-    <>
     <div className="seller-products-page">
       <SellerNavComponent />
       <div className="dashboard-content">
@@ -140,7 +139,6 @@ const SLSEEProductsPages = () => {
       </div>
       <SellerFooterComponent />
     </div>
-    </>
   );
 };
 

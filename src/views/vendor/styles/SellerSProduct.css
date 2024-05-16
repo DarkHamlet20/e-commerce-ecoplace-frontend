@@ -4,6 +4,10 @@
   --seller-text-color: #ffffff;
   --seller-bg-color: #f8f9fa;
   --seller-border-color: #ced4da;
+  --seller-table-header-bg: #4caf50;
+  --seller-table-header-text: #ffffff;
+  --seller-button-warning-bg: #ff9800;
+  --seller-button-danger-bg: #f44336;
 }
 
 .seller-products-page {
@@ -24,6 +28,7 @@
   margin: auto; /* Ajuste para el sidebar */
   background-color: var(--seller-bg-color);
   transition: margin-left 0.3s ease;
+  width: calc(100% - 250px); /* Deja espacio para el sidebar */
 }
 
 .seller-sidebar.show + .main-content {
@@ -63,8 +68,8 @@
 }
 
 .table th {
-  background-color: var(--seller-primary-color);
-  color: var(--seller-text-color);
+  background-color: var(--seller-table-header-bg);
+  color: var(--seller-table-header-text);
 }
 
 .product-info {
@@ -80,21 +85,65 @@
 }
 
 .btn-warning {
-  background-color: var(--seller-warning-color);
-  border-color: var(--seller-warning-color);
+  background-color: var(--seller-button-warning-bg);
+  border: none;
   color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-warning:hover {
+  background-color: darken(var(--seller-button-warning-bg), 10%);
 }
 
 .btn-danger {
-  background-color: var(--seller-danger-color);
-  border-color: var(--seller-danger-color);
+  background-color: var(--seller-button-danger-bg);
+  border: none;
   color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: darken(var(--seller-button-danger-bg), 10%);
+}
+
+/* Estilos para los botones de paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: var(--seller-primary-color);
+  color: var(--seller-text-color);
+  border: 1px solid var(--seller-border-color);
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: var(--seller-secondary-color);
+}
+
+.pagination .active {
+  background-color: var(--seller-secondary-color);
+  color: var(--seller-text-color);
+  border-color: var(--seller-secondary-color);
 }
 
 @media (max-width: 768px) {
   .main-content {
     margin-left: 0;
     padding: 10px;
+    width: 100%; /* Ocupa el 100% del ancho en pantallas pequeñas */
   }
 
   .content-header {
