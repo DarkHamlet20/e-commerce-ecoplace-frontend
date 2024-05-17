@@ -1,59 +1,62 @@
-import { useState } from 'react'
-import './Product.css'
+import { useState } from 'react';
 import axios from "axios";
 import { showAddCart, showErrorAlert } from '../helpers/alerts';
 
-const ProductComponent = ({ id, name, img, description, brand, price }) => {
+const ProductComponent = ({ id, name, img, description, brand, price, onAddToCart }) => {
+  const [quantity, setQuantity] = useState(1);
 
-
+  const handleQuantityChange = (e) => {
+    setQuantity(Number(e.target.value));
+  };
 
   const addToCart = async () => {
     try {
-      // Suponiendo que tienes almacenado el token de autenticación en localStorage
       const token = localStorage.getItem('auth_token');
       await axios.post('http://34.201.92.59:3000/carts/add', 
         {
-          items: [{ product: id, quantity: 1 }] // Ajusta según necesites
+          items: [{ product: id, quantity }] 
         }, 
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      showAddCart()
+      onAddToCart(); // Llama a la función para actualizar el contador del carrito
+      showAddCart();
     } catch (error) {
       console.error("Error al agregar al carrito", error);
-      showErrorAlert("Agregar al carrito","Debes de iniciar sesion para agregar productos al carrito")
+      showErrorAlert("Agregar al carrito", "Debes de iniciar sesion para agregar productos al carrito");
     }
   };
 
-  
   return (
-    <>
-      <main id={id} className="my-10 smm:my-20">
-        <div className="flex items-center h-full">
-          <div className="w-[90%] lg:w-[850px] mx-auto rounded-lg shadow-[0_3px_10px_rgb(0,0,0,0.2)] product-container p-6 ">
-            <div className="mr-3">
-              <picture>
-                <img
-                  src={img}
-                  className=" aspect-square object-contain w-80 rounded-md"
-                  alt=""
-                />
-              </picture>
-            </div>
-            <div>
-              <span>Brand: {brand}</span>
-              <h2 className='text-3xl font-bold my-4'>{name}</h2>
-              <p className='my-5'>{description}</p>
-              <span className='text-2xl'>${price}</span>
-              <div className='flex my-8 mx-auto flex-col w-52 smm:flex smm:flex-row smm:w-full text-center '>
-                <button onClick={addToCart} className='bg-blue-950 text-white rounded-md p-2 text'>Add to Cart</button>
-              </div>
-            </div>
+    <div id={id} className="my-10 smm:my-20">
+      <div className="flex flex-col lg:flex-row items-center h-full">
+        <div className="w-full lg:w-1/2 p-4">
+          <img src={img} className="aspect-square object-contain w-full rounded-md" alt={name} />
+        </div>
+        <div className="w-full lg:w-1/2 p-4">
+          <span className="text-gray-600">Brand: {brand}</span>
+          <h2 className="text-3xl font-bold my-4">{name}</h2>
+          <p className="my-5">{description}</p>
+          <span className="text-2xl font-semibold">${price}</span>
+          <div className="flex my-8 items-center">
+            <input 
+              type="number" 
+              min="1" 
+              value={quantity} 
+              onChange={handleQuantityChange} 
+              className="w-16 text-center p-2 border rounded-md mr-4" 
+            />
+            <button 
+              onClick={addToCart} 
+              className="bg-blue-600 text-white rounded-md p-2 transition hover:bg-blue-700"
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
-      </main>
-    </>
+      </div>
+    </div>
   );
 };
 

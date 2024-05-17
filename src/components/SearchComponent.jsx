@@ -1,15 +1,17 @@
 import React from "react";
 
-export const SearchComponent = () => {
+const SearchComponent = ({ value, onChange }) => {
   return (
-    <>
-      <div className="flex text-white">
+    <div className="flex justify-center mt-4">
+      <div className="relative w-full max-w-xl">
         <input
-          placeholder="Buscar"
+          value={value}
+          onChange={onChange}
+          placeholder="Buscar productos..."
           type="text"
-          className="outline-none p-2 rounded-l smm:m-w-48 md:w-96 text-black"
+          className="w-full p-3 pl-4 pr-12 rounded-full shadow-md border border-gray-300 focus:border-blue-500 focus:outline-none text-black transition duration-300 ease-in-out transform hover:scale-105"
         />
-        <span className="bg-gray-700 rounded-r p-2 border">
+        <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -26,6 +28,8 @@ export const SearchComponent = () => {
           </svg>
         </span>
       </div>
-    </>
+    </div>
   );
 };
+
+export default SearchComponent;

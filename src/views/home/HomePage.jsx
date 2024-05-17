@@ -7,17 +7,21 @@ const HomePage = () => {
   const [showSide, setShowSide] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
-  const handleSide = () => {  //Cambie esto por que al elegir una categoria no esta siendo traida y este era problema
-    setShowSide(showSide)
-  }
+  const handleSide = () => {
+    setShowSide(!showSide);
+  };
 
-  const handleCategorySelect = (categoryId) => {  
+  const handleCategorySelect = (categoryId) => {
     setSelectedCategoryId(categoryId);
+  };
+
+  const resetCategory = () => {
+    setSelectedCategoryId(null);
   };
 
   return (
     <>
-      <LayoutComponent function={handleSide}>
+      <LayoutComponent function={handleSide} resetCategory={resetCategory}>
         <div className="flex justify-center smm:justify-between min-h-[800px]">
           <Sidebar showSide={showSide} onCategorySelect={handleCategorySelect} />
           <CatalogoComponent categoryId={selectedCategoryId} />

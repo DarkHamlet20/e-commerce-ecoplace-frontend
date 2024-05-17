@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useAsyncError } from "react-router-dom";
+
 export const Sidebar = ({ showSide, onCategorySelect }) => {
   const [categories, setCategories] = useState([]);
+  const [drop, setDrop] = useState(false);
 
   const getCategories = async () => {
     const response = await axios.get("http://34.201.92.59:3000/categories");
@@ -13,29 +14,37 @@ export const Sidebar = ({ showSide, onCategorySelect }) => {
     getCategories();
   }, []);
 
-  const [drop, setDrop] = useState(false)
-
   return (
-    <>
-    <h1 onClick={() => setDrop(!drop)}
-     className="p-2 cursor-pointer z-50 absolute left-2 md:hidden">Categories</h1>
-    <div className={` ${drop ? 'relative smm:static' : 'flex flex-col'}`}>
-    <aside className={`${drop ? 'scale-0' : 'scale-100'} md:scale-100 sidebar-sticky mt-14 md:mt-0 md:pt-5 mr-10 absolute px-6 transition-all z-40  flex smm:static left-0 bg-white h-full rounded-r shadow-lg`}>
-      <div className="flex flex-col w-48">
-        <div>
-          {categories.map((category) => (
-            <div
-              className="border-b cursor-pointer hover:text-3xl py-1 transition-all"
-              key={category._id}
-              onClick={() => onCategorySelect(category._id)}
-            >
-              {category.categoryName}
-            </div>
-          ))}
+    <div className="relative md:w-64">
+      <h1
+        onClick={() => setDrop(!drop)}
+        className="p-2 cursor-pointer z-50 absolute left-2 md:hidden text-white bg-blue-600 rounded-md"
+      >
+        Categories
+      </h1>
+      <aside
+        className={`${
+          drop ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0 fixed md:static top-0 left-0 w-64 h-full bg-white shadow-lg transition-transform duration-300 ease-in-out z-40`}
+      >
+        <div className="p-6">
+          <h2 className="text-xl font-semibold mb-4">Categories</h2>
+          <div className="flex flex-col space-y-2">
+            {categories.map((category) => (
+              <div
+                key={category._id}
+                className="cursor-pointer p-2 rounded hover:bg-blue-100 transition-colors"
+                onClick={() => {
+                  onCategorySelect(category._id);
+                  setDrop(false); // Cerrar el sidebar en móvil después de seleccionar una categoría
+                }}
+              >
+                {category.categoryName}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </aside>
+      </aside>
     </div>
-    </>
   );
 };

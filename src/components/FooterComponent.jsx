@@ -9,35 +9,115 @@ import {
 
 const FooterComponent = () => {
   return (
-    <Footer className="relative z-50 bg-primary">
-      <div className="w-full">
-        <div className="grid w-full grid-cols-2 gap-8 px-6 py-8 md:grid-cols-4 ">
-
+    <Footer className="relative z-50 bg-gradient-to-r from-green-600 to-blue-600 text-white py-10">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h4 className="text-white">Help Center</h4>
-            <div className="grid">
-              <a className="text-white" href="">Discord Server</a>
-              <a className="text-white" href="">Twitter</a>
-              <a className="text-white" href="">Facebook</a>
-              <a className="text-white" href="">Contact Us</a>
-            </div>
+            <h4 className="text-lg font-semibold mb-4 text-gray-100">Help Center</h4>
+            <ul className="space-y-2">
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Discord Server
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Facebook
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Contact Us
+                </a>
+              </li>
+            </ul>
           </div>
           <div>
-          <h4 className="text-white">Legal</h4>
-            <div className="grid">
-              <a className="text-white" href="">Privacy Policy</a>
-              <a className="text-white" href="">Licensing</a>
-              <a className="text-white" href="">Terms &amp; Conditions</a>
-            </div>
+            <h4 className="text-lg font-semibold mb-4 text-gray-100">Legal</h4>
+            <ul className="space-y-2">
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Licensing
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Terms &amp; Conditions
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-gray-100">Company</h4>
+            <ul className="space-y-2">
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Careers
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Press
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Blog
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-gray-100">Follow Us</h4>
+            <ul className="space-y-2">
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Facebook
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
+                  Dribbble
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-        <div className="w-full bg-gray-700 px-4 py-6 sm:flex sm:items-center sm:justify-between ">
-          <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
-            <Footer.Icon href="#" icon={BsFacebook} />
-            <Footer.Icon href="#" icon={BsInstagram} />
-            <Footer.Icon href="#" icon={BsTwitter} />
-            <Footer.Icon href="#" icon={BsGithub} />
-            <Footer.Icon href="#" icon={BsDribbble} />
+        <div className="border-t border-gray-500 pt-6 flex flex-col sm:flex-row sm:justify-between items-center">
+          <p className="text-sm text-gray-300 mb-4 sm:mb-0">
+            &copy; {new Date().getFullYear()} EcoPlace. All rights reserved.
+          </p>
+          <div className="flex space-x-6">
+            <Footer.Icon href="#" icon={BsFacebook} className="text-gray-300 hover:text-white transition-colors" />
+            <Footer.Icon href="#" icon={BsInstagram} className="text-gray-300 hover:text-white transition-colors" />
+            <Footer.Icon href="#" icon={BsTwitter} className="text-gray-300 hover:text-white transition-colors" />
+            <Footer.Icon href="#" icon={BsGithub} className="text-gray-300 hover:text-white transition-colors" />
+            <Footer.Icon href="#" icon={BsDribbble} className="text-gray-300 hover:text-white transition-colors" />
           </div>
         </div>
       </div>
@@ -45,4 +125,4 @@ const FooterComponent = () => {
   );
 };
 
-export default FooterComponent
+export default FooterComponent;

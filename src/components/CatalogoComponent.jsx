@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CardComponent from "./CardComponent";
 import PaginationComponent from "../common/PaginationComponent";
-import SearchBarComponent from "../common/SearchbarComponent";
+import SearchComponent from "./SearchComponent";
 
 const CatalogoComponent = ({ categoryId }) => {
   const [products, setProducts] = useState([]);
@@ -47,8 +47,8 @@ const CatalogoComponent = ({ categoryId }) => {
 
   return (
     <main className="my-8 z-10 w-full min-h-full relative">
-      <div className=" w-[80%] mx-auto m-4 shadow-lg">
-        <SearchBarComponent
+      <div className="w-full mx-auto m-4">
+        <SearchComponent
           value={searchTerm}
           onChange={handleSearchChange}
         />
