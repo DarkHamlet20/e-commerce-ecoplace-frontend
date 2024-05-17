@@ -53,16 +53,16 @@ const SLSEEProductsPages = () => {
   );
 
   return (
-    <div className="seller-products-page">
-      <SellerNavComponent />
-      <div className="dashboard-content">
-        <SellerSidebarComponent />
-        <div className="main-content">
-          <div className="content-header">
+    <div className="root-products-see seller-products-page">
+      <SellerSidebarComponent />
+      <div className="seller-main-content">
+        <SellerNavComponent />
+        <div className="seller-content">
+          <div className="seller-header">
             <h2>Gestión de Productos</h2>
-            <div className="action-buttons">
-              <Link to="/seller" className="btn btn-secondary">Regresar</Link>
-              <Link to="/seller/products/add" className="btn btn-primary">Agregar Producto</Link>
+            <div className="seller-action-buttons">
+              <Link to="/seller" className="seller-btn seller-btn-secondary">Regresar</Link>
+              <Link to="/seller/products/add" className="seller-btn seller-btn-primary">Agregar Producto</Link>
             </div>
           </div>
           <SearchBarComponent
@@ -70,8 +70,8 @@ const SLSEEProductsPages = () => {
             onChange={handleSearchChange}
             placeholder="Buscar productos..."
           />
-          <div className="table-responsive">
-            <table className="table">
+          <div className="seller-table-responsive">
+            <table className="seller-table">
               <thead>
                 <tr>
                   <th>Producto</th>
@@ -86,11 +86,11 @@ const SLSEEProductsPages = () => {
                   currentProducts.map((product) => (
                     <tr key={product._id}>
                       <td>
-                        <div className="product-info">
+                        <div className="seller-product-info">
                           <img
                             src={product.images[0]}
                             alt={product.name}
-                            className="product-image"
+                            className="seller-product-image"
                           />
                           {product.name}
                         </div>
@@ -105,13 +105,13 @@ const SLSEEProductsPages = () => {
                       <td>
                         <Link
                           to={`/seller/products/edit/${product._id}`}
-                          className="btn btn-warning"
+                          className="seller-btn seller-btn-warning"
                         >
                           Actualizar
                         </Link>
                         <Link
                           to={`/seller/products/delete/${product._id}`}
-                          className="btn btn-danger"
+                          className="seller-btn seller-btn-danger"
                         >
                           Eliminar
                         </Link>
@@ -120,9 +120,7 @@ const SLSEEProductsPages = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="5" className="text-center">
-                      No se encontraron productos.
-                    </td>
+                    <td colSpan="5" className="seller-no-products">No se encontraron productos.</td>
                   </tr>
                 )}
               </tbody>

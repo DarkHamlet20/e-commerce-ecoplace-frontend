@@ -5,6 +5,7 @@ import { showErrorAlert, showConfirmationAlert } from "../../../helpers/alerts";
 import SellerNavComponent from "../components/SellerNavComponent";
 import SellerSidebarComponent from "../components/SellerSidebarComponent";
 import SellerFooterComponent from "../components/SellerFooterComponent";
+import '../styles/SellerUPDProducts.css'; // Asegúrate de importar el archivo CSS
 
 const SLUPDProductPages = () => {
   const { id } = useParams();

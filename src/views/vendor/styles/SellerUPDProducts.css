@@ -1,11 +1,11 @@
 :root {
-  --seller-primary-color: #4caf50; /* Verde */
-  --seller-secondary-color: #388e3c;
-  --seller-text-color: #ffffff;
-  --seller-bg-color: #f8f9fa;
-  --seller-border-color: #ced4da;
-  --btn-secondary-bg-color: #6c757d;
-  --btn-secondary-hover-bg-color: #5a6268;
+  --upd-product-primary-color: #4caf50; /* Verde */
+  --upd-product-secondary-color: #388e3c;
+  --upd-product-text-color: #ffffff;
+  --upd-product-bg-color: #f8f9fa;
+  --upd-product-border-color: #ced4da;
+  --upd-btn-secondary-bg-color: #6c757d;
+  --upd-btn-secondary-hover-bg-color: #5a6268;
 }
 
 .seller-update-product-page {
@@ -24,8 +24,13 @@
   flex-grow: 1;
   padding: 20px;
   margin: auto; /* Ajuste para el sidebar */
-  background-color: var(--seller-bg-color);
+  background-color: var(--upd-product-bg-color);
   transition: margin-left 0.3s ease;
+  width: calc(100% - 250px);
+}
+
+.seller-sidebar.show + .main-content {
+  margin-left: 0;
 }
 
 .content-header {
@@ -37,7 +42,7 @@
 
 .content-header h2 {
   margin: 0;
-  color: var(--seller-primary-color);
+  color: var(--upd-product-primary-color);
 }
 
 .form-container {
@@ -62,7 +67,7 @@
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
-  color: var(--seller-primary-color);
+  color: var(--upd-product-primary-color);
 }
 
 .form-group input,
@@ -70,7 +75,7 @@
 .form-group textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid var(--seller-border-color);
+  border: 1px solid var(--upd-product-border-color);
   border-radius: 5px;
 }
 
@@ -108,27 +113,28 @@
 }
 
 .btn-primary {
-  background-color: var(--seller-primary-color);
-  color: var(--seller-text-color);
+  background-color: var(--upd-product-primary-color);
+  color: var(--upd-product-text-color);
 }
 
 .btn-primary:hover {
-  background-color: var(--seller-secondary-color);
+  background-color: var(--upd-product-secondary-color);
 }
 
 .btn-secondary {
-  background-color: var(--btn-secondary-bg-color);
-  color: var(--seller-text-color);
+  background-color: var(--upd-btn-secondary-bg-color);
+  color: var(--upd-product-text-color);
 }
 
 .btn-secondary:hover {
-  background-color: var(--btn-secondary-hover-bg-color);
+  background-color: var(--upd-btn-secondary-hover-bg-color);
 }
 
 @media (max-width: 768px) {
   .main-content {
     margin-left: 0;
     padding: 10px;
+    width: 100%; /* Ocupa el 100% del ancho en pantallas pequeñas */
   }
 
   .form-actions {

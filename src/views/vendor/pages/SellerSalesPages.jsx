@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Table, Spinner, Image } from 'react-bootstrap';
 import SellerNavComponent from '../components/SellerNavComponent';
 import SellerSidebarComponent from '../components/SellerSidebarComponent';
 import PaginationComponent from '../../../common/PaginationComponent';
@@ -20,7 +19,7 @@ const SellerSalesPage = () => {
 
   useEffect(() => {
     const fetchSales = async () => {
-      setLoading(true); // Indicar que está cargando
+      setLoading(true);
       try {
         const response = await axios.get('http://34.201.92.59:3000/sales/seller', {
           headers: {
@@ -28,35 +27,33 @@ const SellerSalesPage = () => {
           },
         });
         setSales(response.data);
-        setLoading(false); // Indicar que terminó de cargar
+        setLoading(false);
       } catch (error) {
         console.error('Error al obtener las ventas:', error);
         setLoading(false);
       }
     };
 
-    fetchSales(); // Obtener ventas al montar el componente
-  }, [token]); // Volver a cargar cuando el token cambia
+    fetchSales();
+  }, [token]);
 
   const filteredSales = sales.filter((sale) => {
-    // Buscar productos por nombre
     return sale.items.some((item) => 
       item.product?.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
 
   const totalPages = Math.ceil(filteredSales.length / salesPerPage);
-
   const indexOfLastSale = currentPage * salesPerPage;
   const indexOfFirstSale = indexOfLastSale - salesPerPage;
   const currentSales = filteredSales.slice(indexOfFirstSale, indexOfLastSale);
 
   const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value); // Actualizar el término de búsqueda
+    setSearchTerm(e.target.value);
   };
 
   const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber); // Cambiar la página actual
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -99,9 +96,9 @@ const SellerSalesPage = () => {
                         <td>
                           <div className="seller-product-info">
                             <img
-                              src={sale.items[0].product?.images[0]} // Imagen del producto
+                              src={sale.items[0].product?.images[0]}
                               className="seller-product-image"
-                              alt={sale.items.product?.name}
+                              alt={sale.items[0].product?.name}
                             />
                             <div>
                               <span>{sale.items[0].product?.name}</span>
