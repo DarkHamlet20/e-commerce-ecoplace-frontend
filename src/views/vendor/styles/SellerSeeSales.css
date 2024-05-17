@@ -1,15 +1,15 @@
 :root {
-  --seller-primary-color: #4caf50;
-  --seller-secondary-color: #388e3c;
-  --seller-text-color: #ffffff;
-  --seller-bg-color: #f8f9fa;
-  --seller-border-color: #ced4da;
-  --seller-btn-primary-bg: #4caf50;
-  --seller-btn-secondary-bg: #6c757d;
-  --seller-btn-danger-bg: #dc3545;
-  --seller-btn-primary-color: #ffffff;
-  --seller-btn-secondary-color: #ffffff;
-  --seller-btn-danger-color: #ffffff;
+  --sellerss-primary-color: #4caf50;
+  --sellerss-secondary-color: #388e3c;
+  --sellerss-text-color: #ffffff;
+  --sellerss-bg-color: #f8f9fa;
+  --sellerss-border-color: #ced4da;
+  --sellerss-btn-primary-bg: #4caf50;
+  --sellerss-btn-secondary-bg: #6c757d;
+  --sellerss-btn-danger-bg: #dc3545;
+  --sellerss-btn-primary-color: #ffffff;
+  --sellerss-btn-secondary-color: #ffffff;
+  --sellerss-btn-danger-color: #ffffff;
 }
 
 .seller-sales-page {
@@ -39,7 +39,7 @@
 
 .seller-header h2 {
   margin: 0;
-  color: var(--seller-primary-color);
+  color: var(--sellerss-primary-color);
 }
 
 .seller-btn {
@@ -53,8 +53,8 @@
 }
 
 .seller-btn-secondary {
-  background: var(--seller-btn-secondary-bg);
-  color: var(--seller-btn-secondary-color);
+  background: var(--sellerss-btn-secondary-bg);
+  color: var(--sellerss-btn-secondary-color);
 }
 
 .seller-btn-secondary:hover {
@@ -64,7 +64,7 @@
 .seller-loading {
   text-align: center;
   margin-top: 50px;
-  color: var(--seller-primary-color);
+  color: var(--sellerss-primary-color);
   font-size: 1.5em;
 }
 
@@ -81,13 +81,13 @@
 .seller-table th,
 .seller-table td {
   padding: 10px;
-  border: 1px solid var(--seller-border-color);
+  border: 1px solid var(--sellerss-border-color);
   text-align: left;
 }
 
 .seller-table th {
-  background-color: var(--seller-primary-color);
-  color: var(--seller-text-color);
+  background-color: var(--sellerss-primary-color);
+  color: var(--sellerss-text-color);
 }
 
 .seller-product-info {
@@ -104,7 +104,7 @@
 
 .seller-no-sales {
   text-align: center;
-  color: var(--seller-secondary-color);
+  color: var(--sellerss-secondary-color);
   font-size: 1.2em;
 }
 

@@ -1,7 +1,7 @@
 :root {
-  --seller-primary-color: #4caf50; /* Verde */
-  --seller-secondary-color: #388e3c;
-  --seller-text-color: #4caf50; /* Verde para el texto del footer */
+  --sellerft-primary-color: #4caf50; /* Verde */
+  ---sellerft-secondary-color: #388e3c;
+  --sellerft-text-color: #4caf50; /* Verde para el texto del footer */
   --footer-background-color: #e0e0e0; /* Fondo gris claro para el footer */
   --footer-hover-color: #388e3c; /* Color de hover para los links y los iconos */
 }
@@ -20,7 +20,7 @@ html, body {
 
 .seller-footer {
   background-color: var(--footer-background-color);
-  color: var(--seller-primary-color);
+  color: var(--sellerft-primary-color);
   padding: 20px 0;
   text-align: center;
   margin-top: auto; /* Asegura que el footer esté pegado al fondo */
@@ -53,7 +53,7 @@ html, body {
 }
 
 .footer-link {
-  color: var(--seller-primary-color);
+  color: var(--sellerft-primary-color);
   margin-right: 15px;
   text-decoration: none;
   transition: color 0.3s ease;
@@ -70,7 +70,7 @@ html, body {
 }
 
 .social-link {
-  color: var(--seller-primary-color);
+  color: var(--sellerft-primary-color);
   margin: 0 10px;
   transition: color 0.3s ease;
 }

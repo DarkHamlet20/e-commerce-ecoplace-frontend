@@ -37,11 +37,29 @@ const OrdersCustomerPage = () => {
     setSearchTerm(e.target.value); // Almacenar el término de búsqueda
   };
 
-  const filteredOrders = orders.filter((order) =>
-    `${order.customer?.name} ${order.customer?.lastname} ${order.createdAt}`
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase()) // Filtrar por el término de búsqueda
-  );
+  const filteredOrders = orders.filter((order) => {
+    const term = searchTerm.toLowerCase();
+    const customerName = `${order.customer?.name} ${order.customer?.lastname}`.toLowerCase();
+    const orderDate = new Date(order.createdAt).toLocaleDateString().toLowerCase();
+    const paymentAmount = order.paymentDetails.amountPaid.toString();
+    
+    const matchItems = order.items.some(item => {
+      const productName = item.product?.name?.toLowerCase() || "";
+      const productBrand = item.product?.brand?.toLowerCase() || "";
+      const productCategories = item.product?.categories?.map(cat => cat.categoryName?.toLowerCase()).join(", ") || "";
+      const sellerName = `${item.product?.seller?.name || ""} ${item.product?.seller?.lastname || ""}`.toLowerCase();
+
+      return productName.includes(term) ||
+             productBrand.includes(term) ||
+             productCategories.includes(term) ||
+             sellerName.includes(term);
+    });
+
+    return customerName.includes(term) ||
+           orderDate.includes(term) ||
+           paymentAmount.includes(term) ||
+           matchItems;
+  });
 
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
@@ -52,8 +70,7 @@ const OrdersCustomerPage = () => {
   }
 
   return (
-    <>
-      <LayoutComponent>
+    <LayoutComponent>
       <div className="container mx-auto p-4">
         <h2 className="text-2xl font-bold mb-4">Mis Órdenes</h2>
         <div className="flex justify-between items-center mb-4">
@@ -68,54 +85,54 @@ const OrdersCustomerPage = () => {
         ) : (
           <>
             <div className="overflow-x-auto">
-              <table className="min-w-full bg-white">
+              <table className="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg">
                 <thead>
-                  <tr>
-                    <th className="px-4 py-2">Cliente</th>
-                    <th className="px-4 py-2">Estado</th>
-                    <th className="px-4 py-2">Productos</th>
-                    <th className="px-4 py-2">Fecha de Creación</th>
-                    <th className="px-4 py-2">Monto Pagado</th>
+                  <tr className="bg-gray-800 text-white text-left">
+                    <th className="px-6 py-3">Cliente</th>
+                    <th className="px-6 py-3">Estado</th>
+                    <th className="px-6 py-3">Productos</th>
+                    <th className="px-6 py-3">Fecha de Creación</th>
+                    <th className="px-6 py-3">Monto Pagado</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentOrders.map((order) =>
                     order.items.map((item, index) => (
-                      <tr key={`${order._id}-${index}`}>
+                      <tr key={`${order._id}-${index}`} className="border-t">
                         {index === 0 && (
-                          <td rowSpan={order.items.length} className="border px-4 py-2">
+                          <td rowSpan={order.items.length} className="border px-6 py-4 whitespace-nowrap">
                             {order.customer ? `${order.customer.name} ${order.customer.lastname}` : "Cliente no disponible"}
                           </td>
                         )}
                         {index === 0 && (
-                          <td rowSpan={order.items.length} className="border px-4 py-2">{order.status}</td>
+                          <td rowSpan={order.items.length} className="border px-6 py-4 whitespace-nowrap">{order.status}</td>
                         )}
-                        <td className="border px-4 py-2">
-                          <div className="flex">
+                        <td className="border px-6 py-4">
+                          <div className="flex items-center">
                             <img
-                              src={item.product.images[0]}
-                              alt={item.product.name}
-                              className="w-16 h-16 object-cover mr-4"
+                              src={item.product?.images[0] || 'placeholder.jpg'}
+                              alt={item.product?.name || 'Producto no disponible'}
+                              className="w-16 h-16 object-cover rounded mr-4"
                             />
                             <div>
-                              <p className="font-medium">{item.product.name}</p>
-                              <p>Descripción: {item.product.description}</p>
-                              <p>Marca: {item.product.brand}</p>
-                              <p>Categorías: {item.product.categories.map((cat) => cat.categoryName).join(", ")}</p>
-                              <p>Vendedor: {item.product.seller.name} {item.product.seller.lastname}</p>
-                              <p>Precio: ${item.product.price}</p>
+                              <p className="font-medium">{item.product?.name || 'Producto no disponible'}</p>
+                              <p>Descripción: {item.product?.description || 'No disponible'}</p>
+                              <p>Marca: {item.product?.brand || 'No disponible'}</p>
+                              <p>Categorías: {item.product?.categories?.map((cat) => cat.categoryName).join(", ") || 'No disponible'}</p>
+                              <p>Vendedor: {item.product?.seller?.name || ''} {item.product?.seller?.lastname || ''}</p>
+                              <p>Precio: ${item.product?.price || '0'}</p>
                               <p>Cantidad: {item.quantity}</p>
-                              <p>Subtotal: ${item.quantity * item.product.price}</p>
+                              <p>Subtotal: ${item.quantity * (item.product?.price || 0)}</p>
                             </div>
                           </div>
                         </td>
                         {index === 0 && (
-                          <td rowSpan={order.items.length} className="border px-4 py-2">
+                          <td rowSpan={order.items.length} className="border px-6 py-4 whitespace-nowrap">
                             {new Date(order.createdAt).toLocaleDateString()}
                           </td>
                         )}
                         {index === 0 && (
-                          <td rowSpan={order.items.length} className="border px-4 py-2">
+                          <td rowSpan={order.items.length} className="border px-6 py-4 whitespace-nowrap">
                             ${order.paymentDetails.amountPaid}
                           </td>
                         )}
@@ -124,7 +141,7 @@ const OrdersCustomerPage = () => {
                   )}
                   {currentOrders.length === 0 && (
                     <tr>
-                      <td colSpan="5" className="text-center border px-4 py-2">No se encontraron órdenes.</td>
+                      <td colSpan="5" className="text-center border px-6 py-4">No se encontraron órdenes.</td>
                     </tr>
                   )}
                 </tbody>
@@ -139,7 +156,6 @@ const OrdersCustomerPage = () => {
         )}
       </div>
     </LayoutComponent>
-    </>
   );
 };
 

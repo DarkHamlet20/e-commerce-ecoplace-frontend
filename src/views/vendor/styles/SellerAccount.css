@@ -1,11 +1,11 @@
 :root {
-  --seller-primary-color: #4caf50;
-  --seller-secondary-color: #388e3c;
-  --seller-text-color: #ffffff;
-  --seller-bg-color: #f8f9fa;
-  --seller-border-color: #ced4da;
-  --seller-header-bg: #4caf50;
-  --seller-header-color: #ffffff;
+  --sellerac-primary-color: #4caf50;
+  --sellerac-secondary-color: #388e3c;
+  --sellerac-text-color: #ffffff;
+  --sellerac-bg-color: #f8f9fa;
+  --sellerac-border-color: #ced4da;
+  --sellerac-header-bg: #4caf50;
+  --sellerac-header-color: #ffffff;
 }
 
 .seller-account-page {
@@ -29,7 +29,7 @@
 
 .seller-card {
   background-color: var(--seller-bg-color);
-  border: 1px solid var(--seller-border-color);
+  border: 1px solid var(--sellerac-border-color);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -38,8 +38,8 @@
 }
 
 .seller-card-header {
-  background-color: var(--seller-header-bg);
-  color: var(--seller-header-color);
+  background-color: var(--sellerac-header-bg);
+  color: var(--sellerac-header-color);
   padding: 10px;
   font-size: 1.5em;
   text-align: center;
@@ -73,7 +73,7 @@
 
 .seller-list-group-item {
   padding: 10px;
-  border-bottom: 1px solid var(--seller-border-color);
+  border-bottom: 1px solid var(--sellerac-border-color);
 }
 
 .seller-list-group-item:last-child {

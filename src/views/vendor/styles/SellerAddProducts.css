@@ -1,11 +1,11 @@
 :root {
-  --seller-primary-color: #4caf50; 
-  --seller-secondary-color: #388e3c;
-  --seller-text-color: #ffffff;
-  --seller-bg-color: #f8f9fa;
-  --seller-border-color: #ced4da;
-  --btn-secondary-bg-color: #6c757d;
-  --btn-secondary-hover-bg-color: #5a6268;
+  --sellerad-primary-color: #4caf50; 
+  --sellerad-secondary-color: #388e3c;
+  --sellerad-text-color: #ffffff;
+  --selleradbg-color: #f8f9fa;
+  --sellerad-border-color: #ced4da;
+  --btnad-secondary-bg-color: #6c757d;
+  --btnad-secondary-hover-bg-color: #5a6268;
 }
 
 
@@ -25,7 +25,7 @@
   flex-grow: 1;
   padding: 20px;
   margin: auto; /* Ajuste para el sidebar */
-  background-color: var(--seller-bg-color);
+  background-color: var(--selleradbg-color);
   transition: margin-left 0.3s ease;
 }
 
@@ -38,7 +38,7 @@
 
 .content-header h2 {
   margin: 0;
-  color: var(--seller-primary-color);
+  color: var(--sellerad-primary-color);
 }
 
 .form-container {
@@ -63,7 +63,7 @@
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
-  color: var(--seller-primary-color);
+  color: var(--sellerad-primary-color);
 }
 
 .form-group input,
@@ -71,7 +71,7 @@
 .form-group select {
   width: 100%;
   padding: 8px;
-  border: 1px solid var(--seller-border-color);
+  border: 1px solid var(--sellerad-border-color);
   border-radius: 4px;
 }
 
@@ -102,12 +102,12 @@
 }
 
 .btn-primary {
-  background-color: var(--seller-primary-color);
+  background-color: var(--sellerad-primary-color);
   color: #fff;
 }
 
 .btn-primary:hover {
-  background-color: var(--seller-secondary-color);
+  background-color: var(--sellerad-secondary-color);
 }
 
 .btn-secondary {

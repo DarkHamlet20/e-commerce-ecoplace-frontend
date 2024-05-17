@@ -1,11 +1,11 @@
 :root {
-  --seller-primary-color: #4caf50; /* Verde */
-  --seller-secondary-color: #388e3c;
-  --seller-text-color: #ffffff;
-  --seller-bg-color: #f8f9fa;
-  --seller-border-color: #ced4da;
-  --btn-secondary-bg-color: #6c757d;
-  --btn-secondary-hover-bg-color: #5a6268;
+  --sellerds-primary-color: #4caf50; /* Verde */
+  --sellerds-secondary-color: #388e3c;
+  --sellerds-text-color: #ffffff;
+  --sellerds-bg-color: #f8f9fa;
+  --sellerds-border-color: #ced4da;
+  --btnds-secondary-bg-color: #6c757d;
+  --btnds-secondary-hover-bg-color: #5a6268;
 }
 
 

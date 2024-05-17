@@ -1,19 +1,19 @@
 :root {
-  --seller-primary-color: #4caf50; /* Verde para diferenciar del panel admin */
-  --seller-secondary-color: #388e3c;
-  --seller-text-color: #ffffff;
-  --seller-bg-color: #f8f9fa;
-  --seller-shadow-color: rgba(0, 0, 0, 0.1);
-  --seller-border-color: #ced4da;
+  --sellernv-primary-color: #4caf50; /* Verde para diferenciar del panel admin */
+  --sellernv-secondary-color: #388e3c;
+  --sellernv-text-color: #ffffff;
+  --sellernv-bg-color: #f8f9fa;
+  ---sellernv-shadow-color: rgba(0, 0, 0, 0.1);
+  --sellernv-border-color: #ced4da;
 }
 
 .seller-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--seller-primary-color);
+  background-color: var(--sellernv-primary-color);
   padding: 10px 20px;
-  color: var(--seller-text-color);
+  color: var(--sellernv-text-color);
   position: fixed;
   width: 100%;
   left: 0;
@@ -62,15 +62,15 @@
 .dropdown-toggle {
   background: none;
   border: none;
-  color: var(--seller-text-color);
+  color: var(--sellernv-text-color);
   cursor: pointer;
 }
 
 .dropdown-menu {
   position: absolute;
   right: 0;
-  background-color: var(--seller-secondary-color);
-  color: var(--seller-text-color);
+  background-color: var(--sellernv-secondary-color);
+  color: var(--sellernv-text-color);
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -93,7 +93,7 @@
 }
 
 .dropdown-menu button:hover {
-  background-color: var(--seller-primary-color);
+  background-color: var(--sellernv-primary-color);
 }
 
 @media (max-width: 768px) {

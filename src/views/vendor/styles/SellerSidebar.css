@@ -1,15 +1,15 @@
 :root {
-  --seller-primary-color: #4caf50; /* Verde */
-  --seller-secondary-color: #388e3c;
-  --seller-text-color: #ffffff;
-  --seller-bg-color: #f8f9fa;
-  --seller-shadow-color: rgba(0, 0, 0, 0.1);
-  --seller-border-color: #ced4da;
+  --sellersb-primary-color: #4caf50; /* Verde */
+  --sellersb-secondary-color: #388e3c;
+  --sellersb-text-color: #ffffff;
+  --sellersb-bg-color: #f8f9fa;
+  --sellersb-shadow-color: rgba(0, 0, 0, 0.1);
+  --sellersb-border-color: #ced4da;
 }
 
 .seller-sidebar {
-  background-color: var(--seller-primary-color);
-  color: var(--seller-text-color);
+  background-color: var(--sellersb-primary-color);
+  color: var(--sellersb-text-color);
   position: fixed;
   top: 60px; /* Ajuste para el navbar */
   left: 0;
@@ -28,7 +28,7 @@
 }
 
 .seller-sidebar .menu-item {
-  background-color: var(--seller-primary-color);
+  background-color: var(--sellersb-primary-color);
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -37,15 +37,15 @@
 
 .seller-sidebar .menu-item:hover,
 .seller-sidebar .menu-item.active {
-  background-color: var(--seller-secondary-color);
+  background-color: var(--sellersb-secondary-color);
 }
 
 .seller-sidebar .submenu {
-  background-color: var(--seller-primary-color);
+  background-color: var(--sellersb-primary-color);
 }
 
 .seller-sidebar .submenu-item {
-  background-color: var(--seller-primary-color);
+  background-color: var(--sellersb-primary-color);
   border: none;
   padding: 10px 30px;
   cursor: pointer;
@@ -53,7 +53,7 @@
 }
 
 .seller-sidebar .submenu-item:hover {
-  background-color: var(--seller-secondary-color);
+  background-color: var(--sellersb-secondary-color);
 }
 
 .sidebar-toggle {
@@ -61,7 +61,7 @@
   position: fixed;
   top: 15px;
   left: 15px; /* Cambiado a la izquierda */
-  background-color: var(--seller-primary-color);
+  background-color: var(--sellersb-primary-color);
   color: white;
   padding: 8px;
   border-radius: 50%;
