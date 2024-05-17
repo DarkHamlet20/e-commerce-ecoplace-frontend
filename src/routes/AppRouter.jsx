@@ -34,6 +34,7 @@ import SLDLTProductPages from '../views/vendor/pages/SLDLTProductPages';
 import SellerSalesPage from '../views/vendor/pages/SellerSalesPages';
 import AdminPagesAccount from '../views/admin/pages/AdminPagesAccount';
 import SellerPagesAccount from '../views/vendor/pages/SellerPagesAccount';
+import OrderDetailsPage from '../views/home/OrderDetailsPage';
 
 const AppRouter = () => {
 
@@ -84,12 +85,17 @@ const AppRouter = () => {
         </ProtectedRoute>
       } />
 
+      <Route path='/order/:orderId' element={
+        <ProtectedRoute roles={['Customer']}>
+          <OrderDetailsPage />
+        </ProtectedRoute>
+      } />
+
       <Route path='/order-confirmation' element={
         <ProtectedRoute roles={['Customer']}>
           <OrderConfirmationPage />
         </ProtectedRoute>
       } />
-
       
       {/* Rutas para los Admins */}
       {/* Dashboard del Admin */}

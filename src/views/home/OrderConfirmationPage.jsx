@@ -16,7 +16,11 @@ const OrderConfirmationPage = () => {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
         });
-        setOrder(response.data[0]); // Assume we want to show the latest order
+        if (response.data.length > 0) {
+          setOrder(response.data[0]); // Assume we want to show the latest order
+        } else {
+          setError("No orders found");
+        }
         setLoading(false);
       } catch (error) {
         setError("Failed to fetch order details");
@@ -35,51 +39,70 @@ const OrderConfirmationPage = () => {
     return <div>Error: {error}</div>;
   }
 
+  const calculateTotal = () => {
+    return order.items.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toFixed(2);
+  };
+
   return (
     <>
       <LayoutComponent>
-        <div className="min-h-screen bg-gray-900 flex justify-center items-center px-6 py-8">
-          <div className="w-full max-w-3xl bg-white rounded-lg shadow-xl p-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
-              Order Confirmation
+        <div className="min-h-screen bg-gray-100 flex justify-center items-center px-6 py-8">
+          <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-8">
+            <h2 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
+              Confirmación de Orden
             </h2>
             {order ? (
-              <div>
-                <h3 className="text-lg font-semibold">Order Details:</h3>
-                <ul>
-                  <li>Order ID: {order._id}</li>
-                  <li>Status: {order.status}</li>
-                  <li>Total: ${order.total.toFixed(2)}</li>
-                  <li>
-                    Payment Method: {order.paymentDetails.paymentMethodId}
-                  </li>
-                  <li>
-                    Card Last Four Digits:{" "}
-                    {order.paymentDetails.cardLastFourDigits}
-                  </li>
-                  <li>
-                    Items Ordered:{" "}
-                    {order.items.map((item) => (
-                      <div key={item.product._id}>
-                        {item.product.name} - {item.quantity} x $
-                        {item.product.price.toFixed(2)}
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold text-gray-700">Detalles de la Orden:</h3>
+                  <div className="border-t border-gray-300"></div>
+                  <div className="flex flex-col md:flex-row justify-between">
+                    <span><strong>ID de Orden:</strong> {order._id}</span>
+                    <span><strong>Estado:</strong> {order.status}</span>
+                    <span><strong>Total:</strong> ${order.total.toFixed(2)}</span>
+                    <span><strong>Método de Pago:</strong> {order.paymentDetails.paymentMethodId}</span>
+                    <span><strong>Últimos Cuatro Dígitos de la Tarjeta:</strong> {order.paymentDetails.cardLastFourDigits}</span>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold text-gray-700">Productos Comprados:</h3>
+                  <div className="border-t border-gray-300"></div>
+                  {order.items.map((item) => (
+                    <div key={item.product._id} className="flex flex-col md:flex-row justify-between items-center">
+                      <div className="flex items-center space-x-4">
+                        <img src={item.product.images[0]} alt={item.product.name} className="w-20 h-20 object-cover rounded-md" />
+                        <div>
+                          <h4 className="text-lg font-semibold">{item.product.name}</h4>
+                          <p className="text-sm text-gray-600">Vendedor: {item.product.seller?.name} {item.product.seller?.lastname}</p>
+                          <p className="text-sm text-gray-600">Cantidad: {item.quantity}</p>
+                        </div>
                       </div>
-                    ))}
-                  </li>
-                </ul>
-                <div className="mt-4">
-                  <h4 className="text-lg font-semibold">Shipping Address:</h4>
-                  <p>
-                    {order.customer.street}, {order.customer.city},{" "}
-                    {order.customer.country}, {order.customer.zip}
+                      <p className="text-lg font-semibold">${item.product.price.toFixed(2)} x {item.quantity} = ${(item.product.price * item.quantity).toFixed(2)}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold text-gray-700">Dirección de Envío:</h3>
+                  <div className="border-t border-gray-300"></div>
+                  <p className="text-gray-600">
+                    {order.customer.street}, {order.customer.city}, {order.customer.country}, {order.customer.zip}
                   </p>
                 </div>
-                <div className="mt-6">
+
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold text-gray-700">Fecha de Compra:</h3>
+                  <div className="border-t border-gray-300"></div>
+                  <p className="text-gray-600">{new Date(order.createdAt).toLocaleDateString()}</p>
+                </div>
+
+                <div className="mt-6 text-center">
                   <Link
                     to="/"
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                   >
-                    Go to Home
+                    Volver a la Página Principal
                   </Link>
                 </div>
               </div>

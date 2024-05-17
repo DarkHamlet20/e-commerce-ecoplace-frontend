@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import LayoutComponent from "../../layout/LayoutMain";
 import PaginationComponent from "../../common/PaginationComponent";
 import SearchBarComponent from "../../common/SearchbarComponent";
@@ -8,7 +9,7 @@ const OrdersCustomerPage = () => {
   const [orders, setOrders] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [ordersPerPage] = useState(2);
+  const [ordersPerPage] = useState(5); // Número de órdenes por página
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const OrdersCustomerPage = () => {
           "http://34.201.92.59:3000/orders/user/all",
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("auth_token")}`, // Asumiendo que el token se almacena en localStorage
+              Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
             },
           }
         );
@@ -34,7 +35,7 @@ const OrdersCustomerPage = () => {
   }, []);
 
   const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value); // Almacenar el término de búsqueda
+    setSearchTerm(e.target.value);
   };
 
   const filteredOrders = orders.filter((order) => {
@@ -65,6 +66,8 @@ const OrdersCustomerPage = () => {
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
   const currentOrders = filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder);
 
+  const totalPages = Math.ceil(filteredOrders.length / ordersPerPage);
+
   if (loading) {
     return <div className="text-center text-xl py-10">Cargando órdenes...</div>;
   }
@@ -84,72 +87,40 @@ const OrdersCustomerPage = () => {
           <p>No tienes órdenes.</p>
         ) : (
           <>
-            <div className="overflow-x-auto">
-              <table className="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg">
-                <thead>
-                  <tr className="bg-gray-800 text-white text-left">
-                    <th className="px-6 py-3">Cliente</th>
-                    <th className="px-6 py-3">Estado</th>
-                    <th className="px-6 py-3">Productos</th>
-                    <th className="px-6 py-3">Fecha de Creación</th>
-                    <th className="px-6 py-3">Monto Pagado</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentOrders.map((order) =>
-                    order.items.map((item, index) => (
-                      <tr key={`${order._id}-${index}`} className="border-t">
-                        {index === 0 && (
-                          <td rowSpan={order.items.length} className="border px-6 py-4 whitespace-nowrap">
-                            {order.customer ? `${order.customer.name} ${order.customer.lastname}` : "Cliente no disponible"}
-                          </td>
-                        )}
-                        {index === 0 && (
-                          <td rowSpan={order.items.length} className="border px-6 py-4 whitespace-nowrap">{order.status}</td>
-                        )}
-                        <td className="border px-6 py-4">
-                          <div className="flex items-center">
-                            <img
-                              src={item.product?.images[0] || 'placeholder.jpg'}
-                              alt={item.product?.name || 'Producto no disponible'}
-                              className="w-16 h-16 object-cover rounded mr-4"
-                            />
-                            <div>
-                              <p className="font-medium">{item.product?.name || 'Producto no disponible'}</p>
-                              <p>Descripción: {item.product?.description || 'No disponible'}</p>
-                              <p>Marca: {item.product?.brand || 'No disponible'}</p>
-                              <p>Categorías: {item.product?.categories?.map((cat) => cat.categoryName).join(", ") || 'No disponible'}</p>
-                              <p>Vendedor: {item.product?.seller?.name || ''} {item.product?.seller?.lastname || ''}</p>
-                              <p>Precio: ${item.product?.price || '0'}</p>
-                              <p>Cantidad: {item.quantity}</p>
-                              <p>Subtotal: ${item.quantity * (item.product?.price || 0)}</p>
-                            </div>
-                          </div>
-                        </td>
-                        {index === 0 && (
-                          <td rowSpan={order.items.length} className="border px-6 py-4 whitespace-nowrap">
-                            {new Date(order.createdAt).toLocaleDateString()}
-                          </td>
-                        )}
-                        {index === 0 && (
-                          <td rowSpan={order.items.length} className="border px-6 py-4 whitespace-nowrap">
-                            ${order.paymentDetails.amountPaid}
-                          </td>
-                        )}
-                      </tr>
-                    ))
-                  )}
-                  {currentOrders.length === 0 && (
-                    <tr>
-                      <td colSpan="5" className="text-center border px-6 py-4">No se encontraron órdenes.</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
+            <div className="space-y-4">
+              {currentOrders.map((order) => (
+                <div key={order._id} className="bg-white shadow-md rounded-lg p-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <div className="text-sm text-gray-600">
+                      <p>Fecha de Orden: {new Date(order.createdAt).toLocaleDateString()}</p>
+                      <p>Total de la Orden: ${order.paymentDetails.amountPaid}</p>
+                      <p>Número de Orden: {order._id}</p>
+                    </div>
+                    <Link to={`/order/${order._id}`} className="text-blue-600">Ver detalles de la orden</Link>
+                  </div>
+                  <div className="border-t pt-2">
+                    {order.items.map((item, index) => (
+                      <div key={`${order._id}-${item.product?._id || index}`} className="flex items-center mb-4">
+                        <img
+                          src={item.product?.images[0] || 'placeholder.jpg'}
+                          alt={item.product?.name || 'Producto no disponible'}
+                          className="w-20 h-20 object-cover rounded mr-4"
+                        />
+                        <div className="flex-grow">
+                          <p className="font-medium">{item.product?.name || 'Producto no disponible'}</p>
+                          <p className="text-sm text-gray-600">Vendedor: {item.product?.seller?.name || ''} {item.product?.seller?.lastname || ''}</p>
+                          <p className="text-sm text-gray-600">Cantidad: {item.quantity}</p>
+                          <p className="text-sm text-gray-600">Subtotal: ${(item.quantity * (item.product?.price || 0)).toFixed(2)}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
             <PaginationComponent
               currentPage={currentPage}
-              totalPages={Math.ceil(filteredOrders.length / ordersPerPage)}
+              totalPages={totalPages}
               onPageChange={(pageNumber) => setCurrentPage(pageNumber)}
             />
           </>
