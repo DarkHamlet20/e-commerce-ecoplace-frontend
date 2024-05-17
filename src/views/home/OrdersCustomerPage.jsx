@@ -9,7 +9,7 @@ const OrdersCustomerPage = () => {
   const [orders, setOrders] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [ordersPerPage] = useState(5); // Número de órdenes por página
+  const [ordersPerPage] = useState(3); // Número de órdenes por página
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

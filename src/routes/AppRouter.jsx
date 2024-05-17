@@ -35,6 +35,7 @@ import SellerSalesPage from '../views/vendor/pages/SellerSalesPages';
 import AdminPagesAccount from '../views/admin/pages/AdminPagesAccount';
 import SellerPagesAccount from '../views/vendor/pages/SellerPagesAccount';
 import OrderDetailsPage from '../views/home/OrderDetailsPage';
+import UserUpdateComponent from '../components/UserUpdateComponent';
 
 const AppRouter = () => {
 
@@ -64,6 +65,12 @@ const AppRouter = () => {
       <Route path='/user' element={
         <ProtectedRoute roles={['Admin', 'Customer', 'Seller']}>
           <UserPage />
+        </ProtectedRoute>
+      } />
+
+      <Route path='/account-settings' element={
+        <ProtectedRoute roles={['Customer']}>
+          <UserUpdateComponent />
         </ProtectedRoute>
       } />
 
