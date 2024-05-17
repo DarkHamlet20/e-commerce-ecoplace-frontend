@@ -27,6 +27,7 @@
   padding: 20px;
   justify-content: flex-start; /* Subir el contenido hacia arriba */
   align-items: center; /* Centrar el contenido horizontalmente */
+  width: 120px;
 }
 
 .update-user-form-container {
@@ -50,12 +51,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 80px;
   margin-bottom: 30px; /* Aumentar el espacio debajo del header */
 }
 
 .update-user-header h1 {
   color: #333;
   margin: 0;
+  flex-grow: 1;
+  text-align: center; /* Centrar el título */
+}
+
+.update-user-btn-secondary {
+  margin-left: 0; /* Alinear el botón a la izquierda */
 }
 
 .update-user-form-group {
@@ -108,16 +116,20 @@
 
   .update-user-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .update-user-header h1 {
     margin-bottom: 20px; /* Aumentar el margen inferior */
   }
 
+  .update-user-btn-secondary {
+    width: 100%;
+    margin-bottom: 10px; /* Añadir espacio entre los botones */
+  }
+
   .update-user-btn {
     width: 100%;
     text-align: center;
-    margin-bottom: 10px; /* Añadir espacio entre los botones */
   }
 }

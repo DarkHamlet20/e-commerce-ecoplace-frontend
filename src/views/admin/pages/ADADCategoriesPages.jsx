@@ -48,20 +48,20 @@ const ADADCategoriesPage = () => {
   };
 
   return (
-    <div className="categories-page categories-root">
+    <div className="categoriesad-page categoriesad-root">
       <AdminSidebar />
-      <div className="categories-content-container">
+      <div className="categoriesad-content-container">
         <AdminNavComponent />
-        <div className="categories-main-content">
-          <div className="categories-header">
-            <Link to="/admin/categories/view" className="categories-btn categories-btn-secondary">Regresar</Link>
-            <h2 className="categories-title">Agregar Categoría</h2>
+        <div className="categoriesad-main-content">
+          <div className="categoriesad-header">
+            <Link to="/admin/categories/view" className="categoriesad-btn categoriesad-btn-secondary">Regresar</Link>
+            <h2 className="categoriesad-title">Agregar Categoría</h2>
           </div>
-          <div className="categories-form-wrapper">
-            <div className="categories-form-container">
-              <div className="categories-card">
+          <div className="categoriesad-form-wrapper">
+            <div className="categoriesad-form-container">
+              <div className="categoriesad-card">
                 <form onSubmit={handleSubmit}>
-                  <div className="categories-form-group">
+                  <div className="categoriesad-form-group">
                     <label htmlFor="categoryName">Nombre de la Categoría</label>
                     <input
                       type="text"
@@ -71,8 +71,8 @@ const ADADCategoriesPage = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <div className="categories-text-center">
-                    <button type="submit" className="categories-btn categories-btn-primary">
+                  <div className="categoriesad-text-center">
+                    <button type="submit" className="categoriesad-btn categoriesad-btn-primary">
                       Agregar Categoría
                     </button>
                   </div>

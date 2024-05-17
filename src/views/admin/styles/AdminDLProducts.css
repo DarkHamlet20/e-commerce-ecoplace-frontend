@@ -1,123 +1,125 @@
-:root {
-  --primary-color: #1f3b82;
-  --secondary-color: #6c757d;
-  --text-color: #ffffff;
-  --table-bg-color: #f8f9fa;
-  --warning-color: #ffc107;
-  --danger-color: #dc3545;
-  --card-background: #ffffff;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --border-color: #ced4da;
+.delete-product-root {
+  --delete-product-primary-color: #1f3b82;
+  --delete-product-secondary-color: #6c757d;
+  --delete-product-text-color: #ffffff;
+  --delete-product-warning-color: #ffc107;
+  --delete-product-danger-color: #dc3545;
+  --delete-product-card-background: #ffffff;
+  --delete-product-shadow-color: rgba(0, 0, 0, 0.1);
+  --delete-product-border-color: #ced4da;
 }
 
-.page-container {
+.delete-product-page {
   display: flex;
   flex-direction: column;
   margin-top: 60px;
   min-height: 100vh;
-  margin-bottom: 80px;
+  padding-bottom: 95px; 
 }
 
-.content-container {
+.delete-product-content-container {
   display: flex;
   flex-grow: 1;
 }
 
-.main-content {
+.delete-product-main-content {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  padding: 20px;
   margin-left: 250px;
-}
-
-.content-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-grow: 1;
-  padding-bottom: 100px;
-}
-
-.card {
-  background-color: var(--card-background);
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.delete-product-card {
+  background-color: var(--delete-product-card-background);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--delete-product-shadow-color);
   width: 100%;
   max-width: 800px;
   text-align: center;
+  margin: auto; /* Centra la tarjeta */
 }
 
-.image-container {
+.delete-product-title {
+  color: var(--delete-product-primary-color);
+  margin-bottom: 20px;
+}
+
+.delete-product-subtitle {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.delete-product-image-container {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.product-image {
+.delete-product-image {
   width: 120px;
   height: 120px;
-  object-fit: fill;
+  object-fit: cover;
   border-radius: 8px;
   margin-right: 10px;
 }
 
-.button-group {
+.delete-product-categories {
+  margin-bottom: 20px;
+}
+
+.delete-product-button-group {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
-.btn {
+.delete-product-btn {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  color: var(--text-color);
+  color: var(--delete-product-text-color);
   cursor: pointer;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
-.btn-secondary {
-  background-color: var(--secondary-color);
+.delete-product-btn-secondary {
+  background-color: var(--delete-product-secondary-color);
 }
 
-.btn-danger {
-  background-color: var(--danger-color);
+.delete-product-btn-danger {
+  background-color: var(--delete-product-danger-color);
 }
 
-.btn-secondary:hover {
-  background-color: darken(var(--secondary-color), 10%);
+.delete-product-btn-secondary:hover {
+  background-color: darken(var(--delete-product-secondary-color), 10%);
 }
 
-.btn-danger:hover {
-  background-color: darken(var(--danger-color), 10%);
+.delete-product-btn-danger:hover {
+  background-color: darken(var(--delete-product-danger-color), 10%);
 }
 
 .loading {
   text-align: center;
   padding: 50px;
   font-size: 1.5rem;
-  color: var(--primary-color);
+  color: var(--delete-product-primary-color);
 }
 
 @media (max-width: 768px) {
-  .main-content {
+  .delete-product-main-content {
     margin-left: 0;
     padding: 10px;
   }
 
-  .content-wrapper {
-    padding-bottom: 50px;
-  }
-
-  .button-group {
+  .delete-product-button-group {
     flex-direction: column;
     gap: 10px;
   }
 
-  .btn {
+  .delete-product-btn {
     width: 100%;
   }
 }

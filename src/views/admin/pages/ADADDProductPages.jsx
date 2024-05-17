@@ -93,124 +93,122 @@ const ADADDProductPages = () => {
   };
 
   return (
-    <div className="admin-add-product-page">
-      <div className="content">
-        <AdminSidebar />
-        <div className="main-content">
-          <AdminNavComponent />
-          <div className="container">
-            <div className="header">
-              <h2>Agregar Producto</h2>
-              <Link to="/admin/products/view" className="btn btn-secondary">
-                Regresar
-              </Link>
-            </div>
-            <div className="form-container">
-              <form onSubmit={handleSubmit} className="form">
-                <div className="form-group">
-                  <label htmlFor="name">Nombre del Producto</label>
+    <div className="admin-add-product-page add-product-root">
+      <AdminSidebar />
+      <div className="add-product-content-container">
+        <AdminNavComponent />
+        <div className="add-product-main-content">
+          <div className="add-product-header">
+            <h2>Agregar Producto</h2>
+            <Link to="/admin/products/view" className="add-product-btn add-product-btn-secondary">
+              Regresar
+            </Link>
+          </div>
+          <div className="add-product-form-container">
+            <form onSubmit={handleSubmit} className="add-product-form">
+              <div className="add-product-form-group">
+                <label htmlFor="name">Nombre del Producto</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="add-product-form-group">
+                <label htmlFor="description">Descripción</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="add-product-form-group">
+                <label htmlFor="images">Imágenes</label>
+                <input
+                  type="file"
+                  id="images"
+                  name="images"
+                  multiple
+                  onChange={handleFileChange}
+                />
+              </div>
+              <div className="add-product-form-group">
+                <label htmlFor="brand">Marca</label>
+                <input
+                  type="text"
+                  id="brand"
+                  name="brand"
+                  value={formData.brand}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="add-product-form-group">
+                <label htmlFor="price">Precio</label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="add-product-form-group">
+                <label htmlFor="categories">Categorías</label>
+                <select
+                  multiple
+                  id="categories"
+                  name="categories"
+                  value={formData.categories}
+                  onChange={handleCategoryChange}
+                >
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.categoryName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="add-product-form-group">
+                <label htmlFor="countInStock">Cantidad en Stock</label>
+                <input
+                  type="number"
+                  id="countInStock"
+                  name="countInStock"
+                  value={formData.countInStock}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="add-product-form-group checkbox-group">
+                <label htmlFor="isFeatured">
                   <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
+                    type="checkbox"
+                    id="isFeatured"
+                    name="isFeatured"
+                    checked={formData.isFeatured}
+                    onChange={(e) =>
+                      setFormData({ ...formData, isFeatured: e.target.checked })
+                    }
                   />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="description">Descripción</label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="images">Imágenes</label>
-                  <input
-                    type="file"
-                    id="images"
-                    name="images"
-                    multiple
-                    onChange={handleFileChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="brand">Marca</label>
-                  <input
-                    type="text"
-                    id="brand"
-                    name="brand"
-                    value={formData.brand}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="price">Precio</label>
-                  <input
-                    type="number"
-                    id="price"
-                    name="price"
-                    value={formData.price}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="categories">Categorías</label>
-                  <select
-                    multiple
-                    id="categories"
-                    name="categories"
-                    value={formData.categories}
-                    onChange={handleCategoryChange}
-                  >
-                    {categories.map((category) => (
-                      <option key={category._id} value={category._id}>
-                        {category.categoryName}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="countInStock">Cantidad en Stock</label>
-                  <input
-                    type="number"
-                    id="countInStock"
-                    name="countInStock"
-                    value={formData.countInStock}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="form-group checkbox-group">
-                  <label htmlFor="isFeatured">
-                    <input
-                      type="checkbox"
-                      id="isFeatured"
-                      name="isFeatured"
-                      checked={formData.isFeatured}
-                      onChange={(e) =>
-                        setFormData({ ...formData, isFeatured: e.target.checked })
-                      }
-                    />
-                    ¿Es destacado?
-                  </label>
-                </div>
-                <div className="buttons">
-                  <Link to="/admin/products/view" className="btn btn-secondary">
-                    Cancelar
-                  </Link>
-                  <button type="submit" className="btn btn-primary">
-                    Agregar Producto
-                  </button>
-                </div>
-              </form>
-            </div>
+                  ¿Es destacado?
+                </label>
+              </div>
+              <div className="add-product-buttons">
+                <Link to="/admin/products/view" className="add-product-btn add-product-btn-secondary">
+                  Cancelar
+                </Link>
+                <button type="submit" className="add-product-btn add-product-btn-primary">
+                  Agregar Producto
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

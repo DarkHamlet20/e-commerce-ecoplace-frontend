@@ -55,12 +55,13 @@ const ADSEEOrdersPages = () => {
         <div className="orders-main-content">
           <AdminNavComponent />
           <div className="orders-content-wrapper">
-            <h2>Lista de Órdenes</h2>
             <div className="orders-header">
+              <h2 className="orders-title">Lista de Órdenes</h2>
               <SearchBarComponent
                 value={searchTerm}
                 onChange={handleSearchChange}
                 placeholder="Buscar órdenes..."
+                className="orders-search"
               />
               <Link to="/admin" className="orders-btn orders-btn-secondary">Regresar</Link>
             </div>

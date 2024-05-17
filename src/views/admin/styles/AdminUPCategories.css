@@ -1,25 +1,25 @@
-.categories-root {
-  --categories-primary-color: #1f3b82; /* Azul oscuro */
-  --categories-secondary-color: #1a74db; /* Azul */
-  --categories-text-color: #ffffff; /* Blanco */
-  --categories-background-color: #f8f9fa; /* Fondo */
-  --categories-warning-color: #ffc107; /* Amarillo */
-  --categories-danger-color: #dc3545; /* Rojo */
+.categoriesup-root {
+  --categoriesup-primary-color: #1f3b82; /* Azul oscuro */
+  --categoriesup-secondary-color: #1a74db; /* Azul */
+  --categoriesup-text-color: #ffffff; /* Blanco */
+  --categoriesup-background-color: #f8f9fa; /* Fondo */
+  --categoriesup-warning-color: #ffc107; /* Amarillo */
+  --categoriesup-danger-color: #dc3545; /* Rojo */
 }
 
-.categories-page {
+.categoriesup-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   padding-top: 60px;
 }
 
-.categories-content-container {
+.categoriesup-content-container {
   display: flex;
   flex-grow: 1;
 }
 
-.categories-main-content {
+.categoriesup-main-content {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -29,7 +29,7 @@
   align-items: center; /* Centrar el contenido horizontalmente */
 }
 
-.categories-header {
+.categoriesup-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,13 +37,13 @@
   width: 100%; /* Asegura que el encabezado ocupe todo el ancho */
 }
 
-.categories-title {
-  color: var(--categories-primary-color);
+.categoriesup-title {
+  color: var(--categoriesup-primary-color);
   text-align: center;
   flex-grow: 1;
 }
 
-.categories-form-wrapper {
+.categoriesup-form-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,8 +51,8 @@
   margin-top: 20px; /* Espacio entre el encabezado y el formulario */
 }
 
-.categories-form-container {
-  background-color: var(--categories-background-color);
+.categoriesup-form-container {
+  background-color: var(--categoriesup-background-color);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -60,18 +60,18 @@
   max-width: 600px; /* Hacer el card más grande */
 }
 
-.categories-form-group {
+.categoriesup-form-group {
   margin-bottom: 1.5rem;
 }
 
-.categories-form-group label {
+.categoriesup-form-group label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
   font-size: 1.1rem; /* Aumentar el tamaño de la fuente */
 }
 
-.categories-form-group input {
+.categoriesup-form-group input {
   width: 100%;
   padding: 0.75rem; /* Aumentar el relleno */
   border: 1px solid #ced4da;
@@ -79,100 +79,100 @@
   font-size: 1.1rem; /* Aumentar el tamaño de la fuente */
 }
 
-.categories-btn {
+.categoriesup-btn {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  color: var(--categories-text-color);
+  color: var(--categoriesup-text-color);
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
   text-align: center;
 }
 
-.categories-btn-primary {
-  background-color: var(--categories-primary-color);
+.categoriesup-btn-primary {
+  background-color: var(--categoriesup-primary-color);
 }
 
-.categories-btn-secondary {
+.categoriesup-btn-secondary {
   background-color: #6c757d;
 }
 
-.categories-text-center {
+.categoriesup-text-center {
   text-align: center;
 }
 
-h2.categories-title {
+h2.categoriesup-title {
   width: 100%;
   margin-bottom: 20px; /* Espacio adicional debajo del título */
 }
 
 /* Estilos responsivos */
 @media (max-width: 1024px) {
-  .categories-main-content {
+  .categoriesup-main-content {
     margin-left: 0;
     padding: 10px;
   }
 
-  .categories-header {
+  .categoriesup-header {
     flex-direction: column;
     align-items: center;
   }
 
-  .categories-title {
+  .categoriesup-title {
     text-align: center;
     width: 100%;
     margin-bottom: 10px;
   }
 
-  .categories-btn {
+  .categoriesup-btn {
     margin-top: 10px;
     width: 100%;
   }
 }
 
 @media (max-width: 768px) {
-  .categories-main-content {
+  .categoriesup-main-content {
     margin-left: 0;
     padding: 10px;
   }
 
-  .categories-header {
+  .categoriesup-header {
     flex-direction: column;
     align-items: center;
   }
 
-  .categories-title {
+  .categoriesup-title {
     text-align: center;
     width: 100%;
     margin-bottom: 10px;
   }
 
-  .categories-btn {
+  .categoriesup-btn {
     margin-top: 10px;
     width: 100%;
   }
 
-  .categories-form-wrapper {
+  .categoriesup-form-wrapper {
     padding: 20px;
   }
 }
 
 @media (max-width: 576px) {
-  .categories-header {
+  .categoriesup-header {
     align-items: center;
   }
 
-  .categories-title {
+  .categoriesup-title {
     margin-bottom: 10px;
   }
 
-  .categories-btn {
+  .categoriesup-btn {
     margin-top: 10px;
     width: 100%;
   }
 
-  .categories-form-wrapper {
+  .categoriesup-form-wrapper {
     padding: 20px;
   }
 }

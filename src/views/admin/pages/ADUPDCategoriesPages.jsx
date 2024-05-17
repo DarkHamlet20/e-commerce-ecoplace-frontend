@@ -73,20 +73,20 @@ const ADUPDCategoriesPages = () => {
   };
 
   return (
-    <div className="categories-page categories-root">
+    <div className="categoriesup-page categoriesup-root">
       <AdminSidebar />
-      <div className="categories-content-container">
+      <div className="categoriesup-content-container">
         <AdminNavComponent />
-        <div className="categories-main-content">
-          <div className="categories-header">
-            <Link to="/admin/categories/view" className="categories-btn categories-btn-secondary">Regresar</Link>
-            <h2 className="categories-title">Actualizar Categoría</h2>
+        <div className="categoriesup-main-content">
+          <div className="categoriesup-header">
+            <Link to="/admin/categories/view" className="categoriesup-btn categoriesup-btn-secondary">Regresar</Link>
+            <h2 className="categoriesup-title">Actualizar Categoría</h2>
           </div>
-          <div className="categories-form-wrapper">
-            <div className="categories-form-container">
-              <div className="categories-card">
+          <div className="categoriesup-form-wrapper">
+            <div className="categoriesup-form-container">
+              <div className="categoriesup-card">
                 <form onSubmit={handleSubmit}>
-                  <div className="categories-form-group">
+                  <div className="categoriesup-form-group">
                     <label htmlFor="categoryName">Nombre de la Categoría</label>
                     <input
                       type="text"
@@ -96,8 +96,8 @@ const ADUPDCategoriesPages = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <div className="categories-text-center">
-                    <button type="submit" className="categories-btn categories-btn-primary">
+                  <div className="categoriesup-text-center">
+                    <button type="submit" className="categoriesup-btn categoriesup-btn-primary">
                       Actualizar Categoría
                     </button>
                   </div>

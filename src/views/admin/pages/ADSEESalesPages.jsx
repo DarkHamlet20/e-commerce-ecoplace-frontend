@@ -57,12 +57,13 @@ const ADSEESalesPages = () => {
         <div className="sales-main-content">
           <AdminNavComponent />
           <div className="sales-content-wrapper">
-            <h2>Lista de Ventas</h2>
-            <div className="sales-header">              
+            <div className="sales-header">
+              <h2 className="sales-title">Lista de Ventas</h2>
               <SearchBarComponent
                 value={searchTerm}
                 onChange={handleSearchChange}
                 placeholder="Buscar ventas..."
+                className="sales-search"
               />
               <Link to="/admin" className="sales-btn sales-btn-secondary">Regresar</Link>
             </div>
@@ -91,11 +92,9 @@ const ADSEESalesPages = () => {
                             ? `${item.product.seller.name} ${item.product.seller.lastname}`
                             : "Vendedor no disponible"}
                         </td>
-                        <td>
-                          {index === 0 && (
-                            <td rowSpan={sale.items.length}>{sale.status}</td>
-                          )}
-                        </td>
+                        {index === 0 && (
+                          <td rowSpan={sale.items.length}>{sale.status}</td>
+                        )}
                         <td>
                           <div className="sales-product-details">
                             <div className="sales-product-card">

@@ -38,13 +38,20 @@
 
 .orders-header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.orders-header h2 {
-  color: #333;
+.orders-title {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.orders-search {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
 }
 
 .orders-table-responsive {
@@ -102,6 +109,7 @@
   text-decoration: none;
   text-align: center;
   transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
 .orders-btn-secondary {
@@ -132,12 +140,11 @@
     padding: 10px;
   }
 
-  .orders-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .orders-product-card {
     width: 100%;
+  }
+
+  .orders-header {
+    align-items: center;
   }
 }

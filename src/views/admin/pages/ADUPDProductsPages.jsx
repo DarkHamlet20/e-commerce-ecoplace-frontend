@@ -111,97 +111,127 @@ const ADUPDProductsPages = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="page-container">
-      <div className="content-container">
-        <AdminSidebar />
-        <div className="main-content">
-          <AdminNavComponent />
-          <div className="content-wrapper">
-            <div className="header">
-              <h1>Actualizar Producto</h1>
-              <div className="button-group">
-                <Link to="/admin/products/view" className="btn btn-secondary">Regresar</Link>
+    <div className="update-product-page update-product-root">
+      <AdminSidebar />
+      <div className="update-product-content-container">
+        <AdminNavComponent />
+        <div className="update-product-main-content">
+          <div className="update-product-header">
+            <h2>Actualizar Producto</h2>
+            <Link to="/admin/products/view" className="update-product-btn update-product-btn-secondary">
+              Regresar
+            </Link>
+          </div>
+          <div className="update-product-form-container">
+            <form onSubmit={handleSubmit} className="update-product-form" encType="multipart/form-data">
+              <div className="update-product-form-group">
+                <label htmlFor="name">Nombre del Producto</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
-            </div>
-            <div className="form-wrapper">
-              <div className="form-card">
-                <form onSubmit={handleSubmit} encType="multipart/form-data">
-                  <div className="form-group">
-                    <label className="form-label">{formData.name}</label>
-                    {currentImage && (
-                      <div className="current-image">
-                        <img
-                          src={currentImage}
-                          alt="Imagen actual del producto"
-                        />
-                      </div>
-                    )}
-                    <input
-                      type="file"
-                      multiple
-                      className="form-control"
-                      onChange={handleFileChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="name" className="form-label">Nombre del Producto</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="price" className="form-label">Precio</label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      id="price"
-                      name="price"
-                      value={formData.price}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="description" className="form-label">Descripción</label>
-                    <textarea
-                      className="form-control"
-                      id="description"
-                      name="description"
-                      value={formData.description}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="categories" className="form-label">Categorías</label>
-                    <select
-                      multiple
-                      className="form-control"
-                      id="categories"
-                      name="categories"
-                      value={formData.categories}
-                      onChange={handleCategoryChange}
-                    >
-                      {categories.map((category) => (
-                        <option key={category._id} value={category._id}>
-                          {category.categoryName}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="form-actions">
-                    <Link to="/admin/products/view" className="btn btn-secondary">Cancelar</Link>
-                    <button type="submit" className="btn btn-primary">Actualizar Producto</button>
-                  </div>
-                </form>
+              <div className="update-product-form-group">
+                <label htmlFor="description">Descripción</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
-            </div>
+              <div className="update-product-form-group">
+                <label htmlFor="images">Imágenes</label>
+                {currentImage && (
+                  <div className="current-image">
+                    <img src={currentImage} alt="Imagen actual del producto" />
+                  </div>
+                )}
+                <input
+                  type="file"
+                  id="images"
+                  name="images"
+                  multiple
+                  onChange={handleFileChange}
+                />
+              </div>
+              <div className="update-product-form-group">
+                <label htmlFor="brand">Marca</label>
+                <input
+                  type="text"
+                  id="brand"
+                  name="brand"
+                  value={formData.brand}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="update-product-form-group">
+                <label htmlFor="price">Precio</label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="update-product-form-group">
+                <label htmlFor="categories">Categorías</label>
+                <select
+                  multiple
+                  id="categories"
+                  name="categories"
+                  value={formData.categories}
+                  onChange={handleCategoryChange}
+                >
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.categoryName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="update-product-form-group">
+                <label htmlFor="countInStock">Cantidad en Stock</label>
+                <input
+                  type="number"
+                  id="countInStock"
+                  name="countInStock"
+                  value={formData.countInStock}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="update-product-form-group checkbox-group">
+                <label htmlFor="isFeatured">
+                  <input
+                    type="checkbox"
+                    id="isFeatured"
+                    name="isFeatured"
+                    checked={formData.isFeatured}
+                    onChange={(e) =>
+                      setFormData({ ...formData, isFeatured: e.target.checked })
+                    }
+                  />
+                  ¿Es destacado?
+                </label>
+              </div>
+              <div className="update-product-buttons">
+                <Link to="/admin/products/view" className="update-product-btn update-product-btn-secondary">
+                  Cancelar
+                </Link>
+                <button type="submit" className="update-product-btn update-product-btn-primary">
+                  Actualizar Producto
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

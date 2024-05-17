@@ -58,42 +58,34 @@ const ADLTProductsPages = () => {
   if (!product) return <div>Cargando...</div>;
 
   return (
-    <div className="page-container">
-      <div className="content-container">
-        <AdminSidebar />
-        <div className="main-content">
-          <AdminNavComponent />
-          <div className="content-wrapper">
-            <div className="card">
-              <h2 className="text-center">Eliminar Producto</h2>
-              <h3 className="text-center">{product.name}</h3>
-              <div className="image-container">
-                {product.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`Imagen ${index + 1}`}
-                    className="product-image"
-                  />
-                ))}
-              </div>
-              <p className="text-center">
-                <strong>Categorías:</strong> {product.categories.map((cat) => cat.categoryName).join(', ')}
-              </p>
-              <div className="button-group">
-                <Link
-                  to="/admin/products/view"
-                  className="btn btn-secondary"
-                >
-                  Regresar
-                </Link>
-                <button
-                  className="btn btn-danger"
-                  onClick={deleteProduct}
-                >
-                  Confirmar Eliminación
-                </button>
-              </div>
+    <div className="delete-product-page delete-product-root">
+      <AdminSidebar />
+      <div className="delete-product-content-container">
+        <AdminNavComponent />
+        <div className="delete-product-main-content">
+          <div className="delete-product-card">
+            <h2 className="delete-product-title">Eliminar Producto</h2>
+            <h3 className="delete-product-subtitle">{product.name}</h3>
+            <div className="delete-product-image-container">
+              {product.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Imagen ${index + 1}`}
+                  className="delete-product-image"
+                />
+              ))}
+            </div>
+            <p className="delete-product-categories">
+              <strong>Categorías:</strong> {product.categories.map((cat) => cat.categoryName).join(', ')}
+            </p>
+            <div className="delete-product-button-group">
+              <Link to="/admin/products/view" className="delete-product-btn delete-product-btn-secondary">
+                Regresar
+              </Link>
+              <button className="delete-product-btn delete-product-btn-danger" onClick={deleteProduct}>
+                Confirmar Eliminación
+              </button>
             </div>
           </div>
         </div>

@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 // import { Navbar, Nav, Dropdown, Image } from 'react-bootstrap';
-import '../styles/AdminNav.css';
 import axios from 'axios';
 import logo from '../../../../public/img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp';
+import '../styles/AdminNav.css';
 
-const AdminNavComponent = () => {
+const AdminNavComponent = ({ toggleSidebar, isSidebarOpen }) => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
   const [userData, setUserData] = useState({});
@@ -72,7 +72,7 @@ const AdminNavComponent = () => {
   };
 
   return (
-    <div className="admin-nav">
+    <div className={`admin-nav ${isSidebarOpen ? 'sidebar-open' : ''}`}>
       <div className="nav-logo" onClick={() => navigate('/admin')}>
         <img src={logo} alt="Admin Logo" />
         <span>Admin Dashboard</span>
@@ -86,13 +86,14 @@ const AdminNavComponent = () => {
           <button className="dropdown-toggle" onClick={toggleDropdown}>
             <FontAwesomeIcon icon={faUserCircle} size="lg" />
           </button>
-          <div className={`dropdown-menu ${showDropdown ? 'show' : ''}`}>
+          <div className={`dropdown-admin-menu ${showDropdown ? 'show' : ''}`}>
             <button className='hover:text-white' onClick={handleAccountClick}>Account</button>
             <button className='hover:text-white' onClick={handleLogout}>Sign Out</button>
             <button className='hover:text-white' onClick={handleLogoutAllSessions}>Sign Out All Sessions</button>
           </div>
         </div>
       </div>
+      {isSidebarOpen && <div className="backdrop" onClick={toggleSidebar}></div>}
     </div>
   );
 };

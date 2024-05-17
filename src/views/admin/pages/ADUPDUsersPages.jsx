@@ -106,10 +106,10 @@ const ADUPDUsersPages = () => {
           <div className="update-user-form-container">
             <div className="update-user-card">
               <div className="update-user-header">
-                <h1>Editar Usuario</h1>
                 <button onClick={() => navigate('/admin/users/view')} className="update-user-btn update-user-btn-secondary">
                   Regresar
                 </button>
+                <h1>Editar Usuario</h1>
               </div>
               <form onSubmit={handleSubmit}>
                 {Object.entries(formData).map(
