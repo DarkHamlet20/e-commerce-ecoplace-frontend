@@ -13,11 +13,11 @@ const FooterComponent = () => {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-gray-100">Help Center</h4>
+            <h4 className="text-lg font-semibold mb-4 text-gray-100">Centro de Ayuda</h4>
             <ul className="space-y-2">
               <li>
                 <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
-                  Discord Server
+                  Servidor de Discord
                 </a>
               </li>
               <li>
@@ -32,7 +32,7 @@ const FooterComponent = () => {
               </li>
               <li>
                 <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
-                  Contact Us
+                  Contáctanos
                 </a>
               </li>
             </ul>
@@ -42,37 +42,37 @@ const FooterComponent = () => {
             <ul className="space-y-2">
               <li>
                 <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
-                  Privacy Policy
+                  Política de Privacidad
                 </a>
               </li>
               <li>
                 <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
-                  Licensing
+                  Licencias
                 </a>
               </li>
               <li>
                 <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
-                  Terms &amp; Conditions
+                  Términos y Condiciones
                 </a>
               </li>
             </ul>
           </div>
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-gray-100">Company</h4>
+            <h4 className="text-lg font-semibold mb-4 text-gray-100">Empresa</h4>
             <ul className="space-y-2">
               <li>
                 <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
-                  About Us
+                  Sobre Nosotros
                 </a>
               </li>
               <li>
                 <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
-                  Careers
+                  Carreras
                 </a>
               </li>
               <li>
                 <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
-                  Press
+                  Prensa
                 </a>
               </li>
               <li>
@@ -83,7 +83,7 @@ const FooterComponent = () => {
             </ul>
           </div>
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-gray-100">Follow Us</h4>
+            <h4 className="text-lg font-semibold mb-4 text-gray-100">Síguenos</h4>
             <ul className="space-y-2">
               <li>
                 <a className="hover:text-gray-200 transition-colors text-gray-300" href="#">
@@ -110,7 +110,7 @@ const FooterComponent = () => {
         </div>
         <div className="border-t border-gray-500 pt-6 flex flex-col sm:flex-row sm:justify-between items-center">
           <p className="text-sm text-gray-300 mb-4 sm:mb-0">
-            &copy; {new Date().getFullYear()} EcoPlace. All rights reserved.
+            &copy; {new Date().getFullYear()} EcoPlace. Todos los derechos reservados.
           </p>
           <div className="flex space-x-6">
             <Footer.Icon href="#" icon={BsFacebook} className="text-gray-300 hover:text-white transition-colors" />
