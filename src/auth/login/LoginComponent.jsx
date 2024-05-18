@@ -68,7 +68,7 @@ export default function LoginComponent() {
         <div className="w-full bg-white rounded-lg shadow-[0px_0px_10px_5px_#e53e3e] dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-white-800  hover:shadow-[0px_0px_20px_10px_#e53e3e] transition-shadow">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8  hover:shadow-[0px_0px_20px_10px_#e53e3e] transition-shadow">
             <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl text-black">
-              Sign in to your account
+              Inicia Sesion en tu Cuenta
             </h1>
             <form
               className="space-y-4 md:space-y-6 text-black"
@@ -81,7 +81,7 @@ export default function LoginComponent() {
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-black "
                 >
-                  Your email
+                  Tu Correo
                 </label>
                 <input
                   id="email"
@@ -99,7 +99,7 @@ export default function LoginComponent() {
                   htmlFor="password"
                   className="block mb-2 text-sm font-medium text-black"
                 >
-                  Password
+                  Contraseña
                 </label>
 
                 <div className="flex">
@@ -150,7 +150,7 @@ export default function LoginComponent() {
                   </div>
                   <div className="ml-3 text-sm">
                     <label htmlFor="remember" className="text-black">
-                      Remember me
+                      Recuerdame
                     </label>
                   </div>
                 </div>
@@ -158,23 +158,23 @@ export default function LoginComponent() {
                   href="#"
                   className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
-                  Forgot password?
+                  Olvidaste contraseña?
                 </a>
               </div>
               <button
                 type="submit"
                 className="w-full text-white bg-red-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 hover:scale-y-110 transition-all"
               >
-                Sign in
+                Iniciar Sesion
               </button>
 
               <p className="text-sm font-light text-black">
-                Don’t have an account yet?{" "}
+                No tienes cuenta todavia?{" "}
                 <a
                   href="/register"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
-                  Sign up
+                  Registrarse
                 </a>
               </p>
             </form>
