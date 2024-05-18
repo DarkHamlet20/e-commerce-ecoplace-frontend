@@ -11,7 +11,7 @@ const OrderConfirmationPage = () => {
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const response = await axios.get("http://34.201.92.59:3000/orders/me", {
+        const response = await axios.get("http://localhost:3000/orders/me", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },

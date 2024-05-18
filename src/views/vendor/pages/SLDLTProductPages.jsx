@@ -19,7 +19,7 @@ const SLDLTProductPages = () => {
 
   const fetchProductDetails = async () => {
     try {
-      const response = await axios.get(`http://34.201.92.59:3000/products/${id}`, {
+      const response = await axios.get(`http://localhost:3000/products/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,7 +38,7 @@ const SLDLTProductPages = () => {
     ).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://34.201.92.59:3000/products/${id}`, {
+          .delete(`http://localhost:3000/products/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then(() => {

@@ -21,7 +21,7 @@ const ADSEEProductsPages = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://34.201.92.59:3000/products', {
+      const response = await axios.get('http://localhost:3000/products', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -32,7 +32,7 @@ const SLUPDProductPages = () => {
 
   const fetchProductDetails = async () => {
     try {
-      const response = await axios.get(`http://34.201.92.59:3000/products/${id}`, {
+      const response = await axios.get(`http://localhost:3000/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const product = response.data;
@@ -55,7 +55,7 @@ const SLUPDProductPages = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://34.201.92.59:3000/categories", {
+      const response = await axios.get("http://localhost:3000/categories", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCategories(response.data);
@@ -100,7 +100,7 @@ const SLUPDProductPages = () => {
 
     try {
       await axios.patch(
-        `http://34.201.92.59:3000/products/${id}`,
+        `http://localhost:3000/products/${id}`,
         updateData,
         {
           headers: {

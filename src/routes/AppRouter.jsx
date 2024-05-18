@@ -36,6 +36,8 @@ import AdminPagesAccount from '../views/admin/pages/AdminPagesAccount';
 import SellerPagesAccount from '../views/vendor/pages/SellerPagesAccount';
 import OrderDetailsPage from '../views/home/OrderDetailsPage';
 import UserUpdateComponent from '../components/UserUpdateComponent';
+import ForgotPasswordPage from '../auth/password/ForgotPasswordPage';
+import ResetPasswordPage from '../auth/password/ResetPasswordPage';
 
 const AppRouter = () => {
 
@@ -62,6 +64,8 @@ const AppRouter = () => {
       {/* Rutas de autenticacion */}
       <Route path='/login' element={<LoginPage />} />
       <Route path='/register' element={<RegisterPage />} />
+      <Route path='/forgot-password' element={<ForgotPasswordPage/>} />
+      <Route path='/reset-password/:token' element={<ResetPasswordPage />} />
       <Route path='/user' element={
         <ProtectedRoute roles={['Admin', 'Customer', 'Seller']}>
           <UserPage />

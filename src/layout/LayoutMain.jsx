@@ -15,7 +15,7 @@ const LayoutComponent = ({ children, resetCategory, searchTerm, onSearchChange, 
     try {
       const token = localStorage.getItem('auth_token');
       if (token) {
-        const response = await axios.get("http://34.201.92.59:3000/carts", {
+        const response = await axios.get("http://localhost:3000/carts", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setInternalCartCount(response.data.items.length);
