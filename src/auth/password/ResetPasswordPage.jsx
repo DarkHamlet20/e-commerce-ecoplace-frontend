@@ -1,4 +1,4 @@
-import ResetPasswordComponent from "./ResetPasswordComponent"
+import ResetPasswordComponent from "./ResetPasswordComponent";
 
 const ResetPasswordPage = () => {
   return (
@@ -8,4 +8,4 @@ const ResetPasswordPage = () => {
   );
 };
 
-export default ResetPasswordPage
+export default ResetPasswordPage;

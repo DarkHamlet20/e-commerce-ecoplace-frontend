@@ -1,11 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { showErrorAlert, showConfirmationAlert } from "../../helpers/alerts";
 import background from '../../../public/img/richard-horvath-cPccYbPrF-A-unsplash (1).jpg';
 import logo from '../../../public/img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const ResetPasswordComponent = () => {
   const [password, setPassword] = useState("");
@@ -14,8 +12,10 @@ const ResetPasswordComponent = () => {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
-  const { token } = useParams();
   const navigate = useNavigate();
+
+  // Obtén el token desde el almacenamiento local
+  const token = localStorage.getItem("resetToken");
 
   const validatePassword = (password) => {
     if (password.length < 8) {
@@ -51,6 +51,7 @@ const ResetPasswordComponent = () => {
     e.preventDefault();
     if (!passwordError && !confirmPasswordError) {
       try {
+        const token = localStorage.getItem("resetToken");
         await axios.post(`http://localhost:3000/users/reset-password/${token}`, { password });
         showConfirmationAlert(
           "Restablecimiento de contraseña exitoso",
@@ -58,6 +59,7 @@ const ResetPasswordComponent = () => {
         ).then((result) => {
           if (result.isConfirmed) {
             navigate("/login");
+            localStorage.removeItem("resetToken"); // Elimina el token después de usarlo
           }
         });
       } catch (error) {
@@ -84,7 +86,7 @@ const ResetPasswordComponent = () => {
           alt=""
         />
         <div className="w-full bg-white rounded-lg shadow-[0px_0px_10px_5px_#e53e3e] dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-white-800  hover:shadow-[0px_0px_20px_10px_#e53e3e] transition-shadow">
-        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-black md:text-2xl text-center">
               Restablecer Contraseña
             </h1>

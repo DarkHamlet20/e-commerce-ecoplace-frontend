@@ -13,13 +13,14 @@ const ForgotPasswordComponent = () => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:3000/users/forgot-password", { email });
+      localStorage.setItem('resetToken', response.data.resetToken); // Guarda el token en el almacenamiento local
       if (response.status === 200) {
         showConfirmationAlert(
           "Solicitud de restablecimiento de contraseña enviada",
           "Revisa tu correo electrónico para continuar con el restablecimiento de tu contraseña."
         ).then((result) => {
           if (result.isConfirmed) {
-            navigate("/login");
+            navigate("/reset-password");
           }
         });
       }
