@@ -12,7 +12,7 @@ const ForgotPasswordComponent = () => {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/users/forgot-password", { email });
+      const response = await axios.post("http://34.201.92.59:3000/users/forgot-password", { email });
       localStorage.setItem('resetToken', response.data.resetToken); // Guarda el token en el almacenamiento local
       if (response.status === 200) {
         showConfirmationAlert(

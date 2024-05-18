@@ -12,7 +12,7 @@ const ProductComponent = ({ id, name, img, description, brand, price, onAddToCar
   const addToCart = async () => {
     try {
       const token = localStorage.getItem('auth_token');
-      await axios.post('http://localhost:3000/carts/add', 
+      await axios.post('http://34.201.92.59:3000/carts/add', 
         {
           items: [{ product: id, quantity }] 
         }, 

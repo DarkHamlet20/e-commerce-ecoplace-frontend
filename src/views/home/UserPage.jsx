@@ -18,7 +18,7 @@ const UserPage = () => {
       setAuthenticated(true);
 
       axios
-        .get("http://localhost:3000/users/me", {
+        .get("http://34.201.92.59:3000/users/me", {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -34,7 +34,7 @@ const UserPage = () => {
   const handleLogoutAllSessions = async () => {
     try {
       await axios.post(
-        'http://localhost:3000/users/logout-all',
+        'http://34.201.92.59:3000/users/logout-all',
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
