@@ -3,11 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { showConfirmationAlert, showErrorAlert } from "../../../helpers/alerts";
 import SellerNavComponent from "../components/SellerNavComponent";
-import SellerSidebarComponent from "../components/SellerSidebarComponent";
+import SellerSidebar from "../components/SellerSidebarComponent";
 import SellerFooterComponent from "../components/SellerFooterComponent";
-import '../styles/SellerAddProducts.css';
 
-const SLADDProductPages = () => {
+const SellerAddProductPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -16,8 +15,6 @@ const SLADDProductPages = () => {
     categories: [],
     seller: "",
     countInStock: 0,
-    rating: 0,
-    numReviews: 0,
     isFeatured: false,
   });
   const [categories, setCategories] = useState([]);
@@ -94,19 +91,29 @@ const SLADDProductPages = () => {
   };
 
   return (
-    <div className="seller-add-product-page">
-      <SellerNavComponent />
-      <div className="dashboard-content">
-        <SellerSidebarComponent />
-        <div className="main-content">
-          <div className="content-header">
-            <h2>Agregar Producto</h2>
-            <Link to="/seller/products/view" className="btn btn-secondary">Regresar</Link>
-          </div>
-          <div className="form-container">
-            <form onSubmit={handleSubmit} className="form">
-              <div className="form-group">
-                <label htmlFor="name">Nombre del Producto</label>
+    <div className="flex min-h-screen">
+      <SellerSidebar />
+      <div className="flex-grow">
+        <SellerNavComponent />
+        <div className="p-6">
+          <div className="bg-white shadow-md rounded-lg p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-semibold">Agregar Producto</h2>
+              <Link
+                to="/seller/products/view"
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+              >
+                Regresar
+              </Link>
+            </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Nombre del Producto
+                </label>
                 <input
                   type="text"
                   id="name"
@@ -114,30 +121,48 @@ const SLADDProductPages = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="description">Descripción</label>
+              <div className="space-y-2">
+                <label
+                  htmlFor="description"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Descripción
+                </label>
                 <textarea
                   id="description"
                   name="description"
                   value={formData.description}
                   onChange={handleInputChange}
                   required
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="images">Imágenes</label>
+              <div className="space-y-2">
+                <label
+                  htmlFor="images"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Imágenes
+                </label>
                 <input
                   type="file"
                   id="images"
                   name="images"
                   multiple
                   onChange={handleFileChange}
+                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-gray-100 hover:file:bg-gray-200"
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="brand">Marca</label>
+              <div className="space-y-2">
+                <label
+                  htmlFor="brand"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Marca
+                </label>
                 <input
                   type="text"
                   id="brand"
@@ -145,10 +170,16 @@ const SLADDProductPages = () => {
                   value={formData.brand}
                   onChange={handleInputChange}
                   required
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="price">Precio</label>
+              <div className="space-y-2">
+                <label
+                  htmlFor="price"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Precio
+                </label>
                 <input
                   type="number"
                   id="price"
@@ -156,16 +187,23 @@ const SLADDProductPages = () => {
                   value={formData.price}
                   onChange={handleInputChange}
                   required
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="categories">Categorías</label>
+              <div className="space-y-2">
+                <label
+                  htmlFor="categories"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Categorías
+                </label>
                 <select
                   multiple
                   id="categories"
                   name="categories"
                   value={formData.categories}
                   onChange={handleCategoryChange}
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 >
                   {categories.map((category) => (
                     <option key={category._id} value={category._id}>
@@ -174,8 +212,13 @@ const SLADDProductPages = () => {
                   ))}
                 </select>
               </div>
-              <div className="form-group">
-                <label htmlFor="countInStock">Cantidad en Stock</label>
+              <div className="space-y-2">
+                <label
+                  htmlFor="countInStock"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Cantidad en Stock
+                </label>
                 <input
                   type="number"
                   id="countInStock"
@@ -183,10 +226,14 @@ const SLADDProductPages = () => {
                   value={formData.countInStock}
                   onChange={handleInputChange}
                   required
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
-              <div className="form-group checkbox-group">
-                <label htmlFor="isFeatured">
+              <div className="space-y-2">
+                <label
+                  htmlFor="isFeatured"
+                  className="inline-flex items-center text-sm font-medium text-gray-700"
+                >
                   <input
                     type="checkbox"
                     id="isFeatured"
@@ -195,21 +242,32 @@ const SLADDProductPages = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, isFeatured: e.target.checked })
                     }
+                    className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                   />
-                  ¿Es destacado?
+                  <span className="ml-2">¿Es destacado?</span>
                 </label>
               </div>
-              <div className="form-actions">
-                <Link to="/seller/products/view" className="btn btn-secondary">Regresar</Link>
-                <button type="submit" className="btn btn-primary">Agregar Producto</button>
+              <div className="flex justify-between items-center mt-6">
+                <Link
+                  to="/seller/products/view"
+                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                >
+                  Cancelar
+                </Link>
+                <button
+                  type="submit"
+                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                >
+                  Agregar Producto
+                </button>
               </div>
             </form>
           </div>
         </div>
+        <SellerFooterComponent />
       </div>
-      <SellerFooterComponent />
     </div>
   );
 };
 
-export default SLADDProductPages;
+export default SellerAddProductPage;

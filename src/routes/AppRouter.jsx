@@ -40,6 +40,7 @@ import ForgotPasswordPage from '../auth/password/ForgotPasswordPage';
 import ResetPasswordPage from '../auth/password/ResetPasswordPage';
 import AdminOrderDetails from '../views/admin/pages/AdminOrderDetails';
 import AdminUpdateUserMe from '../views/admin/pages/AdminUpdateUserMe';
+import SellerUpdateUserMe from '../views/vendor/pages/SellerUpdateUserMe';
 
 const AppRouter = () => {
 
@@ -218,6 +219,13 @@ const AppRouter = () => {
       <Route path='/seller/account' element={
         <ProtectedRoute roles={['Seller']}>
           <SellerPagesAccount />
+        </ProtectedRoute>
+      } />
+
+      {/* Account Settingd del Seller */}
+      <Route path='/seller/account/settings' element={
+        <ProtectedRoute roles={['Seller']}>
+          <SellerUpdateUserMe />
         </ProtectedRoute>
       } />
 
