@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/PaginationComponent.css';
 
 const PaginationComponent = ({ currentPage, totalPages, onPageChange }) => {
   const pageNumbers = [];
@@ -17,18 +16,18 @@ const PaginationComponent = ({ currentPage, totalPages, onPageChange }) => {
   }
 
   return (
-    <div className="pagination-container">
-      <button 
-        onClick={() => onPageChange(1)} 
+    <div className="flex justify-center items-center mt-4 space-x-2">
+      <button
+        onClick={() => onPageChange(1)}
         disabled={currentPage === 1}
-        className="pagination-button"
+        className="px-3 py-1 border rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {'<<'}
       </button>
-      <button 
-        onClick={() => onPageChange(currentPage - 1)} 
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="pagination-button"
+        className="px-3 py-1 border rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {'<'}
       </button>
@@ -36,22 +35,22 @@ const PaginationComponent = ({ currentPage, totalPages, onPageChange }) => {
         <button
           key={number}
           onClick={() => onPageChange(number)}
-          className={`pagination-button ${number === currentPage ? 'active' : ''}`}
+          className={`px-3 py-1 border rounded hover:bg-gray-200 ${number === currentPage ? 'bg-blue-500 text-white' : 'bg-white text-black'}`}
         >
           {number}
         </button>
       ))}
-      <button 
-        onClick={() => onPageChange(currentPage + 1)} 
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="pagination-button"
+        className="px-3 py-1 border rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {'>'}
       </button>
-      <button 
-        onClick={() => onPageChange(totalPages)} 
+      <button
+        onClick={() => onPageChange(totalPages)}
         disabled={currentPage === totalPages}
-        className="pagination-button"
+        className="px-3 py-1 border rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {'>>'}
       </button>
