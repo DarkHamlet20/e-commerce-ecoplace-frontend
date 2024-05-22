@@ -7,12 +7,10 @@ import {
   faTag,
   faChartLine,
 } from '@fortawesome/free-solid-svg-icons';
-// import { Row, Col, Card } from 'react-bootstrap';
 import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import AdminFooterComponent from '../components/AdminFooterComponent';
 import axios from 'axios';
-import '../styles/AdminDashboardPage.css'
 
 const AdminDashboardPage = () => {
   const [salesCount, setSalesCount] = useState(0);
@@ -57,37 +55,39 @@ const AdminDashboardPage = () => {
   }, []);
 
   return (
-    <div className="admin-dashboard">
-      <AdminSidebar />
-      <div className="dashboard-content">
-        <AdminNavComponent />
-        <div className="dashboard-container">
-          <h1 className="dashboard-title">Dashboard de Administración</h1>
-          <div className="stats-container">
-            <div className="stat-card">
-              <FontAwesomeIcon icon={faChartLine} className='text-white' size="3x" />
-              <h3>Ventas</h3>
-              <p>{salesCount}</p>
-            </div>
-            <div className="stat-card">
-              <FontAwesomeIcon icon={faShoppingCart} className='text-white'  size="3x" />
-              <h3>Órdenes</h3>
-              <p>{ordersCount}</p>
-            </div>
-            <div className="stat-card">
-              <FontAwesomeIcon icon={faBox} className='text-white'  size="3x" />
-              <h3>Productos</h3>
-              <p>{productsCount}</p>
-            </div>
-            <div className="stat-card">
-              <FontAwesomeIcon icon={faUsers} className='text-white'  size="3x" />
-              <h3>Usuarios</h3>
-              <p>{usersCount}</p>
-            </div>
-            <div className="stat-card">
-              <FontAwesomeIcon icon={faTag} className='text-white'  size="3x" />
-              <h3>Categorías</h3>
-              <p>{categoriesCount}</p>
+    <div className="flex flex-col min-h-screen">
+      <div className="flex flex-1">
+        <AdminSidebar />
+        <div className="flex flex-col flex-1">
+          <AdminNavComponent />
+          <div className="flex-grow p-6">
+            <h1 className="text-2xl font-bold mb-4">Dashboard de Administración</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
+                <FontAwesomeIcon icon={faChartLine} className="text-purple-600 mb-4" size="3x" />
+                <h3 className="text-xl font-bold">Ventas</h3>
+                <p className="text-2xl">{salesCount}</p>
+              </div>
+              <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
+                <FontAwesomeIcon icon={faShoppingCart} className="text-purple-600 mb-4" size="3x" />
+                <h3 className="text-xl font-bold">Órdenes</h3>
+                <p className="text-2xl">{ordersCount}</p>
+              </div>
+              <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
+                <FontAwesomeIcon icon={faBox} className="text-purple-600 mb-4" size="3x" />
+                <h3 className="text-xl font-bold">Productos</h3>
+                <p className="text-2xl">{productsCount}</p>
+              </div>
+              <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
+                <FontAwesomeIcon icon={faUsers} className="text-purple-600 mb-4" size="3x" />
+                <h3 className="text-xl font-bold">Usuarios</h3>
+                <p className="text-2xl">{usersCount}</p>
+              </div>
+              <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
+                <FontAwesomeIcon icon={faTag} className="text-purple-600 mb-4" size="3x" />
+                <h3 className="text-xl font-bold">Categorías</h3>
+                <p className="text-2xl">{categoriesCount}</p>
+              </div>
             </div>
           </div>
         </div>

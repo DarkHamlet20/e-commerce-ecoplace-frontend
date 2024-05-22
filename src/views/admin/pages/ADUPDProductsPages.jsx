@@ -4,8 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import { showErrorAlert, showConfirmationAlert } from '../../../helpers/alerts';
-import AdminFooterComponent from "../components/AdminFooterComponent";
-import '../styles/AdminUPProducts.css';
+import AdminFooterComponent from '../components/AdminFooterComponent';
 
 const ADUPDProductsPages = () => {
   const { id } = useParams();
@@ -111,21 +110,26 @@ const ADUPDProductsPages = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="update-product-page update-product-root">
+    <div className="flex min-h-screen">
       <AdminSidebar />
-      <div className="update-product-content-container">
+      <div className="flex-grow">
         <AdminNavComponent />
-        <div className="update-product-main-content">
-          <div className="update-product-header">
-            <h2>Actualizar Producto</h2>
-            <Link to="/admin/products/view" className="update-product-btn update-product-btn-secondary">
-              Regresar
-            </Link>
-          </div>
-          <div className="update-product-form-container">
-            <form onSubmit={handleSubmit} className="update-product-form" encType="multipart/form-data">
-              <div className="update-product-form-group">
-                <label htmlFor="name">Nombre del Producto</label>
+        <div className="p-6">
+          <div className="bg-white shadow-md rounded-lg p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-semibold">Actualizar Producto</h2>
+              <Link
+                to="/admin/products/view"
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+              >
+                Regresar
+              </Link>
+            </div>
+            <form onSubmit={handleSubmit} className="space-y-4" encType="multipart/form-data">
+              <div className="space-y-2">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                  Nombre del Producto
+                </label>
                 <input
                   type="text"
                   id="name"
@@ -133,23 +137,29 @@ const ADUPDProductsPages = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
-              <div className="update-product-form-group">
-                <label htmlFor="description">Descripción</label>
+              <div className="space-y-2">
+                <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                  Descripción
+                </label>
                 <textarea
                   id="description"
                   name="description"
                   value={formData.description}
                   onChange={handleInputChange}
                   required
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
-              <div className="update-product-form-group">
-                <label htmlFor="images">Imágenes</label>
+              <div className="space-y-2">
+                <label htmlFor="images" className="block text-sm font-medium text-gray-700">
+                  Imágenes
+                </label>
                 {currentImage && (
-                  <div className="current-image">
-                    <img src={currentImage} alt="Imagen actual del producto" />
+                  <div className="mb-2">
+                    <img src={currentImage} alt="Imagen actual del producto" className="w-32 h-32 object-cover rounded" />
                   </div>
                 )}
                 <input
@@ -158,10 +168,13 @@ const ADUPDProductsPages = () => {
                   name="images"
                   multiple
                   onChange={handleFileChange}
+                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-gray-100 hover:file:bg-gray-200"
                 />
               </div>
-              <div className="update-product-form-group">
-                <label htmlFor="brand">Marca</label>
+              <div className="space-y-2">
+                <label htmlFor="brand" className="block text-sm font-medium text-gray-700">
+                  Marca
+                </label>
                 <input
                   type="text"
                   id="brand"
@@ -169,10 +182,13 @@ const ADUPDProductsPages = () => {
                   value={formData.brand}
                   onChange={handleInputChange}
                   required
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
-              <div className="update-product-form-group">
-                <label htmlFor="price">Precio</label>
+              <div className="space-y-2">
+                <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+                  Precio
+                </label>
                 <input
                   type="number"
                   id="price"
@@ -180,16 +196,20 @@ const ADUPDProductsPages = () => {
                   value={formData.price}
                   onChange={handleInputChange}
                   required
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
-              <div className="update-product-form-group">
-                <label htmlFor="categories">Categorías</label>
+              <div className="space-y-2">
+                <label htmlFor="categories" className="block text-sm font-medium text-gray-700">
+                  Categorías
+                </label>
                 <select
                   multiple
                   id="categories"
                   name="categories"
                   value={formData.categories}
                   onChange={handleCategoryChange}
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 >
                   {categories.map((category) => (
                     <option key={category._id} value={category._id}>
@@ -198,8 +218,10 @@ const ADUPDProductsPages = () => {
                   ))}
                 </select>
               </div>
-              <div className="update-product-form-group">
-                <label htmlFor="countInStock">Cantidad en Stock</label>
+              <div className="space-y-2">
+                <label htmlFor="countInStock" className="block text-sm font-medium text-gray-700">
+                  Cantidad en Stock
+                </label>
                 <input
                   type="number"
                   id="countInStock"
@@ -207,10 +229,11 @@ const ADUPDProductsPages = () => {
                   value={formData.countInStock}
                   onChange={handleInputChange}
                   required
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
-              <div className="update-product-form-group checkbox-group">
-                <label htmlFor="isFeatured">
+              <div className="space-y-2">
+                <label htmlFor="isFeatured" className="inline-flex items-center text-sm font-medium text-gray-700">
                   <input
                     type="checkbox"
                     id="isFeatured"
@@ -219,23 +242,27 @@ const ADUPDProductsPages = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, isFeatured: e.target.checked })
                     }
+                    className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
                   />
-                  ¿Es destacado?
+                  <span className="ml-2">¿Es destacado?</span>
                 </label>
               </div>
-              <div className="update-product-buttons">
-                <Link to="/admin/products/view" className="update-product-btn update-product-btn-secondary">
+              <div className="flex justify-between items-center mt-6">
+                <Link
+                  to="/admin/products/view"
+                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                >
                   Cancelar
                 </Link>
-                <button type="submit" className="update-product-btn update-product-btn-primary">
+                <button type="submit" className="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600">
                   Actualizar Producto
                 </button>
               </div>
             </form>
           </div>
         </div>
-      </div>
-      <AdminFooterComponent />
+        <AdminFooterComponent />
+      </div>      
     </div>
   );
 };

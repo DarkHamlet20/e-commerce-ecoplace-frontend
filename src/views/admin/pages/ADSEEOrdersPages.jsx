@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import AdminNavComponent from "../components/AdminNavComponent";
 import AdminSidebar from "../components/AdminSidebar";
-import PaginationComponent from "../../../common/PaginationComponent";
-import SearchBarComponent from "../../../common/SearchbarComponent";
+import AdminPaginationComponent from "../components/AdminPaginationComponent";
+import AdminSearchBarComponent from "../components/AdminSearchBarComponent";
 import AdminFooterComponent from "../components/AdminFooterComponent";
-import '../styles/AdminOrders.css';
 
 const ADSEEOrdersPages = () => {
   const [orders, setOrders] = useState([]);
@@ -38,88 +37,93 @@ const ADSEEOrdersPages = () => {
     setSearchTerm(e.target.value); // Almacenar el término de búsqueda
   };
 
-  const filteredOrders = orders.filter((order) => 
-    `${order.customer?.name} ${order.customer?.lastname} ${order.createdAt}`
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase()) // Filtrar por el término de búsqueda
-  );
+  const filteredOrders = orders.filter((order) => {
+    const orderDate = new Date(order.createdAt).toLocaleDateString();
+    const orderTotal = order.items.reduce((total, item) => total + (item.product?.price || 0) * item.quantity, 0);
+    return (
+      (order.customer && `${order.customer.name} ${order.customer.lastname}`.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      orderDate.includes(searchTerm) ||
+      orderTotal.toString().includes(searchTerm) ||
+      order.items.some(item => item.product && item.product.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+  });
 
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
   const currentOrders = filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder);
 
   return (
-    <div className="orders-page-container">
-      <div className="orders-content-container">
-        <AdminSidebar />
-        <div className="orders-main-content">
-          <AdminNavComponent />
-          <div className="orders-content-wrapper">
-            <div className="orders-header">
-              <h2 className="orders-title">Lista de Órdenes</h2>
-              <SearchBarComponent
-                value={searchTerm}
-                onChange={handleSearchChange}
-                placeholder="Buscar órdenes..."
-                className="orders-search"
+    <div className="flex min-h-screen">
+      <AdminSidebar />
+      <div className="flex-grow flex flex-col">
+        <AdminNavComponent />
+        <div className="flex-grow p-6">
+          <div className="bg-white shadow-md rounded-lg p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-semibold">Lista de Órdenes</h2>
+              <div className="w-full max-w-md">
+                <AdminSearchBarComponent
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  placeholder="Buscar órdenes..."
+                  className="orders-search"
+                />
+              </div>
+              <Link to="/admin" className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                Regresar
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 gap-6">
+              {currentOrders.map((order) => (
+                <div key={order._id} className="bg-gray-100 p-4 rounded-lg shadow-md">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <h3 className="text-lg font-semibold">Cliente: {order.customer ? `${order.customer.name} ${order.customer.lastname}` : "Cliente no disponible"}</h3>
+                      <p className="text-gray-600">Estado: {order.status}</p>
+                      <p className="text-gray-600">Fecha de Creación: {new Date(order.createdAt).toLocaleDateString()}</p>
+                    </div>
+                    <div>
+                      <Link to={`/admin/orders/view/${order._id}`} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                        Ver Detalles
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="mt-4 grid grid-cols-1 gap-4">
+                    {order.items.map((item, index) => (
+                      <div key={index} className="bg-white p-4 rounded-lg shadow-sm flex justify-between items-center">
+                        <div>
+                          <p className="font-medium">Producto: {item.product?.name || "Producto no disponible"}</p>
+                          <p className="text-gray-600">Cantidad: {item.quantity}</p>
+                          <p className="text-gray-600">Precio: ${item.product?.price || "No disponible"}</p>
+                          <p className="text-gray-600">Total: ${item.quantity * item.product?.price || "0"}</p>
+                        </div>
+                        {item.product?.images && (
+                          <img
+                            src={item.product.images[0]}
+                            alt={item.product?.name}
+                            className="w-16 h-16 object-cover rounded-lg"
+                          />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              {currentOrders.length === 0 && (
+                <div className="text-center text-gray-600">No se encontraron órdenes.</div>
+              )}
+            </div>
+            <div className="mt-6">
+              <AdminPaginationComponent
+                currentPage={currentPage}
+                totalPages={Math.ceil(filteredOrders.length / ordersPerPage)}
+                onPageChange={(pageNumber) => setCurrentPage(pageNumber)}
               />
-              <Link to="/admin" className="orders-btn orders-btn-secondary">Regresar</Link>
             </div>
-            <div className="orders-table-responsive">
-              <table className="orders-table">
-                <thead>
-                  <tr>
-                    <th>Cliente</th>
-                    <th>Estado</th>
-                    <th>Productos</th>
-                    <th>Fecha de Creación</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentOrders.map((order) => (
-                    order.items.map((item, index) => (
-                      <tr key={`${order._id}-${index}`}>
-                        {index === 0 && (
-                          <td rowSpan={order.items.length}>
-                            {order.customer ? `${order.customer.name} ${order.customer.lastname}` : "Cliente no disponible"}
-                          </td>
-                        )}
-                        {index === 0 && (
-                          <td rowSpan={order.items.length}>{order.status}</td>
-                        )}
-                        <td>
-                          <div className="orders-product-details">
-                            <div className="orders-product-card">
-                              <p>Producto: {item.product?.name || "Producto no disponible"}</p>
-                              <p>Precio: ${item.product?.price || "No disponible"}</p>
-                              <p>Cantidad: {item.quantity}</p>
-                              <p>Total: ${item.quantity * item.product?.price || "0"}</p>
-                            </div>
-                          </div>
-                        </td>
-                        {index === 0 && (
-                          <td rowSpan={order.items.length}>{new Date(order.createdAt).toLocaleDateString()}</td>
-                        )}
-                      </tr>
-                    ))
-                  ))}
-                  {currentOrders.length === 0 && (
-                    <tr>
-                      <td colSpan="4" className="text-center">No se encontraron órdenes.</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-            <PaginationComponent
-              currentPage={currentPage}
-              totalPages={Math.ceil(filteredOrders.length / ordersPerPage)}
-              onPageChange={(pageNumber) => setCurrentPage(pageNumber)}
-            />            
           </div>
         </div>
+        <AdminFooterComponent />
       </div>
-      <AdminFooterComponent />
     </div>
   );
 };

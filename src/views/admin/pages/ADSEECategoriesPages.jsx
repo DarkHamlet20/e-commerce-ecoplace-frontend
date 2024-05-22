@@ -3,10 +3,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
-import SearchBarComponent from '../../../common/SearchbarComponent';
-import PaginationComponent from '../../../common/PaginationComponent';
-import AdminFooterComponent from "../components/AdminFooterComponent";
-import '../styles/SeeCategories.css'
+import AdminSearchBarComponent from '../components/AdminSearchBarComponent';
+import AdminPaginationComponent from '../components/AdminPaginationComponent';
+import AdminFooterComponent from '../components/AdminFooterComponent';
 
 const ADSEECategoriesPages = () => {
   const [categories, setCategories] = useState([]);
@@ -48,62 +47,82 @@ const ADSEECategoriesPages = () => {
   );
 
   return (
-    <div className="categories-page categories-root">
+    <div className="flex min-h-screen">
       <AdminSidebar />
-      <div className="categories-content-container">
+      <div className="flex-grow">
         <AdminNavComponent />
-        <div className="categories-main-content">
-          <div className="categories-content-wrapper">
-            <div className="categories-header">
-              <Link to="/admin" className="categories-btn categories-btn-secondary">Regresar</Link>
-              <h2 className="categories-title">Gestión de Categorías</h2>
-              <Link to="/admin/categories/add" className="categories-btn categories-btn-primary">Agregar Categoría</Link>
+        <div className="p-6">
+          <div className="bg-white shadow-md rounded-lg p-6">
+            <div className="flex justify-between items-center mb-6">
+              <Link
+                to="/admin"
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+              >
+                Regresar
+              </Link>
+              <h2 className="text-2xl font-semibold">Gestión de Categorías</h2>
+              <Link
+                to="/admin/categories/add"
+                className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
+              >
+                Agregar Categoría
+              </Link>
             </div>
-            <div className="categories-search-bar-container">
-              <SearchBarComponent
+            <div className="mb-4">
+              <AdminSearchBarComponent
                 value={searchTerm}
                 onChange={handleSearchChange}
                 placeholder="Buscar categorías..."
               />
             </div>
-            <div className="categories-table-responsive">
-              <table className="categories-table">
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-white border border-gray-300">
                 <thead>
                   <tr>
-                    <th>Categoría</th>
-                    <th className="text-end">Acciones</th>
+                    <th className="px-6 py-3 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Categoría</th>
+                    <th className="px-6 py-3 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentCategories.length > 0 ? (
                     currentCategories.map((category) => (
-                      <tr key={category._id}>
-                        <td>{category.categoryName}</td>
-                        <td className="text-end">
-                          <Link to={`/admin/categories/edit/${category._id}`} className="categories-btn categories-btn-warning">Actualizar</Link>
-                          <Link to={`/admin/categories/delete/${category._id}`} className="categories-btn categories-btn-danger">Eliminar</Link>
+                      <tr key={category._id} className="hover:bg-gray-100">
+                        <td className="px-6 py-4 border-b border-gray-300">{category.categoryName}</td>
+                        <td className="px-6 py-4 border-b border-gray-300">
+                          <Link
+                            to={`/admin/categories/edit/${category._id}`}
+                            className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 mr-2"
+                          >
+                            Actualizar
+                          </Link>
+                          <Link
+                            to={`/admin/categories/delete/${category._id}`}
+                            className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                          >
+                            Eliminar
+                          </Link>
                         </td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="2" className="categories-text-center">No se encontraron categorías.</td>
+                      <td colSpan="2" className="px-6 py-4 border-b border-gray-300 text-center text-gray-500">
+                        No se encontraron categorías.
+                      </td>
                     </tr>
                   )}
                 </tbody>
               </table>
             </div>
-            {totalPages > 1 && (
-              <PaginationComponent
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-              />
-            )}
+            <AdminPaginationComponent
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
           </div>
         </div>
+        <AdminFooterComponent />
       </div>
-      <AdminFooterComponent />
     </div>
   );
 };

@@ -38,6 +38,8 @@ import OrderDetailsPage from '../views/home/OrderDetailsPage';
 import UserUpdateComponent from '../components/UserUpdateComponent';
 import ForgotPasswordPage from '../auth/password/ForgotPasswordPage';
 import ResetPasswordPage from '../auth/password/ResetPasswordPage';
+import AdminOrderDetails from '../views/admin/pages/AdminOrderDetails';
+import AdminUpdateUserMe from '../views/admin/pages/AdminUpdateUserMe';
 
 const AppRouter = () => {
 
@@ -123,6 +125,12 @@ const AppRouter = () => {
         </ProtectedRoute>
       } />
 
+      <Route path='/admin/account/settings' element={
+        <ProtectedRoute roles={['Admin']}>
+          <AdminUpdateUserMe />
+        </ProtectedRoute>
+      } />
+
       {/* Rutas para los Admins Products */}
       <Route path='/admin/products/add' element={
         <ProtectedRoute roles={['Admin']}>
@@ -183,6 +191,12 @@ const AppRouter = () => {
       <Route path='/admin/orders/view' element={
         <ProtectedRoute roles={['Admin']}>
           <ADSEEOrdersPages />
+        </ProtectedRoute>
+      } />
+
+      <Route path='/admin/orders/view/:orderId' element={
+        <ProtectedRoute roles={['Admin']}>
+          <AdminOrderDetails />
         </ProtectedRoute>
       } />
 

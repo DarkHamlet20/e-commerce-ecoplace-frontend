@@ -2,10 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-// import { Navbar, Nav, Dropdown, Image } from 'react-bootstrap';
 import axios from 'axios';
 import logo from '../../../../public/img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp';
-import '../styles/AdminNav.css';
 
 const AdminNavComponent = ({ toggleSidebar, isSidebarOpen }) => {
   const navigate = useNavigate();
@@ -71,29 +69,62 @@ const AdminNavComponent = ({ toggleSidebar, isSidebarOpen }) => {
     }
   };
 
+  const handleLogoClick = () => {
+    navigate('/admin');
+  };
+
   return (
-    <div className={`admin-nav ${isSidebarOpen ? 'sidebar-open' : ''}`}>
-      <div className="nav-logo" onClick={() => navigate('/admin')}>
-        <img src={logo} alt="Admin Logo" />
-        <span>Admin Dashboard</span>
+    <div className="bg-gradient-to-r from-purple-500 to-purple-700 p-4 flex justify-between items-center shadow-lg relative">
+      <div className="flex items-center space-x-3 cursor-pointer" onClick={handleLogoClick}>
+        <img src={logo} className="h-16" alt="EcoPlace Logo" />
+        <span className="text-2xl font-semibold text-white animate-pulse">Admin Dashboard</span>
       </div>
-      <div className="nav-user" ref={dropdownRef}>
-        <div className="user-info">
-          <span>{userData.name} {userData.lastname}</span>
-          <span>{userData.email}</span>
-        </div>
-        <div className="dropdown">
-          <button className="dropdown-toggle" onClick={toggleDropdown}>
-            <FontAwesomeIcon icon={faUserCircle} size="lg" />
-          </button>
-          <div className={`dropdown-admin-menu ${showDropdown ? 'show' : ''}`}>
-            <button className='hover:text-white' onClick={handleAccountClick}>Account</button>
-            <button className='hover:text-white' onClick={handleLogout}>Sign Out</button>
-            <button className='hover:text-white' onClick={handleLogoutAllSessions}>Sign Out All Sessions</button>
+      <div className="flex-grow mx-4 bg-gradient-to-r from-purple-500 to-purple-700 h-16 animate-background"></div>
+      <div className="relative">
+        <button
+          onClick={toggleDropdown}
+          className="text-white text-3xl focus:outline-none"
+        >
+          <FontAwesomeIcon icon={faUserCircle} />
+        </button>
+        {showDropdown && (
+          <div
+            className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50"
+            ref={dropdownRef}
+          >
+            <div className="px-4 py-3 border-b">
+              <span className="block text-sm text-gray-900">{userData.name} {userData.lastname}</span>
+              <span className="block text-sm text-gray-500 truncate">{userData.email}</span>
+            </div>
+            <ul className="py-1">
+              <li>
+                <button
+                  onClick={handleAccountClick}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Account
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Sign Out
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={handleLogoutAllSessions}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Sign Out All Sessions
+                </button>
+              </li>
+            </ul>
           </div>
-        </div>
+        )}
       </div>
-      {isSidebarOpen && <div className="backdrop" onClick={toggleSidebar}></div>}
     </div>
   );
 };

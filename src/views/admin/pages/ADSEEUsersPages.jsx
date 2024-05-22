@@ -3,10 +3,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import AdminNavComponent from "../components/AdminNavComponent";
 import AdminSidebar from "../components/AdminSidebar";
-import SearchBarComponent from "../../../common/SearchbarComponent";
-import PaginationComponent from "../../../common/PaginationComponent";
+import AdminSearchBarComponent from "../components/AdminSearchBarComponent";
+import AdminPaginationComponent from "../components/AdminPaginationComponent";
 import AdminFooterComponent from "../components/AdminFooterComponent";
-import '../styles/SeeUsers.css';
+import 'tailwindcss/tailwind.css';
 
 const ADSEEUsersPages = () => {
   const [users, setUsers] = useState([]);
@@ -29,7 +29,6 @@ const ADSEEUsersPages = () => {
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users", error);
-        // Manejar el error aquí
       }
     };
 
@@ -51,13 +50,13 @@ const ADSEEUsersPages = () => {
   const getRoleBadgeClass = (roleName) => {
     switch (roleName) {
       case "Admin":
-        return "bg-danger";
+        return "bg-red-500";
       case "Customer":
-        return "bg-success";
+        return "bg-green-500";
       case "Seller":
-        return "bg-primary";
+        return "bg-blue-500";
       default:
-        return "bg-secondary";
+        return "bg-gray-500";
     }
   };
 
@@ -68,67 +67,73 @@ const ADSEEUsersPages = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="users-page-container users-root">
-      <div className="users-content-container">
-        <AdminSidebar />
-        <div className="users-main-content">
-          <AdminNavComponent />
-          <div className="users-content-wrapper">
-            <div className="users-header">
-              <h2 className="users-title">Gestión de Usuarios</h2>
-              <SearchBarComponent
+    <div className="flex">
+      <AdminSidebar />
+      <div className="flex flex-col flex-1 min-h-screen">
+        <AdminNavComponent />
+        <main className="flex-grow p-6">
+          <div className="container mx-auto">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold">Gestión de Usuarios</h2>
+              <Link to="/admin" className="bg-gray-500 text-white px-3 py-1 rounded-md hover:bg-gray-600 transition duration-300">
+                Regresar
+              </Link>
+            </div>
+            <div className="mb-4">
+              <AdminSearchBarComponent
                 value={searchTerm}
                 onChange={handleSearchChange}
                 placeholder="Buscar usuarios..."
               />
-              <Link to="/admin" className="users-btn users-btn-secondary">Regresar</Link>
             </div>
-            <div className="users-table-responsive">
-              <table className="users-table">
+            <div className="bg-white p-6 rounded-lg shadow-lg overflow-x-auto">
+              <table className="min-w-full bg-white">
                 <thead>
                   <tr>
-                    <th>Usuario</th>
-                    <th>Detalles</th>
-                    <th>Fecha de Creación</th>
-                    <th>Acciones</th>
+                    <th className="py-2">Usuario</th>
+                    <th className="py-2">Detalles</th>
+                    <th className="py-2">Fecha de Creación</th>
+                    <th className="py-2">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentUsers.length > 0 ? (
                     currentUsers.map((user) => (
                       <tr key={user._id}>
-                        <td>{user.name} {user.lastname}</td>
-                        <td>
-                          Email: {user.email}<br />
-                          Teléfono: {user.phone}<br />
-                          Dirección: {user.street}, {user.city}, {user.country}, {user.zip}<br />
-                          <span className={`badge ${getRoleBadgeClass(user.role.roleName)}`}>
+                        <td className="border px-4 py-2">{user.name} {user.lastname}</td>
+                        <td className="border px-4 py-2">
+                          <div>Email: {user.email}</div>
+                          <div>Teléfono: {user.phone}</div>
+                          <div>Dirección: {user.street}, {user.city}, {user.country}, {user.zip}</div>
+                          <span className={`inline-block px-2 py-1 text-xs font-semibold text-white rounded ${getRoleBadgeClass(user.role.roleName)}`}>
                             {user.role.roleName}
                           </span>
                         </td>
-                        <td>{new Date(user.createdAt).toLocaleDateString()}</td>
-                        <td>
-                          <Link to={`/admin/users/edit/${user._id}`} className="users-btn users-btn-warning">Editar</Link>
+                        <td className="border px-4 py-2">{new Date(user.createdAt).toLocaleDateString()}</td>
+                        <td className="border px-4 py-2">
+                          <Link to={`/admin/users/edit/${user._id}`} className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 transition duration-300">
+                            Editar
+                          </Link>
                         </td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="4" className="text-center">No se encontraron usuarios.</td>
+                      <td colSpan="4" className="text-center py-4">No se encontraron usuarios.</td>
                     </tr>
                   )}
                 </tbody>
               </table>
             </div>
-            <PaginationComponent
+            <AdminPaginationComponent
               currentPage={currentPage}
               totalPages={Math.ceil(filteredUsers.length / usersPerPage)}
-              onPageChange={(pageNumber) => setCurrentPage(pageNumber)}
+              onPageChange={paginate}
             />
           </div>
-        </div>
+        </main>
+        <AdminFooterComponent />
       </div>
-      <AdminFooterComponent />
     </div>
   );
 };

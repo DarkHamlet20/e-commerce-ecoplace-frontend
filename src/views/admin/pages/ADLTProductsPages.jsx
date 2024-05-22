@@ -4,8 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import AdminNavComponent from '../components/AdminNavComponent';
 import AdminSidebar from '../components/AdminSidebar';
 import { showConfirmationAlert, showErrorAlert } from '../../../helpers/alerts';
-import AdminFooterComponent from "../components/AdminFooterComponent";
-import '../styles/AdminDLProducts.css';
+import AdminFooterComponent from '../components/AdminFooterComponent';
 
 const ADLTProductsPages = () => {
   const [product, setProduct] = useState(null);
@@ -58,39 +57,55 @@ const ADLTProductsPages = () => {
   if (!product) return <div>Cargando...</div>;
 
   return (
-    <div className="delete-product-page delete-product-root">
+    <div className="flex min-h-screen">
       <AdminSidebar />
-      <div className="delete-product-content-container">
+      <div className="flex-grow flex flex-col">
         <AdminNavComponent />
-        <div className="delete-product-main-content">
-          <div className="delete-product-card">
-            <h2 className="delete-product-title">Eliminar Producto</h2>
-            <h3 className="delete-product-subtitle">{product.name}</h3>
-            <div className="delete-product-image-container">
-              {product.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`Imagen ${index + 1}`}
-                  className="delete-product-image"
-                />
-              ))}
-            </div>
-            <p className="delete-product-categories">
-              <strong>Categorías:</strong> {product.categories.map((cat) => cat.categoryName).join(', ')}
-            </p>
-            <div className="delete-product-button-group">
-              <Link to="/admin/products/view" className="delete-product-btn delete-product-btn-secondary">
+        <div className="flex-grow p-6">
+          <div className="bg-white shadow-md rounded-lg p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-semibold">Eliminar Producto</h2>
+              <Link
+                to="/admin/products/view"
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+              >
                 Regresar
               </Link>
-              <button className="delete-product-btn delete-product-btn-danger" onClick={deleteProduct}>
-                Confirmar Eliminación
-              </button>
+            </div>
+            <div className="text-center">
+              <h3 className="text-xl font-medium mb-4">{product.name}</h3>
+              <div className="flex justify-center mb-4">
+                {product.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Imagen ${index + 1}`}
+                    className="w-32 h-32 object-cover rounded mx-2"
+                  />
+                ))}
+              </div>
+              <p className="mb-4">
+                <strong>Categorías:</strong> {product.categories.map((cat) => cat.categoryName).join(', ')}
+              </p>
+              <div className="flex justify-center space-x-4">
+                <Link
+                  to="/admin/products/view"
+                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                >
+                  Regresar
+                </Link>
+                <button
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                  onClick={deleteProduct}
+                >
+                  Confirmar Eliminación
+                </button>
+              </div>
             </div>
           </div>
         </div>
+        <AdminFooterComponent />
       </div>
-      <AdminFooterComponent />
     </div>
   );
 };
