@@ -160,15 +160,15 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
 
         {/* User Dropdown */}
         <div
-          className={`absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 dark:bg-gray-800 ${show ? "block" : "hidden"} z-50`}
+          className={`absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 ${show ? "block" : "hidden"} z-50`}
         >
           {token ? (
             <>
               <div className="px-4 py-3">
-                <span className="block text-sm text-gray-900 dark:text-white">
+                <span className="block text-sm text-gray-900">
                   {userData.name} {userData.lastname}
                 </span>
-                <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+                <span className="block text-sm text-gray-500 truncate">
                   {userData.email}
                 </span>
               </div>
@@ -176,7 +176,7 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
                 <li>
                   <NavLink
                     to="/user"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
                   >
                     Account
                   </NavLink>
@@ -185,7 +185,7 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
                   <li>
                     <NavLink
                       to={`/seller`}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
                     >
                       Dashboard
                     </NavLink>
@@ -194,7 +194,7 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
                 <li>
                   <NavLink
                     to="/order-customer"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
                   >
                     Orders
                   </NavLink>
@@ -203,7 +203,7 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
                   <NavLink
                     to="/login"
                     onClick={() => handleLogout()}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
                   >
                     Sign out
                   </NavLink>
@@ -215,7 +215,7 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
               <li>
                 <NavLink
                   to="/login"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
                 >
                   Login
                 </NavLink>
