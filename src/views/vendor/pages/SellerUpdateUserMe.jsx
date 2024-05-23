@@ -109,7 +109,7 @@ const SellerUpdateUserMe = () => {
 
   return (
     <div className="flex min-h-screen">
-      <SellerSidebarC />
+      <SellerSidebar />
       <div className="flex-grow flex flex-col">
         <SellerNavComponent />
         <main className="flex justify-center items-center flex-grow bg-gray-100 py-10">
