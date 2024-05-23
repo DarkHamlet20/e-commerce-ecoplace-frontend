@@ -57,48 +57,58 @@ const SLDLTProductPages = () => {
     });
   };
 
-  if (!product) return <div className="sldlt-loading">Cargando...</div>;
+  if (!product) return <div className="text-center">Cargando...</div>;
 
   return (
-    <div className="sldlt-product-page">
+    <div className="flex min-h-screen">
       <SellerSidebarComponent />
-      <div className="sldlt-main-content">
+      <div className="flex-grow flex flex-col">
         <SellerNavComponent />
-        <div className="sldlt-content">
-          <div className="sldlt-card">
-            <h2>Eliminar Producto</h2>
-            <h3>{product.name}</h3>
-            <div className="sldlt-image-gallery">
-              {product.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`Imagen ${index + 1}`}
-                  className="sldlt-product-image"
-                />
-              ))}
-            </div>
-            <p>
-              <strong>Categorías:</strong> {product.categories.map((cat) => cat.categoryName).join(", ")}
-            </p>
-            <div className="sldlt-actions">
+        <div className="flex-grow p-6">
+          <div className="bg-white shadow-md rounded-lg p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-semibold">Eliminar Producto</h2>
               <Link
                 to="/seller/products/view"
-                className="sldlt-btn sldlt-btn-secondary"
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
               >
                 Regresar
               </Link>
-              <button
-                className="sldlt-btn sldlt-btn-danger"
-                onClick={deleteProduct}
-              >
-                Confirmar Eliminación
-              </button>
+            </div>
+            <div className="text-center">
+              <h3 className="text-xl font-medium mb-4">{product.name}</h3>
+              <div className="flex justify-center mb-4">
+                {product.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Imagen ${index + 1}`}
+                    className="w-32 h-32 object-cover rounded mx-2"
+                  />
+                ))}
+              </div>
+              <p className="mb-4">
+                <strong>Categorías:</strong> {product.categories.map((cat) => cat.categoryName).join(", ")}
+              </p>
+              <div className="flex justify-center space-x-4">
+                <Link
+                  to="/seller/products/view"
+                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                >
+                  Cancelar
+                </Link>
+                <button
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                  onClick={deleteProduct}
+                >
+                  Confirmar Eliminación
+                </button>
+              </div>
             </div>
           </div>
         </div>
+        <SellerFooterComponent />
       </div>
-      <SellerFooterComponent />
     </div>
   );
 };

@@ -25,7 +25,7 @@ export default function LoginComponent() {
       }));
       
       // Redirección basada en el rol después del inicio de sesión exitoso
-      showConfirmationAlert("Login Successful", "You have been logged in successfully!").then(result => {
+      showConfirmationAlert("Inicio de Sesión", "¡Has iniciado sesión exitosamente!").then(result => {
         if (result.isConfirmed) {
           switch (response.data.role) {
             case 'Admin':
@@ -46,7 +46,7 @@ export default function LoginComponent() {
     } catch (error) {
       console.error('Login Error:', error);
       // Mostrar alerta de error usando la función personalizada
-      showErrorAlert("Authentication Failed", "Please check your credentials and try again.");
+      showErrorAlert("Error de autenticación", "Por favor verifique sus credenciales e inténtelo nuevamente.");
     }
   };
 

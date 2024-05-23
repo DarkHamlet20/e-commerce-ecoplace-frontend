@@ -147,7 +147,7 @@ const SLUPDProductPages = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
@@ -160,7 +160,7 @@ const SLUPDProductPages = () => {
                   value={formData.description}
                   onChange={handleInputChange}
                   required
-                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
@@ -192,7 +192,7 @@ const SLUPDProductPages = () => {
                   value={formData.brand}
                   onChange={handleInputChange}
                   required
-                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
@@ -206,7 +206,7 @@ const SLUPDProductPages = () => {
                   value={formData.price}
                   onChange={handleInputChange}
                   required
-                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
@@ -219,7 +219,7 @@ const SLUPDProductPages = () => {
                   name="categories"
                   value={formData.categories}
                   onChange={handleCategoryChange}
-                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 >
                   {categories.map((category) => (
                     <option key={category._id} value={category._id}>
@@ -239,7 +239,7 @@ const SLUPDProductPages = () => {
                   value={formData.countInStock}
                   onChange={handleInputChange}
                   required
-                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 />
               </div>
               <div className="space-y-2">
@@ -252,7 +252,7 @@ const SLUPDProductPages = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, isFeatured: e.target.checked })
                     }
-                    className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                    className="h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
                   />
                   <span className="ml-2">¿Es destacado?</span>
                 </label>

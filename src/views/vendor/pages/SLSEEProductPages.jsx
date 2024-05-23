@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import PaginationComponent from "../../../common/PaginationComponent";
+import SellerPaginationComponent from "../components/SellerPaginationComponent";
 import SellerNavComponent from "../components/SellerNavComponent";
 import SellerSidebar from "../components/SellerSidebarComponent";
 import SellerFooterComponent from "../components/SellerFooterComponent";
-import SearchBarComponent from "../../../common/SearchbarComponent";
+import SellerSearchBarComponent from "../components/SellerSearchComponent";
 
 const SellerSeeProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -74,7 +74,7 @@ const SellerSeeProductsPage = () => {
               </Link>
             </div>
             <div className="mb-4">
-              <SearchBarComponent
+              <SellerSearchBarComponent
                 value={searchTerm}
                 onChange={handleSearchChange}
                 placeholder="Buscar productos..."
@@ -134,7 +134,7 @@ const SellerSeeProductsPage = () => {
                 </tbody>
               </table>
             </div>
-            <PaginationComponent
+            <SellerPaginationComponent
               currentPage={currentPage}
               totalPages={totalPages}
               onPageChange={setCurrentPage}
