@@ -52,7 +52,7 @@ function Register() {
     e.preventDefault();
     if (!passwordError && !confirmPasswordError) {
       try {
-        await axios.post("http://34.201.92.59:3000/users/register", {
+        await axios.post("http://localhost:3000/users/register", {
           email,
           password,
           name,

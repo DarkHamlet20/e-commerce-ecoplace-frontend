@@ -14,7 +14,7 @@ const AdminOrderDetails = () => {
     const fetchOrderDetails = async () => {
       try {
         const response = await axios.get(
-          `http://34.201.92.59:3000/orders/${orderId}`,
+          `http://localhost:3000/orders/${orderId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("auth_token")}`,

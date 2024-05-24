@@ -16,7 +16,7 @@ export default function LoginComponent() {
     e.preventDefault();
     setError(""); // Limpiar errores anteriores antes de una nueva solicitud
     try {
-      const response = await axios.post('http://34.201.92.59:3000/users/login', { email, password });
+      const response = await axios.post('http://localhost:3000/users/login', { email, password });
       localStorage.setItem('auth_token', response.data.token);
       localStorage.setItem('userRole', response.data.role);
       dispatch(setCredentials({
@@ -61,9 +61,10 @@ export default function LoginComponent() {
       />
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 relative">
         <img
-          className=" w-36 rounded-full relative top-4 shadow-[0px_3px_10px_4px_#e53e3e]"
+          className=" w-36 rounded-full relative top-4 shadow-[0px_3px_10px_4px_#e53e3e] cursor-pointer"
           src="img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp"
           alt=""
+          onClick={() => navigate('/')}
         />
         <div className="w-full bg-white rounded-lg shadow-[0px_0px_10px_5px_#e53e3e] dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-white-800  hover:shadow-[0px_0px_20px_10px_#e53e3e] transition-shadow">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8  hover:shadow-[0px_0px_20px_10px_#e53e3e] transition-shadow">

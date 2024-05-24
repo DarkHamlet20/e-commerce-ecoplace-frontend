@@ -32,7 +32,7 @@ const ADUPDUsersPages = () => {
   const fetchUserDetails = async () => {
     try {
       const response = await axios.get(
-        `http://34.201.92.59:3000/users/admin/users/${id}`,
+        `http://localhost:3000/users/admin/users/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -57,7 +57,7 @@ const ADUPDUsersPages = () => {
 
   const fetchRoles = async () => {
     try {
-      const rolesResponse = await axios.get('http://34.201.92.59:3000/roles', {
+      const rolesResponse = await axios.get('http://localhost:3000/roles', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setRoles(rolesResponse.data);
@@ -76,7 +76,7 @@ const ADUPDUsersPages = () => {
     e.preventDefault();
     try {
       await axios.patch(
-        `http://34.201.92.59:3000/users/admin/users/${id}`,
+        `http://localhost:3000/users/admin/users/${id}`,
         {
           ...formData,
           role: formData.role,

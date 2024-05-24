@@ -11,7 +11,7 @@ const OrderConfirmationPage = () => {
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const response = await axios.get("http://34.201.92.59:3000/orders/me", {
+        const response = await axios.get("http://localhost:3000/orders/me", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
@@ -74,7 +74,7 @@ const OrderConfirmationPage = () => {
                         <img src={item.product.images[0]} alt={item.product.name} className="w-20 h-20 object-cover rounded-md" />
                         <div>
                           <h4 className="text-lg font-semibold">{item.product.name}</h4>
-                          <p className="text-sm text-gray-600">Vendedor: {item.product.seller?.name} {item.product.seller?.lastname}</p>
+                          <p className="text-sm text-gray-600">Vendedor: {item.product?.seller?.name} {item.product?.seller?.lastname}</p>
                           <p className="text-sm text-gray-600">Cantidad: {item.quantity}</p>
                         </div>
                       </div>

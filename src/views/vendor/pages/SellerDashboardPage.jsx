@@ -20,13 +20,13 @@ const SellerDashboardPage = () => {
     const token = localStorage.getItem('auth_token');
     try {
       const [salesResponse, productsResponse, statsResponse] = await Promise.all([
-        axios.get('http://34.201.92.59:3000/stats/client/products-sold', {
+        axios.get('http://localhost:3000/stats/client/products-sold', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://34.201.92.59:3000/stats/client/products-created', {
+        axios.get('http://localhost:3000/stats/client/products-created', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://34.201.92.59:3000/stats/client/product-sales-stats', {
+        axios.get('http://localhost:3000/stats/client/product-sales-stats', {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -103,7 +103,7 @@ const SellerDashboardPage = () => {
           </ResponsiveContainer>
         </div>
         <div className="bg-white shadow-lg rounded-lg p-6">
-          <h3 className="text-lg font-bold mb-4">Productos de Menor Precio No Vendidos</h3>
+          <h3 className="text-lg font-bold mb-4">Productos de Menor Precio Vendidos</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={lowestPriceSold}>
               <CartesianGrid strokeDasharray="3 3" />

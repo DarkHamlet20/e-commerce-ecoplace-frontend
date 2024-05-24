@@ -17,7 +17,7 @@ const ADSEESalesPages = () => {
     const fetchSales = async () => {
       try {
         const response = await axios.get(
-          "http://34.201.92.59:3000/sales/admin",
+          "http://localhost:3000/sales/admin",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("auth_token")}`,

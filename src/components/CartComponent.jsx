@@ -18,7 +18,7 @@ const CartComponent = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get("http://34.201.92.59:3000/carts", {
+        const response = await axios.get("http://localhost:3000/carts", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
@@ -40,7 +40,7 @@ const CartComponent = () => {
     newQuantity = isNaN(newQuantity) || newQuantity < 1 ? 1 : newQuantity;
     try {
       await axios.put(
-        "http://34.201.92.59:3000/carts/update-cart",
+        "http://localhost:3000/carts/update-cart",
         {
           items: [{ product: itemId, quantity: newQuantity }],
         },
@@ -71,7 +71,7 @@ const CartComponent = () => {
   const handleRemoveItemFromCart = async (productId) => {
     try {
       const response = await axios.delete(
-        "http://34.201.92.59:3000/carts/remove-item",
+        "http://localhost:3000/carts/remove-item",
         {
           data: { product: productId },
           headers: {
@@ -98,7 +98,7 @@ const CartComponent = () => {
     try {
       const stripe = await stripePromise;
       const checkoutSession = await axios.post(
-        "http://34.201.92.59:3000/orders/create-checkout-session",
+        "http://localhost:3000/orders/create-checkout-session",
         { items: cartItems },
         {
           headers: {

@@ -12,7 +12,7 @@ const ForgotPasswordComponent = () => {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://34.201.92.59:3000/users/forgot-password", { email });
+      const response = await axios.post("http://localhost:3000/users/forgot-password", { email });
       localStorage.setItem('resetToken', response.data.resetToken); // Guarda el token en el almacenamiento local
       if (response.status === 200) {
         showConfirmationAlert(
@@ -41,7 +41,7 @@ const ForgotPasswordComponent = () => {
   };
 
   return (
-    <section className="bg-gray-50 ">
+    <section className="bg-gray-50">
       <img
         className="w-screen h-screen object-cover absolute z-0"
         src={background}
@@ -49,11 +49,12 @@ const ForgotPasswordComponent = () => {
       />
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 relative">
         <img
-          className=" w-36 rounded-full relative top-4 shadow-[0px_3px_10px_4px_#e53e3e]"
+          className="w-36 rounded-full relative top-4 shadow-[0px_3px_10px_4px_#e53e3e] cursor-pointer"
           src={logo}
           alt=""
+          onClick={() => navigate('/')}
         />
-        <div className="w-full bg-white rounded-lg shadow-[0px_0px_10px_5px_#e53e3e] dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-white-800  hover:shadow-[0px_0px_20px_10px_#e53e3e] transition-shadow">
+        <div className="w-full bg-white rounded-lg shadow-[0px_0px_10px_5px_#e53e3e] dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-white-800 hover:shadow-[0px_0px_20px_10px_#e53e3e] transition-shadow">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-black md:text-2xl text-center">
               Recupera tu contraseña
@@ -79,6 +80,13 @@ const ForgotPasswordComponent = () => {
                 className="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
                 Enviar
+              </button>
+              <button
+                type="button"
+                className="w-full text-red-600 hover:text-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-4"
+                onClick={() => navigate('/login')}
+              >
+                Volver al Inicio de Sesión
               </button>
             </form>
           </div>

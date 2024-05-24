@@ -14,7 +14,7 @@ const ProductPage = () => {
     const getData = async () => {
       try {
         const response = await axios.get(
-          `http://34.201.92.59:3000/products/${id}`
+          `http://localhost:3000/products/${id}`
         );
         setData(response.data);
         setLoading(false);
@@ -30,7 +30,7 @@ const ProductPage = () => {
     try {
       const token = localStorage.getItem('auth_token');
       if (token) {
-        const response = await axios.get("http://34.201.92.59:3000/carts", {
+        const response = await axios.get("http://localhost:3000/carts", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCartCount(response.data.items.length);

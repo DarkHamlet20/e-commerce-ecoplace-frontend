@@ -17,7 +17,7 @@ const ADUPDCategoriesPages = () => {
     const fetchCategoryDetails = async () => {
       try {
         const response = await axios.get(
-          `http://34.201.92.59:3000/categories/${id}`,
+          `http://localhost:3000/categories/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ const ADUPDCategoriesPages = () => {
     e.preventDefault();
     try {
       await axios.put(
-        `http://34.201.92.59:3000/categories/${id}`,
+        `http://localhost:3000/categories/${id}`,
         { categoryName },
         {
           headers: {
