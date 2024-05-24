@@ -18,7 +18,7 @@ const SellerUpdateUserMe = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/users/me", {
+      .get("http://34.201.92.59:3000/users/me", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -78,7 +78,7 @@ const SellerUpdateUserMe = () => {
 
       try {
         await axios.patch(
-          "http://localhost:3000/users/me",
+          "http://34.201.92.59:3000/users/me",
           updates,
           {
             headers: {

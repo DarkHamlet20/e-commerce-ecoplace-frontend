@@ -20,13 +20,13 @@ const SellerDashboardPage = () => {
     const token = localStorage.getItem('auth_token');
     try {
       const [salesResponse, productsResponse, statsResponse] = await Promise.all([
-        axios.get('http://localhost:3000/stats/client/products-sold', {
+        axios.get('http://34.201.92.59:3000/stats/client/products-sold', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:3000/stats/client/products-created', {
+        axios.get('http://34.201.92.59:3000/stats/client/products-created', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:3000/stats/client/product-sales-stats', {
+        axios.get('http://34.201.92.59:3000/stats/client/product-sales-stats', {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);

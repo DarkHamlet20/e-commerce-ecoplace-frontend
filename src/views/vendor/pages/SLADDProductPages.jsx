@@ -25,7 +25,7 @@ const SellerAddProductPage = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/categories", {
+        const response = await axios.get("http://34.201.92.59:3000/categories", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCategories(response.data);
@@ -72,7 +72,7 @@ const SellerAddProductPage = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/products",
+        "http://34.201.92.59:3000/products",
         formDataToSend,
         {
           headers: {

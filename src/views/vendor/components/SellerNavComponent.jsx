@@ -15,7 +15,7 @@ const SellerNavComponent = ({ toggleSidebar, isSidebarOpen }) => {
   useEffect(() => {
     if (token) {
       axios
-        .get('http://localhost:3000/users/me', { headers: { Authorization: `Bearer ${token}` } })
+        .get('http://34.201.92.59:3000/users/me', { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => setUserData(response.data))
         .catch((error) => console.error('Error obteniendo datos del usuario:', error));
     }
@@ -42,7 +42,7 @@ const SellerNavComponent = ({ toggleSidebar, isSidebarOpen }) => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        'http://localhost:3000/users/logout',
+        'http://34.201.92.59:3000/users/logout',
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -57,7 +57,7 @@ const SellerNavComponent = ({ toggleSidebar, isSidebarOpen }) => {
   const handleLogoutAllSessions = async () => {
     try {
       await axios.post(
-        'http://localhost:3000/users/logout-all',
+        'http://34.201.92.59:3000/users/logout-all',
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -26,7 +26,7 @@ const ADADDProductPages = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/categories",
+          "http://34.201.92.59:3000/categories",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -79,7 +79,7 @@ const ADADDProductPages = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/products",
+        "http://34.201.92.59:3000/products",
         formDataToSend,
         {
           headers: {

@@ -52,7 +52,7 @@ const ResetPasswordComponent = () => {
     if (!passwordError && !confirmPasswordError) {
       try {
         const token = localStorage.getItem("resetToken");
-        await axios.post(`http://localhost:3000/users/reset-password/${token}`, { password });
+        await axios.post(`http://34.201.92.59:3000/users/reset-password/${token}`, { password });
         showConfirmationAlert(
           "Restablecimiento de contraseña exitoso",
           "Tu contraseña ha sido restablecida exitosamente."

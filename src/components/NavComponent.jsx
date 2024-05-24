@@ -20,7 +20,7 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
   useEffect(() => {
     if (token) {
       axios
-        .get("http://localhost:3000/users/me", {
+        .get("http://34.201.92.59:3000/users/me", {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
         console.error("No se encontró el token de autenticación.");
       }
       await axios.post(
-        "http://localhost:3000/users/logout",
+        "http://34.201.92.59:3000/users/logout",
         {},
         {
           headers: {

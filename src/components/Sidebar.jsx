@@ -6,7 +6,7 @@ export const Sidebar = ({ showSide, onCategorySelect }) => {
   const [drop, setDrop] = useState(false);
 
   const getCategories = async () => {
-    const response = await axios.get("http://localhost:3000/categories");
+    const response = await axios.get("http://34.201.92.59:3000/categories");
     setCategories(response.data);
   };
 

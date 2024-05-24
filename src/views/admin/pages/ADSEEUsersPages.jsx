@@ -19,7 +19,7 @@ const ADSEEUsersPages = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/users/admin/users",
+          "http://34.201.92.59:3000/users/admin/users",
           {
             headers: {
               Authorization: `Bearer ${token}`,

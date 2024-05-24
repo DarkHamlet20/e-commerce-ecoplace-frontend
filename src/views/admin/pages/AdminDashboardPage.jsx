@@ -32,22 +32,22 @@ const AdminDashboardPage = () => {
     const token = localStorage.getItem('auth_token');
     try {
       const [sales, orders, products, users, categories, productStats] = await Promise.all([
-        axios.get('http://localhost:3000/stats/sales/count', {
+        axios.get('http://34.201.92.59:3000/stats/sales/count', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:3000/stats/orders/count', {
+        axios.get('http://34.201.92.59:3000/stats/orders/count', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:3000/stats/products/count', {
+        axios.get('http://34.201.92.59:3000/stats/products/count', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:3000/stats/users/count', {
+        axios.get('http://34.201.92.59:3000/stats/users/count', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:3000/stats/categories/count', {
+        axios.get('http://34.201.92.59:3000/stats/categories/count', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:3000/stats/admin/product-sales-stats', {
+        axios.get('http://34.201.92.59:3000/stats/admin/product-sales-stats', {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
