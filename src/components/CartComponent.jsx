@@ -152,9 +152,9 @@ const CartComponent = () => {
   }
 
   return (
-    <div className="container mx-auto mt-10 p-5">
-      <div className="flex flex-col lg:flex-row bg-white shadow-md my-10 rounded-lg">
-        <div className="w-full lg:w-3/4 px-10 py-10">
+    <div className="container mx-auto mt-5 sm:mt-10 p-2 sm:p-5">
+      <div className="flex flex-col lg:flex-row bg-white shadow-md my-5 sm:my-10 rounded-lg">
+        <div className="w-full lg:w-3/4 px-4 sm:px-10 py-5 sm:py-10">
           <div className="flex justify-between border-b pb-8">
             <h1 className="font-semibold text-2xl">Carrito de Compras</h1>
             <h2 className="font-semibold text-2xl">{cartItems.length} Items</h2>
@@ -169,14 +169,14 @@ const CartComponent = () => {
             <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
               Precio
             </h3>
-            <h3 className="font-semibold text-right text-gray-600 text-xs uppercase w-1/5">
+            <h3 className="font-semibold text-right text-gray-600 text-xs uppercase w-1/5 p-left 200">
               Total
             </h3>
           </div>
           {cartItems.map((item) => (
             <div
               key={item?.product?._id}
-              className="flex items-center border gap-2 mb-3 hover:bg-gray-100 -mx-8 px-6 py-5"
+              className="flex items-center  gap-2 mb-3 -mx-12 px-8 py-6"
             >
               <div className="flex w-2/5">
                 <img
@@ -189,7 +189,7 @@ const CartComponent = () => {
                   <span className="text-red-500 text-xs">{item?.product?.brand}</span>
                   <a
                     onClick={() => handleRemoveItemFromCart(item?.product?._id)}
-                    className="font-semibold hover:text-red-500 text-gray-500 text-xs cursor-pointer"
+                    className="font-semibold text-gray-500 text-xs px-4 py-2 border border-gray-300 rounded w-28 text-center hover:text-white hover:bg-red-500 active:bg-red-700 transition-colors duration-200 cursor-pointer"
                   >
                     Eliminar
                   </a>
@@ -246,18 +246,18 @@ const CartComponent = () => {
           ))}
           <a
             href="/"
-            className="flex font-semibold text-indigo-600 text-sm mt-10"
-          >
-            <svg
-              className="fill-current mr-2 text-indigo-600 w-4"
-              viewBox="0 0 448 512"
+            className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white font-semibold text-sm rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
             >
+            <svg
+              className="fill-current mr-4 w-5 h-4"
+              viewBox="0 0 448 512"
+              >
               <path d="M134.059 296H0V216H134.059L66.618 148.118 109.882 104.94 232 232 109.882 359.059 66.618 315.882 134.059 296zM416 96c17.673 0 32 14.327 32 32v256c0 17.673-14.327 32-32 32H192c-17.673 0-32-14.327-32-32v-36.152c0-8.837 7.163-16 16-16h96v-64h-96c-8.837 0-16-7.163-16-16V128c0-8.837 7.163-16 16-16h224z" />
             </svg>
             Continuar Comprando
           </a>
         </div>
-        <div id="summary" className="lg:w-1/4 px-8 py-10">
+        <div id="summary" className="lg:w-1/4 px-4 sm:px-8 py-5 sm:py-10">
           <h1 className="font-semibold text-2xl border-b pb-8">
             Resumen del Pedido
           </h1>
@@ -284,7 +284,7 @@ const CartComponent = () => {
             </div>
             <button
               onClick={handleCheckout}
-              className="bg-blue-600 font-semibold hover:bg-blue-700 py-3 text-sm text-white uppercase w-full"
+              className="bg-blue-600 font-semibold hover:bg-blue-800 py-3 text-sm text-white uppercase w-full shadow rounded"
             >
               Proceder al Pago
             </button>
@@ -292,6 +292,8 @@ const CartComponent = () => {
         </div>
       </div>
     </div>
+
+    
   );
 };
 
