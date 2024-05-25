@@ -35,7 +35,7 @@ export default function LoginComponent() {
               navigate('/seller');
               break;
             case 'Customer':
-              navigate('/user');
+              navigate('/');
               break;
             default:
               navigate('/');

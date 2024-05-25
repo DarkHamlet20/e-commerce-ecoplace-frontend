@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import logo from '../../../../public/img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp';
+import { useDispatch } from 'react-redux';
+import { removeCredentials } from '../../../auth/AuthSlice';
 
 const SellerNavComponent = ({ toggleSidebar, isSidebarOpen }) => {
   const navigate = useNavigate();
@@ -11,6 +13,7 @@ const SellerNavComponent = ({ toggleSidebar, isSidebarOpen }) => {
   const [userData, setUserData] = useState({});
   const dropdownRef = useRef(null);
   const token = localStorage.getItem('auth_token');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (token) {
@@ -48,6 +51,7 @@ const SellerNavComponent = ({ toggleSidebar, isSidebarOpen }) => {
       );
       localStorage.removeItem('auth_token');
       localStorage.removeItem('userRole');
+      dispatch(removeCredentials());
       navigate('/login');
     } catch (error) {
       console.error('Error durante el cierre de sesión:', error);
@@ -63,6 +67,7 @@ const SellerNavComponent = ({ toggleSidebar, isSidebarOpen }) => {
       );
       localStorage.removeItem('auth_token');
       localStorage.removeItem('userRole');
+      dispatch(removeCredentials());
       navigate('/login');
     } catch (error) {
       console.error('Error cerrando todas las sesiones:', error);

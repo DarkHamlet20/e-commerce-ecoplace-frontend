@@ -41,6 +41,7 @@ import ResetPasswordPage from '../auth/password/ResetPasswordPage';
 import AdminOrderDetails from '../views/admin/pages/AdminOrderDetails';
 import AdminUpdateUserMe from '../views/admin/pages/AdminUpdateUserMe';
 import SellerUpdateUserMe from '../views/vendor/pages/SellerUpdateUserMe';
+import NotFoundPage from '../views/home/NotFoundPage';
 
 const AppRouter = () => {
 
@@ -260,7 +261,7 @@ const AppRouter = () => {
       <Route path='/success' element={<SuccessPage />} />
       <Route path='/cancel' element={<CancelPage />} />
       <Route path='/unauthorized' element={<UnauthorizedPage />} />
-
+      <Route path='*' element={<NotFoundPage />} />
       
     </Routes>
   );

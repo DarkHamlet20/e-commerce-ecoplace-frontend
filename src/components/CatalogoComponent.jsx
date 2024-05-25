@@ -3,12 +3,13 @@ import axios from "axios";
 import CardComponent from "./CardComponent";
 import PaginationComponent from "../common/PaginationComponent";
 import SearchComponent from "./SearchComponent";
+import '../styles/Global.css';
 
 const CatalogoComponent = ({ categoryId }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(15); // Puedes ajustar esto según tus necesidades
+  const [productsPerPage] = useState(8);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -28,14 +29,13 @@ const CatalogoComponent = ({ categoryId }) => {
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-    setCurrentPage(1); // Restablece a la primera página con nuevos términos de búsqueda
+    setCurrentPage(1);
   };
 
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Calcular la paginación para los productos filtrados
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -48,14 +48,11 @@ const CatalogoComponent = ({ categoryId }) => {
   return (
     <main className="my-8 z-10 w-full min-h-full relative">
       <div className="w-full mx-auto m-4">
-        <SearchComponent
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
+        <SearchComponent value={searchTerm} onChange={handleSearchChange} />
       </div>
-      <div className="flex flex-col items-center smm:w-11/12 smm:items-stretch">
+      <div className="flex flex-col items-center w-full">
         <h2 className="text-4xl font-bold my-5">Lista de Productos</h2>
-        <div className="transition-all flex flex-col gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
           {currentProducts.map((product) => (
             <CardComponent
               key={product._id}
@@ -67,15 +64,9 @@ const CatalogoComponent = ({ categoryId }) => {
             />
           ))}
         </div>
-        <PaginationComponent
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
+        <PaginationComponent currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
       </div>
-      {currentProducts.length === 0 && (
-        <div className="text-center py-4">No se encontraron productos.</div>
-      )}
+      {currentProducts.length === 0 && <div className="text-center py-4">No se encontraron productos.</div>}
     </main>
   );
 };

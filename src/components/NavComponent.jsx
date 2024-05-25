@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import logo from '../../public/img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faShoppingCart,
+  faUserCircle,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
+import logo from "../../public/img/DALL·E_2024_03_31_20_04_37_Create_an_illustrative_logo_for_EcoPlace (1).webp";
 import { roles } from "../types/roles";
+import { useDispatch } from "react-redux";
+import { removeCredentials } from "../auth/AuthSlice";
 
-const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
+const NavComponent = ({
+  handleSide,
+  resetCategory,
+  cartCount,
+  fetchCart,
+  toggleCategories,
+}) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
 
   const redirectToCart = () => {
     navigate("/cart");
@@ -31,7 +45,7 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
           console.error("There was an error with the request:", error);
         });
 
-      fetchCart();  // Fetch the cart count whenever the component mounts or updates
+      fetchCart();
     }
   }, [token, fetchCart]);
 
@@ -53,6 +67,7 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
       );
       localStorage.removeItem("auth_token");
       localStorage.removeItem("userRole");
+      dispatch(removeCredentials());
       navigate("/login");
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
@@ -62,20 +77,33 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
   const [show, setShow] = useState(false);
   const [drop, setDrop] = useState(false);
 
+  const isHomePageOrProductsPage = location.pathname === "/" || location.pathname.includes("/products");
+
   return (
     <>
       <nav className="bg-gradient-to-r from-blue-600 to-green-600 p-4 shadow-lg relative z-50">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div>
-            <NavLink to="/" className="flex items-center space-x-3 rtl:space-x-reverse" onClick={resetCategory}>
-              <img src={logo} className="h-16" alt="EcoPlace Logo" />
-              <span className="text-xl font-semibold text-white">EcoPlace</span>
-            </NavLink>
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center">
+            {/* Logo */}
+            <div
+              onClick={() => navigate("/")}
+              className="cursor-pointer flex items-center space-x-3"
+            >
+              <NavLink
+                to="/"
+                className="flex items-center space-x-3 rtl:space-x-reverse"
+                onClick={resetCategory}
+              >
+                <img src={logo} className="h-16" alt="EcoPlace Logo" />
+                <span className="text-xl font-semibold text-white">
+                  EcoPlace
+                </span>
+              </NavLink>
+            </div>
           </div>
 
           {/* NavLinks */}
-          <div className="hidden md:flex space-x-6">
+          <div className="hidden md:flex space-x-6 justify-center flex-grow">
             <NavLink
               to="/"
               className="text-white hover:text-gray-300 transition-colors"
@@ -99,7 +127,10 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
 
           {/* Action buttons */}
           <div className="flex items-center space-x-4 relative">
-            <button onClick={redirectToCart} className="relative text-white hover:text-gray-300 transition-colors">
+            <button
+              onClick={redirectToCart}
+              className="relative text-white hover:text-gray-300 transition-colors"
+            >
               <FontAwesomeIcon icon={faShoppingCart} size="lg" />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-2 bg-red-600 text-white text-xs rounded-full px-1">
@@ -113,27 +144,19 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
             >
               <FontAwesomeIcon icon={faUserCircle} size="lg" />
             </button>
-            <button
-              onClick={() => setDrop(!drop)}
-              className="md:hidden text-white hover:text-gray-300 transition-colors"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
-            </button>
           </div>
         </div>
+
+        {/* Toggle Button and Categories */}
+        {isHomePageOrProductsPage && (
+          <button
+            onClick={toggleCategories}
+            className="text-white hover:text-gray-300 transition-colors relative z-50 ml-4 mt-4"
+          >
+            <FontAwesomeIcon icon={faBars} size="lg" />
+            <span className="ml-2 text-white">Categorías</span>
+          </button>
+        )}
 
         {/* Dropdown Menu */}
         <div className={`md:hidden ${drop ? "block" : "hidden"} mt-4`}>
@@ -160,7 +183,9 @@ const NavComponent = ({ handleSide, resetCategory, cartCount, fetchCart }) => {
 
         {/* User Dropdown */}
         <div
-          className={`absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 ${show ? "block" : "hidden"} z-50`}
+          className={`absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 ${
+            show ? "block" : "hidden"
+          } z-50`}
         >
           {token ? (
             <>

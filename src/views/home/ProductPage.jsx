@@ -3,6 +3,7 @@ import LayoutComponent from "../../layout/LayoutMain";
 import ProductComponent from "../../components/ProductComponent";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import '../../styles/Global.css';
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -57,7 +58,7 @@ const ProductPage = () => {
       <ProductComponent
         name={data?.name}
         id={data?._id}
-        img={data?.images[0]}
+        images={data?.images || []}
         brand={data?.brand}
         price={data?.price}
         description={data?.description}

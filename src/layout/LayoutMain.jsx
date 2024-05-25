@@ -4,7 +4,7 @@ import NavComponent from "../components/NavComponent";
 import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
-const LayoutComponent = ({ children, resetCategory, searchTerm, onSearchChange, cartCount }) => {
+const LayoutComponent = ({ children, resetCategory, searchTerm, onSearchChange, cartCount, toggleCategories  }) => {
   const [internalCartCount, setInternalCartCount] = useState(cartCount);
 
   useEffect(() => {
@@ -34,6 +34,7 @@ const LayoutComponent = ({ children, resetCategory, searchTerm, onSearchChange, 
         onSearchChange={onSearchChange}
         cartCount={internalCartCount}
         fetchCart={updateCartCount}
+        toggleCategories={toggleCategories}
       />
       <main>
         <div>
