@@ -144,7 +144,8 @@ const CartComponent = () => {
         <p className="mb-6 text-gray-800">
           Parece que aún no has añadido nada a tu carrito.
         </p>
-        <a href="/" className="text-indigo-600 hover:underline">
+        <a href="/" 
+        className="px-4 py-2 bg-blue-600 text-white font-semibold text-sm rounded-lg shadow-md hover:bg-blue-700 transition ease-in-out duration-150">
           Empieza a comprar
         </a>
       </div>

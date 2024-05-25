@@ -7,7 +7,6 @@ import logo from "../../../public/img/DALL·E_2024_03_31_20_04_37_Create_an_illu
 const SuccessPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const token = localStorage.getItem("auth_token");
 
   useEffect(() => {
     const sessionId = new URLSearchParams(location.search).get("session_id");
@@ -23,7 +22,7 @@ const SuccessPage = () => {
         `http://34.201.92.59:3000/orders/checkout-session/${sessionId}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
         }
       );
@@ -37,7 +36,7 @@ const SuccessPage = () => {
           },
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
             },
           }
         );
